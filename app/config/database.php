@@ -79,7 +79,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => '/Users/jmashburn/Documents/Projects/Lance/app/config/schema/test_database.sqlite',
+		'database' => '/var/www/sites/Plaza_Cake/app/config/schema/plaza_cake.sqlite',
 		'prefix' => '',
 		'encoding' => 'UTF8'
 	);

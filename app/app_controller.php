@@ -2,9 +2,9 @@
 
 class AppController extends Controller {
     
-    var $helpers = array('Html', 'Form', 'Time', 'Number', 'Javascript', 'Cache', 'Text', 'Session','Menu','Sidebar');
+    var $helpers = array('Html', 'Form', 'Ajax', 'Time', 'Number', 'Javascript', 'Cache', 'Text', 'Session','Menu','Sidebar');
     var $components = array('Security', 'Acl', 'Auth', 'Acl.AclFilter', 'Cookie', 'RequestHandler', 'Session', 'Mailer', 'Security');
-    var $uses = array('Core.Setting');
+    var $uses = array();
     var $view = 'Theme';      
 
 	var $apiRequest = false;
@@ -16,13 +16,11 @@ class AppController extends Controller {
         $this->set('appConfigurations', Configure::read('App'));
  		$this->set('title_for_layout', __('Error: Title For Layout needed', true));
 
-		$this->Setting->applyAllUpdates();
+	#	$this->Setting->applyAllUpdates();
 		
 		if (isset($this->params['admin'])) {
 			$this->layout = 'admin';
 		}
-		
-		debug($this, false);
 		
 		$this->Auth->allow('*');
 	   	

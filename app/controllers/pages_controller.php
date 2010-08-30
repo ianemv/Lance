@@ -11,7 +11,6 @@ class PagesController extends AppController {
 	}
 	
 	function display() {
-		echo "MADE IT TO DISPLAY";
 	}
 	
 	

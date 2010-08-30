@@ -60,7 +60,7 @@ $config = array(
 	),
 
 
-    'debug' => 2,
+    'debug' => 0,
 
     'Recaptcha' => array(
         'enabled' => true,
