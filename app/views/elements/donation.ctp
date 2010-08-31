@@ -2,6 +2,7 @@
     $(document).ready(function() {
         $('#donar').click(function() {
             $.facebox({div: '#formDonation'});
+			return false;
         });
     }); 
         var donate = function() {
@@ -25,7 +26,7 @@
 <?php echo $this->element('home_carousel'); ?>
 <div 
 <?php
-    echo $form->create('Donation', array('action' => 'donate', 'style' => 'display:block', 'id' => 'formDonation', 'onSubmit' => 'donate();return false;'));
+    echo $form->create('Donation', array('action' => 'donate', 'style' => 'display:none', 'id' => 'formDonation', 'onSubmit' => 'donate();return false;'));
     echo $form->input('first_name', array('label' => __('First Name', true))); 
     echo $form->input('last_name', array('label' => __('Last Name', true)));
     echo $form->input('rut', array('label' => __('RUT', true)));

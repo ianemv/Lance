@@ -6,11 +6,11 @@ App:
     baseUrl: 
     timezone: America/Santiago
     theme: cleanity
-    name: Smart Admin
+    name: Regala Una Plaza
 Site:
     name: 
     theme: 
-    admin_theme: cleanity
+    admin_theme: smart
     status: 1
 Hook: 
     bootstraps: core,acl

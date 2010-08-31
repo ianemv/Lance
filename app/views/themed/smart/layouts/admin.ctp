@@ -18,7 +18,7 @@
 
 			echo $javascript->link('jquery/jquery');
 			echo $javascript->link('jquery/ui');
-			echo $javascript->link('default');
+		#	echo $javascript->link('default');
 
 			echo $scripts_for_layout;
 		?>

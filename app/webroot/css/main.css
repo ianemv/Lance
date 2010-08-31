@@ -1,9 +1,3 @@
-@font-face {
-  font-family:Helvetica-Light;
-  src: url('/assets/css/public/fonts/Helvetica-Light.eot');
-  src: url('/assets/css/public/fonts/Helvetica-Light.woff') format("woff"),
-       url('/assets/css/public/fonts/Helvetica-Light.ttf') format("truetype");
-}
 body{
 	font-family: Helvetica-Light;
 }
@@ -128,7 +122,7 @@ div.column3{
 	height: 58px;
 	background-color: #BBB;
 }
-.footer{
+#footer{
 	position: relative;
 	height: 100px;
 	background: #DDD url(../img/bg_header2.png) repeat-x;
@@ -200,7 +194,7 @@ div.column3{
 }
 
 #formadd input.twitter{
-	background-image:url(../images/at_tt.gif);
+	background-image:url(../img/at_tt.gif);
 	background-position:2px 5px;
 	background-repeat:no-repeat;
 	text-indent:22px;
@@ -303,17 +297,14 @@ div.column3{
 	height: 58px;
 }
 
-div.vote_dialog {
-    background: url(../img/vote.png) no-repeat;
-    width: 195px;
-    height: 75px;
+.clipwrapper_votacion{
+	position:relative;
+	width:220px;
+	height:165px;
 }
-
-div.vote_dialog p {color: #fff; margin: 0 0 0 10px;padding: 5px 0 0 5px;font-weight:bold; width: 150px;font-size: 12px; }
-
-div.vote_form input { margin: 0 0 10px 5px;width: 165px;}
-div.vote_form .btn_votar { margin-left: 5px; }
-
-
-
-
+.clip_votacion{
+  position:absolute;
+  clip:rect(0px 220px 165px 0px);
+  top:0px;
+  left:0px;
+}

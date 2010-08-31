@@ -38,21 +38,7 @@
         echo $javascript->link('facebox/facebox');
 		echo $scripts_for_layout;
 	?>
-    <?php echo $javascript->codeBlock(); ?>
-        $(document).ready(function() {
-            $('#votacion_container_right .marco').hoverIntent(
-               function() {
-                   $(this).find(".vote_box").effect('slide', {direction:'up'}, 200);
-                   $(this).find('.vote_dialog').effect('bounce', {direction:'down'},200);
-                   $(this).find("img").fadeOut();
-               },
-               function() {
-                   $(this).find(".vote_box").fadeOut();
-                   $(this).find("img").fadeIn();
-               }
-           );
-        });
-    <?php echo $javascript->blockEnd(); ?>
+   
 
 </head>
 <body>
@@ -79,63 +65,12 @@
     <div id="main_content" class="wrap">
         <?php echo $this->element('donation'); ?>
 
-			<div id="votacion_container">
-				<h2>Estas son algunas de las plazas</h2>
-				<div class="line"></div>
-				<div id="votacion_container_left" class="font">
-					<p>Entre junio y agosto del año 2010, fueron cientos los colegios que participaron en el concurso de construcción con piezas de Lego para realizar <b>"Mi mejor plaza de juegos"</b>.</p>
-					<p>Esta es la última y más importante etapa del proyecto. Es aquí donde todos tenemos la oportunidad de hacer realidad el sueño de los niños. Poder construir a escala real en 1.000m&sup2; el proyecto ganada de "mi mejor plaza de juegos"</p>
-					<div id="votar_button"><a href="#">Quiero elegir la mejor plaza de juegos</a></div>
-				</div>
-				<div id="votacion_container_right">
-					<div class="marco">
-                        <div class="clipwrapper">
-                            <div class="clip">
-					        <img src="/img/paso2.png" alt=""/> 
-                                <div class="vote_box" style="display:none">
-                                <div class="vote_dialog">
-                                    <p>This is the School</p>
-                                </div>
-                                <div class="vote_form">
-                                <form>
-                                    <input type="text" name="email"/>
-                                    <a href="#" class="btn_votar"><img src="/img/btn_votar_plaza.png" alt="Votar"></a>sdf
-                                    asdfasd
-                                </form>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="marco"><div class="clipwrapper"><div class="clip">
-						<img src="/img/paso2.png" alt=""/>
-					</div></div></div>
-					<div class="marco"><div class="clipwrapper"><div class="clip">
-						<img src="/img/paso2.png" alt=""/>
-                    </div></div></div>
-					<div class="marco"><div class="clipwrapper"><div class="clip">
-						<img src="/img/paso2.png" alt=""/>
-				     </div></div></div>
-					<div class="marco"><div class="clipwrapper"><div class="clip">
-						<img src="/img/paso2.png" alt=""/>
-					</div></div></div>
-					<div class="marco"><div class="clipwrapper"><div class="clip">
-						<img src="/img/paso2.png" alt=""/>
-					</div></div></div>
-				</div>
-			</div>
-        </div> 
+		
+
+			
         <?php echo $content_for_layout; ?>
-		<div class="footer">
-			<div class="wrap">
-				<div id="up">
-                    <?php echo $html->link($html->image('1.jpg', array('alt' => '')), array(), array('escape' => false)); ?>
-				</div>
-                <?php echo sprintf(__('Give a Park is a %s project with help from %s', true), $html->link(__('Charitybox', true), array()), $html->link(__('Digitales x Chile', true), array())); ?>
-                <?php echo $this->element('footer_menu'); ?>
-			</div>
-		</div>
     </div>
+	<?php echo $this->element('footer'); ?>
 <?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
