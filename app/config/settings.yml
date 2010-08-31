@@ -10,7 +10,7 @@ App:
 Site:
     name: 
     theme: 
-    admin_theme: smart
+    admin_theme: broom
     status: 1
 Hook: 
     bootstraps: core,acl
