@@ -5,12 +5,11 @@ App:
     base: 
     baseUrl: 
     timezone: America/Santiago
-    theme: cleanity
     name: Regala Una Plaza
 Site:
     name: 
-    theme: 
-    admin_theme: broom
+    theme: finalus
+    admin_theme: finalus
     status: 1
 Hook: 
     bootstraps: core,acl

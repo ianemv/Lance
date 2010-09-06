@@ -1,0 +1,668 @@
+*{
+	margin:0;padding:0;
+}
+
+html,body,#bg,#bg table,#bg td,#wrap{
+	height:100%;
+	width:100%;
+	overflow:hidden;
+	font-family: "Trebuchet MS";
+}
+#bg{
+	position:fixed;
+}
+#bg div{
+	height:200%;
+	left:-50%;
+	position:absolute;
+	top:-55%;
+	width:200%;
+}
+#bg td{
+	text-align:center;
+	vertical-align:middle;
+}
+#bg img{
+	margin:0 auto;
+	min-height:50%;
+	min-width:50%;
+}
+#wrap{
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:70;
+	overflow:auto;
+}
+.container{
+	margin:0 auto;
+	width:960px;
+        height: 440px;
+	padding-top: 15px;
+	padding-bottom:100px;
+}
+#header {}
+#social_icons{
+	padding-left: 60px;
+        
+}
+#social_icons li{
+	float:left;
+	padding:10px;
+        list-style:none;
+}
+#logo { 
+	background: url(../imgs/barra.png) no-repeat bottom;
+	width: 100%;
+	height: 88px;
+	list-style: none;
+	padding-top: 85px;
+}
+
+#logotipo {
+        float: right;
+        margin-top: -85px;
+        margin-right: 15px;
+}
+
+#logo ul {
+	width:959px;
+ 	display:block;
+	float:left;
+}
+
+#logo li{
+	float:left;
+	padding: 32px 55px 25px 45px; /* top right bottom left */
+}
+
+#over_otros:hover{
+        background: url(../imgs/btn_otros.png);
+        height: 31px;
+}
+
+#over_somos:hover{
+        background: url(../imgs/btn_somos.png);
+        height: 31px;
+}
+
+h1 span { 
+	display: none;
+}
+/*----------------home--------------*/
+#home_icons {
+	background:url(../imgs/cuadro_dialogo_home.png) no-repeat bottom;
+	width: 557px;
+	height: 174px;
+	float:right;
+        font-style:italic;
+        padding-right: 150px;
+}
+#home_icons ul {
+	display:block;
+	list-style:none;
+	padding:60px 0 0 200px;
+}
+#home_icons ul li{
+	height:40px;
+	text-align:center;
+	margin: 0 auto;
+}
+#home_icons ul li a{
+	text-decoration:none;
+	height:20px;
+	font-size:21px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-weight:bold;
+}
+
+.font3_celeste {
+	color: #3fa9f5;
+}
+.font4_orange {
+	color: #e98227;
+}
+/*--------------------------------------------*/
+#content{
+        position:relative;
+        margin-left: 25px;
+        margin-top: 35px;
+}
+#somos_icons {
+	background:url(../imgs/cuadro_dialogo_home.png) no-repeat bottom;
+	width: 477px;
+	height: 174px;
+	float:right;
+	padding:0px;
+}
+#somos_icons .somos {  
+	height: 174px;
+	width:400px;
+	padding: 40px 0px 0px 15px;
+	float:right;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:24px;
+	text-align:center;
+}
+div#logo ul{
+	display:block;
+	list-style:none;
+	text-align:left;
+}
+div#logo ul li{
+	float:left;
+	height:40px;
+	position:relative;
+	text-align:left;
+	margin: 0 auto;
+}
+div#logo ul li a{
+	color: white;
+        text-shadow: black 0.1em 0.1em 0.2em;
+	text-decoration:none;
+	padding-left:10px;
+	height:20px;
+	display:inline-block;
+	text-align:left;
+	font-weight:bold;
+	background:url(../../img/admin/bg-topnav-mask.gif) no-repeat 0 0;
+	position:relative;
+}
+#footer { 
+	bottom:0;
+	left:0;
+	width:100%;
+	z-index:75;
+	overflow:hidden;
+}
+#footer .translate {
+	text-align: center;
+}
+.translate a{
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    font-weight: bold;
+    font-size: 10pt;
+}
+#footer .copyright {  
+	background: url(../imgs/bottom-band.png) repeat-x bottom left;
+	height: 26px;
+	padding: 0 0 0 100px;
+	font: 10px/2.8 Verdana;
+	color:#26d5ea;
+}
+
+a { 
+	text-decoration: none;
+}	
+a img { 
+	border: 0;
+}
+
+.social_icons li a { 
+	width: 28px; 
+	height: 29px;
+}
+
+.font2 {
+	color: #47cd23;
+}
+.clear { 
+	clear: both;
+}
+
+    /* image replacement */
+        .graphic, #prevBtn, #nextBtn{
+            margin:0;
+            padding:0;
+            display:block;
+            overflow:hidden;
+            text-indent:-8000px;
+            }
+    /* // image replacement */
+
+    /* Easy Slider */
+	#slider ul.parent, #slider li.parent{
+		margin:0;
+		padding:0;
+		list-style:none;
+		}
+	#slider li{
+		/*
+			define width and height of list item (slide)
+			entire slider area will adjust according to the parameters provided here
+		*/
+		width:906px;
+		height:316px;
+		overflow:hidden;
+		}
+	#prevBtn, #nextBtn{
+		display:block;
+		width:27px;
+		height:316px;
+		position:absolute;
+		left:-27px;
+		top:0px;
+		}
+	#nextBtn{
+		left:906px;
+		}
+	#prevBtn a, #nextBtn a{
+		display: block;
+		width: 27px;
+		height: 316px;
+		background: url(../images/btn_prev.png) no-repeat 0 0;
+		}
+
+	#nextBtn a{
+		background: url(../images/btn_next.png) no-repeat 0 0;
+		}
+/* Easy Slider */
+
+/* SOMOS 01 */
+        #somos_01{
+                background-image: url("../img/somos_01.png");
+        }
+
+        #somos_01_text{
+                margin-left: 420px;
+                margin-top: 5px;
+                font-family: 'Trebuchet MS';
+                font-size: 32px;
+                width: 550px;
+                color: white;
+        }
+
+        #somos_01_info_header{
+        padding-left: 140px;
+        }
+
+            #somos_01_info_texto1{
+            padding-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #3FA9F5;
+            letter-spacing: 0.3pt;
+            }
+
+            .mayuscula{
+            color: #DE8011;
+            font-weight: bold;
+            }
+
+            #somos_01_info_texto2{
+            padding-top: 10px;
+            font-size: 12px;
+            width: 440px;
+            text-align: justify;
+            line-height: 15px;
+            }
+
+/* SOMOS 02 */
+        #somos_02{
+                background-image: url("../img/somos_02.png");
+        }
+
+        #somos_02_text{
+                margin-left: 40px;
+                margin-top: 5px;
+                font-family: 'Trebuchet MS';
+                font-size: 32px;
+                width: 550px;
+                color: white;
+        }
+
+        #somos_02_info_header{
+        padding-left: 110px;
+        }
+
+            #somos_02_info_texto1{
+            padding-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #3FA9F5;
+            letter-spacing: 0.3pt;
+            }
+
+            .mayuscula{
+            color: #DE8011;
+            font-weight: bold;
+            }
+
+            #somos_02_info_texto2{
+            padding-top: 10px;
+            font-size: 12px;
+            width: 360px;
+            text-align: justify;
+            line-height: 15px;
+            }
+
+/* SERVICIOS 01 */
+        #servicios_01{
+                background-image: url("../img/servicios_01.png");
+        }
+
+        #servicios_01_text{
+                margin-left: 320px;
+                margin-top: 5px;
+                font-family: 'Trebuchet MS';
+                font-size: 32px;
+                width: 550px;
+                color: white;
+        }
+
+        #servicios_01_info_header{
+        padding-left: 150px;
+        }
+
+            #servicios_01_info_texto2{
+            padding-top: 20px;
+            font-size: 12px;
+            width: 530px;
+            text-align: justify;
+            }
+
+            
+            #servicios_01_info_texto2 .mayuscula{
+            background: url("../img/punto.png") left no-repeat;
+            padding-left: 15px;
+            }
+
+            #servicios_01_info_texto2 p:hover{
+            background-color: grey;
+            }
+
+/* SERVICIOS 02 */
+        #servicios_02{
+                background-image: url("../img/servicios_02.png");
+        }
+
+        #servicios_02_text{
+                margin-left: 35px;
+                margin-top: 15px;
+                font-family: 'Trebuchet MS';
+                font-size: 32px;
+                width: 550px;
+                color: white;
+        }
+
+        #servicios_02_info_header{
+        padding-left: 150px;
+        }
+
+        #servicios_02_info_texto2{
+        padding-left: 480px;
+        padding-top: 25px;
+        font-size: 12px;
+        width: 345px;
+        text-align: justify;
+        line-height: 15px;
+        }
+
+        #servicios_02_info_texto1{
+        padding-left: 130px;
+        font-size: 14px;
+        font-weight: bold;
+        }
+
+        .mayuscula2{
+        color: #3FA9F5;
+        font-weight: bold;
+        }
+
+/* SOLUCIONES 01 */
+        #soluciones_01{
+            background-image: url("../img/soluciones_01.png");
+        }
+
+        #soluciones_01_info_header{
+            padding-left: 290px;
+        }
+
+        #soluciones_01_text{
+            margin-left: 35px;
+            margin-top: 15px;
+            font-family: 'Trebuchet MS';
+            font-size: 32px;
+            width: 560px;
+            color: white;
+        }
+
+        #soluciones_01_info_texto1{
+            padding-top: 17px;
+            width: 850px;
+            height: 230px;
+            font-size: 11px;
+            font-family: 'Verdana';
+            font-weight: bold;
+        }
+        
+            #sol_retail{
+                background-image: url("../img/slider/retail.png");
+                height: 216px;
+                width: 120px;
+                float: left;
+            }
+
+                #sol_retail:hover{
+                    background-image: url("../img/slider/retail_over.png");
+                }
+
+                #sol_retail_texto{
+                visibility: hidden;
+                padding-top: 220px;
+                padding-left: 40px;
+                }
+
+            #sol_banco{
+                background-image: url("../img/slider/bancos.png");
+                height: 216px;
+                width: 120px;
+                float: left;
+            }
+
+                #sol_banco:hover{
+                    background-image: url("../img/slider/bancos_over.png");
+                }
+
+                #sol_banco_texto{
+                visibility: hidden;
+                padding-top: 220px;
+                padding-left: 40px;
+                }
+
+            #sol_salud{
+                background-image: url("../img/slider/salud.png");
+                height: 216px;
+                width: 120px;
+                float: left;
+            }
+
+                #sol_salud:hover{
+                    background-image: url("../img/slider/salud_over.png");
+                }
+
+                #sol_salud_texto{
+                visibility: hidden;
+                padding-top: 220px;
+                padding-left: 44px;
+                }
+
+            #sol_ecommerce{
+                background-image: url("../img/slider/ecommerce.png");
+                height: 216px;
+                width: 120px;
+                float: left;
+            }
+
+                #sol_ecommerce:hover{
+                    background-image: url("../img/slider/ecommerce_over.png");
+                }
+
+                #sol_ecommerce_texto{
+                visibility: hidden;
+                padding-top: 220px;
+                padding-left: 25px;
+                }
+
+            #sol_industria{
+                background-image: url("../img/slider/industria.png");
+                height: 216px;
+                width: 120px;
+                float: left;
+            }
+
+                #sol_industria:hover{
+                    background-image: url("../img/slider/industria_over.png");
+                }
+
+                #sol_industria_texto{
+                visibility: hidden;
+                padding-top: 220px;
+                padding-left: 30px;
+                }
+
+            #sol_mineria{
+                background-image: url("../img/slider/mineria.png");
+                height: 216px;
+                width: 120px;
+                float: left;
+            }
+
+                #sol_mineria:hover{
+                    background-image: url("../img/slider/mineria_over.png");
+                }
+
+                #sol_mineria_texto{
+                visibility: hidden;
+                padding-top: 220px;
+                padding-left: 40px;
+                }
+
+            #sol_comunicaciones{
+                background-image: url("../img/slider/comunicaciones.png");
+                height: 216px;
+                width: 120px;
+                float: left;
+            }
+
+                #sol_comunicaciones:hover{
+                    background-image: url("../img/slider/comunicaciones_over.png");
+                }
+
+                #sol_comunicaciones_texto{
+                visibility: hidden;
+                padding-top: 220px;
+                padding-left: 10px;
+                }
+
+/* CONTACTOS */
+
+#contactos_01{
+            background-image: url("../img/contactos_01.png");
+        }
+input, textarea{
+        border: 0;
+        overflow: auto;
+        background-color: transparent;
+        font-family: 'Times New Roman';
+        color: #606060;
+        font-size: 14px;
+        }
+
+        #info{
+        font-family: 'Trebuchet MS';
+        font-size: 30px;
+        width: 520px;
+        color: white;
+        float: left;
+        }
+
+            #info_header{
+            padding-top: 10px;
+            padding-left: 160px;
+            }
+
+            #info_datos{
+            padding: 20px 0px 0px 30px;
+            font-family: 'Trebuchet MS';
+            font-size: 12px;
+            color: #3FA9F5;
+            float: left;
+            letter-spacing: 0.5px;
+            line-height: 24px;
+            }
+
+            #info_foto{
+            float: right;
+            padding-top: 20px;
+            }
+
+        #formulario{
+        background: url("../img/contact_form.png") no-repeat;
+        margin-top: 10px;
+        margin-left: 540px;
+        height: 288px;
+        }
+
+            #inputs{
+            padding: 50px 0 0px 20px;
+            color: #DE8011;
+            font-size: 12px;
+            }
+
+            #formulario_botones{
+            color:white;
+            margin-left: 280px;
+            margin-top: -25px;
+            line-height: 30px;
+            }
+        .clear { /* generic container (i.e. div) for floating buttons */
+                overflow: hidden;
+                width: 100%;
+            }
+        a.boton {
+                background: transparent url('../img/btn_izq.png') no-repeat scroll top right;
+                color: white;
+                font-family: 'Trebuchet MS';
+                font-size: 12px;
+                display: block;
+                float: left;
+                height: 25px;
+                margin-right: 6px;
+                padding-right: 16px; /* sliding doors padding */
+                text-decoration: none;
+            }
+
+            a.boton span {
+                background: transparent url('../img/btn_der.png') no-repeat;
+                display: block;
+                line-height: 15px;
+                padding: 5px 0 5px 18px;
+            }
+            a.boton:active {
+                background-position: bottom right;
+                outline: none; /* hide dotted outline in Firefox */
+            }
+
+            a.boton:active span {
+                background-position: bottom left;
+                padding: 6px 0 4px 18px; /* push text down 1px */
+            }
+
+        #formulario_resultado{
+        color: #DE8011;
+        font-size: 12px;
+        padding-left: 20px;
+        margin-top: -10px;
+        float:left;
+        }
+/* AJAX POPUP (http://nyromodal.nyrodev.com/) */
+#blocker {
+    width: 700px;
+    height: 700px;
+    background: red;
+    padding: 30px;
+    border: 5px solid green;
+}
+/* AJAX POPUP */
