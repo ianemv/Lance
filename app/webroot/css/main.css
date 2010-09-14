@@ -1,3 +1,9 @@
+@font-face {
+  font-family:Helvetica-Light;
+  src: url('/css/public/fonts/Helvetica-Light.eot');
+  src: url('/css/public/fonts/Helvetica-Light.woff') format("woff"),
+       url('/css/public/fonts/Helvetica-Light.ttf') format("truetype");
+}
 body{
 	font-family: Helvetica-Light;
 }
@@ -9,7 +15,7 @@ body{
 .header1{
 	background-color: #999;
 	height: 49px;
-	background: #DDD url("../img/fondo_botonera.png") repeat-x;
+	background: #DDD url("/img/fondo_botonera.png") repeat-x;
 }
 #header1_menu{
 	padding-top: 18px;
@@ -23,7 +29,7 @@ body{
 	border-right: 1px solid #000;
 }
 .header2{
-	background: #DDD url(../img/bg_header2.png) repeat-x;
+	background: #DDD url(/img/bg_header2.png) repeat-x;
 	height: 240px;
 }
 .header2_1{
@@ -123,9 +129,8 @@ div.column3{
 	background-color: #BBB;
 }
 #footer{
-	position: relative;
 	height: 100px;
-	background: #DDD url(../img/bg_header2.png) repeat-x;
+	background: #DDD url(/img/bg_header2.png) repeat-x;
 }
 #up img{
 	width: 67px;
@@ -133,7 +138,7 @@ div.column3{
 	position: absolute;
 	top: 15px;
 }
-#es_de{
+.es_de{
 	width: 600px;
 	position: absolute;
 	right:0;
@@ -142,7 +147,7 @@ div.column3{
 	font-size: 14px;
 	color: #FFF;
 }
-#es_de a{
+.es_de a{
 	text-decoration: none;
 }
 #footer_menu{
@@ -160,53 +165,9 @@ div.column3{
 #footer_menu li a{
 	text-decoration: none;
 }
-#formadd{}
 
-#formadd label{
-	clear:both;
-	display:block;
-	font-size:1.5em;
-	margin:0;
-	padding:0;
-	position:relative;
-}
 
-#formadd label.error{
-	position:absolute;
-	top:4px;
-	right:0px;
-	font-size:0.6em;
-}
 
-#formadd input.input{
-	font-size:1em;
-	margin:5px 0px 5px 0px;
-	width:100%;
-}
-
-#formadd .detail{
-	font-size:0.5em;
-}
-
-#formadd input.error{
-	margin:0;
-	padding:0;
-}
-
-#formadd input.twitter{
-	background-image:url(../img/at_tt.gif);
-	background-position:2px 5px;
-	background-repeat:no-repeat;
-	text-indent:22px;
-}
-#formadd textarea#message {
-	height:50px;
-}
-#formadd textarea {
-	height:250px;
-	padding:5px;
-	width:390px;
-}
 #donar{
 	position: absolute;
 	top: 96px;
@@ -238,7 +199,7 @@ div.column3{
 	float: left;
 }
 #votar_button{
-	background: url(../img/btn_invitar_votacion.png) no-repeat;
+	background: url(/img/btn_invitar_votacion.png) no-repeat;
 	width: 257px;
 	height: 40px;
 	padding: 5px;
@@ -251,7 +212,7 @@ div.column3{
 }
 
 .marco{
-	background: url(../img/caja_fotos_home.png);
+	background: url(/img/caja_fotos_home.png);
 	width: 204px;
 	height: 170px;
 }
@@ -279,7 +240,7 @@ div.column3{
   position:absolute;
   clip:rect(0px 178px 132px 0px);
   top:0px;
-  left:0px;
+  left:3px;
 }
 
 .clipwrapper_flicker{
@@ -307,4 +268,38 @@ div.column3{
   clip:rect(0px 220px 165px 0px);
   top:0px;
   left:0px;
+}
+
+
+/*  Forms */
+div.input {
+    }
+div.input label {
+    font-weight: bold;
+    width: 140px;
+    display:block;
+}
+
+div.input input {
+    width: 220px;
+    font: 11px verdana, sans-serif;
+    color: #443;
+    padding: 3px;
+    margin-bottom: 4px;
+}
+
+div.input textarea {
+    width:350px;
+    height: 100px;
+}
+
+
+div.required label:after {
+    content: '*';
+    color: red;
+}
+
+div.error input {
+    padding-right: 5px;
+    background: red url(/img/exclamation.png) no-repeat 100% 50%;
 }

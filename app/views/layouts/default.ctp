@@ -34,7 +34,6 @@
         echo $javascript->link('jquery/jquery.hoverIntent.min');
 		echo $javascript->link('jquery/jquery.jcarousel/jquery.jcarousel.min');
         echo $javascript->link('jquery/jquery.corner');
-	#	echo $javascript->link('index');
         echo $javascript->link('facebox/facebox');
 		echo $scripts_for_layout;
 	?>
@@ -64,10 +63,6 @@
     </div>
     <div id="main_content" class="wrap">
         <?php echo $this->element('donation'); ?>
-
-		
-
-			
         <?php echo $content_for_layout; ?>
     </div>
 	<?php echo $this->element('footer'); ?>

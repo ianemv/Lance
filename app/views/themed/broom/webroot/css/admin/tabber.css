@@ -18,15 +18,15 @@
   li.tabberactive = the active tab
   --------------------------------------------------*/
 ul.tabbernav { padding: 0;}
-ul.tabbernav li {	 list-style: none;  font-size:11px; float: left;	background: url(/img/admin/tab_inactive_left.png) no-repeat; }
+ul.tabbernav li {	 list-style: none;  font-size:11px; float: left;	background: url(/img/tab_inactive_left.png) no-repeat; }
 
 /*active tab background*/
-ul.tabbernav li.tabberactive {	background: url(/img/admin/tab_active_left.png) no-repeat;}
-ul.tabbernav li a {	display: block;	margin: 0 5px; 	padding: 10px 25px;	text-decoration: none;	color: #a59a92;	border-bottom: 0;	background: url(/img/admin/tab_inactive_right.png) no-repeat right top; 	}
+ul.tabbernav li.tabberactive {	background: url(/img/tab_active_left.png) no-repeat;}
+ul.tabbernav li a {	display: block;	margin: 0 5px; 	padding: 10px 25px;	text-decoration: none;	color: #a59a92;	border-bottom: 0;	background: url(/img/tab_inactive_right.png) no-repeat right top; 	}
 ul.tabbernav li a:hover {	color: #ece0d2;	}
 
 /*active tab background*/
-ul.tabbernav li.tabberactive a {	color: #333;	background: url(/img/admin/tab_active_right.png) no-repeat right top; 	}
+ul.tabbernav li.tabberactive a {	color: #333;	background: url(/img/tab_active_right.png) no-repeat right top; 	}
 
 /* If desired, hide the heading since a heading is provided by the tab */
 .tabberlive .tabbertab h2 { display:none;}

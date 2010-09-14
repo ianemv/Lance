@@ -27,4 +27,22 @@ class AppModel extends Model {
         return true;
     }
 
+    function checkRut($data, $fieldName) {
+        $val = array_shift(array_values($data));
+        if (!empty($val)) {
+            $rut = strtoupper(trim($val));
+            if (strlen($rut)>9) {
+                return false;
+            }
+
+            if (!preg_match('/^([0-9])+\-([K0-9])+$/', $rut)) {
+                return false;
+            }
+
+            while($rut < 9) {
+                $rut = "0".$rut;
+            }
+        }
+    }
+                 
 }

@@ -4,10 +4,20 @@ class DonationsController extends AppController {
 	var $name = 'Donations';
 
 	function index() {
-		$this->Donation->recursive = 0;
-		$this->set('donations', $this->paginate());
+        if ($this->RequestHandler->isAjax()) {
+            $this->layout = 'ajax';
+        } else {
+		    $this->Donation->recursive = 0;
+		    $this->set('donations', $this->paginate());
+        }
 	}
-	
+
+    function add() {
+        if ($this->RequestHandler->isAjax()) {
+            $this->layout = 'ajax';
+        }
+    }
+
 	function admin_index() {
 		$this->Donation->recursive = 0;
 		$this->set('donations', $this->paginate());
@@ -72,10 +82,10 @@ class DonationsController extends AppController {
         }
 
         if (!empty($this->data)) {
-            if ($this->Donation->donate($this->data)) {
-				
-            }
+            $donation = $this->Donation->donate($this->data);
+            $this->set('data', $donation);
 		}
+        return false;
     }
 }
 ?>

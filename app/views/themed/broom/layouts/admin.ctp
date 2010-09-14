@@ -21,8 +21,8 @@
         <![endif]-->
         <?php 
             echo $javascript->link('jquery/jquery');
-            echo $javascript->link('jquery/ui');
-            echo $javascript->link('admin');
+            #echo $javascript->link('jquery/ui');
+            #echo $javascript->link('admin');
             echo $scripts_for_layout;
         ?>
         <script type="text/javascript">
@@ -49,7 +49,7 @@
                     <li id="eng"><?php echo $html->link(__('English', true), array('controller' => ''), null, null, false); ?></li>
                     <li><?php echo $html->link(__('Settings', true), array('controller' => 'settings', 'action' => 'index'), null, null, false); ?></li>
                     <li><?php echo $html->link(__('Lights Out', true), array('controller' => 'users', 'action' => 'logout'), null, null, false); ?></li>
-                    <li><?php echo sprintf(__('Welcome <strong>%s</strong>', true), 'Administrator'); ?></li>
+                    <li><?php echo sprintf(__('Welcome %s', true), $html->tag('strong', 'Administrator')); ?></li>
                     <li id="last"><?php echo sprintf(__('Last Login: %s', true), $time->niceshort()) ?></li>
                 </ul>
             </div>

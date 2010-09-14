@@ -7,9 +7,34 @@ class User extends AppModel {
 
 	var $order = 'name ASC';
 
-    var $actsAs = array('Containable', 'Acl.Acl' => 'requester');
+    var $actsAs = array(
+        'Containable', 
+        'Acl.Acl' => 'requester',
+        'Expandable' => array(
+            'with' => 'UserMetaData',
+            'key' => 'key',
+            'value' => 'value'
+        )
+    );
 
     var $belongsTo = array('Group');
+
+	var $hasMany = array(
+		'UserMetaData' => array(
+			'className' => 'UserMetaData',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
 
     function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
@@ -24,12 +49,12 @@ class User extends AppModel {
                     'rule' => array('isUnique' , 'username'),
                     'message' => __('Username is already taken. Please choose a different username', true)
                 ), 
-                'alphaNumeric' => array(
+                /*'alphaNumeric' => array(
                     'rule' => 'alphaNumeric',
                     'message' => __('The username can contain letters and numbers only.', true)
-                ),
+                ),*/
                 'between' => array(
-                    'rule' => array('between', 3, 16),
+                    'rule' => array('between', 3, 255),
                     'message' => __('Username must be between 3 and 16 characters long.', true),
                 ),
                 'minLength' => array(
@@ -71,6 +96,12 @@ class User extends AppModel {
                     'message' => __('A valid email is required.', true)
                 ), 
             ),
+            'rut' => array(
+                'checkRut' => array(
+                    'rule' => 'checkRut',
+                    'message' => __('The RUT must be valid.', true)
+                )
+            ) 
         );
     }
 
@@ -122,10 +153,9 @@ class User extends AppModel {
 					$data['User']['ip'] = $_SERVER['REMOTE_ADDR'];
                     $this->create();
                 }
+                
                 if ($this->save($data)) {
                     $user = $this->read(null, $this->getLastInsertId());
-
-                	
 
                     #$user['User']['username']       = $data['User']['username'];
                     #$user['User']['password']       = $data['User']['before_password'];
@@ -257,5 +287,17 @@ class User extends AppModel {
         } else {
             return false;
         }
+    }
+
+    function generateRandomPassword($length = 8, $randomString = null) {
+        if(empty($randomString)){
+            $randomString = 'pqowieurytlaksjdhfgmznxbcv1029384756';
+        }   
+        $newPassword = ''; 
+
+        for($i=0;$i<$length;$i++){
+            $newPassword .= substr($randomString, mt_rand(0, strlen($randomString)-1), 1); 
+        }   
+        return $newPassword;
     }
 }
