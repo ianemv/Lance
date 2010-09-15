@@ -59,12 +59,12 @@ class SchoolsController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	
-	function admin_schools($id = null) {
-		debug($this->params);
-		if ($this->RequestHandler->isAjax()) {
-			$schools = $this->School->find('all');
-		}
-		echo "THERE";
+	function admin_schools() {  
+		if (!$this->RequestHandler->isAjax()) {
+			$this->redirect(array('action' => 'index'));  
+		}                                                 
+		$schools = $this->School->find('list'); 
+		$this->set('schools', $schools);
 	}
 
 }

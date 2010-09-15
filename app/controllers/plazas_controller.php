@@ -1,7 +1,9 @@
 <?php
 class PlazasController extends AppController {
 
-	var $name = 'Plazas';
+	var $name = 'Plazas';  
+	
+
 
 	function admin_index() {
 		$this->Plaza->recursive = 0;
@@ -61,6 +63,10 @@ class PlazasController extends AppController {
 		}
 		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Plaza'), 'admin/error');
 		$this->redirect(array('action' => 'index'));
+	}  
+	
+	function getplazas() {       
+   		return $this->Plaza->find('all', array('limit' => 6));  
 	}
 
 }

@@ -1,4 +1,5 @@
-<div id="footer">
+<?php echo $this->element('sponcers'); ?>
+<div id="footer">    
 	<div class="wrap">
 		<div id="up">
             <?php echo $html->link($html->image('btn_subir.png', array('alt' => '')), array(), array('escape' => false)); ?>

@@ -20,7 +20,7 @@
             <?php echo $html->css('admin/admin-ie'); ?>
         <![endif]-->
         <?php 
-            echo $javascript->link('jquery/jquery');
+            echo $javascript->link('http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js');  
             #echo $javascript->link('jquery/ui');
             #echo $javascript->link('admin');
             echo $scripts_for_layout;

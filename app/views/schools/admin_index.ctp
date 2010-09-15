@@ -27,7 +27,7 @@ echo $sidebar->addMenu('new plazas', array('title' => sprintf(__('New %s', true)
             		<th><?php echo $this->Paginator->sort('description');?></th>
             		<th><?php echo $this->Paginator->sort('image');?></th>
             		<th><?php echo $this->Paginator->sort('lat');?></th>
-            		<th><?php echo $this->Paginator->sort('long');?></th>
+            		<th><?php echo $this->Paginator->sort('lng');?></th>
 		            <th class="actions"><?php __('Actions', true);?></th>
 	            </tr>
 			</thead>
@@ -50,7 +50,7 @@ echo $sidebar->addMenu('new plazas', array('title' => sprintf(__('New %s', true)
 		<td><?php echo $school['School']['description']; ?>&nbsp;</td>
 		<td><?php echo $school['School']['image']; ?>&nbsp;</td>
 		<td><?php echo $school['School']['lat']; ?>&nbsp;</td>
-		<td><?php echo $school['School']['long']; ?>&nbsp;</td>
+		<td><?php echo $school['School']['lng']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $school['School']['id']), array('title' => __('Edit', true), 'class' => 'table-edit-link')); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $school['School']['id']), array('title' => __('Delete', true), 'class' => 'table-delete-link'), sprintf(__('Are you sure you want to delete # %s?', true), $school['School']['id'])); ?>

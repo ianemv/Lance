@@ -1,1 +1,1 @@
-Test
+<?php echo json_encode($schools); ?>

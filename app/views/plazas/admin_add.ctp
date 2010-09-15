@@ -2,9 +2,24 @@
 $html->script(array('jquery/jquery.autocomplete'), array('inline' => false));
 ?>
 <?php echo $javascript->codeBlock(); ?>
-	$(document).ready(function() {
-		$("#PlazaSchoolId").autocomplete('<?php echo $html->url(array('controller' => 'schools', 'action' => 'schools', 'ext' => 'json'))?>');
-		
+	$(document).ready(function() { 
+		$("#PlazaSchoolId").autocomplete('<?php echo $html->url(array('controller' => 'schools', 'action' => 'schools', 'ext' => 'json'))?>', {
+				minChars: 0,
+				width: 310,
+				matchContains: "word",
+				autoFill: false,
+				formatItem: function(row, i, max) {   
+					console.log(row);
+					return i + "/" + max + ": \"" + row.name + "\" [" + row.location + "]";
+				},
+				formatMatch: function(row, i, max) { 
+					return row.name + " " + row.location;
+				},
+				formatResult: function(row) {    
+					return row.name;
+				}
+			});
+		 
 	});
 <?php echo $javascript->blockEnd(); ?>
 	<div class="author in">

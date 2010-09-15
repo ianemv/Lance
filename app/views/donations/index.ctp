@@ -10,9 +10,11 @@
                $(this).find(".vote_box").fadeOut();
                $(this).find("img").fadeIn();
            }
-       );
+       ); 
+	   $("")
     });
 <?php echo $javascript->blockEnd(); ?>
+<?php $plazas = $this->requestAction('/plazas/getplazas/limit:1');  ?>
 
 <div id="votacion_container">
 	<h2><?php echo __('Estas son algunas de las plazas', true); ?></h2>
@@ -23,7 +25,34 @@
 		<div id="votar_button"><?php echo $html->link(__('Quiero elegir la mejor plaza de juegos', true), array('controller' => 'plazas'))?></div>
 	</div>
 	<div id="votacion_container_right">
-		<?php echo $html->div('loading', $html->image('loading.gif', array('alt' => __('Loading Content.  Please wait...', true))), array('style' => 'position:relative; top: 25px; left: 25px;height: 350px;border: 1px solid #666;')); ?>
+		<?php   
+			if (!empty($plazas)) {
+				foreach ($plazas as $plaza) {
+		?>
+		<div class="marco"> 
+			<div class="clipwrapper">
+				<div class="clip">   
+					<?php if (!empty($plaza['PlazaImage'])): ?>
+						<?php echo $html->image($plaza['PlazaImage'][0], array('alt' => '')); ?>
+					<?php endif; ?>   
+					<div class="vote_box" style="display:none">
+						<div class="vote_dialog">
+							<?php echo $html->tag('p', $plaza['School']['name']); ?>
+					  	</div>
+						<div class="vote_form"> 
+							   <?php echo $form->input('email', array('label' => false))?>
+							   <?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Vote', true))), '#', array('class'=> 'btn_votar', 'escape' => false))?>
+						</div> 
+				  	</div>
+				</div>
+			</div>
+		</div> 	  
+		<?php		
+				}                     
+			} else {
+				echo __('No Plazas found.', true);
+			}
+		?>
 	</div>
 </div>
 <!--
