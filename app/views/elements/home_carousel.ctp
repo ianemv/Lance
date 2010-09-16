@@ -13,6 +13,6 @@
     $('#plaza_suenos_menu').corner("bottom");
 <?php echo $javascript->blockEnd(); ?>
 <div id="plaza_suenos_menu">
-    <div class="title"><?php echo __('Look what the kids are dreaming', true); ?></div>
+    <div class="title"><?php echo __('Mira lo que ellos sueñan:', true); ?></div>
     <ul id="flicker_images" class="jcarousel-skin-tango"></ul>
 </div>

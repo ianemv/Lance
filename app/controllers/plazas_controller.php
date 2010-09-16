@@ -3,7 +3,9 @@ class PlazasController extends AppController {
 
 	var $name = 'Plazas';  
 	
+    function index() {
 
+    }
 
 	function admin_index() {
 		$this->Plaza->recursive = 0;

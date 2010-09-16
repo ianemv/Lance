@@ -48,18 +48,18 @@
 			<?php echo $this->element('menu_top'); ?>
             <?php echo $html->image('fundacionmustaki.png', array('alt' => __('Mustaki Foundation', true), 'id' => 'logo2')); ?>
             <div class="header2_1">
-                <?php echo __('The children dream it, and we\'ll build it.  We need your donation, to make the dream a reality.', true); ?>
+                <?php echo __('Con la ideas de los niños, construiremos la mejor plaza de juegos.  Necesitamos tu donación, para hacer real su sueño.', true); ?>
             </div>
             <div class="header2_2">
                 <ul>
-                    <li><?php echo $html->image('paso1.png', array('alt' => __('Step 1', true))); ?></li>
-                    <li><?php echo $html->image('paso2.png', array('alt' => __('Step 2', true))); ?></li>
-                    <li><?php echo $html->image('paso3.png', array('alt' => __('Step 3', true))); ?></li>
+                    <li><?php echo $html->image('paso1.png', array('alt' => __('Paso 1', true))); ?></li>
+                    <li><?php echo $html->image('paso2.png', array('alt' => __('Paso 2', true))); ?></li>
+                    <li><?php echo $html->image('paso3.png', array('alt' => __('Paso 3', true))); ?></li>
                 </ul>
             </div>
  			<div style="clear:both"></div>
 			<div class="social_connect"> 
-		 		<?php echo sprintf(__('Que todos se enteren de esta gran causa: %s', true),  $html->link(__('Tweet', true), 'http://twitter.com/share', array('class' => 'twitter-share-button', 'data-count' => 'horizontal', 'data-lang' => 'es'))); ?><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.regalaunaplaza.cl&amp;layout=button_count&amp;show_faces=false&amp;width=450&amp;action=recommend&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:21px;" allowTransparency="true"></iframe> 
+		 		<?php echo sprintf(__('Que todos se enteren de esta gran causa: %s', true),  $html->link(__('Twittear', true), 'http://twitter.com/share', array('class' => 'twitter-share-button', 'data-count' => 'horizontal', 'data-lang' => 'es'))); ?><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.regalaunaplaza.cl&amp;layout=button_count&amp;show_faces=false&amp;width=450&amp;action=recommend&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:21px;" allowTransparency="true"></iframe> 
 			   <div style="float:right; margin-right:50px;">  
 					 <ul class="social_icons">
 		                <li><?php echo $html->link($html->image('icono_twitter.png', array('alt' => __('Twitter', true))), 'http://twitter.com/Regalaunaplaza', array('escape' => false)); ?></li>
@@ -74,10 +74,13 @@
     </div>
     <div id="main_content" class="wrap">
         <?php echo $this->element('donation'); ?>
+        <div id="content">
         <?php echo $content_for_layout; ?>
+        </div>
     </div>
 	<?php echo $this->element('footer'); ?>   
-	<?php echo $html->div('contact', $html->link($html->tag('span', __('Contact Us', true)), '/contacto', array('escape' => false)))?>
+    <?php echo $html->div('equipo', $html->link($html->tag('span', __('Equipo', true)), '/equipo', array('escape' => false))); ?> &nbsp; | &nbsp;
+	<?php echo $html->div('contact', $html->link($html->tag('span', __('Contacto', true)), '/contacto', array('escape' => false))); ?>
 <?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

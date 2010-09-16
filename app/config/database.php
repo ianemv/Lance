@@ -79,8 +79,8 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => '/Users/jmashburn/Documents/Projects/Plaza/app/config/schema/plaza_cake.sqlite',
-        #'database' => '/var/www/sites/Plaza_Cake/app/config/schema/plaza_cake.sqlite',
+		#'database' => '/Users/jmashburn/Documents/Projects/Plaza/app/config/schema/plaza_cake.sqlite',
+        'database' => '/var/www/sites/Plaza_Cake/app/config/schema/plaza_cake.sqlite',
 		'prefix' => '',
 		'encoding' => 'UTF8'
 	);

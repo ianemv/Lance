@@ -6,7 +6,7 @@ body{font-family:Helvetica-Light;font-color:#333;}
 #header1_menu{padding-top:8px;margin-left:120px;clear:both;}
 #header1_menu li{float:left;margin-left:15px;padding-right:10px;border-right:1px solid #000;}
 .header2{background:#fff url(/img/bg_header2.png) repeat-x;height:336px;}
-.header2_1{height:58px;text-align:center;font-size:14px;color:white;font-size:20px;width:700px;margin-left:200px;padding-top:15px;line-height:25px;}
+.header2_1{height:58px;font-size:14px;color:#fff;font-size:20px;width:800px;margin-left:100px;padding-top:15px;line-height:25px;}
 .header2_2{height:132px;}
 #logo1{position:absolute;left:0px;top:0px;width:97px;height:108px;}
 #logo2{position:absolute;right:0px;top:0px;margin-top:10px;}
@@ -18,7 +18,8 @@ body{font-family:Helvetica-Light;font-color:#333;}
 #columns3 div.column3{float:left;}
 #columns3 div.column3.second{margin-left:40px;margin-right:40px;width:310px;}
 div.column3{width:280px;height:318px;background-color:#AAA;}
-#main_content div.line{margin-top:5px;border-top:1px dotted #AAA;}
+#main_content h2 { color:#333; font-size: 15px;padding: 5px 0; margin-bottom:10px; border-bottom:1px dotted #aaa; }
+#content { padding: 25px 0; }
 #nos_ayudan{height:250px;}
 #nos_ayudan .title{line-height:60px;font-size:22px;}
 #nos_ayudan .inst_ayuda{float:left;margin:0 30px 20px 0;}
@@ -38,19 +39,17 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 #votacion_container_left{width:300px;float:left;padding:20px;}
 #votacion_container_right{width:612px;float:right;margin-top:20px;}
 #votacion_container_right div.marco{float:left;}
-#votar_button{background:url(/img/btn_invitar_votacion.png) no-repeat;width:257px;height:40px;padding:5px;text-align:center;margin-top:25px;}
+#votar_button{background:url(/img/btn_invitar_votacion.png) no-repeat;width:257px;height:40px;padding:5px;margin-top:25px;}
 #votar_button a{color:#FFF;text-decoration:none;}
-.marco{background:url(/img/caja_fotos_home.png);width:204px;height:170px;}
-#votacion_container h2{margin-left:20px;color:#666;font-size:1.2em;}
 #votacion_container_left{line-height:1.4em;font-size:0.9em;}
 #votacion_container_left p{margin-bottom:1em;}
-.clipwrapper{position:relative;width:178px;height:132px;margin:10px;}
-.clip{position:absolute;clip:rect(0px 178px 132px 0px);top:0px;left:3px;}
-.clipwrapper_flicker{position:relative;width:58px;height:58px;}
-.clip_flicker{position:absolute;clip:rect(0px 58px 58px 0px);top:0px;left:0px;}
-.clipwrapper_flicker img{height:58px;}
-.clipwrapper_votacion{position:relative;width:220px;height:165px;}
-.clip_votacion{position:absolute;clip:rect(0px 220px 165px 0px);top:0px;left:0px;}
+.marco{background:url(/img/caja_fotos_home.png);width:204px;height:170px;}
+.clip .plaza_img { position: absolute; }
+.vote_box { background:#83cdf4;padding:5px 2px;width:179px;height:142px;margin:4px 10px;}
+.vote_dialog { background:url(/img/vote_bubble.png) no-repeat;height: 57px; padding:5px; font-size:12px }
+.vote_dialog a {color: #333; font-weight:bold; font-size:125%;display:block;}
+.vote_form label { position:absolute;padding:2px 0 0 5px;color: #333;font-size:14px;}
+.vote_form div.input input { width:165px;font:14px;color:#333;}
 /* Forms */
 div.input{}
 div.input label{font-weight:bold;width:140px;display:block;}
@@ -69,7 +68,7 @@ ul.menu li a:hover{color:#0099ff;text-decoration:underline;}
 /** END OF HEADER **/ 
 #logos h2{font-size:15px;color:#333;padding-bottom:5px;border-bottom:1px dotted #333;}
 #logos img{padding:15px;}   
-.social_connect {height: 25px;margin-top:10px;padding: 5px 5px;color: #fff;font-weight:bold;}  
+.social_connect {height: 25px;margin-top:5px;padding: 5px 5px;color: #fff;font-weight:bold;}  
 .social_icons li { float:left;margin-left:10px;}     
 
 .contact { width: 62px; height: 146px; position: fixed; right: 0; top: 100px;background:url(/img/contact_us.png) no-repeat;}
