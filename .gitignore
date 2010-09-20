@@ -10,3 +10,5 @@
 /app/webroot/files/**/*.*
 
 /app/config/config.php
+
+.hg*
