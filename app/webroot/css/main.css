@@ -45,12 +45,13 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 #votacion_container_left p{margin-bottom:1em;}
 .marco{background:url(/img/caja_fotos_home.png);width:204px;height:170px;}  
 .clip { position: relative;} 
+.clipwrapper_flicker{position:relative;width:58px;height:58px;}
+.clip_flicker{position:absolute;clip:rect(0px 58px 58px 0px);top:0px;left:0px;}
+.clipwrapper_flicker img{height: 58px;}
 .plaza_img {background:#fff;padding:3px; position: absolute;top:4px;left:11px;}     
 .plaza_img_inner, .plaza_img_inner img{width:175px;height:145px;padding:0; margin:0;}
 .plaza_thumb img { width: 45px; height:45px;padding:0; margin:0;}   
-
 .plaza_thumb { float:right;margin-right:10px;}  
-     
 .vote_box { background:#83cdf4;width:179px;height:140px;top:5px;left:11px;padding:5px 2px;;position:absolute;}  
 .vote_dialog { background:url(/img/vote_bubble.png) no-repeat;height: 57px; padding:5px; font-size:12px }
 .vote_dialog a {color: #333; font-weight:bold; font-size:125%;display:block;}                     
