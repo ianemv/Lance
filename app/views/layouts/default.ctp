@@ -36,6 +36,7 @@
         echo $javascript->link('jquery/jquery.corner');
         echo $javascript->link('facebox/facebox');  
 		echo $javascript->link('http://platform.twitter.com/widgets.js');
+		echo $javascript->link('main');
 		echo $scripts_for_layout;
 	?>
    

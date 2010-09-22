@@ -259,10 +259,10 @@ class FileUploadBehavior extends ModelBehavior{
         $phpThumb->setSourceFilename($saveAs);
         $phpThumb->setCacheDirectory(CACHE);
         $phpThumb->setParameter('w', $options['width']);
-		if (!empty($option['height'])) {
+		if (!empty($options['height'])) { 
 			$phpThumb->setParameter('h', $options['height']);
         }
-		$phpThumb->setParameter('f', $format);
+		$phpThumb->setParameter('f', $format);  
 
         if(!empty($options['phpThumb'])){
             foreach($options['phpThumb'] as $name => $value){
@@ -272,7 +272,7 @@ class FileUploadBehavior extends ModelBehavior{
             }
         }
 
-        if($phpThumb->generateThumbnail()){
+        if($phpThumb->generateThumbnail()){  
 			if($phpThumb->RenderToFile($destination)){
                 chmod($destination, 0644);
 				return true;

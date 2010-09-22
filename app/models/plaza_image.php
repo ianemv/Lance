@@ -9,11 +9,31 @@ class PlazaImage extends AppModel {
             'image' => array(
                 'required'          => array('add' => true, 'edit' => false),
                 'directory'         => 'img/plazas',
-                'allowed_mime'      => array('image/jpg', 'image/jpeg'),
-                'allowed_extensions'=> array('.jpg', '.jpeg'),
+				'allowed_mime' 	  	=> array('image/jpeg', 'image/jpeg', 'image/gif', 'image/png'),
+				'allowed_extensions'=> array('.jpg', '.jpeg', '.png', '.gif'),
                 'allowed_size'      => 2097152,
                 'random_filename'   => false,
-                'resize'            => false,
+                'resize' => array( 
+					'preview' => array(
+		                'directory' => 'img/plazas/preview',
+		                'width' => 175,
+		                'height' => 140,
+		                'phpThumb' => array(
+		                    'zc' => 1, 
+							'fltr' => array(
+								'ric|10|10'
+							)
+		                )
+		            ),
+		            'thumb' => array(
+		                'directory' => 'img/plazas/thumbs',
+		                'width' => 45,
+		                'height' => 45,
+		                'phpThumb' => array(
+		                    'zc' => 1
+		                )
+		            )
+		        )
             )
         )
     );

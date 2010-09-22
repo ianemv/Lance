@@ -1,26 +1,44 @@
 <?php echo $javascript->codeBlock(); ?>
-    $(document).ready(function() {
+    $(document).ready(function() { 
+	    $(".transfer img").css({ 'opacity' : 0.0 });
         $('#votacion_container_right .marco').hoverIntent(
-           function() {
-               $(this).find(".vote_box").effect('slide', {direction:'up'}, 200);
-               $(this).find('.vote_dialog').effect('bounce', {direction:'down'},200);
-               $(this).find(".plaza_img").fadeOut();
+           function() {  
+	 		   var plazaImg = $(this).find('.plaza_img');
+			   var thumbRel = $(this).find('.plaza_img img').attr('rel');
+			   $(plazaImg).fadeOut();
+               $(this).find(".vote_box").effect('slide', {direction:'up'}, 200).effect('transfer', {to: $(".plaza_thumb img[rel='"+thumbRel+"']")}, 500); 
+			   $(this).find('.vote_dialog').effect('bounce', {direction:'down'},200);   
+			   $(".plaza_thumb img[rel='"+thumbRel+"']").animate({opacity: 1.0}, 1000); 	
            },
-           function() {
+           function() {    
+	   		   var plazaImg = $(this).find('.plaza_img');
+			   var thumbRel = $(this).find('.plaza_img img').attr('rel');  
+			   $(plazaImg).fadeIn();  
                $(this).find(".vote_box").fadeOut();
-               $(this).find(".plaza_img").fadeIn();
+			   $(".plaza_thumb img[rel='"+thumbRel+"']").animate({opacity: 0.0}, 1000); 
                $(this).find(".vote_form input").val();
            }
        ); 
-        $(".vote_form label").click(function() {
-            $(this).hide();
-            $(this).parent().find(".vote_form input").val('here');
-        });
-        $(".vote_box").corner();
-    });
+		$("input.validate-email").keydown(function() {
+			
+		})
+        $(".vote_box").corner();   
+		$(".plaza_img").corner();   
+		$('label').labelOver('label-over'); 
+		$(".plaza_img_inner").corner(); 
+		
+		 
+    }); 
+ 
+	function vote(id) {
+	   $.post('/votes/vote', $("#form_"+id).serialize(),
+		function(data) {
+			alert('Data Loaded: '+ data);
+		});
+	   
+	}
 <?php echo $javascript->blockEnd(); ?>
-<?php $plazas = $this->requestAction('/plazas/getplazas/limit:1');  ?>
-
+<?php $plazas = $this->requestAction('/plazas/getplazas/limit:6');  ?>
 <div id="votacion_container">
 	<h2><?php echo __('Estas son algunas de las plazas', true); ?></h2>
     <?php echo $html->div('view_all', $html->link(__('ver todos', true), array('controller' => 'plazas', 'action' => 'index')), array('style' => 'float:right;margin-top:-30px;')); ?>
@@ -36,18 +54,30 @@
 		?>
 		<div class="marco"> 
 			<div class="clipwrapper">
-				<div class="clip">   
-					<?php if (!empty($plaza['PlazaImage'])): ?>
-						<?php echo $html->image($plaza['PlazaImage'][0], array('alt' => '', 'class' => 'plaza_img')); ?>
-					<?php endif; ?>   
-                    <?php echo $html->image('schools/8490bd465c67da92604d602ea824e3f6eb6631ed.jpg', array('style' => "width:170px; height: 150px;", 'class' => 'plaza_img')); ?>
+				<div class="clip">                                                                  
+					<?php if (!empty($plaza['PlazaImage'])): ?>  
+						<div class="plaza_img"> 
+							<div class="plaza_img_inner">
+						<?php echo $html->image('plazas'. DS . 'preview'. DS .$plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))); ?>  
+							</div>
+						</div>
+					<?php endif; ?>
 					<div class="vote_box" style="display:none">
 						<div class="vote_dialog">
 							<?php echo $html->tag('p', sprintf(__('Ingresa tu mail para votar por esta plaza o puedes %s', true), $html->link(__('ver todas las plazas', true), array('controller' => 'plazas', 'action' => 'index')))); ?>
 					  	</div>
-						<div class="vote_form"> 
-							   <?php echo $form->input('email', array('label' => __('Tu mail', true)))?>
-							   <?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), '#', array('class'=> 'btn_votar', 'escape' => false))?>
+						<div class="vote_form">    
+							<?php $id = uniqid();?>      
+							<?php echo $form->create('Votes', array('action' => 'vote', 'id' => "form_".$id)); ?> 
+							<?php echo $form->hidden('plaza_id', array('value' => $plaza['Plaza']['id'] )); ?>
+							<?php echo $form->input('email', array('label' => array('text' => __('Tu mail', true), 'class' => 'label-over'), 'class' => 'validate-email', 'id' => uniqid('email_')))?>                                   
+						   	<?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), '#', array('onclick' => "return vote('".$id."');",'class'=> 'btn_votar','style'=>'float:left', 'escape' => false))?>
+							<?php echo $form->end();?> 
+							<?php if (!empty($plaza['PlazaImage'])): ?>  
+								 <div class="plaza_thumb"> 
+								<?php echo $html->image('plazas' . DS . 'thumbs' . DS . $plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))); ?>  
+								 </div>
+							<?php endif; ?>   
 						</div> 
 				  	</div>
 				</div>

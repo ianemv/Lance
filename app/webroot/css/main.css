@@ -43,12 +43,19 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 #votar_button a{color:#FFF;text-decoration:none;}
 #votacion_container_left{line-height:1.4em;font-size:0.9em;}
 #votacion_container_left p{margin-bottom:1em;}
-.marco{background:url(/img/caja_fotos_home.png);width:204px;height:170px;}
-.clip .plaza_img { position: absolute; }
-.vote_box { background:#83cdf4;padding:5px 2px;width:179px;height:142px;margin:4px 10px;}
+.marco{background:url(/img/caja_fotos_home.png);width:204px;height:170px;}  
+.clip { position: relative;} 
+.plaza_img {background:#fff;padding:3px; position: absolute;top:4px;left:11px;}     
+.plaza_img_inner, .plaza_img_inner img{width:175px;height:145px;padding:0; margin:0;}
+.plaza_thumb img { width: 45px; height:45px;padding:0; margin:0;}   
+
+.plaza_thumb { float:right;margin-right:10px;}  
+     
+.vote_box { background:#83cdf4;width:179px;height:140px;top:5px;left:11px;padding:5px 2px;;position:absolute;}  
 .vote_dialog { background:url(/img/vote_bubble.png) no-repeat;height: 57px; padding:5px; font-size:12px }
-.vote_dialog a {color: #333; font-weight:bold; font-size:125%;display:block;}
-.vote_form label { position:absolute;padding:2px 0 0 5px;color: #333;font-size:14px;}
+.vote_dialog a {color: #333; font-weight:bold; font-size:125%;display:block;}                     
+.vote_form { position: relative;}
+.vote_form label { position:absolute;top:5px;left:5px;color: #333;font-size:14px;}    
 .vote_form div.input input { width:165px;font:14px;color:#333;}
 /* Forms */
 div.input{}
@@ -73,4 +80,8 @@ ul.menu li a:hover{color:#0099ff;text-decoration:underline;}
 
 .contact { width: 62px; height: 146px; position: fixed; right: 0; top: 100px;background:url(/img/contact_us.png) no-repeat;}
 .contact a { width: 50px; height: 145px; display: block;} 
-.contact a span { display: none;}
+.contact a span { display: none;}      
+
+
+.ui-effects-transfer { border: 1px dashed #333; }
+

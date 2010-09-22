@@ -23,7 +23,7 @@ class PlazasController extends AppController {
 	function admin_add() {
 		if (!empty($this->data)) {
 			$this->Plaza->create();
-			if ($this->Plaza->save($this->data)) {
+			if ($this->Plaza->saveAll($this->data)) {
 				$this->Session->setFlash(sprintf(__('The %s has been saved', true), 'plaza'), 'admin/success');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -39,8 +39,8 @@ class PlazasController extends AppController {
 			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'plaza'), 'admin/attention');
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
-			if ($this->Plaza->save($this->data)) {
+		if (!empty($this->data)) {      
+			if ($this->Plaza->saveAll($this->data)) {
 				$this->Session->setFlash(sprintf(__('The %s has been saved', true), 'plaza'), 'admin/success');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -67,8 +67,9 @@ class PlazasController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}  
 	
-	function getplazas() {       
-   		return $this->Plaza->find('all', array('limit' => 6));  
+	function getplazas() {  
+
+		return $this->paginate();       
 	}
 
 }
