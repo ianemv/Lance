@@ -13,7 +13,6 @@ class VotesController extends AppController {
         }
 
         if (!empty($this->data)) { 
-	debug($this->data);
             $vote = $this->Vote->vote($this->data);
             $this->set('data', $vote);
 		}

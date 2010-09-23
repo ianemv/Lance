@@ -73,9 +73,8 @@
 			</div>  
         </div> 
     </div>
-    <div id="main_content" class="wrap">
-        <?php echo $this->element('donation'); ?>
-        <div id="content">
+    <div id="main_content" class="wrap">   
+		<div id="content"> 
         <?php echo $content_for_layout; ?>
         </div>
     </div>

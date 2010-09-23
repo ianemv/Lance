@@ -18,7 +18,7 @@
     SuperRouter::connect('/proyecto', array('controller' => 'pages', 'action' => 'view', 'proyecto'));
     SuperRouter::connect('/prensa', array('controller' => 'pages', 'action' => 'view', 'prensa'));
     SuperRouter::connect('/difunde', array('controller' => 'pages', 'action' => 'view', 'difunde'));
-    SuperRouter::connect('/votar', array('controller' => 'plazas', 'action' => 'index')); 
+    SuperRouter::connect('/plazas', array('controller' => 'plazas', 'action' => 'index')); 
     SuperRouter::connect('/como', array('controller' => 'pages', 'action' => 'view', 'como'));
 	
     // Users

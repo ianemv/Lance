@@ -37,8 +37,10 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 .header2_2 ul li{float:left;}
 #votacion_container{height:450px;}
 #votacion_container_left{width:300px;float:left;padding:20px;}
-#votacion_container_right{width:612px;float:right;margin-top:20px;}
-#votacion_container_right div.marco{float:left;}
+#votacion_container_right{width:612px;float:right;margin-top:20px;}    
+#votacion_container_full { margin: 20px 0 0 60px; } 
+#votacion_container_right div.marco, #votacion_container_full div.marco {float:left;}   
+
 #votar_button{background:url(/img/btn_invitar_votacion.png) no-repeat;width:257px;height:40px;padding:5px;margin-top:25px;}
 #votar_button a{color:#FFF;text-decoration:none;}
 #votacion_container_left{line-height:1.4em;font-size:0.9em;}

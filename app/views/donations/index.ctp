@@ -26,8 +26,6 @@
 		$(".plaza_img").corner();   
 		$('label').labelOver('label-over'); 
 		$(".plaza_img_inner").corner(); 
-		
-		 
     }); 
  
 	function vote(id) {
@@ -38,7 +36,8 @@
 	   
 	}
 <?php echo $javascript->blockEnd(); ?>
-<?php $plazas = $this->requestAction('/plazas/getplazas/limit:6');  ?>
+<?php $plazas = $this->requestAction('/plazas/getplazas/limit:6');  ?> 
+<?php echo $this->element('donation'); ?>
 <div id="votacion_container">
 	<h2><?php echo __('Estas son algunas de las plazas', true); ?></h2>
     <?php echo $html->div('view_all', $html->link(__('ver todos', true), array('controller' => 'plazas', 'action' => 'index')), array('style' => 'float:right;margin-top:-30px;')); ?>

@@ -3,7 +3,8 @@ class DonationsController extends AppController {
 
 	var $name = 'Donations';
 
-	function index() {
+	function index() {   
+		$this->set('title_for_layout', __('Necesitamos tu donación, para hacer real su sueño', true));
         if ($this->RequestHandler->isAjax()) {
             $this->layout = 'ajax';
         } else {
