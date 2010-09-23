@@ -8,7 +8,9 @@ class PlazaImportShell extends Shell {
 
     var $currentFileName;
 
-    var $verbose = false;
+    var $verbose = false; 
+
+	var $dryRun = false;
 	
 	var $success = 0;
 
@@ -34,7 +36,9 @@ class PlazaImportShell extends Shell {
 		foreach ($this->params as $name=>$value) {
 			$name = strtolower($name);
 			if ($name == 'verbose' || $name == 'v') {
-				$this->verbose = true;
+				$this->verbose = true;  
+			} elseif ($name =='dry' || $name == 'd') {  
+				$this->dryRun = true;
 			} elseif ($name == 'datapath') {
 				$this->useDataPath = true;
 			} elseif ($name == 'help' || $name == '?') {
@@ -85,78 +89,103 @@ class PlazaImportShell extends Shell {
             }
         }
         return $buffer;
-    }
+    }    
+
 
     private function _importPlazas($values) {
         foreach($values as $data) {
             $count = count($data);
-            if ($this->verbose) {
-                $this->out(sprintf(__('Currently Processing: %s', true), $data[1]));
-            }
-            $school['School'] = array('key' => $data[0], 'name' => $data[1], 'location' => $data[2], 'description' => $data[3], 'image' => $data['4']);
-            $this->School->create();
-            if ($school = $this->School->save($school)) {
-                if ($this->verbose) {
-                    $this->out(sprintf(__('Added school "%s" successfully', true), $data[1]));
-                    $this->out(sprintf(__('Processing plaza for school "%s"', true), $data[1]));
-                }
-                if (!empty($school)) {
-                    $plaza['Plaza'] = array('school_id' => $this->School->id, 'description' => $data[5]);
-                    if ($count>5) {
-                        if ($this->verbose) {
-                            $this->out(sprintf(__('Found Image(s) for "%s"', true), $data[1]));
-                        }
-                        $plaza['PlazaImage'] = array();
-                        $dirname = dirname($this->currentFileName);
-                        if (is_dir($dirname.DS.$data[0])) {
-                            for($i=6;$i<$count;$i++) {
-                                if ($this->verbose) {
-                                    $this->out(sprintf(__('Preparing image "%s" for school "%s"', true), $data[$i], $data[1]));
-                                }
-                                if (is_file($dirname.DS.$data[0].DS.$data[$i])) {
-                                    $image = new File($dirname.DS.$data[0].DS.$data[$i]);
-                                    $info = $image->info();
-                                    $plaza['PlazaImage'][] = array(
-                                        'plaza_id' => $this->Plaza->id,
-                                        'image' => array(
-                                            'name' => $data[$i],
-                                            'type' => 'image'.DS.$info['extension'],
-                                            'tmp_name' => $dirname.DS.$data[0].DS.$data[$i],
-                                            'error' => 0,
-                                            'size' => $image->size()
-                                        )
-                                    );
-                                }
-                            }
-                        }
-                    }
-                    $this->Plaza->create();
-                    if ($this->verbose) {
-                        $image_count = (!empty($plaza['PlazaImage']))?count($plaza['PlazaImage']):0;
-                        $this->out(sprintf(__('Adding Plaza for school "%s" with %d image(s)', true), $data[1], $image_count));
-                    }
-                    if ($this->Plaza->saveAll($plaza)) {
-                        if ($this->verbose) {
-                            $this->out(sprintf(__('Successfully Added Plaza for "%s"', true), $data[1]));
-                            $this->hr();
-                        }
-                        $this->success++;
-                    } else {
-                        if ($this->verbose) {
-                            $this->out(sprintf(__('Failed to add Plaza for school "%s"', true), $data[1]));
-                        }
-                        $this->failedFiles[$data[1]] = $this->Plaza->invalidFields();
-                        $this->errors++;
-                    }
+            $dirname = dirname($this->currentFileName);                                                                            
+			if ($this->dryRun) { 
+				$this->out(sprintf(__('Currently Processing: %s', true), $data[1]));
+				$this->out(sprintf(__('Processing plaza for school "%s"', true), $data[1]));
+				if ($count>5) {
+					$this->out(sprintf(__('Found Images(s) for "%s"', true), $data[1]));
+				}    
+				$images[$data[1]] = array();                                                                   
+				if (is_dir($dirname.DS.$data[0])) {
+					for($i=6;$i<$count;$i++) {        
+						if (!empty($data[$i])) {
+							$this->out(sprintf(__('Preparing image "%s" for school "%s"', true), $data[$i], $data[1]));
+							if (!is_file($dirname.DS.$data[0].DS.$data[$i])) { 
+								$this->errors++;
+								$this->failedFiles[$data[1]]['image'][] = $data[$i];                                                                                                 
+							} else {
+								$images[$data[1]][] = $data[$i]; 
+							} 
+					  	}
+					}
+				}                                     
+				$this->out(sprintf(__('Adding Plaza for school "%s" with %d image(s)', true), $data[1], count($images[$data[1]])));
+				
+			} else { 
+				if ($this->verbose) {
+	                $this->out(sprintf(__('Currently Processing: %s', true), $data[1]));
+	            }
+            	$school['School'] = array('key' => $data[0], 'name' => $data[1], 'location' => $data[2], 'description' => $data[3], 'image' => $data['4']);  
+               	$this->School->create();
+ 	           	if ($school = $this->School->save($school)) {
+	                if ($this->verbose) {
+	                    $this->out(sprintf(__('Added school "%s" successfully', true), $data[1]));
+	                    $this->out(sprintf(__('Processing plaza for school "%s"', true), $data[1]));
+	                }
+	                if (!empty($school)) {
+	                    $plaza['Plaza'] = array('school_id' => $this->School->id, 'description' => $data[5]);
+	                    if ($count>5) {
+	                        if ($this->verbose) {
+	                            $this->out(sprintf(__('Found Image(s) for "%s"', true), $data[1]));
+	                        }
+	                        $plaza['PlazaImage'] = array();
+	                        if (is_dir($dirname.DS.$data[0])) {   
+	                            for($i=6;$i<$count;$i++) { 
+									if (is_file($dirname.DS.$data[0].DS.$data[$i])) {
+	                                	if ($this->verbose) {
+		                                    $this->out(sprintf(__('Preparing image "%s" for school "%s"', true), $data[$i], $data[1]));
+		                                }  
+	                                    $image = new File($dirname.DS.$data[0].DS.$data[$i]);
+	                                    $info = $image->info();
+	                                    $plaza['PlazaImage'][] = array(
+	                                        'plaza_id' => $this->Plaza->id,
+	                                        'image' => array(
+	                                            'name' => $data[$i],
+	                                            'type' => 'image'.DS.$info['extension'],
+	                                            'tmp_name' => $dirname.DS.$data[0].DS.$data[$i],
+	                                            'error' => 0,
+	                                            'size' => $image->size()
+	                                        )
+	                                    );
+	                                }
+	                            }
+	                        }
+	                    }
+	                    $this->Plaza->create();
+	                    if ($this->verbose) {
+	                        $image_count = (!empty($plaza['PlazaImage']))?count($plaza['PlazaImage']):0;
+	                        $this->out(sprintf(__('Adding Plaza for school "%s" with %d image(s)', true), $data[1], $image_count));
+	                    }
+	                    if ($this->Plaza->saveAll($plaza)) {
+	                        if ($this->verbose) {
+	                            $this->out(sprintf(__('Successfully Added Plaza for "%s"', true), $data[1]));
+	                            $this->hr();
+	                        }
+	                        $this->success++;
+	                    } else {
+	                        if ($this->verbose) {
+	                            $this->out(sprintf(__('Failed to add Plaza for school "%s"', true), $data[1]));
+	                        }
+	                        $this->failedFiles[$data[1]] = $this->Plaza->invalidFields();
+	                        $this->errors++;
+	                    }
                     
-                }
-            } else {
-                if ($this->verbose) {
-                    $this->out(sprintf(__('Failed to add School "%s"', true), $data[1]));
-                }
-                $this->failedFiles[$data[1]] = $this->School->invalidFields();
-                $this->errors++;
-            }
+	                }
+	            } else {
+	                if ($this->verbose) {
+	                    $this->out(sprintf(__('Failed to add School "%s"', true), $data[1]));
+	                }
+	                $this->failedFiles[$data[1]] = $this->School->invalidFields();
+	                $this->errors++;
+	            }
+			}
         }
     }
 
@@ -272,17 +301,31 @@ class PlazaImportShell extends Shell {
 		$this->out(sprintf(__('Unsuccessful plazas attempts: %d', true), $this->errors));
 		if ($this->errors > 0) {
 			$this->out(__("Here are the plazas that failed to import:", true));
-            $this->hr();
+            $this->hr();          
+			if ($this->dryRun) {
+				$output = "Dry Run Output\n";
+				$output .= "-----------------------------------------------\n";
+			}
             foreach ($this->failedFiles as $name => $errors) {
                 $this->out(sprintf(__('Error: %s', true), $name));
-                if (!empty($errors)) {
-                    foreach ($errors as $key => $value) {
-                        $this->out(sprintf(__('Field: (%s) - %s', true), $key, $value));
+                if (!empty($errors)) {   
+					 
+                    foreach ($errors as $key => $value) {    
+						if (is_array($value)) {
+							$value = implode("\n", array_values($value));
+						}  
+						if ($this->dryRun) {
+							$output .= $value."\n";
+						}
+                        $this->out(sprintf(__("Field: (%s) - %s", true), $key, $value));
                     }
                     $this->hr();
                 }
             }
-            $this->hr();
+            $this->hr();  
+            if ($this->dryRun) {
+				file_put_contents(dirname($this->currentFileName).DS.$this->_removeExtension($this->currentFileName).".dry", $output);
+			}
 		}
         $this->_stop();
 		

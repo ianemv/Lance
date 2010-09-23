@@ -244,7 +244,7 @@ class FileUploadBehavior extends ModelBehavior{
     }
 
 	function generateThumbnail($saveAs, $options){
-        $destination = WWW_ROOT . $options['directory'] . DS . basename($saveAs);
+        $destination = WWW_ROOT . $options['directory'] . DS . basename($saveAs);   
 
         $ext = substr(basename($saveAs), strrpos(basename($saveAs), '.') + 1);
         if($ext == '.jpg' || $ext == '.jpeg'){
@@ -255,7 +255,7 @@ class FileUploadBehavior extends ModelBehavior{
             $format = 'gif';
         }else{
             $format = 'jpeg';
-        }
+        }            
 
         $phpThumb = new phpthumb();
         $phpThumb->setSourceFilename($saveAs);
@@ -272,7 +272,7 @@ class FileUploadBehavior extends ModelBehavior{
                     $phpThumb->setParameter($name, $value);
                 }
             }
-        }
+        }   
 
         if($phpThumb->generateThumbnail()){  
 			if($phpThumb->RenderToFile($destination)){
