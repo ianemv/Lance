@@ -8,6 +8,8 @@
 /app/tmp/logs/*.log
 
 /app/webroot/files/**/*.*
+/app/webroot/img/**/*.*
+/app/webroot/img/plazas/**/*.*
 
 /app/config/config.php
 

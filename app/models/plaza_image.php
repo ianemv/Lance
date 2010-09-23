@@ -9,9 +9,9 @@ class PlazaImage extends AppModel {
             'image' => array(
                 'required'          => array('add' => true, 'edit' => false),
                 'directory'         => 'img/plazas',
-				'allowed_mime' 	  	=> array('image/jpeg', 'image/jpeg', 'image/gif', 'image/png'),
+				'allowed_mime' 	  	=> array('image/jpg', 'image/jpeg', 'image/gif', 'image/png'),
 				'allowed_extensions'=> array('.jpg', '.jpeg', '.png', '.gif'),
-                'allowed_size'      => 2097152,
+                'allowed_size'      => 3276800,
                 'random_filename'   => false,
                 'resize' => array( 
 					'preview' => array(

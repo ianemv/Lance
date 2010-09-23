@@ -7,11 +7,12 @@ class FileUploadBehavior extends ModelBehavior{
     var $options = array(
         'required'		    => false,
 		'directory'         => 'img/upload',
-		'allowed_mime' 	    => array('image/jpeg', 'image/pjpeg', 'image/gif', 'image/png'),
+		'allowed_mime' 	    => array('image/jpeg', 'image/jpg', 'image/gif', 'image/png'),
 		'allowed_extensions' => array('.jpg', '.jpeg', '.png', '.gif'),
 		'allowed_size'	    => 1048576,
 		'random_filename'   => true,
-        'resize' => array(
+        'resize'            => false,
+/*      'resize'            => array(
             'max' => array(
                 'directory' => 'img/upload/max',
                 'width' => 640,
@@ -28,8 +29,8 @@ class FileUploadBehavior extends ModelBehavior{
                 'phpThumb' => array(
                     'zc' => 0
                 )
-            )
-        )
+            ) 
+        ) */ 
     );
 
     /**
@@ -40,17 +41,14 @@ class FileUploadBehavior extends ModelBehavior{
     var $__fields;
 
     function setup(&$model, $config = array()){
-
+        
         $config_temp = array();
         
-        $config = array_merge($this->options, $config);
-
         foreach($config as $field => $options){
             // Check if given field exists
             if(!$model->hasField($field)){
                 unset($config[$field]);
                 unset($model->data[$model->name][$field]);
-
                 continue;
             }
 
@@ -66,14 +64,14 @@ class FileUploadBehavior extends ModelBehavior{
             	}
 			}
 
-            $config_temp[$field] = $options;
+            $this->__fields[$model->name][$field] = array_merge($this->options, $options);
         }
-        $this->__fields = $config_temp;
     }
 
     function beforeSave(&$model) {
-        if(count($this->__fields) > 0) {
-            foreach($this->__fields as $field => $options){
+
+        if(!empty($this->__fields[$model->name]) && count($this->__fields[$model->name]) > 0) {
+            foreach($this->__fields[$model->name] as $field => $options){
                 // Check for model data whether has been set or not
                 if(!isset($model->data[$model->name][$field])){
                     continue;
@@ -103,7 +101,7 @@ class FileUploadBehavior extends ModelBehavior{
 
                 // Create final save path
                 if(!isset($options['random_filename']) || !$options['random_filename']) {
-                    $saveAs = realpath($options['directory']) . DS . $model->data[$model->name][$field]['name'];
+                    $saveAs = realpath(WWW_ROOT. $options['directory']) . DS . $model->data[$model->name][$field]['name'];
                 } else {
                     // Remove any file which did exist for this model
                     if(!empty($model->data[$model->name]['id'])) {
@@ -126,8 +124,10 @@ class FileUploadBehavior extends ModelBehavior{
 
                 // Attempt to move uploaded file
                 if(!move_uploaded_file($model->data[$model->name][$field]['tmp_name'], $saveAs)) {
-                    unset($model->data[$model->name][$field]);
-                    continue;
+                    if (!copy($model->data[$model->name][$field]['tmp_name'], $saveAs)) {
+                        unset($model->data[$model->name][$field]);
+                        continue;
+                    }
                 }
 
                 // Update model data
@@ -148,74 +148,76 @@ class FileUploadBehavior extends ModelBehavior{
 
     function beforeValidate(&$model)
     {
-        foreach($this->__fields as $field => $options) {
-            if(!empty($model->data[$model->name][$field]['type']) && !empty($options['allowed_mime'])) {
-                // Check extensions
-                if(count($options['allowed_extensions']) > 0) {
-                    $matches = 0;
-                    foreach($options['allowed_extensions'] as $extension){
-                        if(strtolower(substr($model->data[$model->name][$field]['name'],-strlen($extension))) == $extension){
-                            $matches++;
+        if(!empty($this->__fields[$model->name]) && count($this->__fields[$model->name]) > 0) {
+            foreach($this->__fields[$model->name] as $field => $options) {
+                if(!empty($model->data[$model->name][$field]['type']) && !empty($options['allowed_mime'])) {
+                    // Check extensions
+                    if(count($options['allowed_extensions']) > 0) {
+                        $matches = 0;
+                        foreach($options['allowed_extensions'] as $extension){
+                            if(strtolower(substr($model->data[$model->name][$field]['name'],-strlen($extension))) == $extension){
+                                $matches++;
+                            }
                         }
-                    }
 	
-                    if($matches == 0) {
-                        $allowed_ext = implode(', ', $options['allowed_extensions']);
-                        $model->invalidate($field, sprintf(__('Invalid file type. Only %s allowed.', true), $allowed_ext));
-                        continue;
-                    }
-                }
-
-                // Check mime
-                if(count($options['allowed_mime']) > 0 && !in_array($model->data[$model->name][$field]['type'], $options['allowed_mime'])) {
-                    $model->invalidate($field, __('Invalid file type', true));
-                    continue;
-                }
-
-                // Check the size
-                if($model->data[$model->name][$field]['size'] > $options['allowed_size']) {
-                    $model->invalidate($field, sprintf(__('The image you uploaded exceeds the maximum file size of %d bytes', true), $options['allowed_size']));
-                    continue;
-                }
-            }else{
-                if(is_array($options['required'])) {
-                	foreach ($options['required'] as $action => $required) {
-                        $empty = false;
-
-                		switch($action){
-                            case 'add':
-                                if($required == true && empty($mode->data[$model->name]['id'])){
-                                    $empty = true;
-                                    continue;
-                                }
-                                break;
-
-                            case 'edit':
-                                if($required == true && !empty($mode->data[$model->name]['id'])){
-                                    $empty = true;
-                                    continue;
-                                }
-                                break;
-                        }
-
-                        if($empty){
-                            $model->invalidate($field, sprintf(__('%s is required.', true), Inflector::humanize($field)));
+                        if($matches == 0) {
+                            $allowed_ext = implode(', ', $options['allowed_extensions']);
+                            $model->invalidate($field, sprintf(__('Invalid file type. Only %s allowed.', true), $allowed_ext));
                             continue;
                         }
-                	}
-                } elseif($options['required'] == true) {
-                    $model->invalidate($field, sprintf(__('%s is required.', true), Inflector::humanize($field)));
-                    continue;
+                    }
+
+                    // Check mime
+                    if(count($options['allowed_mime']) > 0 && !in_array($model->data[$model->name][$field]['type'], $options['allowed_mime'])) {
+                        $model->invalidate($field, __('Invalid file type', true));
+                        continue;
+                    }
+
+                    // Check the size
+                    if($model->data[$model->name][$field]['size'] > $options['allowed_size']) {
+                        $model->invalidate($field, sprintf(__('The image you uploaded exceeds the maximum file size of %d bytes', true), $options['allowed_size']));
+                        continue;
+                    }
+                }else{
+                    if(is_array($options['required'])) {
+                	    foreach ($options['required'] as $action => $required) {
+                            $empty = false;
+
+                		    switch($action){
+                                case 'add':
+                                    if($required == true && empty($mode->data[$model->name]['id'])){
+                                        $empty = true;
+                                        continue;
+                                    }
+                                    break;
+
+                               case 'edit':
+                                    if($required == true && !empty($mode->data[$model->name]['id'])){
+                                        $empty = true;
+                                        continue;
+                                    }
+                                    break;
+                            }
+
+                            if($empty){
+                                $model->invalidate($field, sprintf(__('%s is required.', true), Inflector::humanize($field)));
+                                continue;
+                            }
+                	    }
+                    } elseif($options['required'] == true) {
+                        $model->invalidate($field, sprintf(__('%s is required.', true), Inflector::humanize($field)));
+                        continue;
+                    }
                 }
             }
         }
     }
 
     function beforeDelete(&$model) {
-        if(count($this->__fields) > 0){
+        if(count($this->__fields[$model->name]) > 0){
             $model->read(null, $model->id);
             if (isset($model->data)) {
-                foreach($this->__fields as $field => $options){
+                foreach($this->__fields[$model->name] as $field => $options){
                     if(!empty($model->data[$model->name][$field])) {
                     	$this->removeFiles($model->data[$model->name][$field], $options);
                     }
