@@ -96,12 +96,12 @@ class User extends AppModel {
                     'message' => __('A valid email is required.', true)
                 ), 
             ),
-            'rut' => array(
+            /*'rut' => array(
                 'checkRut' => array(
                     'rule' => 'checkRut',
                     'message' => __('The RUT must be valid.', true)
                 )
-            ) 
+            )  */
         );
     }
 
@@ -157,15 +157,12 @@ class User extends AppModel {
                 if ($this->save($data)) {
                     $user = $this->read(null, $this->getLastInsertId());
 
-                    #$user['User']['username']       = $data['User']['username'];
-                    #$user['User']['password']       = $data['User']['before_password'];
-                    #$user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $data['User']['key'];
-                    #$user['to']                     = $data['User']['email'];
-                   # if ($admin == true) {
-                   # } else {
-                   #     $user['subject']            = sprintf(__('Registration Verification - %s', true), $this->appConfigurations['name']);
-                   # }
-                   # $user['template']               = 'users/activate';
+                    $user['User']['username']       = $data['User']['username'];
+                    $user['User']['password']       = $data['User']['password_before'];
+                    $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $data['User']['key'];
+                    $user['to']                     = $data['User']['email'];
+					$user['subject']            = sprintf(__('Registration Verification - %s', true), $this->appConfigurations['name']);
+                   	$user['template']               = 'users/activate';
 
                     return $user;
                 } else {

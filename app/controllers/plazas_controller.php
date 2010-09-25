@@ -4,11 +4,10 @@ class PlazasController extends AppController {
 	var $name = 'Plazas'; 
 	
 	var $paginate = array(
-	    'limit' => 8,
+	    'limit' => 12,
     );      
 	
     function index() {
-    	$this->Plaza->recursive = 0; 
 		$this->set('plazas', $this->paginate());
     }
 

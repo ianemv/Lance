@@ -36,13 +36,19 @@
         echo $javascript->link('jquery/jquery.corner');
         echo $javascript->link('facebox/facebox');  
 		echo $javascript->link('http://platform.twitter.com/widgets.js');
-		echo $javascript->link('main');
+		echo $javascript->link('main');  
+		
+		echo $javascript->link('http://widgets.digg.com/buttons.js');
+		
 		echo $scripts_for_layout;
 	?>
    
 
 </head>
-<body>
+<body>    
+	   <a class="DiggThisButton DiggMedium" href="http://digg.com/submit?url=http://www.iwobble.com"></a>
+	<a class="DiggThisButton DiggLarge"></a> 
+	<a class="DiggThisButton DiggCompact"></a> 
     <div class="full header2">
         <div class="wrap">  
 			<?php echo $html->image('logo_charitybox.png', array('alt' => __('Charity Box', true), 'id' => 'logo1')); ?>  

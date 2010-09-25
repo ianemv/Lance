@@ -6,7 +6,8 @@ App:
     baseUrl: 
     timezone: America/Santiago
     theme: cleanity
-    name: Regala Una Plaza
+    name: Regala Una Plaza 
+    url: http://plaza_cake/
 Site:
     name: 
     theme: 

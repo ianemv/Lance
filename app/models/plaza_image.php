@@ -25,6 +25,17 @@ class PlazaImage extends AppModel {
 							)
 		                )
 		            ),
+					'vote' => array(
+		                'directory' => 'img/plazas/vote',
+		                'width' => 220,
+		                'height' => 165,
+		                'phpThumb' => array(
+		                    'zc' => 1, 
+							'fltr' => array(
+								'ric|10|10'
+							)
+		                )
+		            ),     
 		            'thumb' => array(
 		                'directory' => 'img/plazas/thumbs',
 		                'width' => 45,

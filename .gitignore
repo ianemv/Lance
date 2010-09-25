@@ -10,7 +10,7 @@
 /app/webroot/files/**/*.*
 /app/webroot/img/**/*.*
 /app/webroot/img/plazas/**/*.*
-
+/app/webroot/img/sponcers/**/*./*
 /app/config/config.php
 
 .hg*

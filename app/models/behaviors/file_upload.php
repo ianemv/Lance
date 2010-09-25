@@ -179,27 +179,27 @@ class FileUploadBehavior extends ModelBehavior{
                         continue;
                     }
                 }else{
-                    if(is_array($options['required'])) {
+                    if(is_array($options['required'])) {  
                 	    foreach ($options['required'] as $action => $required) {
                             $empty = false;
-
                 		    switch($action){
                                 case 'add':
-                                    if($required == true && empty($mode->data[$model->name]['id'])){
+                                    if($required == true && empty($model->data[$model->name]['id'])) {   	
                                         $empty = true;
                                         continue;
                                     }
                                     break;
 
-                               case 'edit':
-                                    if($required == true && !empty($mode->data[$model->name]['id'])){
+                               case 'edit':    
+                                    if($required == true && !empty($model->data[$model->name]['id'])){
                                         $empty = true;
                                         continue;
-                                    }
+                                    }  
                                     break;
                             }
 
-                            if($empty){
+                            if($empty){   
+							die($empty);
                                 $model->invalidate($field, sprintf(__('%s is required.', true), Inflector::humanize($field)));
                                 continue;
                             }
