@@ -6,6 +6,8 @@ App:
     baseUrl: 
     timezone: America/Santiago
     theme: 
+    limits:
+        active: true
 Hook: 
     bootstraps: core
     components: 

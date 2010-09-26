@@ -1,0 +1,27 @@
+*{border:none;margin:0;padding:0;}
+.db-wrapper{vertical-align:bottom;}
+.db-wrapper,.db-body,.db-compact .db-anchor,.db-compact .db-count{display:-moz-inline-stack;display:inline-block;*display:inline;zoom:1;}
+.db-wrapper a{cursor:pointer;}
+.db-anchor{cursor:pointer;display:block;overflow:hidden;text-indent:-10000px}
+.db-count{color:#ff9900;display:block;font-weight:bold;}
+.db-wrapper .db-medium,.db-wrapper .db-large{background:transparent url(/img/buttons/VoteThisMedium.png) no-repeat 0 0;height:64px;text-align:center;width:50px;}
+.db-dugg .db-medium,.db-dugg .db-large{background-position:0 -64px;}
+.db-medium .db-copy,.db-large .db-copy{display:none;}
+.db-medium .db-anchor,.db-large .db-anchor{display:block;height:22px;margin:0 auto;width:44px;}
+.db-medium .db-count,.db-large .db-count{font-size:21px;height:29px;line-height:1;overflow:hidden;padding:8px 5px 0;width:40px;}
+.db-wrapper .db-wide{background:transparent url(/img/buttons/VoteThisWide.png) no-repeat 0 0;height:32px;overflow:hidden;position:relative;width:165px;}
+.db-wide{background-position:0 -42px;}
+.db-wide .db-copy{color:#ff9900;font-size:11px:margin:-10px 0 0 25px;}
+.db-wide .db-count{font-size:16px;margin:5px 0 0 25px;}
+.db-wide .db-copy,.db-wide .db-count{padding-left:8px;}
+.db-wide .db-anchor{height:23px;position:absolute;right:0px;top:0px;width:70px;}
+.db-wrapper .db-compact{height:20px;}
+.db-compact .db-copy{display:none;}
+.db-compact .db-anchor{background:transparent url(/img/buttons/voteThisCompact.png) no-repeat right top;float:left;height:20px;width:58px;}
+.db-compact .db-count{background:transparent url(/img/buttons/voteThisCompact.png) no-repeat left top;font-size:14px;float:left;height:16px;overflow:hidden;padding:1px 4px 3px 6px;text-align:center;}
+.db-wrapper .db-digger{width:16px;height:16px;background:transparent url(/img/buttons/voteIcon.png) no-repeat 0 0;}
+.db-wide .db-copy{display:none;}
+.db-ie6 .db-large,.db-ie6 .db-medium{background-image:url(/img/buttons/voteThisMedium.gif);}
+.db-ie6 .db-wide{background-image:url(/img/buttons/voteThisWide.gif);}
+.db-ie .db-wide .db-count{margin-bottom:-5px;}
+.db-ie6 .db-compact .db-anchor,.db-ie6 .db-compact .db-count{background-image:url(/img/buttons/voteThisCompact.gif);}

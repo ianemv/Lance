@@ -199,7 +199,6 @@ class FileUploadBehavior extends ModelBehavior{
                             }
 
                             if($empty){   
-							die($empty);
                                 $model->invalidate($field, sprintf(__('%s is required.', true), Inflector::humanize($field)));
                                 continue;
                             }

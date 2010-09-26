@@ -7,7 +7,8 @@ class PlazaImage extends AppModel {
     var $actsAs = array(
         'FileUpload' => array(
             'image' => array(
-                'required'          => array('add' => true, 'edit' => false),
+                #'required'          => array('add' => true, 'edit' => false),
+                'required' => false,
                 'directory'         => 'img/plazas',
 				'allowed_mime' 	  	=> array('image/jpg', 'image/jpeg', 'image/gif', 'image/png'),
 				'allowed_extensions'=> array('.jpg', '.jpeg', '.png', '.gif'),

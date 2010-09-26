@@ -36,20 +36,16 @@
         echo $javascript->link('jquery/jquery.corner');
         echo $javascript->link('facebox/facebox');  
 		echo $javascript->link('http://platform.twitter.com/widgets.js');
-		echo $javascript->link('main');  
-		
-		echo $javascript->link('http://widgets.digg.com/buttons.js');
-		
+        echo $javascript->link('buttons');
+		echo $javascript->link('main');
 		echo $scripts_for_layout;
 	?>
    
 
 </head>
-<body>    
-	   <a class="DiggThisButton DiggMedium" href="http://digg.com/submit?url=http://www.iwobble.com"></a>
-	<a class="DiggThisButton DiggLarge"></a> 
-	<a class="DiggThisButton DiggCompact"></a> 
-    <div class="full header2">
+<body>
+    <?php echo $this->element('message_hint'); ?>
+   <div class="full header2">
         <div class="wrap">  
 			<?php echo $html->image('logo_charitybox.png', array('alt' => __('Charity Box', true), 'id' => 'logo1')); ?>  
 			<?php echo $this->element('menu_top'); ?>
@@ -87,6 +83,7 @@
 	<?php echo $this->element('footer'); ?>   
     <?php echo $html->div('equipo', $html->link($html->tag('span', __('Equipo', true)), '/equipo', array('escape' => false))); ?> &nbsp; | &nbsp;
 	<?php echo $html->div('contact', $html->link($html->tag('span', __('Contacto', true)), '/contacto', array('escape' => false))); ?>
-<?php echo $this->element('sql_dump'); ?>
+
+    <?php echo $this->element('litebox'); ?>
 </body>
 </html>

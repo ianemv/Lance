@@ -25,6 +25,9 @@
 	SuperRouter::connect('/register', array('controller' => 'users', 'action' => 'register'));
 	SuperRouter::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	SuperRouter::connect('/recover', array('controller' => 'users', 'action' => 'recover'));
+
+
+    SuperRouter::connect('/plazas/count', array('controller' => 'plazas', 'action' => 'count', 'ext' => 'json'), array('pass' => array('id'), 'id' => '[0-9]+'));
 	
 	Router::parseExtensions('xml','json', 'csv');
 

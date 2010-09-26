@@ -8,6 +8,11 @@ App:
     theme: cleanity
     name: Regala Una Plaza 
     url: http://plaza_cake/
+    limits:
+        active: true
+        limit: 2 //
+        expiry: 1 //The number of days
+
 Site:
     name: 
     theme: 

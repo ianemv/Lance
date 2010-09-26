@@ -1,1 +1,1 @@
-<?php echo $message; ?>
+<p class="msg-error">    <strong><?php echo $message; ?></strong>    <?php echo $html->link($html->tag('span',__('Remove', true)), "#", array('class' => 'remove-btn', 'title' => __('Remove', true), 'escape' => false)); ?></p>

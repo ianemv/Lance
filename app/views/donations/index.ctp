@@ -51,7 +51,7 @@
 			if (!empty($plazas)) {
 				foreach ($plazas as $plaza) {
 		?>
-		<div class="marco"> 
+		<div class="marco" id="plaza_<?php echo $plaza['Plaza']['id']; ?>"> 
 			<div class="clipwrapper">
 				<div class="clip">                                                                  
 					<?php if (!empty($plaza['PlazaImage'])): ?>  
@@ -66,8 +66,7 @@
 							<?php echo $html->tag('p', sprintf(__('Ingresa tu mail para votar por esta plaza o puedes %s', true), $html->link(__('ver todas las plazas', true), array('controller' => 'plazas', 'action' => 'index')))); ?>
 					  	</div>
 						<div class="vote_form">    
-							<?php $id = uniqid();?>      
-							<?php echo $form->create('Votes', array('action' => 'vote', 'id' => "form_".$id)); ?> 
+							<?php echo $form->create('Votes', array('action' => 'vote', 'id' => "form_".$plaza['Plaza']['id'])); ?> 
 							<?php echo $form->hidden('plaza_id', array('value' => $plaza['Plaza']['id'] )); ?>
 							<?php echo $form->input('email', array('label' => array('text' => __('Tu mail', true), 'class' => 'label-over'), 'class' => 'validate-email', 'id' => uniqid('email_')))?>                                   
 						   	<?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), '#', array('onclick' => "return vote('".$id."');",'class'=> 'btn_votar','style'=>'float:left', 'escape' => false))?>

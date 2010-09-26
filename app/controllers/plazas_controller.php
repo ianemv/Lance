@@ -76,5 +76,10 @@ class PlazasController extends AppController {
 		return $this->paginate();       
 	}
 
+    function count() {
+        $this->layout = "ajax";
+
+    }
+
 }
 ?>

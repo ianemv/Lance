@@ -19,7 +19,7 @@ body{font-family:Helvetica-Light;font-color:#333;}
 #columns3 div.column3.second{margin-left:40px;margin-right:40px;width:310px;}
 div.column3{width:280px;height:318px;background-color:#AAA;}
 #main_content h2 { color:#333; font-size: 15px;padding: 5px 0; margin-bottom:10px; border-bottom:1px dotted #aaa; }
-#main_content h3 { color:#fff; font-size: 15px; padding: 5px 15px;}
+#main_content h3 { color:#fff; font-size: 15px; padding: 5px 15px 2px 15px;}
 #content { padding: 25px 0; }
 #nos_ayudan{height:250px;}
 #nos_ayudan .title{line-height:60px;font-size:22px;}
@@ -57,17 +57,23 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 #votacion_container_right .plaza_img_inner img{width:175px;height:145px;padding:0; margin:0;}
 #votacion_container_right .plaza_thumb img { width: 45px; height:45px;padding:0; margin:0;}   
 #votacion_container_right .plaza_thumb { float:right;margin-right:10px;}
-#votacion_container_full .plaza_img {background:#fff;padding:3px; position: absolute;top:45px;left:11px;}     
+#votacion_container_full .plaza_img {background:#fff;padding:3px; position: absolute;top:40px;left:11px;}     
 #votacion_container_full .plaza_img_inner img{width:220px;height:165px;padding:0; margin:0;}
 #votacion_container_full .plaza_thumb img { width: 45px; height:45px;padding:0; margin:0;}   
-#votacion_container_full .plaza_thumb { float:right;margin-right:10px;}  
-.vote_box { background:#83cdf4;width:179px;height:140px;top:5px;left:11px;padding:5px 2px;;position:absolute;}  
+#votacion_container_full .plaza_thumb { position:absolute;bottom:10px;right:10px;margin-right:10px;}  
+.vote_box { background:#83cdf4;position:absolute;}  
+#votacion_container_right .vote_box { width:179px;height:140px;top:5px;left:11px;padding:5px 2px;}
+#votacion_container_full .vote_box {width: 225px;height:202px;left:11px;top:40px;padding:5px 2px;z-index:1000;}
 .vote_dialog { background:url(/img/vote_bubble.png) no-repeat;height: 57px; padding:5px; font-size:12px }
 .vote_dialog a {color: #333; font-weight:bold; font-size:125%;display:block;}                     
+#votacion_container_right .vote_dialog { }
+#votacion_container_full .vote_dialog { }
 .vote_form { position: relative;}
 .vote_form label { position:absolute;top:5px;left:5px;color: #333;font-size:14px;}    
 .vote_form div.input input { width:165px;font:14px;color:#333;}    
-.vote_bottom { border: 1px solid #666;clear:both;}
+.vote_bottom { margin-top:95px;position: absolute; left:73px;top:127px;}
+
+.vote_info { float: left;background: url(/img/bt-line.png) no-repeat 0 100;width:33px;height: 25px;display:none}
 /* Forms */
 div.input{}
 div.input label{font-weight:bold;width:140px;display:block;}
@@ -95,4 +101,26 @@ ul.menu li a:hover{color:#0099ff;text-decoration:underline;}
 
 
 .ui-effects-transfer { border: 1px dashed #333; }
+
+#message_hint{margin:0 auto;position:fixed;top:0px; left:0px;right:0px;z-index:1000;display:none;background: #56bbea;}
+.msg-error,.msg-success,.msg-attention,.msg-info{padding:0;margin:0;padding-left:17px;padding:10px;position:relative;font-weight:bold;}
+.remove-btn{position:absolute;top:0;right:17px;top:10px;padding-top:15px;padding-right:20px;background:url('/img/btn-close.png') no-repeat center right;font-weight:bold;color:#333 !important;}
+.remove-btn span { display:none; }
+.remove-btn:hover{color:#666 !important;}
+.msg-error{color:#cc3333;}
+.msg-success{color:#6eb244;}
+.msg-attention{color:#c0a443;border:1px solid #c0a443;}
+.msg-info{color:#369fb4;border:1px solid #369fb4;}
+/***********MODAL *****************/
+#mask{display:none;position:absolute;top:0;left:0;background:url('/img/mask.gif');z-index:9000;}
+#modal-container{display:none;position:absolute;top:0;left:0;z-index:9999;border: 1px solid #666;}
+#modal{margin:0 auto;padding:25px;background:#56bbea;border:7px solid #ccc;-moz-border-radius:10px;-webkit-border-radius:10px;}
+#modal-content h2{padding-bottom:5px;font-size:18px;font-weight:normal;border-bottom:1px solid #ddd;}
+#modal-content label{color:#7a7a7a;font-weight:bold;}
+#modal-content input[type=text]{margin:5px 0 10px;width:241px;background:#f8f8f8;border:1px solid #aaa;}
+#modal-close {background:url('/img/btn-modal-close.png');width:22px;height:22px;position:absolute;top:-15px;right:-15px;cursor:pointer;}
+#modal-close a { display: block; border: 1px solid #666;}
+#modal-close span { display: none;}
+
+
 
