@@ -16,7 +16,7 @@
 		echo $html->css('reset');
         echo $html->css('main');
         echo $html->css('/js/jquery/jquery.jcarousel/jquery.jcarousel.skin');
-        echo $html->css('/js/facebox/facebox.css');
+        echo $html->css('colorbox');
     ?>
     <!--[if IE]>
         <?php echo $javascript->link('http://html5shiv.googlecode.com/svn/trunk/html5.js'); ?>
@@ -34,7 +34,7 @@
         echo $javascript->link('jquery/jquery.hoverIntent.min');
 		echo $javascript->link('jquery/jquery.jcarousel/jquery.jcarousel.min');
         echo $javascript->link('jquery/jquery.corner');
-        echo $javascript->link('facebox/facebox');  
+        echo $javascript->link('jquery/jquery.colorbox');  
 		echo $javascript->link('http://platform.twitter.com/widgets.js');
         echo $javascript->link('buttons');
 		echo $javascript->link('main');

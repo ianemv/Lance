@@ -12,6 +12,8 @@ App:
         active: true
         limit: 2 //
         expiry: 1 //The number of days
+    donations:
+        cost: 25,000
 
 Site:
     name: 

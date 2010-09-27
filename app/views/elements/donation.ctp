@@ -1,6 +1,6 @@
 <?php echo $javascript->codeBlock(); ?>
     $(document).ready(function() {
-        $('#donar').facebox();
+        $('#donar').colorbox({width:525,opacity:0.55});
     }); 
 <?php echo $javascript->blockEnd(); ?>
 

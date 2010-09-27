@@ -24,7 +24,6 @@
 		})
         $(".vote_box").corner();   
 		$(".plaza_img").corner();   
-		$('label').labelOver('label-over'); 
 		$(".plaza_img_inner").corner(); 
     }); 
  
@@ -69,14 +68,15 @@
 							<?php echo $form->create('Votes', array('action' => 'vote', 'id' => "form_".$plaza['Plaza']['id'])); ?> 
 							<?php echo $form->hidden('plaza_id', array('value' => $plaza['Plaza']['id'] )); ?>
 							<?php echo $form->input('email', array('label' => array('text' => __('Tu mail', true), 'class' => 'label-over'), 'class' => 'validate-email', 'id' => uniqid('email_')))?>                                   
+							<?php echo $form->input('password', array('label' => array('password' => __('Contraseña', true), 'class' => 'label-over')))?>                                   
 						   	<?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), '#', array('onclick' => "return vote('".$id."');",'class'=> 'btn_votar','style'=>'float:left', 'escape' => false))?>
 							<?php echo $form->end();?> 
-							<?php if (!empty($plaza['PlazaImage'])): ?>  
-								 <div class="plaza_thumb"> 
-								<?php echo $html->image('plazas' . DS . 'thumbs' . DS . $plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))); ?>  
-								 </div>
-							<?php endif; ?>   
-						</div> 
+                        </div>
+						<?php if (!empty($plaza['PlazaImage'])): ?>  
+						<div class="plaza_thumb"> 
+						<?php echo $html->image('plazas' . DS . 'thumbs' . DS . $plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))); ?>  
+						</div>
+						<?php endif; ?>   
 				  	</div>
 				</div>
 			</div>

@@ -26,10 +26,11 @@
         $(plazaImg).fadeOut();
         $(marco).find(".vote_box").effect('slide', {direction:'up'}, 200).effect('transfer', {to: $(".plaza_thumb img[rel='"+thumbRel+"']")}, 500);
         $(marco).find('.vote_dialog').effect('bounce', {direction:'down'},200);
+        $(marco).find('.vote_bottom').hide();
         $(".plaza_thum img[rel='"+thumbRel+"']").animate({opacity: 1.0}, 1000);
     }
 <?php echo $javascript->blockEnd(); ?>
-<a href="/plazas/" class="modal">Plazas</a>
+<a href="/login" class="modal">Plazas</a>
 <h2><?php echo __('Vota por tu plaza favorita', true); ?></h2>
 <p><?php echo sprintf(__('Entre junio y agosto del año 2010, fueron cientos los colegios que participaron en el concurso de construcción con piezas de Lego para realizar "%s."', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>
 <p><?php echo sprintf(__('Esta es la última y más importante etapa del proyecto. Es aquí donde todos tenemos la oportunidad de hacer realidad el sueño de los niños. Poder construir a escala real en 1.000m&sup2; el proyecto ganada de "%s"', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>    
@@ -60,19 +61,21 @@
 				<?php endif; ?>
 				<div class="vote_box" style="display:none">
 					<div class="vote_dialog">
-						<?php echo $html->tag('p', sprintf(__('Ingresa tu mail para votar por esta plaza o puedes %s', true), $html->link(__('ver todas las plazas', true), array('controller' => 'plazas', 'action' => 'index')))); ?>
+                        <?php echo $html->tag('p', $html->tag('strong', __('Tienes que ingresar para votar', true))); ?>
+						<?php echo $html->tag('p', sprintf(__('Para votar por esta plaza, ingresa al ', true), $html->link(__('ver todas las plazas', true), array('controller' => 'plazas', 'action' => 'index')))); ?>
 				  	</div>
 					<div class="vote_form">    
 						<?php echo $form->create('Votes', array('action' => 'vote', 'id' => "form_".$plaza['Plaza']['id'])); ?> 
 						<?php echo $form->hidden('plaza_id', array('value' => $plaza['Plaza']['id'] )); ?>
 						<?php echo $form->input('email', array('label' => array('text' => __('Tu mail', true), 'class' => 'label-over'), 'class' => 'validate-email', 'id' => uniqid('email_')))?>                                   
+                        <?php echo $form->input('password', array('label' => array('text' => __('Contraseña', true), 'class' => 'label-over'), 'id' => uniqid('password_'))); ?>
 						<?php echo $form->end();?> 
-						<?php if (!empty($plaza['PlazaImage'])): ?>  
-							 <div class="plaza_thumb"> 
-							<?php echo $html->image('plazas' . DS . 'thumbs' . DS . $plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))); ?>  
-							 </div>
-						<?php endif; ?>   
 					</div> 
+                    <?php if (!empty($plaza['PlazaImage'])): ?>  
+						<div class="plaza_thumb"> 
+						<?php echo $html->image('plazas' . DS . 'thumbs' . DS . $plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))); ?>  
+						</div>
+					<?php endif; ?>   
 			  	</div>  
 			  	<div class="vote_bottom">
                 <div class="vote_info">

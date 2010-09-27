@@ -6,7 +6,7 @@
                     $("#flicker_images").append('<li><div class="clipwrapper_flicker"><div class="clip_flicker"><a href="'+this.media.m+'" rel="facebox"><img src='+this.media.m+' alt="'+this.title+'" /></a></div></div></li>');
                 }
             );
-            $('#flicker_images a').facebox();
+            $('#flicker_images a').colorbox({current:""});
             $('#flicker_images').jcarousel();
         }
     );
