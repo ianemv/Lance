@@ -30,7 +30,6 @@
         $(".plaza_thum img[rel='"+thumbRel+"']").animate({opacity: 1.0}, 1000);
     }
 <?php echo $javascript->blockEnd(); ?>
-<a href="/login" class="modal">Plazas</a>
 <h2><?php echo __('Vota por tu plaza favorita', true); ?></h2>
 <p><?php echo sprintf(__('Entre junio y agosto del año 2010, fueron cientos los colegios que participaron en el concurso de construcción con piezas de Lego para realizar "%s."', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>
 <p><?php echo sprintf(__('Esta es la última y más importante etapa del proyecto. Es aquí donde todos tenemos la oportunidad de hacer realidad el sueño de los niños. Poder construir a escala real en 1.000m&sup2; el proyecto ganada de "%s"', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>    

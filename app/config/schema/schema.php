@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* App schema generated on: 2010-09-24 20:09:55 : 1285373815*/
+/* App schema generated on: 2010-09-27 07:09:45 : 1285585545*/
 class AppSchema extends CakeSchema {
 	var $name = 'App';
 
@@ -90,6 +90,9 @@ class AppSchema extends CakeSchema {
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
 		'school_id' => array('type' => 'text', 'null' => false, 'default' => NULL, 'length' => 11),
 		'description' => array('type' => 'text', 'null' => false, 'default' => NULL),
+		'closed' => array('type' => 'text', 'null' => false, 'default' => '0', 'length' => 1),
+		'start_time' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+		'end_time' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'indexes' => array(),
@@ -141,6 +144,15 @@ class AppSchema extends CakeSchema {
 		'ip' => array('type' => 'string', 'null' => false, 'default' => NULL),
 		'created' => array('type' => 'datetime', 'null' => false, 'default' => NULL),
 		'modified' => array('type' => 'datetime', 'null' => false, 'default' => NULL),
+		'indexes' => array(),
+		'tableParameters' => array()
+	);
+	var $votes = array(
+		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
+		'plaza_id' => array('type' => 'text', 'null' => true, 'default' => NULL, 'length' => 11),
+		'user_id' => array('type' => 'text', 'null' => true, 'default' => NULL, 'length' => 11),
+		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'indexes' => array(),
 		'tableParameters' => array()
 	);
