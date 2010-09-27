@@ -36,13 +36,13 @@
 <p><?php echo sprintf(__('Esta es la última y más importante etapa del proyecto. Es aquí donde todos tenemos la oportunidad de hacer realidad el sueño de los niños. Poder construir a escala real en 1.000m&sup2; el proyecto ganada de "%s"', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>    
 
 <div id="votacion_container_full"> 
-    	<div class="pagination">
-	        	<?php echo $this->Paginator->first('<<'.__('First', true), array()); ?>
-	        	<?php echo $this->Paginator->prev('<<'.__('Previous', true), array(), null, array('class' => 'disabled')); ?>
-	        	<?php echo $this->Paginator->numbers(array('class' => 'number', 'separator' => '')); ?>
-	        	<?php echo $this->Paginator->next(__('Next', true).'>>', array(), null, array('class' => 'disabled')); ?>
-	        	<?php echo $this->Paginator->last(__('Last', true).'>>', array()); ?>
-	    </div>
+     <div class="pagination">
+        	<?php echo $this->Paginator->first($html->image('btn-first.png', array('alt' => __('First', true))), array('escape' => false)); ?>
+        	<?php echo $this->Paginator->prev($html->image('btn-previous.png', array('alt' => __('Previous', true))), array(), null, array('class' => 'disabled','escape' => false)); ?>
+        	<?php echo $this->Paginator->numbers(array('class' => 'number', 'separator' => '')); ?>
+        	<?php echo $this->Paginator->next($html->image('btn-next.png', array('alt' => __('Next', true))), array(), null, array('class' => 'disabled','escape' => false)); ?>
+        	<?php echo $this->Paginator->last($html->image('btn-last.png', array('alt' => __('Last', true))), array()); ?>
+    </div>
 <?php   
 	if (!empty($plazas)) {
 		foreach ($plazas as $plaza) {   
@@ -96,11 +96,11 @@
 	?>  
 </div> 
 <div style="clear:both;"></div>   
- <div class="pagination">
-        	<?php echo $this->Paginator->first('<<'.__('First', true), array()); ?>
-        	<?php echo $this->Paginator->prev('<<'.__('Previous', true), array(), null, array('class' => 'disabled')); ?>
+     <div class="pagination">
+        	<?php echo $this->Paginator->first($html->image('btn-first.png', array('alt' => __('First', true))), array('escape' => false)); ?>
+        	<?php echo $this->Paginator->prev($html->image('btn-previous.png', array('alt' => __('Previous', true))), array(), null, array('class' => 'disabled','escape' => false)); ?>
         	<?php echo $this->Paginator->numbers(array('class' => 'number', 'separator' => '')); ?>
-        	<?php echo $this->Paginator->next(__('Next', true).'>>', array(), null, array('class' => 'disabled')); ?>
-        	<?php echo $this->Paginator->last(__('Last', true).'>>', array()); ?>
+        	<?php echo $this->Paginator->next($html->image('btn-next.png', array('alt' => __('Next', true))), array(), null, array('class' => 'disabled','escape' => false)); ?>
+        	<?php echo $this->Paginator->last($html->image('btn-last.png', array('alt' => __('Last', true))), array()); ?>
     </div>
 

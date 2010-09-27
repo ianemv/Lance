@@ -81,9 +81,6 @@
         </div>
     </div>
 	<?php echo $this->element('footer'); ?>   
-    <?php echo $html->div('equipo', $html->link($html->tag('span', __('Equipo', true)), '/equipo', array('escape' => false))); ?> &nbsp; | &nbsp;
-	<?php echo $html->div('contact', $html->link($html->tag('span', __('Contacto', true)), '/contacto', array('escape' => false))); ?>
-
     <?php echo $this->element('litebox'); ?>
 </body>
 </html>

@@ -43,7 +43,7 @@
 	<div id="votacion_container_left" class="font">
 		<p><?php echo sprintf(__('Entre junio y agosto del año 2010, fueron cientos los colegios que participaron en el concurso de construcción con piezas de Lego para realizar "%s."', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>
 		<p><?php echo sprintf(__('Esta es la última y más importante etapa del proyecto. Es aquí donde todos tenemos la oportunidad de hacer realidad el sueño de los niños. Poder construir a escala real en 1.000m&sup2; el proyecto ganada de "%s"', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>
-		<div id="votar_button"><?php echo $html->link(__('Quiero elegir la mejor plaza de juegos', true), array('controller' => 'plazas'))?></div>
+		<div class="votar_button"><?php echo $html->link(__('Quiero elegir la mejor plaza de juegos', true), array('controller' => 'plazas'))?></div>
 	</div>
 	<div id="votacion_container_right">
 		<?php   
@@ -68,7 +68,7 @@
 							<?php echo $form->create('Votes', array('action' => 'vote', 'id' => "form_".$plaza['Plaza']['id'])); ?> 
 							<?php echo $form->hidden('plaza_id', array('value' => $plaza['Plaza']['id'] )); ?>
 							<?php echo $form->input('email', array('label' => array('text' => __('Tu mail', true), 'class' => 'label-over'), 'class' => 'validate-email', 'id' => uniqid('email_')))?>                                   
-							<?php echo $form->input('password', array('label' => array('password' => __('Contraseña', true), 'class' => 'label-over')))?>                                   
+							<?php echo $form->input('password', array('label' => array('password' => __('Contraseña', true), 'class' => 'label-over'), 'id' => uniqid('password_')))?>                                   
 						   	<?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), '#', array('onclick' => "return vote('".$id."');",'class'=> 'btn_votar','style'=>'float:left', 'escape' => false))?>
 							<?php echo $form->end();?> 
                         </div>

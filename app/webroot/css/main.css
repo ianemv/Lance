@@ -2,6 +2,7 @@
 url('/css/public/fonts/Helvetica-Light.ttf') format("truetype");}
 body{font-family:Helvetica-Light;font-color:#333;}
 p {font-size:14px;color:#666; }
+a {color: #006699;font-weight:bold;text-decoration:underline;}
 .wrap{width:952px;margin:auto;position:relative;}
 .header1{background-color:#999;height:49px;background:#DDD url("/img/fondo_botonera.png") repeat-x;}
 #header1_menu{padding-top:8px;margin-left:120px;clear:both;}
@@ -29,11 +30,12 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 .inst_ayuda{width:58px;height:58px;background-color:#BBB;}
 #footer{height:100px;background:#fff url(/img/footer.png) repeat-x;}
 #up img{width:67px;height:65px;position:absolute;top:15px;}
-.es_de{width:600px;position:absolute;right:0;top:20px;text-align:right;font-size:14px;color:#FFF;}
-.es_de a{text-decoration:none;}
-#footer_menu{width:600px;position:absolute;right:0;top:60px;text-align:right;font-size:14px;}
-#footer_menu li{float:right;margin-left:10px;}
-#footer_menu li a{text-decoration:none;}
+.es_de{position:absolute;right:0;top:25px;text-align:right;font-size:14px;color:#fff;}
+#footer_menu { text-align:right; }
+#footer_menu ul{position:absolute;right:0;top:60px;font-size:14px;}
+#footer_menu li{float:left;padding:0 5px;border-right:1px solid #fff;}
+#footer_menu li.last { border: 0; }
+#footer_menu li a{text-decoration:none;display:block; float:left;padding:0 5px;}
 #donar{position:absolute;top:128px;right:63px;}
 #metodo_pago{position:absolute;right:51px;top:245px;}
 .header2_2 ul li{float:left;}
@@ -44,8 +46,8 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 #votacion_container_right div.marco {float: left; background:url(/img/caja_fotos_home.png) no-repeat; width:204px;height:170px;}
 #votacion_container_full div.marco {float:left;background:url(/img/caja_votacion.png) no-repeat; width:248px;height:261px;margin:10px;} 
 
-#votar_button{background:url(/img/btn_invitar_votacion.png) no-repeat;width:257px;height:40px;padding:5px;margin-top:25px;}
-#votar_button a{color:#FFF;text-decoration:none;}
+.votar_button{background:url(/img/btn_invitar_votacion.png) no-repeat;width:257px;height:40px;padding:7px 0 5px 5px;margin-top:25px;}
+.votar_button a{color:#fff;font-size:12px;text-decoration:underline;}
 #votacion_container_left{line-height:1.4em;font-size:0.9em;}
 #votacion_container_left p{margin-bottom:1em;}
 
@@ -77,7 +79,7 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 .vote_info { float: left;background: url(/img/bt-line.png) no-repeat 0 100;width:33px;height: 25px;display:none}
 /* Forms  */
 .input { display: block;margin: 0 0 5px 0;position: relative; }
-label.label-over { position:absolute;top:0px;left:5px;color: #333;padding:5px;font-size:14px;dispay:block;width:100px;}    
+label.label-over { position:absolute;top:2px;left:5px;color: #333;padding:5px;font-size:14px;dispay:block;width:100px;font-weight:bold;}    
 
 .input input.long { width: 500px;}
 div.input label{position:absolute:top:5px;left:5px;color:#333;font-size:14px;}
