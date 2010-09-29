@@ -26,6 +26,11 @@ class Plaza extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+		'Vote' => array(
+			'className' => 'Vote',
+			'foreignKey' => 'plaza_id',
+			'dependent' => false
 		)
 	);
 

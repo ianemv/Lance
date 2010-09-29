@@ -40,68 +40,67 @@ class User extends AppModel {
         parent::__construct($id, $table, $ds);
 
         $this->validate = array(
+			'first_name' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __('Tienes que ingresar tu nombre.', true),
+				)
+			),
+			'last_name' => array(                                          
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __('Tienes que ingresar tu apellido. ', true),
+				 )
+		   	),
             'username' => array(
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
-					'message' => __('Username must not be empty.', true),
+					'message' => __('Tienes que ingresar el nombre de usuario.', true),
 				),
-                'isUnique' => array(
-                    'rule' => array('isUnique' , 'username'),
-                    'message' => __('Username is already taken. Please choose a different username', true)
-                ), 
-                /*'alphaNumeric' => array(
-                    'rule' => 'alphaNumeric',
-                    'message' => __('The username can contain letters and numbers only.', true)
-                ),*/
                 'between' => array(
                     'rule' => array('between', 3, 255),
-                    'message' => __('Username must be between 3 and 16 characters long.', true),
+                    'message' => __('El nombre del usuario debe ser entre 3 y 16 caracteres.', true),
                 ),
-                'minLength' => array(
-                    'rule' => array('minLength', 1),
-                    'message' => __('Username is a required field', true)
-                )
+				'isUnique' => array(
+                	'rule' => array('isUnique' , 'username'),
+                	'message' => __('El nombre del usuairo ya existe. Por favor escoge otro.', true)
+              	),
             ),
             'password_before' => array(
                 'between' => array(
                     'rule' => array('between', 6, 20),
-                    'message' => __('Password must be between 6 and 20 characters long.', true)
-                ),
-                'minLength' => array(
-                    'rule' => array('minLength', '1'),
-                    'message' => __('A valid password is required.', true)
-                ),
+                    'message' => __('Tu contraseña debe ser entre 6 y 20 caracteres.', true)
+                ),   
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __('Tienes que ingresar una contraseña.', true),
+				),
             ),
             'password_confirmation' => array(
                 'matchFields' => array(
                     'rule' => array('matchFields', 'password_before'),
-                    'message' => __('Password and Retype Password do not match.', true)
+                    'message' => __('Los dos contraseñas no son equales.', true)
                 ),
-                'minLength' => array(
-                    'rule' => array('minLength', 1),
-                    'message' => __('A valid retype password is required.', true)
-                ),
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __('Tienes que ingresar una contraseña de confirmación.', true),
+				), 
             ),    
             'email' => array(
-                'isUnique' => array(
-                    'rule' => array('isUnique', 'email'),
-                    'message' => __('The email was already used by another user.', true)
-                ),
                 'email' => array(
                     'rule' => 'email',
-                    'message' => __('The email you provided does not appear to be valid.', true)
+                    'message' => __('El mail no es valido.', true)
                 ),
-                'minlength' => array(
-                    'rule' => array('minLength', 1),
-                    'message' => __('A valid email is required.', true)
-                ), 
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __('Tienes que ingresar una contraseña de confirmación.', true),
+				),  
+				'isUnique' => array(
+                	'rule' => array('isUnique', 'email'),
+                	'message' => __('Este mail ya existe.  Por favor escoge otro.', true),
+			  		'on' => 'create',
+             	),
             ),
-            /*'rut' => array(
-                'checkRut' => array(
-                    'rule' => 'checkRut',
-                    'message' => __('The RUT must be valid.', true)
-                )
-            )  */
         );
     }
 

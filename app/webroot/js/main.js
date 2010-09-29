@@ -1,7 +1,9 @@
 $(document).ready(function() {
     $(".colorbox").corner();
     $('label').labelOver('label-over'); 
-    $("a.modal").colorbox({opacity:0.55,scrolling:false});
+    $("a.modal").colorbox({opacity:0.55,scrolling:false}); 
+	$("a[rel='plazas']").colorbox({transition:"fade"});
+	
 });
 
 jQuery.fn.labelOver = function(overClass) {
@@ -26,6 +28,40 @@ jQuery.fn.labelOver = function(overClass) {
 			if (input.val() != '') this.hide(); 
 		}
 	});
+}      
+
+function showLogin(a,b) {  
+    var marco = $("#plaza_"+a.id);   
+    var plazaImg = $(marco).find('.plaza_img');
+    var thumbRel = $(marco).find('.plaza_img img').attr('rel'); 
+	if (b) {
+		$(plazaImg).fadeIn('slow');
+		$(marco).find(".vote_box").fadeOut(); 
+		$(marco).find('.vote_bottom').show('slow');
+	} else {
+    	$(plazaImg).fadeOut();
+        $(marco).find(".vote_box").effect('slide', {direction:'up'}, 200).effect('transfer', {to: $(".plaza_thumb img[rel='"+thumbRel+"']")}, 500);
+        $(marco).find('.vote_dialog').effect('bounce', {direction:'down'},200);
+        $(marco).find('.vote_bottom').hide();
+        $(".plaza_thum img[rel='"+thumbRel+"']").animate({opacity: 1.0}, 1000);   
+	}
+}
+
+function votePlaza(a) {  
+    $.post("/votes/plaza", $("#form_"+a.id).serialize(), function(result) { 
+        if (!result.success) {
+            if (result.login) {
+                showLogin(a);
+            }
+            messageHint(result.message);
+        } else {  
+            if (result.message) {
+                messageHint(result.message);
+            } 
+		  	showLogin(a,true);
+        }
+    }, "json");
+    return false;
 }
 
 function messageHint(m) {

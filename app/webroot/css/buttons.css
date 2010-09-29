@@ -11,7 +11,7 @@
 .db-wrapper .db-wide{background:transparent url(/img/buttons/VoteThisWide.png) no-repeat 0 0;height:32px;overflow:hidden;position:relative;width:165px;}
 .db-wide{background-position:0 -42px;}
 .db-wide .db-copy{color:#ff9900;font-size:11px:margin:-10px 0 0 25px;}
-.db-wide .db-count{font-size:16px;margin:5px 0 0 25px;}
+.db-wide .db-count{font-size:16px;margin:6px 0 0 25px;}
 .db-wide .db-copy,.db-wide .db-count{padding-left:8px;}
 .db-wide .db-anchor{height:23px;position:absolute;right:0px;top:0px;width:70px;}
 .db-wrapper .db-compact{height:20px;}

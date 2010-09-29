@@ -3,7 +3,8 @@
 
 class VotesController extends AppController {
 
-    var $name = 'Votes'; 
+    var $name = 'Votes';
+
 
 	function plaza() {
 
@@ -14,61 +15,113 @@ class VotesController extends AppController {
 
         $message = null;
         $success = false;
-        $login = false;
+        $login = false; 
 
-        if ($this->Session->check('Auth.User')) {
-            $this->data['user_id'] = $this->Auth->user('id');
+		if (!$this->Session->check('Vote')) {
+			if (!$this->Session->check('Auth.User')) { 
+				if ($this->appConfigurations['votes']['limits']['force_login']) { 
+					// Limits set to force login, and user not logged in
+					$message = sprintf(__('You must be logged in to continue.  Please login', true));
+					$this->canVote = false;
+					break;
+				}       
+				if (!empty($this->data['User'])) {    
+					if (array_key_exists('full_name', $this->data['User'])) {
+						if (!empty($this->data['User']['full_name']) && strpos($this->data['User']['full_name'], ' ')) { 
+							list($first_name, $last_name) = explode(" ", $this->data['User']['full_name']); 
+							$this->data['User']['first_name'] = ($first_name)?$first_name:"";
+							$this->data['User']['last_name'] = ($last_name)?$last_name:"";
+						} elseif(array_key_exists('full_name', $this->data['User'])) {
+							$this->data['User']['first_name'] = "";
+							$this->data['User']['last_name'] = "";
+						}
+				  	}                                                
+					
+				  	$canVote = true;   
+					$user = $this->User->findByEmail($this->data['User']['email']);   
+					if (empty($user)) {
+						$user['User']['group_id']       = 2;  // Adding User
+		                $user['User']['username']       = $this->data['User']['email'];
+		                $user['User']['first_name']     = $this->data['User']['first_name'];
+		                $user['User']['last_name']      = $this->data['User']['last_name'];
+		                $user['User']['email']          = $this->data['User']['email'];
+		                $user['User']['password_before']= $this->User->generateRandomPassword();
+		                $user['User']['active']         = 1;   
 
-        if (!empty($this->data)) {
-            $canVote = true;
-            $plaza_id = $this->data['Votes']['plaza_id'];
-            $user_id = $this->data['user_id'];
-            $plaza = $this->Vote->Plaza->find('first', array('conditions' => array('Plaza.id' => $plaza_id)));
-            
-            if (!empty($plaza)) {
-                if (!empty($this->appConfigurations['limits']['active'])) {
-                    $limits_exceeded = $this->Vote->limitsCanVote($plaza['Plaza']['id'], $user_id);
-                    if ($limits_exceeded == false) {
-                        $message = __('You cannot vote for as you have exceeded your voting limits. Try again later.', true);
-                        $canVote = false;
-                    }
-                }
+						if (!$user = $this->User->register($user)) {  
+							//User coudn't be created
+		          			$message = implode(", ", $this->User->invalidFields());
+		                    $canVote = false;
+						  	$login = true;    
+		                }
+					}           
+				} else {   
+					// User info wasn't found
+					$message = implode(", ", $this->User->invalidFields());   
+					$login = true;
+					$canVote = false;
+				}
+		 	} else { 
+				// User Authenticated, Continue
+			   	$user['User'] = $this->Auth->user();
+			  	$canVote = true;
+			}
+	  	} else { 
+			// User has voted and has a session
+			$user['User'] = $this->Session->read('Vote');  
+			$canVote = true;
+		}      
+		
 
-                if ((!empty($plaza['Plaza']['closed']) || (!empty($plaza['PLaza']['end_time']) && strtotime($plaza['Plaza']['end_time']) <= time()))) {
-                    $message = sprintf(__('This %s is closed to voting.', true), __('Plaza', true));
-                    $canVote = false;
-                }
-                
-                if (!empty($plaza['Plaza']['start_time'])) {
-                    if (strtotime($plaza['Plaza']['start_time']) > time()) {
-                        $message = sprintf(__('Voting for this %s has not started yet', true), __('Plaza', true));
-                        $canVote = false;
-                    }
-                }
-            } else {
-                $message = __('That plaza could not be found.  Please try again', true);
-            }
-            if ($canVote) {
-                $vote['plaza_id'] = $plaza_id;
-                $vote['user_id'] = $user_id;
-                $this->Vote->create();
-                if ($this->Vote->save($vote)) {
-                    $message = __('Thanks for your vote', true);
-                    $success = true;
-                } else {
-                    $message = __('There was a problem with your vote.  Please contact us', true);
-                    $success = false;
-                }
-            } else {
-                $success = false;
-            }
-        }
-        } else {
-            $message = __('You are not logged in.', true);
-            $login = true;
-            $success = false;
-            // Not Logged In
-        }
+		
+		     
+		if ($canVote && !empty($this->data['Vote']['plaza_id'])) {   
+			
+           	$plaza_id = $this->data['Vote']['plaza_id'];
+           	$user_id = $user['User']['id'];
+           	$plaza = $this->Vote->Plaza->find('first', array('conditions' => array('Plaza.id' => $plaza_id)));
+         
+           	if (!empty($plaza)) {
+               	if (!empty($this->appConfigurations['votes']['limits']['active'])) {
+                   	$limits_exceeded = $this->Vote->limitsCanVote($plaza['Plaza']['id'], $user_id);
+                   	if ($limits_exceeded == false) {
+                       	$message = __('No puedes votar, porque has pasado los limites de votación.  Ententa mañana!', true);
+                       	$canVote = false;
+                   	}
+               	}
+
+               	if ((!empty($plaza['Plaza']['closed']) || (!empty($plaza['PLaza']['end_time']) && strtotime($plaza['Plaza']['end_time']) <= time()))) {
+                	$message = sprintf(__('La votación esta cerrada para esta %s.', true), __('plaza', true));
+                   	$canVote = false;
+               	}
+             
+               	if (!empty($plaza['Plaza']['start_time'])) {
+                   	if (strtotime($plaza['Plaza']['start_time']) > time()) {
+                       	$message = sprintf(__('La votación para esta %s no ha empezado todavia.', true), __('Plaza', true));
+                       	$canVote = false;
+                   	}
+               	}
+           	} else {
+               	$message = __('No se puede encontrar la plaza.  Ententalo denuevo', true);
+           	}
+           	
+			if ($canVote) {
+               	$vote['plaza_id'] = $plaza_id;
+               	$vote['user_id'] = $user_id;
+               	$this->Vote->create();
+               	if ($this->Vote->save($vote)) { 
+					$this->Session->write('Vote', $user['User']);
+                   	$message = __('Gracias por votar.', true);
+                   	$success = true;
+               	} else {
+                   	$message = __('Hay un problema con tu voto, por favor contactanos.', true);
+                   	$success = false;
+               	}
+           	} else {
+            	$success = false;
+       		}
+		}
+
 
         if (!$success) {
             $this->set('message', $message);
@@ -78,7 +131,7 @@ class VotesController extends AppController {
             $this->set('message', $message);
             $message = $this->render('/elements/success');
             $this->output = "";
-        }
+        }   
 
 
         $vote = array('success' => $success, 'message' => $message, 'login' => $login);

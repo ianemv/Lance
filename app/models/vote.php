@@ -9,7 +9,8 @@ class Vote extends AppModel {
 			'foreignKey' => 'plaza_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => '',
+			'counterCache' => true,
 		),
 		'User' => array(
 			'className' => 'User',
@@ -22,11 +23,19 @@ class Vote extends AppModel {
 
 
     function limitsCanVote($plaza_id = null, $user_id = null) {
-        $expiry_date = date('Y-m-d H:i:s', time() - ($this->appConfigurations['limits']['expiry'] * 24 * 60 * 60));
+        $expiry_date = date('Y-m-d H:i:s', time() - ($this->appConfigurations['votes']['limits']['expiry'] * 24 * 60 * 60));
 
-        $params = array('conditions' => array('Vote.user_id' => $user_id, 'Vote.plaza_id' => $plaza_id, 'Vote.created >' => $expiry_date));
+        $params = array(
+			'conditions' => array(
+				'Vote.user_id' => $user_id, 
+				'Vote.created >' => $expiry_date
+		 	)
+	   	); 
+		if (!$this->appConfigurations['votes']['limits']['all']) {
+			$paras['conditions']['Vote.plaza_id'] = $plaza_id;
+		}
 
-        if ($this->find('count', $params) >= $this->appConfigurations['limits']['limit']) {
+        if ($this->find('count', $params) >= $this->appConfigurations['votes']['limits']['limit']) {
             return false;
         }
         return true;

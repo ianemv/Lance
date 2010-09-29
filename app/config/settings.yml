@@ -7,11 +7,14 @@ App:
     timezone: America/Santiago
     theme: cleanity
     name: Regala Una Plaza 
-    url: http://plaza_cake/
-    limits:
-        active: true
-        limit: 2 //
-        expiry: 1 //The number of days
+    url: http://plaza_cake/ 
+    votes:
+        limits:
+            active: true
+            limit: 3 //
+            expiry: 1 //The number of days 
+            all: true
+            force_login: false    
     donations:
         cost: 25,000
 

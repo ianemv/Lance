@@ -74,13 +74,14 @@
 class DATABASE_CONFIG {
 
 	var $default = array(
-		'driver' => 'sqlite',
+		'driver' => 'mysql',
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
-		'password' => '',
-        'database' => '/var/www/sites/Plaza_Cake/app/config/schema/plaza_cake.sqlite',
+		'password' => 'root',
+        #'database' => '/var/www/sites/Plaza_Cake/app/config/schema/plaza_cake.sqlite',
 		#'database' => '/Users/jmashburn/Documents/Projects/Plaza/app/config/schema/plaza_cake.sqlite',
+		'database' => 'regalaunaplaza',
 		'prefix' => '',
 		'encoding' => 'UTF8'
 	);

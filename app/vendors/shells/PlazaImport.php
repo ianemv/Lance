@@ -204,6 +204,8 @@ class PlazaImportShell extends Shell {
 	}
 	
 	function main() {
+		$this->import();
+		$this->_stop();
 		$this->out(__('Plaza Import', true));
 		$this->hr();
 		$this->out(__('[I]mport plaza file(s)', true));
@@ -229,9 +231,9 @@ class PlazaImportShell extends Shell {
 	}
 	
 	function import() {
-		if (empty($this->args)) {
-			$this->_interactive();
-		}
+	##	if (empty($this->args)) {
+	#		$this->_interactive();
+	#	}
 		$this->_import();
 	}
 	

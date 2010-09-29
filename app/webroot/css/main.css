@@ -1,8 +1,7 @@
-@font-face{font-family:Helvetica-Light;src:url('/css/public/fonts/Helvetica-Light.eot');src:url('/css/public/fonts/Helvetica-Light.woff') format("woff"),
-url('/css/public/fonts/Helvetica-Light.ttf') format("truetype");}
-body{font-family:Helvetica-Light;font-color:#333;}
-p {font-size:14px;color:#666; }
-a {color: #006699;font-weight:bold;text-decoration:underline;}
+
+body{font-family:Helvetica;font-color:#333;}
+p {font-size:13px;color:#666;; }
+a {color: #006699;font-weight:bold;}
 .wrap{width:952px;margin:auto;position:relative;}
 .header1{background-color:#999;height:49px;background:#DDD url("/img/fondo_botonera.png") repeat-x;}
 #header1_menu{padding-top:8px;margin-left:120px;clear:both;}
@@ -46,8 +45,8 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 #votacion_container_right div.marco {float: left; background:url(/img/caja_fotos_home.png) no-repeat; width:204px;height:170px;}
 #votacion_container_full div.marco {float:left;background:url(/img/caja_votacion.png) no-repeat; width:248px;height:261px;margin:10px;} 
 
-.votar_button{background:url(/img/btn_invitar_votacion.png) no-repeat;width:257px;height:40px;padding:7px 0 5px 5px;margin-top:25px;}
-.votar_button a{color:#fff;font-size:12px;text-decoration:underline;}
+.votar_button{background:url(/img/btn_invitar_votacion.png) no-repeat;width:257px;height:40px;padding:9px 0 5px 9px;margin-top:25px;}
+.votar_button a{color:#fff;font-size:13px;text-decoration:underline;}
 #votacion_container_left{line-height:1.4em;font-size:0.9em;}
 #votacion_container_left p{margin-bottom:1em;}
 
@@ -64,22 +63,26 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 #votacion_container_full .plaza_img_inner img{width:220px;height:165px;padding:0; margin:0;}
 #votacion_container_full .plaza_thumb img { width: 45px; height:45px;padding:0; margin:0;}   
 #votacion_container_full .plaza_thumb { position:absolute;top:10px;right:5px;}  
+.plaza_group{display:none;}
 .vote_box { background:#83cdf4;position:relative;display:block;}  
 #votacion_container_right .vote_box { width:179px;height:140px;top:5px;left:11px;padding:5px 2px;}
 #votacion_container_full .vote_box {width: 225px;height:202px;left:11px;top:5px;padding:5px 2px;}
-.vote_dialog { background:url(/img/vote_bubble.png) no-repeat;height: 57px; padding:5px 5px 5px 0; font-size:12px;width:170px;}
+.vote_dialog { background:url(/img/vote_bubble.png) no-repeat;height: 57px; padding:5px 5px 5px 0; font-size:12px;width:170px;} 
+.vote_dialog_long { background:url(/img/vote.png) no-repeat;height: 57px; padding:5px 5px 5px 0; font-size:12px;width:170px;} 
 .vote_dialog p { color: #333; }
 .vote_dialog a {color: #333; font-weight:bold; font-size:125%;display:block;}                     
 .vote_form {position:relative;}
 #votacion_container_full .vote_form div.input input { width: 215px;}
 #votacion_container_right .vote_form div.input input { width: 170px;}
 .vote_form div.input input { font:14px;color:#333;}    
-.vote_bottom { margin-top:95px;position: absolute; left:73px;top:127px;}
+.vote_bottom { padding-left:70px;margin-top:95px;position: absolute; left:3px;top:127px;display:block;background:url(/img/);}    
+
+#plazas_list { }
 
 .vote_info { float: left;background: url(/img/bt-line.png) no-repeat 0 100;width:33px;height: 25px;display:none}
 /* Forms  */
 .input { display: block;margin: 0 0 5px 0;position: relative; }
-label.label-over { position:absolute;top:2px;left:5px;color: #333;padding:5px;font-size:14px;dispay:block;width:100px;font-weight:bold;}    
+label.label-over { position:absolute;top:3px;left:2px;color: #333;padding:3px;font-size:14px;display:block;font-weight:bold;}    
 
 .input input.long { width: 500px;}
 div.input label{position:absolute:top:5px;left:5px;color:#333;font-size:14px;}
@@ -102,8 +105,12 @@ ul.menu li a:hover{color:#0099ff;text-decoration:underline;}
 .social_icons li { float:left;margin-left:10px;}     
 
 .contact { width: 62px; height: 146px; position: fixed; right: 0; top: 100px;background:url(/img/contact_us.png) no-repeat;}
-.contact a { width: 50px; height: 145px; display: block;} 
-.contact a span { display: none;}      
+a.contact span { border:1px solid #666;display:none;}      
+                                     
+    
+div.pagination { padding-left:200px;margin:10px 0;display:block;}
+a.number { color:#ff9900;font-size:20px; margin: 0 10px;}  
+span.current { color:#ff9900;font-size:25px; margin: 0 10px; }
 
 
 .ui-effects-transfer { border: 1px dashed #333; }
@@ -119,7 +126,10 @@ ul.menu li a:hover{color:#0099ff;text-decoration:underline;}
 .msg-info{color:#369fb4;border:1px solid #369fb4;}
 
 .font1 { color:#56bbea; font-weight:bold;font-size:18px;}
-.font2 { color:#333; font-weight:bold;font-size:18px; }
+.font2 { color:#333; font-weight:bold;font-size:18px; }     
+.clear { clear:both;}
+
+
 
 
 
