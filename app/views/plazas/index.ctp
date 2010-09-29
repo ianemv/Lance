@@ -65,7 +65,7 @@
 			  	</div>  
 			  	<div class="vote_bottom"> 
 					<ul>
-						<li class=""><?php echo $html->link(__('Plazas', true), '#', array('rel' => 'group_'.$plaza['Plaza']['id'], 'class' => 'ghog-pop')); ?></li>
+						<li class="plaza_info"><?php echo $html->link($html->tag('span', __('Plazas', true)), '#', array('rel' => 'group_'.$plaza['Plaza']['id'], 'escape' => false, 'class' => 'ghog-pop')); ?></li>
 					</ul>
 					
                 <?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), array('controller' => 'plazas','action' => 'vote', '?' => array('url' => $plaza['Plaza']['id'], 'callback' => 'votePlaza')), array('class' => 'VoteThisButton VoteWide', 'escape' => false)); ?>

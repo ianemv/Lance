@@ -75,7 +75,12 @@ div.column3{width:280px;height:318px;background-color:#AAA;}
 #votacion_container_full .vote_form div.input input { width: 215px;}
 #votacion_container_right .vote_form div.input input { width: 170px;}
 .vote_form div.input input { font:14px;color:#333;}    
-.vote_bottom { padding-left:70px;margin-top:95px;position: absolute; left:3px;top:127px;display:block;background:url(/img/);}    
+.vote_bottom { padding-left:20px;margin-top:95px;position: absolute; left:3px;top:127px;display:block;background:url(/img/);}  
+
+.vote_bottom ul { display:inline;float:left;} 
+.vote_bottom ul li { float:left; display: block;padding:0 20px 0 0;}
+.vote_bottom ul li a {width:26px;height:26px;display:block;background:url(/img/ico_escritorio.png) no-repeat; }  
+.vote_bottom ul li a span { display:none;}
 
 #plazas_list { }
 
@@ -127,7 +132,8 @@ span.current { color:#ff9900;font-size:25px; margin: 0 10px; }
 
 .font1 { color:#56bbea; font-weight:bold;font-size:18px;}
 .font2 { color:#333; font-weight:bold;font-size:18px; }     
-.clear { clear:both;}
+.clear { clear:both;}   
+
 
 
 
