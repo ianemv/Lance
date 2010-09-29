@@ -32,8 +32,11 @@
 	<h2><?php echo __('Estas son algunas de las plazas', true); ?></h2>
     <?php echo $html->div('view_all', $html->link(__('ver todos', true), array('controller' => 'plazas', 'action' => 'index')), array('style' => 'float:right;margin-top:-30px;')); ?>
 	<div id="votacion_container_left" class="font">
-		<p><?php echo sprintf(__('Entre junio y agosto del año 2010, fueron cientos los colegios que participaron en el concurso de construcción con piezas de Lego para realizar "%s."', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>
-		<p><?php echo sprintf(__('Esta es la última y más importante etapa del proyecto. Es aquí donde todos tenemos la oportunidad de hacer realidad el sueño de los niños. Poder construir a escala real en 1.000m&sup2; el proyecto ganada de "%s"', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>
+		<p>Entre junio y agosto del año 2010, fueron cientos los colegios que participaron en el concurso "Mi mejor plaza de juegos” utilizando piezas de LEGO para construir sus modelos. A continuación presentamos las fotos de las plazas que los niños del proyecto construyeron y la que obtenga más votos será construida a escala real en 1.000 m² en una de las zonas afectadas por el terremoto.</p>
+		<p>Entre el 30 de Septiembre y 24 de Octubre realizaremos la votación de la mejor plaza. Cada persona tiene un máximo de 3 votos por día. Puedes volver el otro día y votar de nuevo. Para votar tienes que hacer clic en tu plaza(s) favoritas e ingresar tus datos.</p>
+		<p>La votación es la etapa más importante del proyecto, dado que nos entrega el proyecto ganador. Es aquí donde todos tenemos la oportunidad de hacer realidad los sueños de los niños. Poder construir a escala real en 1.000m² el proyecto ganador de "Mi mejor plaza de juegos".</p>
+		<p>Además los 9 proyectos más votados recibirán premios de LEGO Educación, evaluado en un valor total sobre los $11.000.000.</p>
+		<p><strong>¡Vota por tu plaza favorita ahora!</strong></p>
 		<div class="votar_button"><?php echo $html->link(__('Quiero elegir la mejor plaza de juegos', true), array('controller' => 'plazas'))?></div>
 	</div>
 	<div id="votacion_container_right">

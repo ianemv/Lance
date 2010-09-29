@@ -9,9 +9,16 @@
 		})
     }); 
 <?php echo $javascript->blockEnd(); ?>
-<h2><?php echo __('Vota por tu plaza favorita', true); ?></h2>
-<p><?php echo sprintf(__('Entre junio y agosto del año 2010, fueron cientos los colegios que participaron en el concurso de construcción con piezas de Lego para realizar "%s."', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>
-<p><?php echo sprintf(__('Esta es la última y más importante etapa del proyecto. Es aquí donde todos tenemos la oportunidad de hacer realidad el sueño de los niños. Poder construir a escala real en 1.000m&sup2; el proyecto ganada de "%s"', true), $html->tag('strong',__('mi mejor plaza de juegos', true))); ?></p>    
+<h2><?php echo __('Vota por tu plaza favorita', true); ?></h2>  
+<p>Entre junio y agosto del año 2010, fueron cientos los colegios que participaron en el concurso "Mi mejor plaza de juegos” utilizando piezas de LEGO para construir sus modelos. A continuación presentamos las fotos de las plazas que los niños del proyecto construyeron y la que obtenga más votos será construida a escala real en 1.000 m² en una de las zonas afectadas por el terremoto.</p>
+
+<p>Entre el 30 de Septiembre y 24 de Octubre realizaremos la votación de la mejor plaza. Cada persona tiene un máximo de 3 votos por día. Puedes volver el otro día y votar de nuevo. Para votar tienes que hacer clic en tu plaza(s) favoritas e ingresar tus datos.</p>
+
+<p>La votación es la etapa más importante del proyecto, dado que nos entrega el proyecto ganador. Es aquí donde todos tenemos la oportunidad de hacer realidad los sueños de los niños. Poder construir a escala real en 1.000m² el proyecto ganador de "Mi mejor plaza de juegos".</p>
+
+<p>Además los 9 proyectos más votados recibirán premios de LEGO Educación, evaluado en un valor total sobre los $11.000.000.</p>
+
+<p><strong>¡Vota por tu plaza favorita ahora!</strong></p>    
 
 <div id="votacion_container_full"> 
      <div class="pagination">
@@ -34,7 +41,7 @@
 				<?php if (!empty($plaza['PlazaImage'])): ?>  
 					<div class="plaza_img"> 
 						<div class="plaza_img_inner">
-					<?php echo $html->image('plazas'. DS . 'vote'. DS .$plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))); ?>  
+					<?php echo $html->image('plazas'. DS . 'vote'. DS .$plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => "group_"+$plaza['Plaza']['id'])); ?>  
 						</div>
 					</div>
 				<?php endif; ?>
@@ -65,7 +72,7 @@
 			  	</div>  
 			  	<div class="vote_bottom"> 
 					<ul>
-						<li class="plaza_info"><?php echo $html->link($html->tag('span', __('Plazas', true)), '#', array('rel' => 'group_'.$plaza['Plaza']['id'], 'escape' => false, 'class' => 'ghog-pop')); ?></li>
+						<li class="plaza_info"><?php echo $html->link($html->tag('span', __('Plazas', true)), '#', array('rel' => 'group_'.$plaza['Plaza']['id'], 'escape' => false,'class' => 'ghog-pop')); ?></li>
 					</ul>
 					
                 <?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), array('controller' => 'plazas','action' => 'vote', '?' => array('url' => $plaza['Plaza']['id'], 'callback' => 'votePlaza')), array('class' => 'VoteThisButton VoteWide', 'escape' => false)); ?>
