@@ -41,23 +41,23 @@ class PagesController extends AppController {
 				if ($this->Page->validates()) {
 					$data['Page'] = $this->data['Page'];
 					$data['delivery'] = 'mail';
-					$data['from'] = $this->data['Page']['name'].' <'.$this->data['Page']['email'].'>';
+					$data['from'] = $this->data['Page']['first_name'].' '.$this->data['Page']['last_name'] . '<'.$this->data['Page']['email'].'>';
 					$data['to'] = $this->appConfigurations['email'];
-					$data['subject'] = sprintf(__('%s - Contact Form Submited', true), $this->appConfigurations['name']);
-					$data['template'] = 'pages/contact';
+					$data['subject'] = sprintf(__('%s - Formulario de contacto', true), $this->appConfigurations['name']);
+					$data['template'] = 'pages/contact';     
 					$this->_sendEmail($data);
 					
-					$this->Session->setFlash(__('The contact form was sucessfully submited', true), 'success', array('class' => 'success'));
-					$this->redirect('/contact');
+					$this->Session->setFlash(__('El formulario de contacto fue sometido con éxito.', true), 'success');
+					$this->redirect('/contacto');
 				} else {
-					$this->Session->setFlash(__('There was a problem submitting the contact form.  Please review the errors below and try again', true), 'error');
+					$this->Session->setFlash(__('Hubo un problema al enviar el formulario de contacto. Por favor, revise los siguientes errores y vuelva a intentarlo', true), 'error');
 				}
 			} else {
-				$this->Session->setFlash(__('The captcha form was not valid, please try again.', true), 'message', array('class' => 'message'));
+				$this->Session->setFlash(__('La forma de código de la imagen no era válido, por favor, inténtelo de nuevo.', true), 'message');
 				$this->set('recaptchaError', $this->Recaptcha->error);
 			}
 		}
-		$this->set('title_for_layout', __('Contact Us', true));
+		$this->set('title_for_layout', __('Contáctanos', true));
 	}
 	
 	function getpages($position = 'top') {

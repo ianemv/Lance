@@ -8,6 +8,7 @@ App:
     theme: cleanity
     name: Regala Una Plaza 
     url: http://plaza_cake/ 
+    email: jmashburn@iwobble.com
     votes:
         limits:
             active: true
@@ -16,14 +17,24 @@ App:
             all: true
             force_login: false    
     donations:
-        cost: 25,000
-
+        cost: 25,000 
 Site:
     name: 
     theme: 
     admin_theme: broom
     status: 1
 Hook: 
-    bootstraps: core,acl
+    bootstraps: acl,searchable
     components: 
-    routes: core,acl
+    routes: acl,searchable  
+    
+Email:
+#    IsSMTP: false,
+    IsHTML: false,
+    SMTPAuth: false,
+    Host: localhost,
+    Port: 25,
+    Wordwrap: 50,
+    From: info@iwobble.com
+    FromName: iWobble Info
+    ReplyTo: info@iwobble.com    

@@ -10,7 +10,7 @@ a:hover { text-decoration: underline; color:#44E; }
 </style>
 </head>
 <body>
-<p><?php __('Site down for maintenance.'); ?></p>
+<p><?php echo sprintf(__('Estamos trabajando en el sitio y volveremos lo antes posible para seguir con las votaciones.<br /> Preguntas o dudas a  %s', true), $appConfigurations['email']); ?></p>
 </body>
 </html>
 <?php Configure::write('debug', 0); ?>

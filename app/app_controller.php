@@ -25,9 +25,8 @@ class AppController extends Controller {
 			$this->layout = 'admin';
 		}
 		
-		$this->Auth->allow('*');
-	   	
-		
+		$this->Auth->allow('*'); 
+
 		if (Configure::read('Site.theme')  && !isset($this->params['admin'])) {
 			$this->theme = Configure::read('Site.theme');
 		} elseif (Configure::read('Site.admin_theme') && isset($this->params['admin'])) {
@@ -35,9 +34,10 @@ class AppController extends Controller {
 		}
 
 		if (!isset($this->params['admin']) && 
-			Configure::read('Site.status') == 0) {
+			Configure::read('Site.status') == 0 && (!in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps']))) {    
+			echo $this->RequestHandler->getClientIp();   
 			$this->layout = 'maintenance';
-			$this->set('title_for_layout', __('Site down for maintenance', true));
+			$this->set('title_for_layout', __('Sitio de servicio por mantenimiento', true));
 			$this->render('../elements/blank');	
 		}
 		
@@ -215,8 +215,8 @@ class AppController extends Controller {
                     $this->log('_sendEmail(), Port parameter required');
                     return false;
                 }
-
-                if (!empty($emailConfigurations['IsSMTP'])) {
+                             
+                if (!empty($emailConfigurations['IsSMTP']) && $emailConfigurations['IsSMTP']) {
                     $this->Mailer->IsSMTP();
 
                     if (!empty($emailConfigurations['Username'])) {

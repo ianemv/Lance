@@ -81,7 +81,7 @@ class BuildSearchIndexShell extends Shell {
       }
 
       // Find all records
-      $records = $ModelObj->find('all',array('recursive' => 0));
+      $records = $ModelObj->find('all',array('recursive' => 1));
 
       foreach ($records as $record) {
 

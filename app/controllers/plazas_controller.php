@@ -13,6 +13,16 @@ class PlazasController extends AppController {
 		$this->set('plazas', $this->paginate());
     }
 
+	function description($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(sprintf(__('Invalid %s', true), __('plaza', true)), 'error');
+			$this->redirect(array('action' => 'index'));
+		}     
+		$this->layout = 'ajax';                                            
+		$description = $this->Plaza->read(null, $id);     
+		$this->set('plaza', $description);
+	}
+
 	function admin_index() {
 		$this->Plaza->recursive = 0;
 		$this->set('plazas', $this->paginate());

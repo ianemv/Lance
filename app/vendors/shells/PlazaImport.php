@@ -123,6 +123,13 @@ class PlazaImportShell extends Shell {
 	                $this->out(sprintf(__('Currently Processing: %s', true), $data[1]));
 	            }
             	$school['School'] = array('key' => $data[0], 'name' => $data[1], 'location' => $data[2], 'description' => $data[3], 'image' => $data['4']);  
+				$school = $this->School->findByKey($data[0]);
+				
+				if (empty($school)) {
+			      $this->School->create();
+				}
+
+
                	$this->School->create();
  	           	if ($school = $this->School->save($school)) {
 	                if ($this->verbose) {
@@ -314,6 +321,7 @@ class PlazaImportShell extends Shell {
 					 
                     foreach ($errors as $key => $value) {    
 						if (is_array($value)) {
+							debug($value);
 							$value = implode("\n", array_values($value));
 						}  
 						if ($this->dryRun) {

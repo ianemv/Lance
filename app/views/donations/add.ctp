@@ -1,3 +1,16 @@
+<!--<div style="padding:20px;">
+    <div class="info" style="margin: 10px 0;">
+        <h2 class="title"><?php echo __('Donaciones abiertas proximamente', true); ?></h2>
+        <p style="padding: 5px 0;">
+        Si estas interesado en donar, nos puedes contactar por mientras en <a href="/contacto">info@firstlegoleague.cl</a>. <br />Gracias
+        </p>
+    </div>
+</div>  
+
+-->
+
+
+
 <?php echo $javascript->codeBlock(); ?>
 	function processForm(request) {
 		if (request == 'success') {
@@ -13,7 +26,7 @@
 <?php echo $javascript->blockEnd(); ?>
 <div style="padding:20px;">
     <div class="info" style="margin: 10px 0;">
-        <h2><?php echo __('Ayudanos donando', true); ?></h2>
+        <h2 class="title"><?php echo __('Ayudanos donando', true); ?></h2>
         <p style="padding: 5px 0;"><?php echo __('Ayudan a realizar este sueño', true); ?>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam hendrerit scelerisque nunc, et viverra ligula tempus sit amet. Nam arcu tellus, pulvinar in adipiscing non, sodales id ante. Pellentesque placerat metus non quam lobortis quis posuere dolor feugiat. Maecenas justo nibh, suscipit facilisis rhoncus sed, varius at velit.
         </p>
@@ -35,5 +48,6 @@
     <div style="padding-left:75px;">
         <?php echo $html->link($html->image('btn_donar.png', array('alt' => __('¡Quiero donar ahora!', true))), array('controller' => 'donations', 'action' => 'add'), array('escape' => false));  ?>
     </div>
-</div>
+</div> 
+
 

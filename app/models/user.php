@@ -52,20 +52,20 @@ class User extends AppModel {
 					'message' => __('Tienes que ingresar tu apellido. ', true),
 				 )
 		   	),
-            'username' => array(
+           /* 'username' => array(
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
 					'message' => __('Tienes que ingresar el nombre de usuario.', true),
 				),
-                'between' => array(
+           /*     'between' => array(
                     'rule' => array('between', 3, 255),
                     'message' => __('El nombre del usuario debe ser entre 3 y 16 caracteres.', true),
-                ),
+                ),  
 				'isUnique' => array(
                 	'rule' => array('isUnique' , 'username'),
                 	'message' => __('El nombre del usuairo ya existe. Por favor escoge otro.', true)
               	),
-            ),
+            ),   */
             'password_before' => array(
                 'between' => array(
                     'rule' => array('between', 6, 20),
@@ -85,7 +85,7 @@ class User extends AppModel {
 					'rule' => array('notEmpty'),
 					'message' => __('Tienes que ingresar una contraseña de confirmación.', true),
 				), 
-            ),    
+            ),  
             'email' => array(
                 'email' => array(
                     'rule' => 'email',
@@ -93,7 +93,7 @@ class User extends AppModel {
                 ),
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
-					'message' => __('Tienes que ingresar una contraseña de confirmación.', true),
+					'message' => __('Tienes que ingresar una mail.', true),
 				),  
 				'isUnique' => array(
                 	'rule' => array('isUnique', 'email'),
@@ -151,8 +151,8 @@ class User extends AppModel {
                 } else {
 					$data['User']['ip'] = $_SERVER['REMOTE_ADDR'];
                     $this->create();
-                }
-                
+                }  
+
                 if ($this->save($data)) {
                     $user = $this->read(null, $this->getLastInsertId());
 

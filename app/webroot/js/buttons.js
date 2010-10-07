@@ -53,7 +53,7 @@ if (!window.__BTN) var __BTN = function () {
         c.firstChild.onclick = function() {
             var f = this.firstChild;
             f.className = "db-container db-voted";
-            if (!k) {
+            if (!k) {   
                 f = f.firstChild.firstChild;
                 j.id ? t(f) : u(f, 0,
                 function () {
@@ -63,7 +63,7 @@ if (!window.__BTN) var __BTN = function () {
                     },
                     175)
                 });
-                k = 1
+                k = 0
             }
             b() ? n(e, "click") : setTimeout(function() {
                 n(e, "click")

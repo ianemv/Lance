@@ -15,16 +15,17 @@ class VotesController extends AppController {
 
         $message = null;
         $success = false;
-        $login = false; 
+        $login = false;  
 
-		if (!$this->Session->check('Vote')) {
+		#if (!$this->Session->check('Vote')) {
 			if (!$this->Session->check('Auth.User')) { 
 				if ($this->appConfigurations['votes']['limits']['force_login']) { 
 					// Limits set to force login, and user not logged in
 					$message = sprintf(__('You must be logged in to continue.  Please login', true));
 					$this->canVote = false;
 					break;
-				}       
+				}            
+
 				if (!empty($this->data['User'])) {    
 					if (array_key_exists('full_name', $this->data['User'])) {
 						if (!empty($this->data['User']['full_name']) && strpos($this->data['User']['full_name'], ' ')) { 
@@ -38,8 +39,8 @@ class VotesController extends AppController {
 				  	}                                                
 					
 				  	$canVote = true;   
-					$user = $this->User->findByEmail($this->data['User']['email']);   
-					if (empty($user)) {
+					$user = $this->User->findByEmail($this->data['User']['email']);     
+					if (empty($user)) {     
 						$user['User']['group_id']       = 2;  // Adding User
 		                $user['User']['username']       = $this->data['User']['email'];
 		                $user['User']['first_name']     = $this->data['User']['first_name'];
@@ -47,13 +48,18 @@ class VotesController extends AppController {
 		                $user['User']['email']          = $this->data['User']['email'];
 		                $user['User']['password_before']= $this->User->generateRandomPassword();
 		                $user['User']['active']         = 1;   
-
-						if (!$user = $this->User->register($user)) {  
-							//User coudn't be created
-		          			$message = implode(", ", $this->User->invalidFields());
-		                    $canVote = false;
-						  	$login = true;    
-		                }
+                            
+						$this->User->set($user);
+						#if ($this->User->validates(array('fieldList' => array('first_name', 'last_name', 'email')))) {
+							if (!$user = $this->User->register($user)) {  
+								//User coudn't be created        '
+			          			$message = implode(", ", $this->User->invalidFields());
+			                    $canVote = false;
+							  	$login = true;    
+			                } 
+				   		#} else {
+							
+						#}
 					}           
 				} else {   
 					// User info wasn't found
@@ -66,14 +72,11 @@ class VotesController extends AppController {
 			   	$user['User'] = $this->Auth->user();
 			  	$canVote = true;
 			}
-	  	} else { 
-			// User has voted and has a session
-			$user['User'] = $this->Session->read('Vote');  
-			$canVote = true;
-		}      
-		
-
-		
+	  	#} else { 
+		#	// User has voted and has a session
+		#	$user['User'] = $this->Session->read('Vote');  
+		#	$canVote = true;
+		#}
 		     
 		if ($canVote && !empty($this->data['Vote']['plaza_id'])) {   
 			
@@ -85,7 +88,7 @@ class VotesController extends AppController {
                	if (!empty($this->appConfigurations['votes']['limits']['active'])) {
                    	$limits_exceeded = $this->Vote->limitsCanVote($plaza['Plaza']['id'], $user_id);
                    	if ($limits_exceeded == false) {
-                       	$message = __('No puedes votar, porque has pasado los limites de votación.  Ententa mañana!', true);
+                       	$message = __('No puedes votar porque has pasado los límites de votación. Intenta mañana', true);
                        	$canVote = false;
                    	}
                	}

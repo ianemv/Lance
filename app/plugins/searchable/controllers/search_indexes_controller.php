@@ -23,7 +23,7 @@ class SearchIndexesController extends SearchableAppController {
         $redirect['type'] = 'All';
       }
       $this->redirect($redirect);
-    }
+    }  
 
     // Add default scope condition
     $this->paginate['SearchIndex']['conditions'] = array('SearchIndex.active' => 1);
@@ -39,11 +39,11 @@ class SearchIndexesController extends SearchableAppController {
     && $this->params['type'] != 'All') {
       $this->data['SearchIndex']['type'] = $this->params['type'];
       $this->paginate['SearchIndex']['conditions']['model'] = $this->params['type'];
-    }
+    } 
 
     // Add term condition, and sorting
     if (isset($this->params['term'])
-    && $this->params['term'] != 'null') {
+    && $this->params['term'] != 'null') { 
       $this->data['SearchIndex']['term'] = $this->params['term'];
       $term = $this->params['term'];
       App::import('Core', 'Sanitize');
@@ -65,9 +65,9 @@ class SearchIndexesController extends SearchableAppController {
 	function search() {
 		$this->layout = 'ajax';
 		if (!$this->RequestHandler->isAjax()) {
-			$this->redirect(array('plugin'=>false, 'controller' => 'dashboards', 'action' => 'index'));
+			$this->redirect(array('plugin'=>'searchable', 'controller' => 'search_indexes', 'action' => 'index'));
 		} else {
-			$this->disableCache();
+			$this->disableCache();   
 			if (!empty($this->params['url']['query'])) {
 
 			    // Add default scope condition
@@ -83,12 +83,10 @@ class SearchIndexesController extends SearchableAppController {
 			  	$this->data['SearchIndex']['term'] = $this->params['url']['query'];
 			    $term = $this->params['url']['query'];
 			    App::import('Core', 'Sanitize');
-			   	$term = Sanitize::escape($term);
-			   	$this->paginate['SearchIndex']['conditions'][] = "MATCH(data) AGAINST('$term' IN BOOLEAN MODE)";
-			   	$this->paginate['SearchIndex']['fields'] = "*, MATCH(data) AGAINST('$term' IN BOOLEAN MODE) AS score";
-			   	$this->paginate['SearchIndex']['order'] = "score DESC";
-			
-			    $results = $this->paginate();
+			   	$term = Sanitize::escape($term);   
+			   	$this->paginate['SearchIndex']['conditions']['SearchIndex.data LIKE'] = "%$term%";  
+			                                                                                     
+			    $results = $this->paginate();                              
 
 			    $this->set(compact('results'));
 			}

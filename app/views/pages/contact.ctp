@@ -1,21 +1,31 @@
 <div>
-	<h2 class="login"><?php echo __('Contactano usando el formulario abajo', true);?>:</h2>
-	<?php echo $form->create(null, array('url' => '/contact')); ?>
-	<fieldset>
-	    <?php
-	    echo $form->input('name', array('label' => __('Nombre', true)));
-	    echo $form->input('email', array('label' => __('Mail', true)));
-	    echo $form->input('phone', array('label' => __('Fono', true)));
-	    echo $form->input('message', array('label' => __('Mensaje', true), 'type' => 'textarea'));
-	    ?>
+	<h2 class="login"><?php echo __('Contáctanos llenando el formulario', true);?>:</h2>
+	<div style="width:450px;float:left;">
+		<fieldset>
+		    <?php   
+		 	echo $form->create(null, array('url' => '/contacto'));       
+		    echo $form->input('first_name', array('label' => __('Nombre', true))); 
+			echo $form->input('last_name', array('label' => __('Apellido', true))); 
+		    echo $form->input('email', array('label' => __('Mail', true)));
+		    echo $form->input('phone', array('label' => __('Teléfono', true)));
+		    echo $form->input('message', array('label' => __('Mensaje', true), 'type' => 'textarea'));
+		    ?>
 
-	    <?php if(Configure::read('Recaptcha.enabled')):?>
-	    	<?php echo $recaptcha->getHtml(!empty($recaptchaError) ? $recaptchaError : null);?>
-	    <?php endif;?>
+		    <?php if(Configure::read('Recaptcha.enabled')):?>
+		    	<?php echo $recaptcha->getHtml(!empty($recaptchaError) ? $recaptchaError : null);?>
+		    <?php endif;?>
 
-	    <?php echo $form->end();?>       
-	</fieldset>
-</div>
+		    <?php echo $form->end('Send');?>       
+		</fieldset>          
+	</div> 
+	<div style="width:450px;float:left">
+		<address>   
+			<strong>Fundación Gabriel y Mary Mustakis</strong><br /> Av. Presidente Riesco 5335, of. 303,<br /> La Condes, Santiago<br /> <a href="http://www.fundacionmustakis.com">http://www.fundacionmustakis.com</a>
+		</address>
+	</div>
+	<div style="clear:both;"></div>  
+</div>  
+
 
 
 

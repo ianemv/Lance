@@ -1,22 +1,30 @@
 <?php echo $javascript->codeBlock(); ?>
     $(document).ready(function() { 
 		$(".plaza_img").corner(); 
-        $(".vote_box").corner();  
- 		$(".ghog-pop").click(function() {
-			var a = $(this).attr('rel');
-			$(".plaza_"+a).colorbox({open:true, maxWidth:"800px", opacity:0.50, transition:"fade"}); 
-			return false;  
+        $(".vote_box").corner();
+  		$(".modal").click(function() {
+			$(this).colorbox({open:true, minWidth:"600px", opacity:0.50, transition:"fade"});
+		});
+ 		$(".plaza_img_inner a").click(function() { 
+	     	var b = "plaza_"+$(this).attr('class');   
+			$('a[rel="'+b+'"]').colorbox({
+				current:"<?php echo __('imagen', true); ?> {current} <?php echo __('de', true); ?> {total}", 
+				open:true, 
+				maxWidth:"800px", 
+				opacity:0.50, 
+				transition:"fade"
+		  	});
+			return false;
 		})
     }); 
 <?php echo $javascript->blockEnd(); ?>
 <h2><?php echo __('Vota por tu plaza favorita', true); ?></h2>  
-<p>Entre junio y agosto del año 2010, fueron cientos los colegios que participaron en el concurso "Mi mejor plaza de juegos” utilizando piezas de LEGO para construir sus modelos. A continuación presentamos las fotos de las plazas que los niños del proyecto construyeron y la que obtenga más votos será construida a escala real en 1.000 m² en una de las zonas afectadas por el terremoto.</p>
+<p>A continuación presentamos las fotos de las plazas que los niños construyeron. Para votar tienes que hacer clic en tu plaza(s) favorita(s) e ingresar tus datos, tienes hasta el 24 de Octubre para votar. Cada persona tiene un máximo de 3 votos por día. Después de 24 horas puedes volver a votar nuevamente.  Las plazas seran ordenados por las que tienen más votos.  
+</p><br />
 
-<p>Entre el 30 de Septiembre y 24 de Octubre realizaremos la votación de la mejor plaza. Cada persona tiene un máximo de 3 votos por día. Puedes volver el otro día y votar de nuevo. Para votar tienes que hacer clic en tu plaza(s) favoritas e ingresar tus datos.</p>
+<p>Si quieres ver la descripción de la plaza, solo debes hacer un clic en el ícono del texto, ubicado abajo de la foto. Para ver las fotos de la plaza más grandes, haga clic en ellas.</p> <br />
 
-<p>La votación es la etapa más importante del proyecto, dado que nos entrega el proyecto ganador. Es aquí donde todos tenemos la oportunidad de hacer realidad los sueños de los niños. Poder construir a escala real en 1.000m² el proyecto ganador de "Mi mejor plaza de juegos".</p>
-
-<p>Además los 9 proyectos más votados recibirán premios de LEGO Educación, evaluado en un valor total sobre los $11.000.000.</p>
+<p>Son ustedes los que eligen el proyecto ganador y los que dan la oportunidad de hacer realidad los sueños de los niños: Poder construir a escala real en 1.000m² en Concepción, una de las zonas afectadas por el terremoto, el proyecto ganador de "Mi mejor plaza de juegos". Además los 9 proyectos más votados recibirán premios de LEGO Educación, evaluados en un valor total sobre los $11.000.000.</p><br />
 
 <p><strong>¡Vota por tu plaza favorita ahora!</strong></p>    
 
@@ -40,8 +48,8 @@
 				<p><?php echo $plaza['School']['location']; ?></p>                                                               
 				<?php if (!empty($plaza['PlazaImage'])): ?>  
 					<div class="plaza_img"> 
-						<div class="plaza_img_inner">
-					<?php echo $html->image('plazas'. DS . 'vote'. DS .$plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => "group_"+$plaza['Plaza']['id'])); ?>  
+						<div class="plaza_img_inner">  
+				   			<?php echo $html->link($html->image('plazas'. DS . 'preview'. DS .$plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))), '#', array('class' => 'group_'.$plaza['Plaza']['id'], 'escape' => false)); ?>  
 						</div>
 					</div>
 				<?php endif; ?>
@@ -65,14 +73,14 @@
 						</div>
 						<div class="plaza_group">  
 						<?php foreach ($plaza['PlazaImage'] as $image): ?> 
-							<?php echo $html->tag('p', $html->link($plaza['School']['name'], '/img/plazas' . DS . $image['image'], array('class' => 'plaza_group_'.$plaza['Plaza']['id'], 'title' => $plaza['School']['name'])))?>
+							<?php echo $html->tag('p', $html->link($plaza['School']['name'], '/img/plazas' . DS . $image['image'], array('rel' => 'plaza_group_'.$plaza['Plaza']['id'], 'title' => $plaza['School']['name'])))?>
 						<?php endforeach; ?> 
 						</div>  
 					<?php endif; ?>   
 			  	</div>  
 			  	<div class="vote_bottom"> 
 					<ul>
-						<li class="plaza_info"><?php echo $html->link($html->tag('span', __('Plazas', true)), '#', array('rel' => 'group_'.$plaza['Plaza']['id'], 'escape' => false,'class' => 'ghog-pop')); ?></li>
+						<li class="plaza_info"><?php echo $html->link($html->tag('span', __('Plazas', true)), array('controller' => 'plazas', 'action' => 'description', $plaza['Plaza']['id']), array('escape' => false, 'class' => 'modal')); ?></li>
 					</ul>
 					
                 <?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), array('controller' => 'plazas','action' => 'vote', '?' => array('url' => $plaza['Plaza']['id'], 'callback' => 'votePlaza')), array('class' => 'VoteThisButton VoteWide', 'escape' => false)); ?>

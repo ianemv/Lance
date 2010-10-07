@@ -29,8 +29,8 @@
     <![endif]-->
     
     <?php
-		echo $javascript->link('http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js');
-        echo $javascript->link('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js');
+		echo $javascript->link('jquery/jquery.min.js');
+        echo $javascript->link('jquery/jquery-ui.min.js');
         echo $javascript->link('jquery/jquery.hoverIntent.min');
 		echo $javascript->link('jquery/jquery.jcarousel/jquery.jcarousel.min');
         echo $javascript->link('jquery/jquery.corner');
@@ -51,7 +51,7 @@
 			<?php echo $this->element('menu_top'); ?>
             <?php echo $html->image('fundacionmustaki.png', array('alt' => __('Mustaki Foundation', true), 'id' => 'logo2')); ?>
             <div class="header2_1">
-                <?php echo __('Con la ideas de los niños, construiremos la mejor plaza de juegos.  Necesitamos tu donación, para hacer real su sueño.', true); ?>
+                <?php echo __('Con la ideas de los niños, construiremos la mejor plaza de juegos.  Necesitamos tu donación, para hacer realidad sus sueños.', true); ?>
             </div>
             <div class="header2_2">
                 <ul>
@@ -62,7 +62,7 @@
             </div>
  			<div style="clear:both"></div>
 			<div class="social_connect"> 
-		 		<?php echo sprintf(__('Que todos se enteren de esta gran causa: %s', true),  $html->link(__('Twittear', true), 'http://twitter.com/share', array('class' => 'twitter-share-button', 'data-count' => 'horizontal', 'data-lang' => 'es'))); ?><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.regalaunaplaza.cl&amp;layout=button_count&amp;show_faces=false&amp;width=450&amp;action=recommend&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:21px;" allowTransparency="true"></iframe> 
+		 		<?php echo sprintf(__('Que todos se enteren de esta gran causa: %s', true),  $html->link(__('Twittear', true), 'http://twitter.com/share', array('class' => 'twitter-share-button', 'data-count' => 'horizontal', 'data-lang' => 'es'))); ?><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.regalaunaplaza.cl/plazas&amp;layout=button_count&amp;show_faces=true&amp;width=150&amp;action=recommend&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
 			   <div style="float:right; margin-right:50px;">  
 					 <ul class="social_icons">
 		                <li><?php echo $html->link($html->image('icono_twitter.png', array('alt' => __('Twitter', true))), 'http://twitter.com/Regalaunaplaza', array('escape' => false)); ?></li>
@@ -75,12 +75,24 @@
 			</div>  
         </div> 
     </div>
-    <div id="main_content" class="wrap">   
-		<div id="content"> 
+    <div id="main_content" class="wrap"> 
+    	<?php echo $this->element('search', array('plugin' => 'searchable')); ?>
+		<div id="content">   
+			<?php
+	                if($session->check('Message.flash')){     
+						$session->flash();
+	                }
+
+	                if($session->check('Message.auth')){
+						$session->flash('auth');
+	                }
+	        ?>
+	        
         <?php echo $content_for_layout; ?>
         </div>
     </div>
 	<?php echo $this->element('footer'); ?>   
-    <?php echo $this->element('litebox'); ?>
-</body>
+    <?php echo $this->element('litebox'); ?> 
+	<?php echo $this->element('analytics')?>
+</body>                                      
 </html>

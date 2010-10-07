@@ -7,41 +7,32 @@ class Page extends AppModel {
 		parent::__construct($id, $table, $ds);
 		
 		$this->validate = array(
-			'name' => array(
-				'name' => array(
+			'first_name' => array(
+				'first_name' => array(
 					'rule' => 'notEmpty',
-					'message' => __('Name is required', true)
+					'message' => __('Tienes que entrar tu nombre.', true)
 				)
 			),
-			'title' => array(
+			'last_name' => array(
 				'title' => array(
 					'rule' => 'notEmpty',
-					'message' => __('Title is required', true)
-				)
-			),
-			'content' => array(
-				'content' => array(
-					'rule' => 'notEmpty',
-					'message' => __('Content is required', true)
+					'message' => __('Tienes que entrar un apellido', true)
 				)
 			),
 			'email' => array(
+				'notEmpty' => array(
+					'rule' => 'notEmpty',
+					'message' => __('Tienes que entrar un mail.', true)
+				),
 				'email' => array(
-					'email' => array(
-						'rule' => 'email',
-						'message' => __('The email address you entered is not valid.', true)
-					),
-					'notEmpty' => array(
-						'rule' => 'notEmpty',
-						'message' => __('Email address is required', true)
-					)
-				)
-			
+					'rule' => 'email',
+					'message' => __('El mail que ingresaste no es valido.', true)
+				),
 			),
 			'message' => array(
 				'message' => array(
 					'rule' => 'notEmpty',
-					'message' => __('If you don\'t enter a questions, we won\'t be able to answer it.', true)
+					'message' => __('Por favor, ingresa un mensaje.', true)
 				)
 			),
 		);

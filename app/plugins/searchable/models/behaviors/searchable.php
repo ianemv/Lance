@@ -83,19 +83,18 @@ class SearchableBehavior extends ModelBehavior {
       }
     } else {
       // Ensure fields is in the format array(Model.field => Model.field, ...)
-      foreach ($this->settings[$model->alias]['fields'] as $field => $modelField) {
-        unset($this->settings[$model->alias]['fields'][$field]);
-        if (strpos($modelField, '.') === false) {
-          $modelField = $model->alias.'.'.$modelField;
-        }
-        if (is_numeric($field)) {
-          $field = $modelField;
-        } elseif (strpos($field, '.') === false) {
-          $field = $model->alias.'.'.$field;
-        }
-        $this->settings[$model->alias]['fields'][$field] = $modelField;
+      foreach ($this->settings[$model->alias]['fields'] as $field => $modelField) { 
+        unset($this->settings[$model->alias]['fields'][$field]);                    
+		if (is_array($modelField)) { 
+			$modelAlias = '';
+			foreach ($modelField as $modelAlias) {  
+				$this->_createFieldSettings($model, $field, $modelAlias, true);                                       
+			}
+		} else { 
+			$this->_createFieldSettings($model, $field, $modelField);
+		}
       }
-    }
+    }  
 
     // Set 'name' to false if you don't want to populate the 'name' field
     if (!isset($this->settings[$model->alias]['name'])
@@ -119,8 +118,7 @@ class SearchableBehavior extends ModelBehavior {
     // Add default action of view
     if (!isset($this->settings[$model->alias]['url']['action'])) {
       $this->settings[$model->alias]['url']['action'] = 'view';
-    }
-
+    }  
   }
 
   /**
@@ -305,47 +303,58 @@ class SearchableBehavior extends ModelBehavior {
    */
   protected function _getSearchableData(&$model) {
 
-    $data = array();
-
-    // Iterate through the fields configured to be used in the Search Index data
+    $data = array();     
+ 	 // Iterate through the fields configured to be used in the Search Index data
     // field identifying the Model.field in the model data and the Model.field
     // in the model or associated model data.
-    foreach ($this->settings[$model->alias]['fields'] as $modelDataSource => $searchDataSource) {
+	foreach ($this->settings[$model->alias]['fields'] as $modelDataSource => $searchDataSource) {
+		
+		list($modelDataAlias, $modelDataField) = explode('.', $modelDataSource);  
+		
+		// If the Model.field for the source is not in model data, continue 
+		if (!isset($this->_modelData[$modelDataAlias][$modelDataField])) {
+   			continue;
+		}     
+		
+		// Get the value from the model data for the given source Model.field
+      	$value = $this->_modelData[$modelDataAlias][$modelDataField];
 
-      list($modelDataAlias, $modelDataField) = explode('.', $modelDataSource);
+        // If the real value to include in the Search Index data field is actually
+      	// from an associated model, fetch that value  	
+		if ($modelDataSource != $searchDataSource) {
+			if (is_array($searchDataSource)) {   
+				foreach($searchDataSource as $searchAliasDataSource) { 
+					list($searchAliasDataAlias, $searchAliasDataField) = explode('.', $searchAliasDataSource);   
+					if (isset($this->_modelData[$searchAliasDataAlias][$searchAliasDataField])) {
+						$value = $this->_modelData[$searchAliasDataAlias][$searchAliasDataField];
+					} else {
+						$modelDataValue = $this->_modelData[$modelDataAlias][$modelDataField];
+						$AssocModel = ClassRegistry::init($searchAliasDataAlias);
+						$AssocModel->id = $modelDataValue;
+						$value = $AssocModel->field($searchAliasDataField);
+					} 
+					$data[$searchAliasDataAlias][$searchAliasDataField] = $this->_cleanValue($value); 
+				}
+			} else { 
+		   		list($searchDataAlias, $searchDataField) = explode('.', $searchDataSource);   
 
-      // If the Model.field for the source is not in model data, continue
-      if (!isset($this->_modelData[$modelDataAlias][$modelDataField])) {
-        continue;
-      }
-
-      // Get the value from the model data for the given source Model.field
-      $value = $this->_modelData[$modelDataAlias][$modelDataField];
-
-      // If the real value to include in the Search Index data field is actually
-      // from an associated model, fetch that value
-      if ($modelDataSource != $searchDataSource) {
-
-        list($searchDataAlias, $searchDataField) = explode('.', $searchDataSource);
-
-        // The value from the associated model may already be in model data
-        if (isset($this->_modelData[$searchDataAlias][$searchDataField])) {
-          $value = $this->_modelData[$searchDataAlias][$searchDataField];
-        } else { // But if it isn't, fetch it from the database.
-          $modelDataValue = $this->_modelData[$modelDataAlias][$modelDataField];
-          $AssocModel = ClassRegistry::init($searchDataAlias);
-          $AssocModel->id = $modelDataValue;
-          $value = $AssocModel->field($searchDataField);
-        }
-
-      }
-
-      $data[$searchDataSource] = $this->_cleanValue($value);
-
-    }
-
-    return $data;
-
+				if (isset($this->_modelData[$searchDataAlias][$searchDataField])) {
+					$value = $this->_modelData[$searchDataAlias][$searchDataField];
+				} else {
+					$modelDataValue = $this->_modelData[$modelDataAlias][$modelDataField];
+					$AssocModel = ClassRegistry::init($searchDataAlias);
+					$AssocModel->id = $modelDataValue;
+					$value = $AssocModel->field($searchDataField);
+				} 
+				
+				$value = $this->_modelData[$modelDataAlias][$modelDataField]; 
+				$data[$searchDataSource] = $this->_cleanValue($value);
+			}
+		} else {
+			$data[$searchDataSource] = $this->_cleanValue($value);
+		}
+	}  
+   	return $data;
   }
 
   /**
@@ -400,6 +409,27 @@ class SearchableBehavior extends ModelBehavior {
     $value = trim($value);
     $value = html_entity_decode($value, ENT_COMPAT, 'UTF-8');
     return $value;
+  }  
+
+  protected function _createSearchableData($dataSource) {
+                
+  }  
+
+  protected function _createFieldSettings(&$model, $field, $modelField, $isArray = false) {
+	if (strpos($modelField, '.') === false) {
+      $modelField = $model->alias.'.'.$modelField;
+    } 
+
+    if (is_numeric($field)) {
+      $field = $modelField;
+    } elseif (strpos($field, '.') === false) {
+      $field = $model->alias.'.'.$field;
+    }     
+	if ($isArray) {
+		$this->settings[$model->alias]['fields'][$field][] = $modelField;	
+	} else {
+		$this->settings[$model->alias]['fields'][$field] = $modelField;
+	}  
   }
 
   /**

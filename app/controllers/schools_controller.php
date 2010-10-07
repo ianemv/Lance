@@ -1,7 +1,19 @@
 <?php
 class SchoolsController extends AppController {
 
-	var $name = 'Schools';
+	var $name = 'Schools';  
+	
+	function view($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(sprintf(__('Invalid %s', true), __('School', true)), 'error');
+			$this->redirect(array('controller' => 'plazas', 'action' => 'index'));
+		}                                                                         
+		                              
+		$this->School->recursive = 2; 
+		$school = $this->School->read(null, $id);
+		$this->set('title_for_layout', $school['School']['name']);
+		$this->set('school',$school);;
+	}
 
 	function admin_index() {
 		$this->School->recursive = 0;

@@ -5,7 +5,8 @@ echo $form->input('term', array('label' => 'Search'));
 echo $form->input('type', array('empty' => 'All',));
 echo $form->end('View Search Results');
 ?>
-<?php if (!empty($results)): ?>
+<?php if (!empty($results)): ?>   
+	<?php debug($results);?>
   <ul>
     <?php foreach ($results as $result) : ?>
     <li>
