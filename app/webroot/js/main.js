@@ -1,12 +1,16 @@
 $(document).ready(function() {  
 	$(".corner").corner();
     $(".colorbox").corner();
-    $('label').labelOver('label-over'); 
+    $('.text label, .password label').labelOver('label-over'); 
     $("a.modal").colorbox({opacity:0.55,scrolling:false}); 
 	$("a[rel='plazas']").colorbox({transition:"fade"}); 
 	if ($.trim($("#message_hint").html()) != "") {
 		messageHint($("#message_hint").html());
 	}
+	$(".vote_box .close").click(function() { 
+		alert(id);
+	}); 
+   
 	
 });
 
@@ -54,6 +58,7 @@ function showLogin(a,b) {
         $(marco).find('.vote_bottom').hide();
         $(".plaza_thum img[rel='"+thumbRel+"']").animate({opacity: 1.0}, 1000);   
 	}
+	return false;
 }
 
 function votePlaza(a) {  

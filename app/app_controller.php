@@ -13,7 +13,13 @@ class AppController extends Controller {
 
 
     function beforeFilter() { 
-		$this->AclFilter->auth();
+		$this->AclFilter->auth();    
+		
+		$this->Auth->fields = array(
+            'username'  => 'email',
+            'password'  => 'password'
+        );  
+		
 		$this->Security->blackHoleCallback = '__securityError';
         $this->appConfigurations = Configure::read('App');
         $this->set('appConfigurations', $this->appConfigurations);
@@ -120,10 +126,7 @@ class AppController extends Controller {
 	
 		$this->Auth->userModel = 'Usuarios';
 	
-        $this->Auth->fields = array(
-            'username'  => 'usuario',
-            'password'  => 'password'
-        );
+
 
         $this->Auth->loginAction = array(
             'controller' => 'usuarios',

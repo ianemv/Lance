@@ -54,17 +54,26 @@
 					</div>
 				<?php endif; ?>
 				<div class="vote_box" style="display:none">
+					<?php echo $html->link($html->tag('span', __('Close', true)), "#", array('class' => 'close', 'onclick' => 'return showLogin({id:'.$plaza['Plaza']['id'].'}, true);', 'escape' => false))?> 
+					<div class="clear"></div>
 					<div class="vote_dialog">
-                        <?php echo $html->tag('p', $html->tag('strong', __('Para votar, ingresa tus datos.', true))); ?>            
-						<?php echo $html->tag('p', sprintf(__('Recuerda, tienes solamente tres votos cada día. ', true))); ?>
+                        <?php echo $html->tag('p', $html->tag('strong', __('Para votar, tienes que entrar.', true))); ?>            
+						<?php echo $html->tag('p', sprintf(__('No tienes un cuenta? %s.', true), $html->link(__('Crear una', true), array('controller' => 'users', 'action' => 'register'), array('class' => 'modal')))); ?>
 				  	</div>
 					<div class="vote_form">    
 						<?php echo $form->create('Votes', array('action' => 'vote', 'id' => "form_".$plaza['Plaza']['id'])); ?> 
-						<?php echo $form->hidden('Vote.plaza_id', array('value' => $plaza['Plaza']['id'] )); ?>
-						<?php echo $form->input('User.first_name', array('label' => array('text' => __('Nombre', true), 'class' => 'label-over'), 'id' => uniqid('nombre_')))?>
-						<?php echo $form->input('User.last_name', array('label' => array('text' => __('Apellido', true), 'class' => 'label-over'), 'id' => uniqid('apellido_')))?>                                   
-                        <?php echo $form->input('User.email', array('label' => array('text' => __('Mail', true), 'class' => 'label-over'), 'class' => 'validate-email', 'id' => uniqid('mail_'))); ?>                     
-						<?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), '#', array('onclick' => 'return votePlaza({id:'.$plaza['Plaza']['id'].'});', 'escape' => false)); ?>
+						<?php echo $form->hidden('Vote.plaza_id', array('value' => $plaza['Plaza']['id'] )); ?> 
+						<?php echo $form->input('User.email', array('label' => array('text' => __('E-mail', true), 'class' => 'label-over'), 'id' => uniqid('email_'))) ?>
+						<?php echo $form->input('User.password', array('label' => array('text' => __('Contraseña', true), 'class' => 'label-over'), 'id' => uniqid('password_'))) ?>  
+					   	<?php echo $form->input('User.remember_me', array('type' => 'checkbox', 'label' => __('Recordarme', true), 'id' => uniqid('remember_'))); ?>
+						<?php #echo $form->input('User.first_name', array('label' => array('text' => __('Nombre', true), 'class' => 'label-over'), 'id' => uniqid('nombre_')))?>
+						<?php #echo $form->input('User.last_name', array('label' => array('text' => __('Apellido', true), 'class' => 'label-over'), 'id' => uniqid('apellido_')))?>                                   
+                        <?php #echo $form->input('User.email', array('label' => array('text' => __('Mail', true), 'class' => 'label-over'), 'class' => 'validate-email', 'id' => uniqid('mail_'))); ?>    
+                 		<?php #$html->image('btn_entrar_plaza.png', array('alt' => __('Entrar', true))) ?>
+						<?php #$html->image('btn_registrarte_plaza.png', array('alt' => __('Regístrate', true)))?>
+						<?php echo $html->link('Login', '#', array('onclick' => 'return votePlaza({id:'.$plaza['Plaza']['id'].'});', 'escape' => false)); ?>
+						<?php echo $html->link('Regester', array('controller' => 'users', 'action' => 'register'), array('class' => 'modal', 'escape' => false)); ?>
+						
 						<?php echo $form->end();?> 
 					</div> 
                     <?php if (!empty($plaza['PlazaImage'])): ?>  

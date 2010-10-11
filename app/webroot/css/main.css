@@ -8,7 +8,6 @@ address{font-style:normal;font-size:12pt;color:#333;}
 #header1_menu li{float:left;margin-left:15px;padding-right:10px;border-right:1px solid #000;}
 .header2{background:#fff url(/img/bg_header2.png) repeat-x;height:336px;}
 .header2_1{height:58px;font-size:14px;color:#fff;font-size:20px;width:800px;margin-left:100px;padding-top:15px;line-height:25px;}
-.header2_2{height:132px;}
 #logo1{position:absolute;left:0px;top:0px;width:97px;height:108px;}
 #logo2{position:absolute;right:0px;top:0px;margin-top:10px;}
 #plaza_container{height:244px;width:952px;margin-top:12px;text-align:center;}
@@ -61,9 +60,11 @@ h2 span { font-size: 8pt;display:block;padding: 5px 0 0 5px;}
 #votacion_container_full .plaza_img{background:#fff;padding:3px 3px 0 3px;position:absolute;top:45px;left:11px;}
 #votacion_container_full .plaza_img_inner img{width:220px;height:165px;padding:0;margin:0;}
 #votacion_container_full .plaza_thumb img{width:45px;height:45px;padding:0;margin:0;}
-#votacion_container_full .plaza_thumb{position:absolute;top:10px;right:5px;}
+#votacion_container_full .plaza_thumb{position:absolute;top:25px;right:5px;}
 .plaza_group{display:none;}
-.vote_box{background:#83cdf4;position:relative;display:block;}
+.vote_box{background:#83cdf4;position:relative;display:block;}   
+.vote_box a.close { margin: 0 5px;width:16px;height:16px;float:right;display:block;cursor:pointer;background:url(/img/close-btn.png) no-repeat;}  
+.vote_box a.close span { display: none; }
 #votacion_container_right .vote_box{width:179px;height:140px;top:5px;left:11px;padding:5px 2px;}
 #votacion_container_full .vote_box{width:225px;height:202px;left:11px;top:0px;padding:5px 2px;}
 .vote_dialog{background:url(/img/vote_bubble.png) no-repeat;height:57px;padding:5px 5px 5px 0;font-size:12px;width:170px;}
@@ -71,7 +72,7 @@ h2 span { font-size: 8pt;display:block;padding: 5px 0 0 5px;}
 .vote_dialog p{color:#333;}
 .vote_dialog a{color:#333;font-weight:bold;font-size:125%;display:block;}
 .vote_form{position:relative;}
-#votacion_container_full .vote_form div.input input{width:215px;}
+#votacion_container_full .vote_form div.text input, #votacion_container_full .vote_form div.password input{width:215px;}
 #votacion_container_right .vote_form div.input input{width:170px;}
 .vote_form div.input input{font:14px;color:#333;}
 .vote_bottom{padding-left:20px;margin-top:95px;position:absolute;left:3px;top:127px;display:block;background:url(/img/);}
@@ -82,13 +83,13 @@ h2 span { font-size: 8pt;display:block;padding: 5px 0 0 5px;}
 #plazas_list{}
 .vote_info{float:left;background:url(/img/bt-line.png) no-repeat 0 100;width:33px;height:25px;display:none}
 /* Forms */
-.input{display:block;margin:0 0 5px 0;position:relative;}
+.text, .password{display:block;margin:0 0 5px 0;position:relative;}
 label.label-over{position:absolute;top:3px;left:2px;color:#333;padding:3px;font-size:14px;display:block;font-weight:bold;}
 .input input.long{width:500px;}
 div.input label{position:absolute:top:5px;left:5px;color:#333;font-size:14px;}
 div.input input{color:#333;}
 div.input textarea{width:350px;height:100px;}
-div.required label:after{content:'*';color:red;}
+div.required label:after{content:'*';color:red;}  
 input.form-error{float:left;}
 div.error .error-message{margin-left:10px;padding-left:10px;padding:2px;font-size:12px;border:thin solid #8b0000;background:#ffc0cb;margin-right:100px;}
 /** menu **/ 
@@ -102,7 +103,7 @@ ul.menu li a:hover{color:#0099ff;text-decoration:underline;}
 /** END OF HEADER **/ 
 #logos h2{font-size:15px;color:#333;padding-bottom:5px;border-bottom:1px dotted #333;}
 #logos img{padding:15px;}
-.social_connect{height:25px;margin-top:5px;padding:5px 5px;color:#fff;font-weight:bold;}
+.social_connect{height:35px;margin-top:5px;padding:10px 5px 0 5px;color:#fff;font-weight:bold;}
 .social_icons li{float:left;margin-left:10px;}
 .contact{width:62px;height:146px;position:fixed;right:0;top:100px;background:url(/img/contact_us.png) no-repeat;}
 a.contact span{border:1px solid #666;display:none;}

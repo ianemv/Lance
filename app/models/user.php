@@ -160,7 +160,7 @@ class User extends AppModel {
                     $user['User']['password']       = $data['User']['password_before'];
                     $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $data['User']['key'];
                     $user['to']                     = $data['User']['email'];
-					$user['subject']            = sprintf(__('Registration Verification - %s', true), $this->appConfigurations['name']);
+					$user['subject']            	= sprintf(__('Registration Verification - %s', true), $this->appConfigurations['name']);
                    	$user['template']               = 'users/activate';
 
                     return $user;
