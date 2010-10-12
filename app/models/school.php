@@ -4,7 +4,10 @@ class School extends AppModel {
 	var $displayField = 'name';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed   
 	
-	var $actsAs = array(
+	var $actsAs = array( 
+		'Searchable.Searchable' => array(
+			'summary' => 'location',
+		),
 		'FileUpload'  => array(
 			'image' => array(
 				'required' 				=> array('add' => false, 'edit' => false),

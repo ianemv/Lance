@@ -19,7 +19,12 @@ class User extends AppModel {
 
     var $belongsTo = array('Group');
 
-	var $hasMany = array(
+	var $hasMany = array( 
+		'Account' => array(
+		 	'className' => 'Account',
+			'foreignKey' => 'user_id',
+			'dependent' => true,
+		),
 		'UserMetaData' => array(
 			'className' => 'UserMetaData',
 			'foreignKey' => 'user_id',
