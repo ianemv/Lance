@@ -4,8 +4,8 @@ class PlazasController extends AppController {
 	var $name = 'Plazas'; 
 	
 	var $paginate = array(
-	    'limit' => 12, 
-		'order' => 'Plaza.vote_count DESC'
+	    'limit' => 12,   
+		'order' => 'School.name ASC'
     );      
 	
     function index() {
@@ -84,7 +84,7 @@ class PlazasController extends AppController {
 	}  
 	
 	function getplazas() {  
-
+        $this->paginate = array('order' => 'Plaza.vote_count DESC');
 		return $this->paginate();       
 	}
 

@@ -36,7 +36,7 @@ class UsersController extends AppController {
 		if ($this->Cookie->read('User.id')) { 
 			$this->Cookie->delete('User.id');
 	    }
-        $this->redirect($this->Auth->logout());
+        $this->redirect('/');
     }
 
     function register($status = '') {
