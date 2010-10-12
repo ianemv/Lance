@@ -17,7 +17,10 @@ App:
             all: true
             force_login: false    
     donations:
-        cost: 25,000 
+        cost: 25,000    
+    allowedIps:
+        69.169.164.173
+        
 Site:
     name: 
     theme: 

@@ -8,7 +8,7 @@
 	                serviceUrl: '<?php echo $html->url(array('plugin' => 'searchable', 'controller' => 'search_indexes', 'action' => 'search', 'admin' => false))?>',
 	                minChars: 2, 
 					maxHeight: false,
-	                indicator: 'search-indicator',
+	  
 	                selectElement:getElementId,
 	        };
 	        $("#query").autocomplete(options);
@@ -16,5 +16,5 @@
 	                location.href = $(li).attr('url');
 	        }     
 	});
-	<?php echo $html->scriptEnd();?>
+	<?php echo $html->scriptEnd();?> 
 </div>

@@ -1,15 +1,15 @@
-<!--<div style="padding:20px;">
+<div style="padding:20px;">
     <div class="info" style="margin: 10px 0;">
-        <h2 class="title"><?php echo __('Donaciones abiertas proximamente', true); ?></h2>
+        <h2 class="title"><?php echo __('Formulario donación', true); ?></h2>
         <p style="padding: 5px 0;">
-        Si estas interesado en donar, nos puedes contactar por mientras en <a href="/contacto">info@firstlegoleague.cl</a>. <br />Gracias
+        La última semana de octubre tendremos disponible esta sección, para que puedan donar dinero para la construcción a escala real del proyecto ganador. Si de igual forma, estás interesado en hacer una donación en este momento, nos puedes contactar a través del email <a href="/contacto" >info@firstlegoleague.cl</a>. Muchas gracias
         </p>
     </div>
 </div>  
 
--->
 
 
+<!--
 
 <?php echo $javascript->codeBlock(); ?>
 	function processForm(request) {
@@ -49,5 +49,7 @@
         <?php echo $html->link($html->image('btn_donar.png', array('alt' => __('¡Quiero donar ahora!', true))), array('controller' => 'donations', 'action' => 'add'), array('escape' => false));  ?>
     </div>
 </div> 
+        
 
+-->
 

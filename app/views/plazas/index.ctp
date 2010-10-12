@@ -18,13 +18,16 @@
 		})
     }); 
 <?php echo $javascript->blockEnd(); ?>
-<h2><?php echo __('Vota por tu plaza favorita', true); ?></h2>  
-<p>A continuación presentamos las fotos de las plazas que los niños construyeron. Para votar tienes que hacer clic en tu plaza(s) favorita(s) e ingresar tus datos, tienes hasta el 24 de Octubre para votar. Cada persona tiene un máximo de 3 votos por día. Después de 24 horas puedes volver a votar nuevamente.  Las plazas seran ordenados por las que tienen más votos.  
+<h2 class="title"><?php echo __('Vota por tu plaza favorita', true); ?></h2>  
+<p>A continuación puedes votar a través de estas fotos por la plaza que más te guste de las que construyeron los niños.
+Solo haz “click” en tu(s) plaza(s) favorita(s) e ingresa tus datos ¡Tienes hasta el 02 de Noviembre para votar! 
 </p><br />
 
-<p>Si quieres ver la descripción de la plaza, solo debes hacer un clic en el ícono del texto, ubicado abajo de la foto. Para ver las fotos de la plaza más grandes, haga clic en ellas.</p> <br />
+<p>IMPORTANTE: Cada persona tiene un máximo de 10 votos. Si quieres ver la descripción de la plaza, haz click en el ícono de texto, ubicado bajo la foto. Para ver las fotos más grandes, haz click en ellas.</p> <br />
 
-<p>Son ustedes los que eligen el proyecto ganador y los que dan la oportunidad de hacer realidad los sueños de los niños: Poder construir a escala real en 1.000m² en Concepción, una de las zonas afectadas por el terremoto, el proyecto ganador de "Mi mejor plaza de juegos". Además los 9 proyectos más votados recibirán premios de LEGO Educación, evaluados en un valor total sobre los $11.000.000.</p><br />
+<p>Son ustedes los que eligen el proyecto ganador y los que dan la oportunidad de hacer realidad los sueños de los niños: construir a escala real en 1.000m² en Concepción el proyecto ganador de "Mi mejor plaza de juegos".</p><br />  
+<p>Además los 9 proyectos más votados recibirán premios LEGO Educación, equivalente a un total de $11.000.000.</p><br />  
+<p>Con respecto a la participación de los jardines infantiles: Si es que alguno se encuentra dentro de los 10 más votados tendrá un premio especial acorde a la edad de los niños, pero no podrá optar por los premios originales, incluida la construcción a escala real de la plaza, por encontrarse los niños fuera del rango de edad del concurso.</p><br />
 
 <p><strong>¡Vota por tu plaza favorita ahora!</strong></p>    
 
@@ -58,23 +61,25 @@
 					<div class="clear"></div>
 					<div class="vote_dialog">
                         <?php echo $html->tag('p', $html->tag('strong', __('Para votar, tienes que entrar.', true))); ?>            
-						<?php echo $html->tag('p', sprintf(__('No tienes un cuenta? %s.', true), $html->link(__('Crear una', true), array('controller' => 'users', 'action' => 'register'), array('class' => 'modal')))); ?>
+						<?php echo $html->tag('p', sprintf(__('No tienes una cuenta? %s.', true), $html->link(__('Crear una', true), array('controller' => 'users', 'action' => 'register')))); ?>
 				  	</div>
 					<div class="vote_form">    
 						<?php echo $form->create('Votes', array('action' => 'vote', 'id' => "form_".$plaza['Plaza']['id'])); ?> 
 						<?php echo $form->hidden('Vote.plaza_id', array('value' => $plaza['Plaza']['id'] )); ?> 
-						<?php echo $form->input('User.email', array('label' => array('text' => __('E-mail', true), 'class' => 'label-over'), 'id' => uniqid('email_'))) ?>
-						<?php echo $form->input('User.password', array('label' => array('text' => __('Contraseña', true), 'class' => 'label-over'), 'id' => uniqid('password_'))) ?>  
-					   	<?php echo $form->input('User.remember_me', array('type' => 'checkbox', 'label' => __('Recordarme', true), 'id' => uniqid('remember_'))); ?>
+						<?php echo $form->input('User.username', array('label' => array('text' => __('Usuario', true), 'class' => 'label-over'), 'id' => uniqid('email_'))) ?>
+						<?php echo $form->input('User.password', array('label' => array('text' => __('Contraseña', true), 'class' => 'label-over'), 'class' => 'short ', 'id' => uniqid('password_'), 'after' => $html->tag('span', $html->link(__('Olvidaste?', true), array('controller' => 'users', 'action' => 'recover')), array('class' => 'hint')))) ?>  
+					   	
 						<?php #echo $form->input('User.first_name', array('label' => array('text' => __('Nombre', true), 'class' => 'label-over'), 'id' => uniqid('nombre_')))?>
 						<?php #echo $form->input('User.last_name', array('label' => array('text' => __('Apellido', true), 'class' => 'label-over'), 'id' => uniqid('apellido_')))?>                                   
                         <?php #echo $form->input('User.email', array('label' => array('text' => __('Mail', true), 'class' => 'label-over'), 'class' => 'validate-email', 'id' => uniqid('mail_'))); ?>    
                  		<?php #$html->image('btn_entrar_plaza.png', array('alt' => __('Entrar', true))) ?>
-						<?php #$html->image('btn_registrarte_plaza.png', array('alt' => __('Regístrate', true)))?>
-						<?php echo $html->link('Login', '#', array('onclick' => 'return votePlaza({id:'.$plaza['Plaza']['id'].'});', 'escape' => false)); ?>
-						<?php echo $html->link('Regester', array('controller' => 'users', 'action' => 'register'), array('class' => 'modal', 'escape' => false)); ?>
-						
-						<?php echo $form->end();?> 
+						<?php #$html->image('btn_registrarte_plaza.png', array('alt' => __('Regístrate', true)))?>  
+						<div style="margin:10px 0;">
+						<?php echo $html->link($html->image('entrar.png', array('alt' => __('Ingresar', true))), '#', array('onclick' => 'return votePlaza({id:'.$plaza['Plaza']['id'].'});', 'escape' => false)); ?>  
+						<?php echo $html->tag('p', sprintf(__('No tienes una cuenta? %s.', true), $html->link(__('Crear una', true), array('controller' => 'users', 'action' => 'register')))); ?>
+						</div>  
+						<?php echo $form->end();?>   
+					   
 					</div> 
                     <?php if (!empty($plaza['PlazaImage'])): ?>  
 						<div class="plaza_thumb"> 

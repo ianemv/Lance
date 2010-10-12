@@ -1,7 +1,7 @@
 $(document).ready(function() {  
 	$(".corner").corner();
     $(".colorbox").corner();
-    $('.text label, .password label').labelOver('label-over'); 
+    $('.text label, .password label, .textarea label').labelOver('label-over'); 
     $("a.modal").colorbox({opacity:0.55,scrolling:false}); 
 	$("a[rel='plazas']").colorbox({transition:"fade"}); 
 	if ($.trim($("#message_hint").html()) != "") {
@@ -10,6 +10,10 @@ $(document).ready(function() {
 	$(".vote_box .close").click(function() { 
 		alert(id);
 	}); 
+	
+	$(".settings-menu-toggle").click(function() {       
+		$(".settings-menu").toggleClass('open');
+	})
    
 	
 });

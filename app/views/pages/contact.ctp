@@ -1,5 +1,5 @@
 <div>
-	<h2 class="login"><?php echo __('Contáctanos llenando el formulario', true);?>:</h2>
+	<h2 class="title login"><?php echo __('Contáctanos llenando el formulario', true);?>:</h2>
 	<div style="width:450px;float:left;">
 		<fieldset>
 		    <?php   
@@ -8,14 +8,14 @@
 			echo $form->input('last_name', array('label' => __('Apellido', true))); 
 		    echo $form->input('email', array('label' => __('Mail', true)));
 		    echo $form->input('phone', array('label' => __('Teléfono', true)));
-		    echo $form->input('message', array('label' => __('Mensaje', true), 'type' => 'textarea'));
+		    echo $form->input('message', array('label' => array('text' => __('Mensaje', true), 'class' => 'label-over'), 'type' => 'textarea'));
 		    ?>
 
 		    <?php if(Configure::read('Recaptcha.enabled')):?>
 		    	<?php echo $recaptcha->getHtml(!empty($recaptchaError) ? $recaptchaError : null);?>
 		    <?php endif;?>
 
-		    <?php echo $form->end('Send');?>       
+		    <?php echo $form->end('contactanos.png');?>       
 		</fieldset>          
 	</div> 
 	<div style="width:450px;float:left">

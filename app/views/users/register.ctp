@@ -1,22 +1,20 @@
-<?php echo $form->create('User', array('action' => 'register')); ?>
-<fieldset>
-    <?php
-        echo $form->input('username', array('label' => __('Choose a username (no spaces)', true)));
-        echo $form->input('before_password', array('type' => 'password', 'label' => __('Choose a password', true))); 
-        echo $form->input('retype_password', array('type' => 'password', 'label' => __('Retype a password', true)));
-        echo $form->input('email', array('label' => __('Email address (must be real!)', true)));
-        echo $form->input('newsletter', array('label' => __('Send me occasional update', true)));
-        echo $form->input('date_of_birth', array('minYear' => $appConfigurations['Dob']['year_min'], 'maxYear' => $appConfigurations['Dob']['year_max'], 'label' => __('Date of birth', true)));
-    ?> 
+<div>
+	<h2 class="title"><?php echo sprintf(__('Regístrate con %s', true), $appConfigurations['name']); ?></h2>             
+	<div style="width:450px;float:left;">
+		<fieldset>
+		    <?php  
+				echo $form->create('User', array('action' => 'register'));         
+				echo $form->input('email', array('label' => __('E-mail', true), 'class' => 'med'));  
+		        echo $form->input('username', array('label' => __('Usuario', true), 'class' => 'med'));
+		        echo $form->input('before_password', array('type' => 'password', 'label' => __('Contraseña', true), 'class' => 'med')); 
+		        echo $form->end('crear.png');
+		        echo $html->div('terms hint', sprintf(__('Al crear una cuenta usted de acuerdo con los %s & %s ', true), $html->link(__('Términos de Servicio', true), '#'), $html->link(__('Política de Privacidad', true), '#')));
+		    ?>
+		</fieldset>          
+	</div> 
+	<div style="width:450px;float:left">
 
-    <?php if (Configure::read('Recaptcha.enabled')): ?>
-        <label><?php echo __('Enter the text in the image', true) ?></label>
-        <?php echo $recaptcha->getHtml(!empty($recaptchaError) ? $recaptchaError : null); ?>
-    <?php endif; ?> 
+	</div>
+	<div style="clear:both;"></div>  
+</div>
 
-    <?php 
-        echo $html->div('terms', __('I agree to the <a href="#">terms of use</a> and <a href="#">privacy policy</a>', true));
-        echo $form->end(__('I agree, continue', true));
-    ?>
-
-</fieldset>

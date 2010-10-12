@@ -81,10 +81,14 @@ h2 span { font-size: 8pt;display:block;padding: 5px 0 0 5px;}
 .vote_bottom ul li a{width:26px;height:26px;display:block;background:url(/img/ico_escritorio.png) no-repeat;}
 .vote_bottom ul li a span{display:none;}
 #plazas_list{}
-.vote_info{float:left;background:url(/img/bt-line.png) no-repeat 0 100;width:33px;height:25px;display:none}
+.vote_info{float:left;background:url(/img/bt-line.png) no-repeat 0 100;width:33px;height:25px;display:none} 
+.hint { font-size:9px;margin: 0 5px;}
 /* Forms */
-.text, .password{display:block;margin:0 0 5px 0;position:relative;}
-label.label-over{position:absolute;top:3px;left:2px;color:#333;padding:3px;font-size:14px;display:block;font-weight:bold;}
+.text, .file, .password, .textarea{display:block;margin:0 0 5px 0;position:relative;}   
+label { margin:5px 0;color:#333;font-size:14px;font-weight:bold;}
+label.label-over{position:absolute;top:3px;left:2px;padding:3px;;margin:0;display:block;} 
+.input input.short{width:150px !important;} 
+.input input.med{width: 250px !important;}
 .input input.long{width:500px;}
 div.input label{position:absolute:top:5px;left:5px;color:#333;font-size:14px;}
 div.input input{color:#333;}
@@ -103,8 +107,13 @@ ul.menu li a:hover{color:#0099ff;text-decoration:underline;}
 /** END OF HEADER **/ 
 #logos h2{font-size:15px;color:#333;padding-bottom:5px;border-bottom:1px dotted #333;}
 #logos img{padding:15px;}
-.social_connect{height:35px;margin-top:5px;padding:10px 5px 0 5px;color:#fff;font-weight:bold;}
-.social_icons li{float:left;margin-left:10px;}
+.social_connect{height:35px;margin-top:5px;padding:10px 5px 0 5px;color:#fff;font-weight:bold;position:relative;} 
+.social_connect ul { display:block;}
+.social_connect ul li { float: left;margin:0;}
+.social_connect ul li a{ color: #fff; text-decoration:none;font-size:14px;float:left;display:block;}
+.social_connect ul li li { display:none;}  
+
+.social_icons li{float:left;margin-left:10px !important;}
 .contact{width:62px;height:146px;position:fixed;right:0;top:100px;background:url(/img/contact_us.png) no-repeat;}
 a.contact span{border:1px solid #666;display:none;}
 div.pagination{padding-left:200px;margin:10px 0;display:block;}
@@ -122,32 +131,43 @@ span.current{color:#ff9900;font-size:25px;margin:0 10px;}
 .msg-info{color:#369fb4;border:1px solid #369fb4;}
 .font1{color:#56bbea;font-weight:bold;font-size:18px;}
 .font2{color:#333;font-weight:bold;font-size:18px;}
-.clear{clear:both;}          
+.clear{clear:both;} 
+
+
+.account {
+	width: 725px;
+	float: left; 
+	position:relative;
+} 
+
+
+#right-col { width:220px; float: left;}  
+#right-col li { display: block;}
+#right-col li a { display: block; font-size: 13px;}      
 
 
 #searchform {
-	margin: 5px 0;
+	margin: 2px 0;
+	float:right;
 }                 
 
-#searchform .input {
-	float: right;   
-	margin-left: 25px;
-	
+#searchform .input { 
+
 }   
 
-#searchform .input input {
-	width: 300px;  
+#searchform .input input {  
+	width: 225px;  
 	color: #333;
-	margin-left: 5px;
 }    
 
 
 span.autocomplete-indicator {
-	float: left;
+	float: right;
 	width: 16px;
 	height: 11px;
 	margin: 0;
-	padding: 0!important;
+	padding: 0!important;  
+	display:none;
 } 
 
 
@@ -265,6 +285,139 @@ span.autocomplete-indicator {
 
 .info .plaza_vote {
 	margin: 10px 0 0 25px;
+} 
+
+
+.login-join, .current-user,.current-user dl,.settings-menu {
+	float: left; 
+	padding: 2px 0;
+}
+
+.login-join {
+	padding: 5px 0;
+} 
+
+.login-join ul li {  
+	padding: 5px 5px;
+	display: block;
+	float: left;
+}   
+.login-join li a {
+	display: block;
+	float: left;
+	padding: 3px 2px 0px 2px;
+}
+
+.current-user a:hover {
+	text-decoration: underline;
+}
+.current-user dl {
+	padding: 0px 0;
+	position: relative;
+	text-align: center;
+	top: 0px; 	 
+	margin: 0 10px;
+}
+.current-user dt {
+	color: #fff;
+	font-size: .9em;
+	font-weight: bold;   
+}
+.current-user dd a {
+	color: #fff;
+	font-size: .8em;
+	font-weight: normal;      
+}
+          
+.current-user-thumbnail {
+	border: 1px solid #333;
+	float: left;
+	height: 24px;
+	margin-top: 2px;
+	width: 24px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.settings-menu { 
+	margin-right: 10px;
+	position: relative;
+	top: 0px;
+	width: 53px;
+	z-index: 999;
+}     
+
+.settings-menu-top {   
+	background-color: #56bbea;
+	display: block;
+	padding: 0 22px 0 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;  
+}
+.settings-menu-top .arrow {
+	background: url(http://cdn2.diggstatic.com/img/sprites/global.dda634d0.png) no-repeat -159px -48px;
+	display: block;
+	height: 4px;
+	margin: 16px auto 0;
+	width: 7px; 
+}
+.settings-menu-toggle {
+	float: right;
+	height: 30px;
+	margin-right: -22px;
+	width: 22px;
+}
+.settings-menu-dropdown {
+	background-color: #56bbea;
+    display:none;
+	padding: 5px 0 5px;
+	position: absolute;
+	width: 140px; 
+	border-radius: 0 5px 5px 5px;
+	-moz-border-radius: 0 5px 5px 5px;
+	-webkit-border-radius: 0 5px 5px 5px;
+}
+.settings-menu-dropdown li a {
+	color: #333;   
+	font-weight: normal;
+	display: block;
+	font-size: .8em !important;
+	padding-left: 20px;
+	padding-right: 10px;
+}
+.settings-menu-dropdown li {
+margin-bottom: 5px !important;
+}    
+
+.open .arrow {
+background-position: -159px -56px;
+}
+.open .settings-menu-dropdown {
+	display: block;
+}
+.open .settings-menu-top {
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+}
+#header-settings, #header-logout {
+	color: #fff;
+	font-size: .9em !important;
+}
+.settings-menu .last {
+	border-top: 1px solid #fff;
+	margin: 10px 0 4px 0;
+	padding-top: 4px;
+}     
+
+
+
+.profile_image {
+	position: absolute;
+	top:10px;
+	right:10px;
 }
 
 

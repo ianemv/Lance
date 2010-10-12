@@ -1,9 +1,9 @@
-<fieldset>
-    <legend><?php echo __('Forgot your username or password?', true); ?></legend>
+<div>
+	<h2 class="title"><?php echo __('¿Olvidaste tu contraseña?', true); ?></h2>
     <?php
         echo $form->create('User', array('action' => 'recover'));
-        echo $form->input('email', array('label' => __('Enter your email address', true)));
-        echo $form->end(__('Retrieve Password', true));
+        echo $form->input('email', array('label' => __('E-mail', true), 'class' => 'long'));
+        echo $form->end('enviarme_contrasena.png');
     ?> 
-</fieldset>
+</div>
 
