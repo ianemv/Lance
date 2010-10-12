@@ -32,8 +32,6 @@ class AppController extends Controller {
 		}
 		
 		$this->Auth->allow('*');  
-		
-		print_r($this->appConfigurations);
 
 		if (Configure::read('Site.theme')  && !isset($this->params['admin'])) {
 			$this->theme = Configure::read('Site.theme');
