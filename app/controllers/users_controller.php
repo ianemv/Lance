@@ -39,15 +39,16 @@ class UsersController extends AppController {
         $this->redirect('/');
     }
 
-    function register($status = '') {
+    function register($status = '') { 
+		$this->set('title_for_layout', __('Registro', true));
         if (!$this->Session->check('Auth.User')) {
             if (!empty($this->data)) {
-                if ($user = $this->User->register($this->data)) {
+                if ($user = $this->User->register($this->data)) { 
                     $this->_sendEmail($user);
                     $this->Session->write('Registration.email', $user['to']);
                     $this->redirect(array('action' => 'register', 'success'));
                 } else {
-                    $this->Session->setFlash(__('We were unable to register your account!', true));
+                    $this->Session->setFlash(__('No pudimos registrar tu cuenta.', true));
                 }
             } elseif ($status) {
                 if ($this->Session->check('Registration.email')) {
@@ -108,7 +109,8 @@ class UsersController extends AppController {
         // Send to Home Page
     }
 
-    function recover() {
+    function recover() {   
+		$this->set('title_for_layout', __('¿Olvidaste tu contraseña?', true));
         if (!empty($this->data)) {
             if ($user = $this->User->recover($this->data)) {
                 $this->_sendEmail($user);

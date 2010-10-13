@@ -60,7 +60,7 @@ Solo haz “click” en tu(s) plaza(s) favorita(s) e ingresa tus datos ¡Tienes 
 					<?php echo $html->link($html->tag('span', __('Close', true)), "#", array('class' => 'close', 'onclick' => 'return showLogin({id:'.$plaza['Plaza']['id'].'}, true);', 'escape' => false))?> 
 					<div class="clear"></div>
 					<div class="vote_dialog">
-                        <?php echo $html->tag('p', $html->tag('strong', __('Para votar, tienes que entrar.', true))); ?>            
+                        <?php echo $html->tag('p', $html->tag('strong', __('Para votar, tienes que registrarte.', true))); ?>            
 						<?php echo $html->tag('p', sprintf(__('No tienes una cuenta? %s.', true), $html->link(__('Crear una', true), array('controller' => 'users', 'action' => 'register')))); ?>
 				  	</div>
 					<div class="vote_form">    

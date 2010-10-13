@@ -19,7 +19,9 @@ App:
     donations:
         cost: 25,000    
     allowedIps:
+        200.30.250.18
         69.169.164.173
+        
         
 Site:
     name: 
@@ -32,12 +34,15 @@ Hook:
     routes: acl,searchable  
     
 Email:
-#    IsSMTP: false,
-    IsHTML: false,
-    SMTPAuth: false,
-    Host: localhost,
-    Port: 25,
+    IsSMTP: true,
+    IsHTML: true,
+    SMTPAuth: true,
+    SMTPSecure: ssl,
+    Host: smtp.gmail.com
+    Port: 465,
+    Username: jmashburn,
+    Password: j1a2r3e4d5,
     Wordwrap: 50,
     From: info@iwobble.com
     FromName: iWobble Info
-    ReplyTo: info@iwobble.com    
+    ReplyTo: info@iwobble.com

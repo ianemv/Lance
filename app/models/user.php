@@ -10,11 +10,11 @@ class User extends AppModel {
     var $actsAs = array(
         'Containable', 
         'Acl.Acl' => 'requester',
-        'Expandable' => array(
+    /*    'Expandable' => array(
             'with' => 'UserMetaData',
             'key' => 'key',
             'value' => 'value'
-        )
+        ) */
     );
 
     var $belongsTo = array('Group');
@@ -57,12 +57,12 @@ class User extends AppModel {
 					'message' => __('Tienes que ingresar tu apellido. ', true),
 				 )
 		   	),
-           /* 'username' => array(
+           'username' => array(
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
 					'message' => __('Tienes que ingresar el nombre de usuario.', true),
 				),
-           /*     'between' => array(
+                'between' => array(
                     'rule' => array('between', 3, 255),
                     'message' => __('El nombre del usuario debe ser entre 3 y 16 caracteres.', true),
                 ),  
@@ -70,7 +70,7 @@ class User extends AppModel {
                 	'rule' => array('isUnique' , 'username'),
                 	'message' => __('El nombre del usuairo ya existe. Por favor escoge otro.', true)
               	),
-            ),   */
+            ), 
             'password_before' => array(
                 'between' => array(
                     'rule' => array('between', 6, 20),
@@ -141,7 +141,7 @@ class User extends AppModel {
 	}
 
     function register($data, $id = null) {
-        if (is_array($data)) {
+        if (is_array($data)) {   
             if (!empty($data['User'])) {
 				if (empty($id) || !empty($data['User']['reset_key'])) {
 					$data['User']['key']  = Security::hash(uniqid(rand(), true).Configure::read('Security.salt'));
@@ -156,7 +156,9 @@ class User extends AppModel {
                 } else {
 					$data['User']['ip'] = $_SERVER['REMOTE_ADDR'];
                     $this->create();
-                }  
+                } 
+
+ 				$data['User']['group_id'] = 2;  
 
                 if ($this->save($data)) {
                     $user = $this->read(null, $this->getLastInsertId());
@@ -166,7 +168,7 @@ class User extends AppModel {
                     $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $data['User']['key'];
                     $user['to']                     = $data['User']['email'];
 					$user['subject']            	= sprintf(__('Registration Verification - %s', true), $this->appConfigurations['name']);
-                   	$user['template']               = 'users/activate';
+                   	$user['template']               = 'users/activate';    
 
                     return $user;
                 } else {

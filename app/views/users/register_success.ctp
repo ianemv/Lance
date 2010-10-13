@@ -1,4 +1,4 @@
-<h2><?php echo __('Now, please check your email', true); ?></h2>
+<h2 clas="title"><?php echo __('Now, please check your email', true); ?></h2>
 <ul>
     <li><?php echo __('You must click on the link in the email we just sent you in order to complete your registration', true); ?></li>
     <li><?php echo sprintf(__('The email was sent to %s', true), $email); ?></li>

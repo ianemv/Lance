@@ -18,7 +18,9 @@ class AppController extends Controller {
 		$this->Auth->fields = array(
             'username'  => 'email',
             'password'  => 'password'
-        );  
+        ); 
+
+ 		$this->Auth->loginError = __('La conexión ha fallado. El nombre de usuario o la contraseña no son válidas.', true);
 		
 		$this->Security->blackHoleCallback = '__securityError';
         $this->appConfigurations = Configure::read('App');
@@ -201,9 +203,9 @@ class AppController extends Controller {
     }
 
     function _sendEmail($data) {
-        if (!empty($data)) {
+        if (!empty($data)) {   
             if ($this->Mailer) {
-                $emailConfigurations = Configure::read('Email');
+                $emailConfigurations = Configure::read('Email'); 
 
                 if (!empty($emailConfigurations['Host'])) {
                     $this->Mailer->Host = $emailConfigurations['Host'];
@@ -319,7 +321,7 @@ class AppController extends Controller {
                     $this->viewPath = 'elements'.DS.'email'.DS.'text';
                     $bodyText = $this->render($data['template']);
                     $this->Mailer->AltBody = $bodyText;
-                }
+                } 
 
                 // Get things back to normal
                 $this->autoRender = $tmp['autoRender'];
