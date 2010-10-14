@@ -71,7 +71,7 @@ class UsersController extends AppController {
             if (!is_null($key)) {
                 if ($user = $this->User->activate($key)) {
                     $this->Auth->login($user);
-                    $this->_sendEmail($user);
+                    #$this->_sendEmail($user);
                     $this->Session->setFlash(__('Tu cuenta ha sido verificada', true), 'success');
 					$this->redirect('/plazas');
                     #$this->redirect(array('action' => 'done'));
