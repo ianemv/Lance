@@ -3,7 +3,7 @@
 class AppController extends Controller {
     
     var $helpers = array('Html', 'Form', 'Ajax', 'Time', 'Number', 'Javascript', 'Cache', 'Text', 'Session','Menu','Sidebar');
-    var $components = array('Security', 'Acl', 'Auth', 'Acl.AclFilter', 'Cookie', 'RequestHandler', 'Session', 'Mailer', 'Security');
+    var $components = array('Security', 'Acl', 'Auth', 'Acl.AclFilter', 'Cookie', 'RequestHandler', 'Session', 'Email', 'Security');
    	var $uses = array('User');
     var $view = 'Theme';      
 
@@ -16,7 +16,7 @@ class AppController extends Controller {
 		$this->AclFilter->auth();    
 		
 		$this->Auth->fields = array(
-            'username'  => 'email',
+            'username'  => 'username',
             'password'  => 'password'
         ); 
 
@@ -204,144 +204,205 @@ class AppController extends Controller {
 
     function _sendEmail($data) {
         if (!empty($data)) {   
-            if ($this->Mailer) {
-                $emailConfigurations = Configure::read('Email'); 
+            if ($this->Email) {
+                $emailConfigurations = Configure::read('Email');  
+  				
+			   	if (!empty($emailConfigurations['delivery'])) {
+					$this->Email->delivery = $emailConfigurations['delivery'];
+				} else {
+					$this->log('_sendEmail(), Delivery parameter required. smtp|mail|debug');
+					return false;
+				} 
+				
+				if ($emailConfigurations['delivery'] == 'smtp') {  
+					if (!empty($emailConfigurations['smtpOptions'])) {
+						$emailSmtpOptions = $emailConfigurations['smtpOptions'];
+						if (!empty($emailSmtpOptions['host'])) {
+							$this->Email->smtpOptions['host'] = $emailSmtpOptions['host'];
+						} else {
+							$this->log('_sendEmail(), Host parameter required');
+							return false;
+						}
+						if (!empty($emailSmtpOptions['port'])) {
+		                    $this->Email->smtpOptions['port'] = $emailSmtpOptions['port'];
+		                } else {
+		                    $this->log('_sendEmail(), Port parameter required');
+		                    return false;
+		                }
+		                if (!empty($emailSmtpOptions['auth']) && $emailSmtpOptions['auth'] === true) { 
+							$this->Email->smtpOptions['auth'] = $emailSmtpOptions['auth'];
+			 				if (!empty($emailSmtpOptions['username'])) {
+				            	$this->Email->smtpOptions['username'] = $emailSmtpOptions['username'];
+						  	} else {
+							  	$this->log('_sendEmail(), Username parameter required when using Auth and SMTP');
+								return false;
+							}  
+							if (!empty($emailSmtpOptions['Password'])) {
+		                        $this->Email->smtpOptions['password'] = $emailSmtpOptions['password'];
+		                    } else {
+		                        $this->log('_sendEmail(), Password parameter required when using Auth and SMTP');
+		                        return false;
+		                    }
+						} else {
+							$this->Email->auth = false;
+						}
+						if (!empty($emailSmtpOptions['timeout'])) {
+							$this->Email->smtpOptions['timeout'] = $emailSmtpOptions['timeout'];
+						}                                                                       
+						if (!empty($emailSmtpOptions['client'])) {
+							$this->Email->smtpOptions['client'] = $emailSmtpOptions['client'];
+						}
 
-                if (!empty($emailConfigurations['Host'])) {
-                    $this->Mailer->Host = $emailConfigurations['Host'];
-                } else {
-                    $this->log('_sendEmail(), Host parameter required');
-                    return false;
-                }
-
-                if (!empty($emailConfigurations['Port'])) {
-                    $this->Mailer->Port = $emailConfigurations['Port'];
-                } else {
-                    $this->log('_sendEmail(), Port parameter required');
-                    return false;
-                }
-                             
-                if (!empty($emailConfigurations['IsSMTP']) && $emailConfigurations['IsSMTP']) {
-                    $this->Mailer->IsSMTP();
-
-                    if (!empty($emailConfigurations['Username'])) {
-                        $this->Mailer->Username = $emailConfigurations['Username'];
-                    } else {
-                        $this->log('_sendEmail(), Username parameter required if using SMTP');
-                        return false;
-                    }
-
-                    if (!empty($emailConfigurations['Password'])) {
-                        $this->Mailer->Password = $emailConfigurations['Password'];
-                    } else {
-                        $this->log('_sendEmail(), Password parameter required if using SMTP');
-                        return false;
-                    }
-                }
-
-                if (!empty($emailConfigurations['SMTPAuth'])) {
-                    $this->Mailer->SMTPAuth = $emailConfigurations['SMTPAuth'];
-                } 
-
-                if (!empty($emailConfigurations['SMTPSecure'])) {
-                    $this->Mailer->SMTPSecure = $emailConfigurations['SMTPSecure'];
-                } 
-
-                if (!empty($emailConfigurations['WordWrap'])) {
-                    $this->Mailer->WordWrap = $emailConfigurations['WordWrap'];
-                } 
-
-                if (!empty($emailConfigurations['From'])) {
-                    $this->Mailer->From = $emailConfigurations['From'];
+					} else {
+						$this->log('_sendEmail(), SmtpOptons are required when sending via SMTP');
+						return false;
+					}
+				}
+				if (!empty($emailConfigurations['lineLength'])) {
+                    $this->Email->lineLength = $emailConfigurations['lineLength'];
+				}
+				if (!empty($emailConfigurations['replyTo'])) {
+					$this->Email->replyTo = $emailConfigurations['replyTo']; 
+					$this->Email->return = $emailConfigurations['return'];
+				}
+                if (!empty($emailConfigurations['from'])) {
+                    $this->Email->from = $emailConfigurations['from'];
                 } else {
                     $this->log('_sendEmail(), From name parameter required');
                     return false;
                 }
-
-                if (!empty($emailConfigurations['FromName'])) {
-                    $this->Mailer->FromName = $emailConfigurations['FromName'];
-                }
-
                 if (!empty($data['subject'])) {
-                    $this->Mailer->Subject = $data['subject'];
+                    $this->Email->subject = $data['subject'];
                 } else {
                     $this->log('_sendEmail(), Subject paramerter required');
                     return false;
-                }
+                }  
 
-                if (!empty($data['to'])) {
-                    if (is_array($data['to'])) {
+                if (!empty($data['to'])) { 
+					$to = array();
+                    if (is_array($data['to'])) {  
                         foreach ($data['to'] as $recipient) {
-                            if (!empty($recipient['name'])) {
-                                $this->Mailer->AddAddress($recipient['to'], $recipient['name']);
+                            if (!empty($recipient['name'])) { 
+							   	$to[] = "<".$recipient['name']."> ". $recipient['to'];
                             } else {
-                                $this->Mailer->AddAddress($recipient['to']);
+                                $to[] = $recipient['to'];
                             }
                         }
                     } else {
                         if (!empty($data['name'])) {
-                            $this->Mailer->AddAddress($data['to'], $data['name']);
+							$to[] = "<".$data['name']."> ". $data['to'];
                         } else {
-                            $this->Mailer->AddAddress($data['to']);
+                             $to[] = $data['to'];      
                         }
                     }
+				   	if (!empty($to)) {
+						$this->Email->to = $to;
+					} else {
+						$this->log('_sendEmail(), To array empty.');
+						return false;
+					}
                 } else {
                     $this->log('_sendEmail(), To parameter required');
                     return false;
                 }
 
-                $tmp = array(
-                    'autoRender' =>  $this->autoRender,
-                    'autoLayout' => $this->autoLayout,
-                    'layout' => $this->layout,
-                    'viewPath' => $this->viewPath,
-                );
-
-
-                $this->set('data', $data);
-                $this->autoRender = false;
-                $this->autoLayout = false;
-
-                if (empty($data['layout'])) {
-                    $data['layout'] = 'default';
-                } 
-                if (empty($data['template'])) {
-                    $data['template'] = $this->action;
+ 				if (!empty($data['cc'])) { 
+					$cc = array();
+                    if (is_array($data['cc'])) {  
+                        foreach ($data['cc'] as $recipient) {
+                            if (!empty($recipient['name'])) { 
+							   	$cc[] = "<".$recipient['name']."> ". $recipient['to'];
+                            } else {
+                                $cc[] = $recipient['to'];
+                            }
+                        }
+                    }
+				   	if (!empty($cc)) {
+						$this->Email->cc = $cc;
+					} else {
+						$this->log('_sendEmail(), Cc array empty.');
+						return false;
+					}
                 }
+
+				if (!empty($data['bcc'])) { 
+					$bcc = array();
+                    if (is_array($data['bcc'])) {  
+                        foreach ($data['bcc'] as $recipient) {
+                            if (!empty($recipient['name'])) { 
+							   	$bcc[] = "<".$recipient['name']."> ". $recipient['to'];
+                            } else {
+                                $bcc[] = $recipient['to'];
+                            }
+                        }
+                    }
+				   	if (!empty($bcc)) {
+						$this->Email->bcc = $bcc;
+					} else {
+						$this->log('_sendEmail(), Bcc array empty.');
+						return false;
+					}
+                }
+
+                #$tmp = array(
+                #    'autoRender' =>  $this->autoRender,
+                #    'autoLayout' => $this->autoLayout,
+                ##    'layout' => $this->layout,
+                #    'viewPath' => $this->viewPath,
+                #);
+
 
                 
-                if (!empty($emailConfigurations['IsHTML'])) {
-                    $this->Mailer->IsHTML($emailConfigurations['IsHTML']);
-                    $this->layout = 'email'.DS.'html'.DS.$data['layout'];
-                    $this->viewPath = 'elements'.DS.'email'.DS.'html';
-                    $bodyHtml = $this->render($data['template']);
-                    $this->Mailer->MsgHTML($bodyHtml);
+                #$this->autoRender = false;
+                #$this->autoLayout = false;
+
+                if (!empty($data['layout'])) {
+                    $this->Email->layout = $data['layout'];
+                }  
+
+                if (empty($data['template'])) {
+                    $this->Email->template = $this->action;
                 } else {
-                    $this->layout = 'email'.DS.'text'.DS.$data['layout'];
-                    $this->viewPath = 'elements'.DS.'email'.DS.'text';
-                    $bodyText = $this->render($data['template']);
-                    $this->Mailer->AltBody = $bodyText;
-                } 
+					$this->Email->template = $data['template'];
+			  	}
+
+                if (!empty($emailConfigurations['sendAs'])) {
+	            	$this->Email->sendAs = $emailConfigurations['sendAs'];
+				}    
+
+
+                #if (!empty($emailConfigurations['IsHTML'])) {
+                #    $this->Mailer->IsHTML($emailConfigurations['IsHTML']);
+                #    $this->layout = 'email'.DS.'html'.DS.$data['layout'];
+                #    $this->viewPath = 'elements'.DS.'email'.DS.'html';
+                #    $bodyHtml = $this->render($data['template']);
+                #    $this->Mailer->MsgHTML($bodyHtml);
+                #} else {
+                #    $this->layout = 'email'.DS.'text'.DS.$data['layout'];
+                #    $this->viewPath = 'elements'.DS.'email'.DS.'text';
+                #    $bodyText = $this->render($data['template']);
+                #    $this->Mailer->AltBody = $bodyText;
+                #} 
 
                 // Get things back to normal
-                $this->autoRender = $tmp['autoRender'];
-                $this->autoLayout = $tmp['autoLayout'];
-                $this->layout = $tmp['layout'];
-                $this->viewPath = $tmp['viewPath'];
-
-                if (!$return = $this->Mailer->Send()) {
-                    $this->log($this->Mailer->ErrorInfo);
+                #$this->autoRender = $tmp['autoRender'];
+                #$this->autoLayout = $tmp['autoLayout'];
+                #$this->layout = $tmp['layout'];
+                #$this->viewPath = $tmp['viewPath'];
+				$this->set('data', $data);
+				
+                if ($return = $this->Email->Send()) {
+					if (!empty($this->Email->smtpError)) {
+						$this->log($this->Email->smtpErrors);
+					}
                     $return = false;
-                }
+                }   
 
-                $this->Mailer->ClearAddresses();
-                $this->Mailer->ClearAllRecipients();
-                $this->Mailer->ClearCustomHeaders();
-                $this->Mailer->ClearAttachments();
+                $this->Email->reset();
 
                 return $return;
             } else {
-                $this->log('_sendEmail(), PhpMailer component required');
+                $this->log('_sendEmail(), Mailer component required');
                 return false;
             }
         } else {
