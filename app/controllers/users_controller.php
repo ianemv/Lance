@@ -42,7 +42,7 @@ class UsersController extends AppController {
     }
 
     function register($status = '') { 
-		$this->set('title_for_layout', __('Registro', true));
+		$this->set('title_for_layout', __('Registro', true));  
         if (!$this->Session->check('Auth.User')) {
             if (!empty($this->data)) {
                 if ($user = $this->User->register($this->data)) { 
@@ -50,7 +50,7 @@ class UsersController extends AppController {
                     $this->Session->write('Registration.email', $user['to']);
                     $this->redirect(array('action' => 'register', 'success'));
                 } else {
-                    $this->Session->setFlash(__('No pudimos registrar tu cuenta.', true));
+                    $this->Session->setFlash(__('No pudimos registrar tu cuenta.', true), 'error');
                 }
             } elseif ($status) {
                 if ($this->Session->check('Registration.email')) {
@@ -66,16 +66,17 @@ class UsersController extends AppController {
     }
 
 
-    function activate($key = null) {
+    function activate($key = null) {  
         if (!$this->Session->check('Auth.User')) {
             if (!is_null($key)) {
                 if ($user = $this->User->activate($key)) {
                     $this->Auth->login($user);
                     $this->_sendEmail($user);
-                    $this->Session->setFlash(__('Tu cuenta ha sido verificada', true));
-                    $this->redirect(array('action' => 'done'));
+                    $this->Session->setFlash(__('Tu cuenta ha sido verificada', true), 'success');
+					$this->redirect('/plazas');
+                    #$this->redirect(array('action' => 'done'));
                 } else {
-                    $this->Session->setFlash(__('No hemos podido verificar la cuenta! La cuenta ya puede estar activo.', true));
+                    $this->Session->setFlash(__('No hemos podido verificar la cuenta! La cuenta ya puede estar activo.', true), 'error');
                     $this->redirect(array('action' => 'login'));
                 }
             } else {
@@ -116,10 +117,10 @@ class UsersController extends AppController {
         if (!empty($this->data)) {
             if ($user = $this->User->recover($this->data)) {
                 $this->_sendEmail($user);
-                $this->Session->setFlash(__('Tu contraseña ha sido enviada a tu correo electrónico', true));  
+                $this->Session->setFlash(__('Tu contraseña ha sido enviada a tu correo electrónico', true), 'success');  
                 $this->redirect(array('action' => 'recover'));
             } else {
-                $this->Session->setFlash(__('Tu email no está registrado', true)); 
+                $this->Session->setFlash(__('Tu email no está registrado', true), 'error'); 
             }
         }
     }
@@ -149,7 +150,7 @@ class UsersController extends AppController {
             if ($user = $this->User->resend($email)) {
                 $this->_sendEmail($user);
             } else {
-                $this->Session->setFlash(__('No se puede enviar un correo electrónico de activación. Puede ser que la cuenta ya está activa o el correo electrónico no exisit.', true)); 
+                $this->Session->setFlash(__('No se puede enviar un correo electrónico de activación. Puede ser que la cuenta ya está activa o el correo electrónico no exisit.', true), 'error'); 
             }
         }
         $this->redirect(array('action' => 'login'));
