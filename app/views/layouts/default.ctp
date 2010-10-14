@@ -77,7 +77,8 @@
 			</div>  
         </div> 
     </div>
-    <div id="main_content" class="wrap"> 
+    <div id="main_content" class="wrap">
+	 <?php echo $this->Session->flash('email'); ?> 
 		<div id="content">   
 			<?php
 	                if($session->check('Message.flash')){     

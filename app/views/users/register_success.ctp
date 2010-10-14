@@ -1,12 +1,16 @@
-<h2 clas="title"><?php echo __('Now, please check your email', true); ?></h2>
-<ul>
-    <li><?php echo __('You must click on the link in the email we just sent you in order to complete your registration', true); ?></li>
-    <li><?php echo sprintf(__('The email was sent to %s', true), $email); ?></li>
-</ul>
-<hr />
-<h2><?php echo __('Never received the email?', true); ?></h2>
-<ul>
-    <li><?php echo __('Has it been less than 10 minutes? Please wait -- it sometimes just takes a bit', true); ?></li>
-    <li><?php echo __('Check your spam folder just in case', true); ?></li>
-    <li><?php echo sprintf(__('Try %s your email', true), $html->link(__('resending', true), array('action' => 'resend', $email))); ?></li>
-</ul>
+<h2 class="title"><?php echo __('Por favor, compruebe su correo electrónico', true); ?></h2>
+<div style="margin:10px 0">
+	<ul>
+    	<li><?php echo __('Debes hacer un clic en el enlace que se enviará a tu email para poder completar tu registro.', true); ?></li>
+	    <li><?php echo sprintf(__('Su correo electrónico fue enviado a %s', true), $email); ?></li>
+	</ul>
+</div>
+
+<h2 class="title"><?php echo __('¿No recibiste ningún mail?', true); ?></h2> 
+<div style="margin:10px 0">
+	<ul>
+	    <li><?php echo __('¿Se ha demorado más de 10 minutos? Por favor espere. A veces toma un poco de tiempo.', true); ?></li>
+	    <li><?php echo __('Revisa tu carpeta de Spam por si acaso.', true); ?></li>
+	    <li><?php echo sprintf(__('Trate de %s tu email.', true), $html->link(__('reenviar', true), array('action' => 'resend', $email))); ?></li>
+	</ul>    
+</div>

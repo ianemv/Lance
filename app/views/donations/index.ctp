@@ -45,8 +45,8 @@
 	<h2 class="title"><?php echo __('Estas son nueve de las plazas más votadas', true); ?></h2>
     <?php echo $html->div('view_all', $html->link(__('ver todos', true), array('controller' => 'plazas', 'action' => 'index')), array('style' => 'float:right;margin-top:-30px;')); ?>
 	<div id="votacion_container_left" class="font">
-		<p><?php echo sprintf(__('Cientos de colegios participaron entre junio y agosto de 2010 en el Concurso CHARITY BOX: %s. El certamen invitó a niños entre 6 y 10 años a construir con LEGO la plaza de sus sueños.', true), $html->tag('strong',__('Mi mejor plaza de juegos', true))); ?></p>    
-		<p><?php echo sprintf(__('Hemos llegado a la última etapa y la más importante: por una parte la elección de la mejor plazas y por otra la posibilidad de que esa plaza se construya en la realidad.  Hoy, TODOS pueden participar: ¡entre TODOS podemos hacer realidad este sueño! Queremos construir en Concepción la plaza en 1.000 m2 – una de lasa zonas más afectadas por el terremoto - donde podemos hacer realidad el sueño ganador de los niños.', true), $html->tag('strong',__('Mi mejor plaza de juegos', true))); ?></p>
+		<p><?php echo sprintf(__('Cientos de colegios participaron entre junio y agosto de 2010 en el Concurso LEGO CharityBox: %s. El certamen convocó a niños entre 6 y 10 años a construir con LEGO la plaza de sus sueños.', true), $html->tag('strong',__('Mi mejor plaza de juegos', true))); ?></p>    
+		<p><?php echo sprintf(__('Hemos llegado a la última y más importante etapa. Por una parte la elección de la mejor plaza y por otra la posibilidad de que ésta se construya en la realidad. Hoy, TODOS pueden participar: ¡entre TODOS podemos hacer realidad este sueño! Queremos construir a escala real en Concepción el proyecto ganador en 1.000 m² , una de las zonas más afectadas por el terremoto."', true), $html->tag('strong',__('Mi mejor plaza de juegos', true))); ?></p>
 		<div class="votar_button"><?php echo $html->link(__('Quiero elegir la mejor plaza de juegos', true), array('controller' => 'plazas'))?></div>
 	</div>
 	<div id="votacion_container_right">
