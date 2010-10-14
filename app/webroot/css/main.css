@@ -87,7 +87,7 @@ h2 span { font-size: 8pt;display:block;padding: 5px 0 0 5px;}
 .text, .file, .password, .textarea{display:block;margin:0 0 5px 0;position:relative;}   
 label { margin:5px 0;color:#333;font-size:14px;font-weight:bold;}
 label.label-over{position:absolute;top:3px;left:2px;padding:3px;;margin:0;display:block;} 
-.input input.short{width:150px !important;} 
+.input input.short{width:140px !important;} 
 .input input.med{width: 250px !important;}
 .input input.long{width:500px;}
 div.input label{position:absolute:top:5px;left:5px;color:#333;font-size:14px;}
