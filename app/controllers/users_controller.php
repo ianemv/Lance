@@ -20,7 +20,7 @@ class UsersController extends AppController {
 
     function index() {}
 
-    function login() {          
+    function login() {      
 		$this->set('title_for_layout', __('Entrar', true));           
         if (!empty($this->data)) {    
             if ($this->data['User']['remember_me'] == 1) {    
@@ -125,7 +125,8 @@ class UsersController extends AppController {
         }
     }
 
-    function reset($key = null) {   
+    function reset($key = null) {
+	   $this->set('title_for_layout', __('', true));
         if (!is_null($key)) {  
 			if ($user = $this->User->resetKey($key)) {
 				$this->Session->write('Reset.User', $user); 

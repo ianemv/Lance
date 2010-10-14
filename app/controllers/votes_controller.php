@@ -7,7 +7,6 @@ class VotesController extends AppController {
 
 
 	function plaza() {
-
 	    $this->layout = 'json';
         if (!$this->RequestHandler->isAjax()) {
             $this->redirect('/');
@@ -26,7 +25,7 @@ class VotesController extends AppController {
 					$login = true;
 				}            
                 $canVote = false;
-				if (!empty($this->data['User']) && !empty($this->data['User']['username'])) {    
+				if (!empty($this->data['User']) && !empty($this->data['User']['username'])) {   
 					if ($this->Auth->login($this->data['User'])) {
 			 			$user = $this->Auth->user(); 
 						$canVote = true;

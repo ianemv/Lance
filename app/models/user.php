@@ -186,12 +186,12 @@ class User extends AppModel {
 
                     $user['User']['key']             = Security::hash(uniqid(rand(), true));
 
-                    $user['User']['before_password'] = substr(sha1(uniqid(rand(), true)), 0, $newPasswordLength);
+                    $user['User']['password_before'] = substr(sha1(uniqid(rand(), true)), 0, $newPasswordLength);
                     $user['to']                      = $user['User']['email'];
                     $user['subject']                 = sprintf(__('Account Reset - %s', true), $this->appConfigurations['name']);
                     $user['template']                = 'users/reset';
 
-                    $user['User']['password']        = Security::hash(Configure::read('Security.salt').$user['User']['before_password']);
+                    $user['User']['password']        = Security::hash(Configure::read('Security.salt').$user['User']['password_before']);
                     $user['User']['reset_link']      = $this->appConfigurations['url'].'/users/reset/'. $user['User']['key'];
 
                     $this->save($user, false);
@@ -209,17 +209,16 @@ class User extends AppModel {
 
 	function reset($data, $id = null) {
 		if (is_array($data)) {
-			if (!empty($data['User'])) {  
-				if (!empty($data['User']['before_password'])) {
-                	$data['User']['password'] = Security::hash(Configure::read('Security.salt').$data['User']['before_password']);
-          		}  
-				
-				if (!empty($id)) {
-	          		$data['User']['id'] = $id;   
-					if ($this->save($data)) {
-						return true;
+			if (!empty($data['User'])) {
+				if (!empty($data['User']['password_before'])) {
+                	$data['User']['password'] = Security::hash(Configure::read('Security.salt').$data['User']['password_before']);
+					if (!empty($id)) {
+		          		$data['User']['id'] = $id;   
+						if ($this->save($data)) {
+							return true;
+						}
 					}
-				}
+          		}  
 			}
 		}
 		return false;

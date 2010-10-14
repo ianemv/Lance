@@ -1,11 +1,12 @@
-<h2><?php echo __('Please Enter a new Password', true); ?></h2>
-<fieldset>
-    <legend><?php echo sprintf(__('Your username is "%s"', true), $user['User']['username'])?></legend>
+<h2 class="title"><?php echo __('Por favor, ingresa una nueva contraseña', true); ?></h2>  
+<div class="">
+<p><?php echo sprintf(__('Tu nombre de usuario es "%s"', true), $user['User']['username'])?></p>
+
     <?php
         echo $form->create('User', array('action' => 'reset'));
-        echo $form->input('before_password', array('type' => 'password', 'label' => __('Enter a New Password', true)));
-        echo $form->input('retype_password', array('type' => 'password', 'label' => __('Verify New Password', true)));
-        echo $form->end(__('Reset Password', true));
+        echo $form->input('password_before', array('type' => 'password', 'label' => array('text' => __('Nueva contraseña', true), 'class' => 'label-over')));
+        echo $form->input('password_confirmation', array('type' => 'password', 'label' => array('text' => __('Verifica contraseña', true), 'class' => 'label-over')));
+        echo $form->end('cambiar_contrasena.png');
     ?> 
-</fieldset>
+</div>
 
