@@ -21,12 +21,12 @@ class VotesController extends AppController {
 			if (!$this->Session->check('Auth.User')) { 
 				if ($this->appConfigurations['votes']['limits']['force_login']) { 
 					// Limits set to force login, and user not logged in
-					$message = sprintf(__('You must be logged in to continue.  Please login', true));
+					$message = sprintf(__('Debe estar registrado para continuar. Por favor, regístrate', true));
 					$canVote = false;
 					$login = true;
 				}            
                 $canVote = false;
-				if (!empty($this->data['User'])) {    
+				if (!empty($this->data['User']) && !empty($this->data['User']['username'])) {    
 					if ($this->Auth->login($this->data['User'])) {
 			 			$user = $this->Auth->user(); 
 						$canVote = true;
@@ -34,8 +34,7 @@ class VotesController extends AppController {
 						$message = $this->Auth->loginError;
 		   				$canVote = false;
 					}
-		    
-					
+
 					/* 
 					if (array_key_exists('full_name', $this->data['User'])) {
 						if (!empty($this->data['User']['full_name']) && strpos($this->data['User']['full_name'], ' ')) { 
@@ -73,8 +72,6 @@ class VotesController extends AppController {
 					}  
 					*/         
 				} else {   
-					// User info wasn't found
-					$message = implode(", ", $this->User->invalidFields());   
 					$login = true;
 					$canVote = false;
 				}
@@ -137,8 +134,8 @@ class VotesController extends AppController {
             	$success = false;
        		}
 		} 
-
-        if (!$success) {
+        
+       	if (!$success) {
             $this->set('message', $message);
             $message = $this->render('/elements/error');
             $this->output = "";
@@ -146,8 +143,7 @@ class VotesController extends AppController {
             $this->set('message', $message);
             $message = $this->render('/elements/success');
             $this->output = "";
-        }   
-
+        } 
 
         $vote = array('success' => $success, 'message' => $message, 'login' => $login);
         $this->set('data', $vote);
