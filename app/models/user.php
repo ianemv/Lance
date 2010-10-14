@@ -45,18 +45,6 @@ class User extends AppModel {
         parent::__construct($id, $table, $ds);
 
         $this->validate = array(
-			'first_name' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
-					'message' => __('Tienes que ingresar tu nombre.', true),
-				)
-			),
-			'last_name' => array(                                          
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
-					'message' => __('Tienes que ingresar tu apellido. ', true),
-				 )
-		   	),
            'username' => array(
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
@@ -274,14 +262,14 @@ class User extends AppModel {
 
 
     function activate($key) {
-        $user = $this->find('first', array('conditions' => array('User.key' => $key, 'User.active' => 0)));
-
+        $user = $this->find('first', array('conditions' => array('User.key' => $key, 'User.active' => 0))); 
 
         if (!empty($user)) {
             $user['User']['active'] = 1;
-            $user['User']['key'] = '';
-            $this->save($user);
-            
+            $user['User']['key'] = ''; 
+
+			$this->save($user);
+			
             $user['to']                     = $user['User']['email'];
             $user['subject']                = sprintf(__('Welcome to %s, %s', true), $this->appConfigurations['name'], $user['User']['username']);
             $user['template']               = 'users/welcome';

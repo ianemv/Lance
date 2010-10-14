@@ -72,7 +72,27 @@ class Account extends AppModel {
 			'fields' => '',
 			'order' => ''
 		)
-	);
+	); 
+	
+	
+	function __construct($id = false, $table = null, $ds = null) {
+        parent::__construct($id, $table, $ds);
+
+        $this->validate = array(
+        	'first_name' => array(
+					'notEmpty' => array(
+						'rule' => array('notEmpty'),
+						'message' => __('Tienes que ingresar tu nombre.', true),
+					),
+			 ),
+			'last_name' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __('Tienes que ingresar tu appellido.', true),
+				),   
+            ), 
+        );
+    }
 	
 	
 	function getAccountByIdOrUsername($id = null) {
