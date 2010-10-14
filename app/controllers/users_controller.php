@@ -20,7 +20,8 @@ class UsersController extends AppController {
 
     function index() {}
 
-    function login() {                                 
+    function login() {          
+		$this->set('title_for_layout', __('Entrar', true));           
         if (!empty($this->data)) {    
             if ($this->data['User']['remember_me'] == 1) {    
                 $this->Cookie->write('User.id', $this->Auth->user('id'));
@@ -33,6 +34,7 @@ class UsersController extends AppController {
     }
     
     function logout() { 
+	  	$this->Auth->logout();
 		if ($this->Cookie->read('User.id')) { 
 			$this->Cookie->delete('User.id');
 	    }
@@ -70,10 +72,10 @@ class UsersController extends AppController {
                 if ($user = $this->User->activate($key)) {
                     $this->Auth->login($user);
                     $this->_sendEmail($user);
-                    $this->Session->setFlash(__('Your account is verified!', true));
+                    $this->Session->setFlash(__('Tu cuenta ha sido verificada', true));
                     $this->redirect(array('action' => 'done'));
                 } else {
-                    $this->Session->setFlash(__('We were unable to verify you account! Account may already be active.', true));
+                    $this->Session->setFlash(__('No hemos podido verificar la cuenta! La cuenta ya puede estar activo.', true));
                     $this->redirect(array('action' => 'login'));
                 }
             } else {
@@ -114,10 +116,10 @@ class UsersController extends AppController {
         if (!empty($this->data)) {
             if ($user = $this->User->recover($this->data)) {
                 $this->_sendEmail($user);
-                $this->Session->setFlash(__('Password Change Email has been sent!', true));  
+                $this->Session->setFlash(__('Tu contraseña ha sido enviada a tu correo electrónico', true));  
                 $this->redirect(array('action' => 'recover'));
             } else {
-                $this->Session->setFlash(__('No user found with that email', true)); 
+                $this->Session->setFlash(__('Tu email no está registrado', true)); 
             }
         }
     }
@@ -147,7 +149,7 @@ class UsersController extends AppController {
             if ($user = $this->User->resend($email)) {
                 $this->_sendEmail($user);
             } else {
-                $this->Session->setFlash(__('Unable to send activation email.  It may be that the account is already active or the email doesn\'t exisit.', true)); 
+                $this->Session->setFlash(__('No se puede enviar un correo electrónico de activación. Puede ser que la cuenta ya está activa o el correo electrónico no exisit.', true)); 
             }
         }
         $this->redirect(array('action' => 'login'));
