@@ -1,5 +1,5 @@
 <div>
-	<h2 class="title"><?php echo sprintf(__('Registro con %s', true), $appConfigurations['name']); ?></h2>             
+	<h2 class="title"><?php echo __('Registro', true); ?></h2>             
 	<div style="width:450px;float:left;">
 		<fieldset>
 		    <?php  

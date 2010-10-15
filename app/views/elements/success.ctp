@@ -1,1 +1,1 @@
-<p class="msg-success">    <strong><?php echo $message; ?></strong>    <?php echo $html->link(__('Remove', true), "#", array('class' => 'remove-btn', 'title' => __('Remove', true))); ?></p>
+<p class="msg-success">    <strong><?php echo $message; ?></strong>    <?php echo $html->link(__('Cerrar', true), "#", array('class' => 'remove-btn', 'title' => __('Cerrar', true))); ?></p>
