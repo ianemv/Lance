@@ -1,3 +1,7 @@
+<?php
+debug($this->data);
+
+?>
 <div class="box users form">
 	<div class="box-top rounded_by_jQuery_corners" style="-moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;">
 	    <h4 class="white"><?php printf(__('Admin Edit %s', true), __('User', true)); ?></h4>
@@ -11,8 +15,8 @@
 		<ol>
 	<?php
 		echo $this->Form->input('id');
-		echo $form->input('first_name', array('label' => array('text' => __('First Name', true), 'class' => 'field-title'), 'class' => 'txtbox-long'));
-		echo $form->input('last_name', array('label' => array('text' => __('Last Name', true), 'class' => 'field-title'), 'class' => 'txtbox-long'));
+		#echo $form->input('first_name', array('label' => array('text' => __('First Name', true), 'class' => 'field-title'), 'class' => 'txtbox-long'));
+		#echo $form->input('last_name', array('label' => array('text' => __('Last Name', true), 'class' => 'field-title'), 'class' => 'txtbox-long'));
 		echo $form->input('username', array('label' => array('text' => __('User Name', true), 'class' => 'field-title'), 'class' => 'txtbox-long'));
 		echo $form->input('email', array('label' => array('text' => __('Email', true), 'class' => 'field-title'), 'class' => 'txtbox-long'));
 		echo $form->input('password_before', array('type' => 'password', 'label' => array('text' => __('Password', true), 'class' => 'field-title'), 'class' => 'txtbox-long'));

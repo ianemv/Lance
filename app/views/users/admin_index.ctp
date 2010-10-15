@@ -23,8 +23,8 @@ echo $sidebar->addMenu('new groups', array('title' => sprintf(__('New %s', true)
 				<tr>
 					<th>&nbsp;</th>
             		<th><?php echo $this->Paginator->sort('username');?></th>
-            		<th><?php echo $this->Paginator->sort('first_name');?></th>
-            		<th><?php echo $this->Paginator->sort('last_name');?></th>
+            		<th><?php #echo $this->Paginator->sort('first_name');?></th>
+            		<th><?php #echo $this->Paginator->sort('last_name');?></th>
             		<th><?php echo $this->Paginator->sort('active');?></th>
             		<th><?php echo $this->Paginator->sort('group_id');?></th>
 		            <th class="actions"><?php __('Actions', true);?></th>
@@ -45,8 +45,8 @@ echo $sidebar->addMenu('new groups', array('title' => sprintf(__('New %s', true)
 	<tr<?php echo $class;?>>
 		<td class="col-chk"><input type="checkbox" name="mass[]" value="<?php echo $user['User']['id']; ?>" /></td>
 		<td><?php echo $user['User']['username']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['first_name']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['last_name']; ?>&nbsp;</td>
+		<td><?php #echo $user['User']['first_name']; ?>&nbsp;</td>
+		<td><?php #echo $user['User']['last_name']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['active']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
