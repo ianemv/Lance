@@ -76,7 +76,7 @@ class UsersController extends AppController {
 					$this->redirect('/plazas');
                     #$this->redirect(array('action' => 'done'));
                 } else {
-                    $this->Session->setFlash(__('Tu cuenta ya está activada. Por favor ingresa tus datos directamente al momento de votar por tu plaza favorita', true), 'error');
+                    $this->Session->setFlash(__('Tu cuenta ya está activada. Por favor ingresa tus datos directamente al momento de votar por tu plaza favorita.', true), 'error');
                     $this->redirect('/plazas');
                 }
             } else {
