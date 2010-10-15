@@ -45,15 +45,15 @@
 
             foreach ($groups AS $groupId => $groupTitle) {
                 if ($level != 0) {
-                    #if ($groupId != 1) {
+                    if ($groupId != 1) {
                         if ($permissions[$id][$groupId] == 1) {
                             $row[] = $html->image('/acl/img/icons/tick_circle.png', array('class' => 'permission-toggle grant', 'rel' => $id.'-'.$groupsAros[$groupId]));
                         } else {
                             $row[] = $html->image('/acl/img/icons/cross_circle.png', array('class' => 'permission-toggle deny', 'rel' => $id.'-'.$groupsAros[$groupId]));
                         }
-                    #} else {
-                    #    $row[] = $html->image('/acl/img/icons/tick_circle_disabled.png', array('class' => 'permission-disabled'));
-                    #}
+                    } else {
+                        $row[] = $html->image('/acl/img/icons/tick_circle_disabled.png', array('class' => 'permission-disabled'));
+                    }
                 } else {
                     $row[] = '';
                 }

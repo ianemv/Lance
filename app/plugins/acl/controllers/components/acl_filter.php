@@ -43,9 +43,9 @@ class AclFilterComponent extends Object {
             // Role: Admin
             $this->controller->Auth->allowedActions = array('*');
         } else {
-            if ($this->controller->Auth->user()) {
-                $groupId = $this->controller->Auth->user('group_id');
-            } else {
+            if ($this->controller->Auth->user()) {  
+                $groupId = $this->controller->Auth->user('group_id'); 
+            } else {   
                 $groupId = 3; // Role: Public
             }
 
