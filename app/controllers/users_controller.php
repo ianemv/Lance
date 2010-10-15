@@ -14,7 +14,6 @@ class UsersController extends AppController {
 
         if (!empty($this->Auth)) {
             $this->Auth->allow('activate', 'register', 'reset', 'recover', 'resend', 'login', 'logout');
-            $this->Auth->allow('*');
         }
     }
 
@@ -159,7 +158,7 @@ class UsersController extends AppController {
     }
 
 
-    function admin_login() {
+    function admin_login() {  
 		$this->set('title_for_layout', __('Administration Login', true));
 		$this->layout = "admin_login";
 		if (!empty($this->data)) {

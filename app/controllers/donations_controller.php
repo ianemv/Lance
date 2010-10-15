@@ -1,7 +1,14 @@
 <?php
 class DonationsController extends AppController {
 
-	var $name = 'Donations';
+	var $name = 'Donations';   
+	
+	function beforeFilter() {
+		parent::beforeFilter();
+		if (!empty($this->Auth)) {
+			$this->Auth->allow('index');
+		}
+	} 
 
 	function index() {   
 		$this->set('title_for_layout', __('Necesitamos tu donación, para hacer real su sueño', true));
