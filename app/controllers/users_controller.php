@@ -155,6 +155,7 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__('No se puede enviar un correo electrónico de activación. Puede ser que la cuenta ya está activa o el correo electrónico no exisit.', true), 'error'); 
             }
         }
+		$this->redirect('/');
     }
 
 
