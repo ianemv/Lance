@@ -56,7 +56,7 @@ class User extends AppModel {
                 ),  
 				'isUnique' => array(
                 	'rule' => array('isUnique' , 'username'),
-                	'message' => __('El nombre del usuairo ya existe. Por favor escoge otro.', true)
+                	'message' => __('El nombre del usuario ya existe. Por favor escoge otro.', true)
               	),
             ), 
             'password_before' => array(
