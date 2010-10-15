@@ -155,7 +155,7 @@ class User extends AppModel {
                     $user['User']['password']       = $data['User']['password_before'];
                     $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $data['User']['key'];
                     $user['to']                     = $data['User']['email'];
-					$user['subject']            	= sprintf(__('Registration Verification - %s', true), $this->appConfigurations['name']);
+					$user['subject']            	= sprintf(__('Verificación de tu registro - %s', true), $this->appConfigurations['name']);
                    	$user['template']               = 'users/activate';    
 
                     return $user;
@@ -188,7 +188,7 @@ class User extends AppModel {
 
                     $user['User']['password_before'] = substr(sha1(uniqid(rand(), true)), 0, $newPasswordLength);
                     $user['to']                      = $user['User']['email'];
-                    $user['subject']                 = sprintf(__('Account Reset - %s', true), $this->appConfigurations['name']);
+                    $user['subject']                 = sprintf(__('Tu contraseña - %s', true), $this->appConfigurations['name']);
                     $user['template']                = 'users/reset';
 
                     $user['User']['password']        = Security::hash(Configure::read('Security.salt').$user['User']['password_before']);
@@ -250,7 +250,7 @@ class User extends AppModel {
                 
                 $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $data['User']['key'];
                 $user['to']                     = $user['User']['email'];
-                $user['subject']            = sprintf(__('Resent Verification - %s', true), $this->appConfigurations['name']);
+                $user['subject']            = sprintf(__('Verificación de tu registro - %s', true), $this->appConfigurations['name']);
                 $user['template']               = 'users/activate';
 
                 return $user;
@@ -270,7 +270,7 @@ class User extends AppModel {
 			$this->save($user);
 			
             $user['to']                     = $user['User']['email'];
-            $user['subject']                = sprintf(__('Welcome to %s, %s', true), $this->appConfigurations['name'], $user['User']['username']);
+            $user['subject']                = sprintf(__('Bienvenido a %s, %s', true), $this->appConfigurations['name'], $user['User']['username']);
             $user['template']               = 'users/welcome';
 
             return $user;
