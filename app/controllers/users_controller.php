@@ -76,11 +76,11 @@ class UsersController extends AppController {
 					$this->redirect('/plazas');
                     #$this->redirect(array('action' => 'done'));
                 } else {
-                    $this->Session->setFlash(__('No hemos podido verificar la cuenta! La cuenta ya puede estar activo.', true), 'error');
-                    $this->redirect(array('action' => 'login'));
+                    $this->Session->setFlash(__('Tu cuenta ya está activada. Por favor ingresa tus datos directamente al momento de votar por tu plaza favorita', true), 'error');
+                    $this->redirect('/plazas');
                 }
             } else {
-                $this->redirect(array('action' => 'login'));
+                $this->redirect('/plazas');
             }
         } else {
             $this->redirect('/');
@@ -149,12 +149,12 @@ class UsersController extends AppController {
     function resend($email = null) {
         if (!is_null($email)) {
             if ($user = $this->User->resend($email)) {
-                $this->_sendEmail($user);
+                $this->_sendEmail($user);  
+				$this->Session->setFlash(__('Acabamos de volver a enviar el email de confirmación, por favor revisa tu inbox de tu email.', true), 'success');
             } else {
                 $this->Session->setFlash(__('No se puede enviar un correo electrónico de activación. Puede ser que la cuenta ya está activa o el correo electrónico no exisit.', true), 'error'); 
             }
         }
-        $this->redirect(array('action' => 'login'));
     }
 
 

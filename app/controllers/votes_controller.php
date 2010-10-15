@@ -20,7 +20,7 @@ class VotesController extends AppController {
 			if (!$this->Session->check('Auth.User')) { 
 				if ($this->appConfigurations['votes']['limits']['force_login']) { 
 					// Limits set to force login, and user not logged in
-					$message = sprintf(__('Debe estar registrado para continuar. Por favor, regístrate', true));
+					$message = sprintf(__('Debes estar registrado para continuar. Por favor, regístrate', true));
 					$canVote = false;
 					$login = true;
 				}            
@@ -96,7 +96,7 @@ class VotesController extends AppController {
                    	$limits_exceeded = $this->Vote->limitsCanVote($plaza['Plaza']['id'], $user_id);
                    	if ($limits_exceeded == false) { 
 						$this->Auth->logout();
-                       	$message = __('No puedes votar porque has pasado los límites de votación. Intenta mañana', true);
+                       	$message = __('No puedes votar porque has pasado los límites de votación.', true);
                        	$canVote = false;  
 						$login = false;
                    	}
