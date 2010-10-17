@@ -168,7 +168,7 @@ class UsersController extends AppController {
         }
 
         if ($this->Session->check('Auth.User')) {
-            $this->redirect($this->Auth->redirect());
+            $this->redirect('/');
         }
     }
 

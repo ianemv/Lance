@@ -72,7 +72,7 @@
 				<div class="clear"></div> 
 				<hr />
 				<p style="padding: 5px 10px;"> 
-				<?php echo $html->link(__('Twittear', true), 'http://twitter.com/share', array('class' => 'twitter-share-button', 'data-count' => 'horizontal', 'data-lang' => 'es')); ?>&nbsp;<iframe src="http://www.facebook.com/plugins/like.php?layout=button_count&amp;show_faces=true&amp;width=150&amp;action=recommend&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe></p>
+				<?php echo $html->link(__('Twittear', true), 'http://twitter.com/share', array('class' => 'twitter-share-button', 'data-count' => 'horizontal', 'data-lang' => 'es')); ?>&nbsp;<iframe src="http://www.facebook.com/plugins/like.php?layout=button_count&amp;show_faces=false&amp;width=150&amp;action=recommend&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe></p>
 		</div> 
 	</div> 
 	<div id="right-col">
