@@ -13,6 +13,7 @@ $(document).ready(function() {
 	
 	$(".settings-menu-toggle").click(function() {       
 		$(".settings-menu").toggleClass('open');
+		return false;
 	})
    
 	
@@ -44,8 +45,8 @@ jQuery.fn.labelOver = function(overClass) {
 
 function showLogin(a,b) {  
     var marco = $("#plaza_"+a.id);   
-    var plazaImg = $(marco).find('.plaza_img');
-    var thumbRel = $(marco).find('.plaza_img img').attr('rel'); 
+    var plazaImg = $(marco).find('.plaza_image');
+    var thumbRel = $(marco).find('.plaza_image img').attr('rel'); 
 	if (b) {  
 		$(marco).find("label").each(function() { 
 			$(this).css({textIndent:0});
@@ -54,32 +55,32 @@ function showLogin(a,b) {
 	   
 		$(plazaImg).fadeIn('slow');
 		$(marco).find(".vote_box").fadeOut(); 
-		$(marco).find('.vote_bottom').show();
-	} else {     
-    	$(plazaImg).fadeOut();
-        $(marco).find(".vote_box").blur(showLogin(a, true)).effect('slide', {direction:'up'}, 200).effect('transfer', {to: $(".plaza_thumb img[rel='"+thumbRel+"']")}, 500);
+		$(marco).find('.plaza_footer').show();
+	} else {   
+    	$(plazaImg).fadeOut();  
+        $(marco).find(".vote_box").effect('slide', {direction:'up'}, 200).effect('transfer', {to: $(".plaza_thumb img[rel='"+thumbRel+"']")}, 500);
         $(marco).find('.vote_dialog').effect('bounce', {direction:'down'},200);
-        $(marco).find('.vote_bottom').hide();
-        $(".plaza_thum img[rel='"+thumbRel+"']").animate({opacity: 1.0}, 1000);   
+        $(marco).find('.plaza_footer').hide();
+        $(".plaza_thumb img[rel='"+thumbRel+"']").animate({opacity: 1.0}, 1000);   
 	}
 	return false;
-}
+}   
 
-function votePlaza(a) {  
-    $.post("/votes/plaza", $("#form_"+a.id).serialize(), function(result) { 
-        if (!result.success) {
-            if (result.login) {
-                showLogin(a);
-            }
-            messageHint(result.message);
-        } else {  
-            if (result.message) {
-                messageHint(result.message);
-            } 
-		  	showLogin(a,true);
-        }
-    }, "json");
-    return false;
+function votePlaza(a) {
+	$.post("/votes/plaza", $("#form_"+a.id).serialize(), function(result) { 
+		if (!result.success) {
+ 			if (result.login) {
+				showLogin(a);
+			}
+			messageHint(result.message);
+		} else {
+			if (result.message) {
+				messageHint(result.message);
+			}
+			showLogin(a, true);
+		}
+	}, 'json');
+	return false;
 }
 
 function messageHint(m) {

@@ -1,0 +1,1 @@
+<a href="http://www.premioswaw.com/waw/1648/" target="_blank"><img src="http://www.premioswaw.com/assets/images/banners/300x250.jpg" /></a>

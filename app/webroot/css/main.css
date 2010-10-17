@@ -1,7 +1,10 @@
 body{font-family:Helvetica;font-color:#333;}
 p{font-size:12pt;color:#333;line-height:1.4em;}
 a{color:#006699;font-weight:bold;}
-address{font-style:normal;font-size:12pt;color:#333;}
+address{font-style:normal;font-size:12pt;color:#333;}  
+h3{color:#fff;font-size:15px;}
+
+
 .wrap{width:952px;margin:auto;position:relative;}
 .header1{background-color:#999;height:49px;background:#DDD url("/img/fondo_botonera.png") repeat-x;}
 #header1_menu{padding-top:8px;margin-left:120px;clear:both;}
@@ -20,7 +23,7 @@ address{font-style:normal;font-size:12pt;color:#333;}
 div.column3{width:280px;height:318px;background-color:#AAA;}
 h2.title{color:#333;font-size:15pt;padding:5px 0;margin-bottom:10px;border-bottom:1px dotted #aaa;}      
 h2 span { font-size: 8pt;display:block;padding: 5px 0 0 5px;}
-#main_content h3{color:#fff;font-size:15px;padding:5px 15px 2px 15px;}
+/* #main_content h3{color:#fff;font-size:15px;padding:5px 15px 2px 15px;}  */
 #content{padding:25px 0;}
 #nos_ayudan{height:250px;}
 #nos_ayudan .title{line-height:60px;font-size:22px;}
@@ -38,7 +41,8 @@ h2 span { font-size: 8pt;display:block;padding: 5px 0 0 5px;}
 #donar{position:absolute;top:128px;right:63px;}
 #metodo_pago{position:absolute;right:51px;top:245px;}
 .header2_2 ul li{float:left;}
-#votacion_container{height:450px;}
+#votacion_container{height:450px;}  
+
 #votacion_container_left{width:300px;float:left;padding:20px;}
 #votacion_container_right{width:612px;float:right;margin-top:20px;}
 #votacion_container_full{margin:20px 0 0 60px;}
@@ -57,37 +61,20 @@ h2 span { font-size: 8pt;display:block;padding: 5px 0 0 5px;}
 #votacion_container_right .plaza_img_inner img{width:175px;height:145px;padding:0;margin:0;}
 #votacion_container_right .plaza_thumb img{width:45px;height:45px;padding:0;margin:0;}
 #votacion_container_right .plaza_thumb{position:absolute;bottom:5px;right:0px;margin-right:10px;}
-#votacion_container_full .plaza_img{background:#fff;padding:3px 3px 0 3px;position:absolute;top:45px;left:11px;}
-#votacion_container_full .plaza_img_inner img{width:220px;height:165px;padding:0;margin:0;}
-#votacion_container_full .plaza_thumb img{width:45px;height:45px;padding:0;margin:0;}
-#votacion_container_full .plaza_thumb{position:absolute;top:25px;right:5px;}
-.plaza_group{display:none;}
-.vote_box{background:#83cdf4;position:relative;display:block;}   
-.vote_box a.close { margin: 0 5px;width:16px;height:16px;float:right;display:block;cursor:pointer;background:url(/img/close-btn.png) no-repeat;}  
-.vote_box a.close span { display: none; }
-#votacion_container_right .vote_box{width:179px;height:140px;top:5px;left:11px;padding:5px 2px;}
-#votacion_container_full .vote_box{width:225px;height:202px;left:11px;top:0px;padding:5px 2px;}
-.vote_dialog{background:url(/img/vote_bubble.png) no-repeat;height:57px;padding:5px 5px 5px 0;font-size:12px;width:170px;}
-.vote_dialog_long{background:url(/img/vote.png) no-repeat;height:57px;padding:5px 5px 5px 0;font-size:12px;width:170px;}
-.vote_dialog p{color:#333;}
-.vote_dialog a{color:#333;font-weight:bold;font-size:125%;display:block;}
-.vote_form{position:relative;}
-#votacion_container_full .vote_form div.text input, #votacion_container_full .vote_form div.password input{width:215px;}
-#votacion_container_right .vote_form div.input input{width:170px;}
-.vote_form div.input input{font:14px;color:#333;}
-.vote_bottom{padding-left:20px;margin-top:95px;position:absolute;left:3px;top:127px;display:block;background:url(/img/);}
-.vote_bottom ul{display:inline;float:left;}
-.vote_bottom ul li{float:left;display:block;padding:0 20px 0 0;}
-.vote_bottom ul li a{width:26px;height:26px;display:block;background:url(/img/ico_escritorio.png) no-repeat;}
-.vote_bottom ul li a span{display:none;}
+.plaza_img{background:#fff;padding:3px 3px 0 3px;position:absolute;top:45px;left:11px;}
+.plaza_img_inner img{width:220px;height:165px;padding:0;margin:0;}
+
+.plaza_group{display:none;}                         
+
+
 #plazas_list{}
 .vote_info{float:left;background:url(/img/bt-line.png) no-repeat 0 100;width:33px;height:25px;display:none} 
-.hint { font-size:9px;margin: 0 5px;}
+.hint { font-size:10px;margin: 2px 5px;}
 /* Forms */
 .text, .file, .password, .textarea{display:block;margin:0 0 5px 0;position:relative;}   
 label { margin:5px 0;color:#333;font-size:14px;font-weight:bold;}
 label.label-over{position:absolute;top:3px;left:2px;padding:3px;;margin:0;display:block;} 
-.input input.short{width:140px !important;} 
+.input input.short{width:135px !important;} 
 .input input.med{width: 250px !important;}
 .input input.long{width:500px;}
 div.input label{position:absolute:top:5px;left:5px;color:#333;font-size:14px;}
@@ -140,14 +127,15 @@ span.current{color:#ff9900;font-size:25px;margin:0 10px;}
 	position:relative;
 } 
 
+#left-col { width: 620px;float:left; }                                                             
 
-#right-col { width:220px; float: left;}  
+#right-col { width:310px; float: left;margin: 0 10px;}  
 #right-col li { display: block;}
 #right-col li a { display: block; font-size: 13px;}      
 
 
 #searchform {
-	margin: 2px 0;
+	margin: 2px 0;  
 	float:right;
 }                 
 
@@ -174,22 +162,23 @@ span.autocomplete-indicator {
 .autocomplete {
 	z-index: 1000;
 	position: absolute;
+	top:2px;
 	background: #fff;
-	border: 1px solid #333;
+	border: 1px solid #8F8F8F;
 	border-top: 0; 
 	font-size: 11px;
 	color: #333;
 	padding: 0;
-	margin: 1px 0 0 0;
 }                     
 
 .autocomplete ul { margin: 0; padding: 0; list-style: none;}
 .autocomplete ul li.selected { background-color: #83CDF4; color: #fff;}
 .autocomplete ul li { padding: .5em .5em; min-height: 32px; cursor:pointer; text-align: left; color: #2f2f2f; line-height: 1.3em; border-bottom: 1px solid #eee;} 
 .autocomplete ul li img { float: left; margin: 0 5px;}
-.autocomplete ul li h3 { display: block; float: left;} 
+.autocomplete ul li h3 { display: block; float:left;font-size:10px;width: 155px;color:#333;} 
 .autocomplete ul li.selected h3 { color: #fff;} 
-.autocomplete ul li p { font-size: 10px;}      
+.autocomplete ul li p { font-size: 10px;} 
+.autocomplete ul li.selected p { color: #fff;}     
 
 
 
@@ -201,7 +190,7 @@ span.autocomplete-indicator {
 
 	width: 600px;
 	background: #56BBEA;
-	position: relative;
+	position: relative; 
 	z-index: 90;
 	-moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
   	-khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
@@ -273,7 +262,7 @@ span.autocomplete-indicator {
 	font-size:85%;
 }
                  
-.info .marco {
+.info .marco { 
 	float: left;   
 	margin: 0 10px 0 0;
 }   
@@ -421,6 +410,41 @@ background-position: -159px -56px;
 }
 
 
+
+
+
+
+
+.plaza {float:left;display:block;width:240px;} 
+.plaza_header {height:35px;padding:5px 10px;}
+.plaza_header h3 { padding:5px 15px 2px 0;}  
+.plaza_header p { font-size:12px;color:#fff;}
+.plaza_content {display:block;padding:0;padding:0px 9px 0 9px;position:absolute;	} 
+.plaza_footer {padding: 8px 10px 0 10px;display:block;}
+
+
+.plaza_image {background:#fff;padding:5px;display:block;position:relative;}
+.plaza_image_inner {display:block;}  
+.plaza_image img{width:220px;height:165px;padding:0;margin:0;display:block;}  
+
+
+.vote_box{background:#fff;padding:5px;position:relative;}  
+.vote_box_inner {background:#83cdf4;display:block;padding:5px 0 0 0;}
+.vote_box_inner a.close { margin: 0 5px;width:16px;height:16px;float:right;display:block;cursor:pointer;background:url(/img/close-btn.png) no-repeat;}  
+.vote_box_inner a.close span { display: none; } 
+.vote_form {} 
+.vote_form p { font-size:11px;padding:5px 0px ;}
+.vote_form div.text input, .vote_form div.password input { width: 215px;}   
+.plaza_thumb img{width:45px;height:45px;padding:0;margin:0;}
+.plaza_thumb{position:absolute;top:30px;right:5px;}
+  
+
+.vote_dialog{background:url(/img/vote_bubble.png) no-repeat;height:57px;padding:5px 5px 5px 0;font-size:12px;width:170px;}
+.vote_dialog p{color:#333;font-size:14px;padding-left:10px;}      
+
+/*#votacion_container_right .vote_box{width:179px;height:140px;top:5px;left:11px;padding:5px 2px;}
+#votacion_container_full .vote_box{width:225px;height:202px;left:11px;top:0px;padding:5px 2px;}    
+*/
 
 
 
