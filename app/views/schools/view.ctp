@@ -1,6 +1,6 @@
 <?php
 	$html->meta(null, null, array('property' => 'og:title', 'content' => $appConfigurations['name']."::".$school['School']['name']."-". $school['School']['name'], 'inline' => false));
-	$html->meta(null, null, array('property' => 'og:description', 'content' => Sanitize::html($school['Plaza'][0]['description']) , 'inline' => false));
+	$html->meta(null, null, array('property' => 'og:description', 'content' => $text->truncate($school['Plaza'][0]['description'], 300) , 'inline' => false));
 	$html->meta(null, null, array('property' => 'og:image', 'content' => $html->url($appConfigurations['url'] . IMAGES_URL . 'plazas'. DS . 'vote'. DS .$school['Plaza'][0]['PlazaImage'][0]['image']), 'inline' => false)); 
 ?>
 <?php echo $javascript->link('http://static.ak.fbcdn.net/connect.php/js/FB.Share', array('inline' => false)); ?>
