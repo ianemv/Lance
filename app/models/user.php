@@ -82,7 +82,7 @@ class User extends AppModel {
             'email' => array(
                 'email' => array(
                     'rule' => 'email',
-                    'message' => __('El mail no es valido.', true)
+                    'message' => __('Tienes que ingresar un Email válido.', true)
                 ),
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),

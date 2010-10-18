@@ -5,11 +5,12 @@ class PlazasController extends AppController {
 	
 	var $paginate = array(
 	    'limit' => 12,   
-		'order' => 'School.name ASC'
+		'order' => ''
     );      
 	
     function index() {
 		$this->set('title_for_layout', 'Votar por una plaza');
+		$this->paginate['order'] = 'RAND()';
 		$this->set('plazas', $this->paginate());
     }
 

@@ -1,11 +1,9 @@
 <?php echo $javascript->codeBlock(); ?>
     $(document).ready(function() { 
-		$(".plaza_img").corner(); 
-        $(".vote_box").corner();
   		$(".modal").click(function() {
 			$(this).colorbox({open:true, minWidth:"600px", opacity:0.50, transition:"fade"});
 		});
- 		$(".plaza_img_inner a").click(function() { 
+ 		$(".plaza_image_inner a").click(function() { 
 	     	var b = "plaza_"+$(this).attr('class');   
 			$('a[rel="'+b+'"]').colorbox({
 				current:"<?php echo __('imagen', true); ?> {current} <?php echo __('de', true); ?> {total}", 
@@ -20,7 +18,7 @@
 <?php echo $javascript->blockEnd(); ?>
 <h2 class="title"><?php echo __('Vota por tu plaza favorita', true); ?></h2>  
 <p>A continuación puedes votar a través de estas fotos por la plaza que más te guste de las que construyeron los niños.
-Solo haz “click” en tu(s) plaza(s) favorita(s) e ingresa tus datos ¡Tienes hasta el 02 de Noviembre para votar! 
+Solo haz “click” en tu(s) plaza(s) favorita(s) e ingresa tus datos ¡Tienes hasta el 09 de Noviembre para votar! 
 </p><br />
 
 <p>IMPORTANTE: Cada persona tiene un máximo de 10 votos. Si quieres ver la descripción de la plaza, haz click en el ícono de texto, ubicado bajo la foto. Para ver las fotos más grandes, haz click en ellas.</p> <br />

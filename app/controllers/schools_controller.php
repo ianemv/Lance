@@ -1,4 +1,5 @@
-<?php
+<?php   
+uses('Sanitize');
 class SchoolsController extends AppController {
 
 	var $name = 'Schools';  

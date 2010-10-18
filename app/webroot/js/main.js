@@ -54,10 +54,10 @@ function showLogin(a,b) {
 		})   
 	   
 		$(plazaImg).fadeIn('slow');
-		$(marco).find(".vote_box").fadeOut(); 
+		$(marco).find(".vote_box").hide(); 
 		$(marco).find('.plaza_footer').show();
 	} else {   
-    	$(plazaImg).fadeOut();  
+    	$(plazaImg).hide();  
         $(marco).find(".vote_box").effect('slide', {direction:'up'}, 200).effect('transfer', {to: $(".plaza_thumb img[rel='"+thumbRel+"']")}, 500);
         $(marco).find('.vote_dialog').effect('bounce', {direction:'down'},200);
         $(marco).find('.plaza_footer').hide();

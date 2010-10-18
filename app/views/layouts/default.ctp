@@ -64,14 +64,15 @@
  		   
 			<div class="social_connect">
 		 		<?php echo sprintf(__('Que todos se enteren de esta gran causa: %s', true),  $html->link(__('Twittear', true), 'http://twitter.com/share', array('class' => 'twitter-share-button', 'data-count' => 'horizontal', 'data-lang' => 'es'))); ?><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.regalaunaplaza.cl/plazas&amp;layout=button_count&amp;show_faces=true&amp;width=150&amp;action=recommend&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
-			     
-				<?php echo $this->element('top_search'); ?>
-			</div>  
+			    <?php echo $this->element('social_connect');?>
+			</div>                                            
+			
         </div> 
     </div>
-    <div id="main_content" class="wrap">
+    <div id="main_content" class="wrap">  
+	<?php echo $this->element('top_search'); ?> 
 	 <?php echo $this->Session->flash('email'); ?> 
-		<div id="content">   
+		<div id="content">  
 			<?php
 	                if($session->check('Message.flash')){     
 						$session->flash();

@@ -1,7 +1,7 @@
 <?php echo $javascript->link('http://static.ak.fbcdn.net/connect.php/js/FB.Share', array('inline' => false)); ?>
 <?php echo $javascript->codeBlock(); ?>
  $(document).ready(function() { 
-	$(".plaza_img_inner a").click(function() { 
+	$(".plaza_image_inner a").click(function() { 
     	var b = "plaza_"+$(this).attr('class');   
 		$('a[rel="'+b+'"]').colorbox({
 			current:"<?php echo __('imagen', true); ?> {current} <?php echo __('de', true); ?> {total}", 
@@ -67,17 +67,22 @@
 						</div> 
 					</div>
 			   	</div>
-			    <p style="padding: 10px 10px;"><?php echo $school['Plaza'][0]['description']; ?></p>
+			    <p style="padding: 10px 10px;"><?php echo Sanitize::html($school['Plaza'][0]['description']); ?></p>
 				<div class="clear"></div> 
 				<hr />
-				<p style="padding: 5px 10px;"> 
-					<?php echo $html->link(__('Twittear', true), "http://twitter.com/share?text=".$school['School']['name']." - ".$school['School']['location']."&url=".$html->url(null, true)."&amp;via=".$appConfigurations['name'], array('class' => 'twitter-share-button', 'data-lang' => 'es', 'style' => 'border:1px solid #666;')); ?>
-					<?php echo $html->link(__('Facebook', true), 'http://www.facebook.com/sharer.php?u='.$html->url(null, true).'&t='.$school['School']['name']." - ".$school['School']['location'], array('name' => 'fb_share', 'class' => 'facebook-share-button')); ?>
-					<?php echo $html->link($html->image('share-email.png', array('alt' => '')), 'mailto:?subject=&amp;body=', array('escape' => false)); ?>
+				<p>  
+					<ul class="actions">
+						<li class="sharing-option"><?php echo $html->link(__('Twittear', true), "http://twitter.com/share?text=".$appConfigurations['name']."::".$school['School']['name']." - ".$school['School']['location']."&url=".$html->url(null, true)."&amp;via=".$appConfigurations['name'], array('class' => 'sharing-twitter twitter-share-button', 'data-count' => 'none', 'data-lang' => 'es')); ?></li>
+						<li class="sharing-option"><?php echo $html->link(__('Facebook', true), 'http://www.facebook.com/sharer.php?u='.$html->url(null, true).'&t='.$school['School']['name']." - ".$school['School']['location'], array('name' => 'fb_share', 'type' => 'button_count', 'class' => 'sharing-facebook facebook-share-button')); ?></li>
+					 	<li><?php echo $html->link($html->image('share-email.png', array('alt' => '')), 'mailto:?subject=&amp;body=', array('class' => 'sharing-email', 'escape' => false)); ?></li>
+					</ul> 
+					<div class="clear"></div>
+
 				</p>
 		</div> 
 	</div> 
-	<div id="right-col">
+	<div id="right-col" style="postion:relative;">
+		 
 		<?php echo $this->element('waw_300_250');?> 
 		<?php echo $this->element('facebook_box'); ?>      
 	</div>

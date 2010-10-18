@@ -129,14 +129,13 @@ span.current{color:#ff9900;font-size:25px;margin:0 10px;}
 
 #left-col { width: 620px;float:left; }                                                             
 
-#right-col { width:310px; float: left;margin: 0 10px;}  
+#right-col { width:300px; float: left;padding: 0 5px;margin: 0 10px;position:relative;}  
 #right-col li { display: block;}
 #right-col li a { display: block; font-size: 13px;}      
 
 
 #searchform {
-	margin: 2px 0;  
-	float:right;
+	margin: 10px 17px 0 0; 
 }                 
 
 #searchform .input { 
@@ -144,7 +143,7 @@ span.current{color:#ff9900;font-size:25px;margin:0 10px;}
 }   
 
 #searchform .input input {  
-	width: 225px;  
+	width: 293px;  
 	color: #333;
 }    
 
@@ -174,10 +173,11 @@ span.autocomplete-indicator {
 .autocomplete ul { margin: 0; padding: 0; list-style: none;}
 .autocomplete ul li.selected { background-color: #83CDF4; color: #fff;}
 .autocomplete ul li { padding: .5em .5em; min-height: 32px; cursor:pointer; text-align: left; color: #2f2f2f; line-height: 1.3em; border-bottom: 1px solid #eee;} 
-.autocomplete ul li img { float: left; margin: 0 5px;}
-.autocomplete ul li h3 { display: block; float:left;font-size:10px;width: 155px;color:#333;} 
+.autocomplete ul li img { float: left; margin: 0 5px;}    
+.autocomplete ul li .search-result-content{ float:left;display:block;width:200px;}
+.autocomplete ul li h3 { display: block; font-size:10px;color:#333;} 
 .autocomplete ul li.selected h3 { color: #fff;} 
-.autocomplete ul li p { font-size: 10px;} 
+.autocomplete ul li p { font-size: 10px;display:block;} 
 .autocomplete ul li.selected p { color: #fff;}     
 
 
@@ -413,8 +413,6 @@ background-position: -159px -56px;
 
 
 
-
-
 .plaza {float:left;display:block;width:240px;} 
 .plaza_header {height:35px;padding:5px 10px;}
 .plaza_header h3 { padding:5px 15px 2px 0;}  
@@ -432,24 +430,18 @@ background-position: -159px -56px;
 .vote_box_inner {background:#83cdf4;display:block;padding:5px 0 0 0;}
 .vote_box_inner a.close { margin: 0 5px;width:16px;height:16px;float:right;display:block;cursor:pointer;background:url(/img/close-btn.png) no-repeat;}  
 .vote_box_inner a.close span { display: none; } 
-.vote_form {} 
 .vote_form p { font-size:11px;padding:5px 0px ;}
 .vote_form div.text input, .vote_form div.password input { width: 215px;}   
 .plaza_thumb img{width:45px;height:45px;padding:0;margin:0;}
 .plaza_thumb{position:absolute;top:30px;right:5px;}
   
-
 .vote_dialog{background:url(/img/vote_bubble.png) no-repeat;height:57px;padding:5px 5px 5px 0;font-size:12px;width:170px;}
 .vote_dialog p{color:#333;font-size:14px;padding-left:10px;}      
 
-/*#votacion_container_right .vote_box{width:179px;height:140px;top:5px;left:11px;padding:5px 2px;}
-#votacion_container_full .vote_box{width:225px;height:202px;left:11px;top:0px;padding:5px 2px;}  */ 
-
-
-.sharing-email,.sharing-facebook,.sharing-twitter{display:block;text-indent:-999999px;}
-.sharing-email{background:url('/img/share-email.png') no-repeat; height:12px;margin-top:1px;width:15px;border: 1px solid #666;}
- 
-*/
+.actions {margin-left:10px;}                                                                                                    
+.actions a {float: left;display:block;}
+.actions li {float: left;margin-right:10px;}
+.sharing-email,.sharing-facebook,.sharing-twitter{display:block;}
 
 
 
