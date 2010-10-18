@@ -1,5 +1,5 @@
 <?php
-	$html->meta(null, null, array('property' => 'og:title', 'content' => $appConfigurations['name']."::".$school['School']['name']."-". $school['School']['name'], 'inline' => false));
+	$html->meta(null, null, array('property' => 'og:title', 'content' => $appConfigurations['name']."::".$school['School']['name']."-". $school['School']['location'], 'inline' => false));
 	$html->meta(null, null, array('property' => 'og:description', 'content' => $text->truncate($school['Plaza'][0]['description'], 300) , 'inline' => false));
 	$html->meta(null, null, array('property' => 'og:image', 'content' => $html->url($appConfigurations['url'] . IMAGES_URL . 'plazas'. DS . 'vote'. DS .$school['Plaza'][0]['PlazaImage'][0]['image']), 'inline' => false)); 
 ?>
