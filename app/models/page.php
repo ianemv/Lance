@@ -10,23 +10,23 @@ class Page extends AppModel {
 			'first_name' => array(
 				'first_name' => array(
 					'rule' => 'notEmpty',
-					'message' => __('Tienes que entrar tu nombre.', true)
+					'message' => __('Tienes que ingresar tu nombre.', true)
 				)
 			),
 			'last_name' => array(
 				'title' => array(
 					'rule' => 'notEmpty',
-					'message' => __('Tienes que entrar un apellido', true)
+					'message' => __('Tienes que ingresar tu apellido.', true)
 				)
 			),
 			'email' => array(
 				'notEmpty' => array(
 					'rule' => 'notEmpty',
-					'message' => __('Tienes que entrar un mail.', true)
+					'message' => __('Tienes que ingresar un mail.', true)
 				),
 				'email' => array(
 					'rule' => 'email',
-					'message' => __('El mail que ingresaste no es valido.', true)
+					'message' => __('El mail que ingresaste no es válido.', true)
 				),
 			),
 			'message' => array(

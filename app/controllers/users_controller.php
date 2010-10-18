@@ -157,6 +157,20 @@ class UsersController extends AppController {
 		$this->redirect('/');
     }
 
+	function changepassword() {
+		$this->layout = 'account';
+		$this->set('title_for_layout', __('Change Password', true));
+		if (!empty($this->data)) {
+			if ($user = $this->User->reset($this->data)) {
+				$this->Session->setFlash(__('Password has been changed.', true));
+				$this->redirect(array('action' => 'index'));
+			} else {                                        
+				$this->Session->setFlash(__('Unable to change password. Please try again.', true));
+				$this->redirect(array('action' => 'changepassword'));
+			}                                                                    
+		}
+	}
+
 
     function admin_login() {  
 		$this->set('title_for_layout', __('Administration Login', true));

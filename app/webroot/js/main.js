@@ -91,7 +91,7 @@ function messageHint(m) {
         }, 6000);
     });
     $('.remove-btn').click(function() {
-        $("#message_hint").slideUp(500);
+        $("#message_hint").slideUp(1000);
         return false;
     });
 }
