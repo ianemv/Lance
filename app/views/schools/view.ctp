@@ -1,3 +1,4 @@
+<?php echo $javascript->link('http://static.ak.fbcdn.net/connect.php/js/FB.Share', array('inline' => false)); ?>
 <?php echo $javascript->codeBlock(); ?>
  $(document).ready(function() { 
 	$(".plaza_img_inner a").click(function() { 
@@ -14,8 +15,6 @@
  })
 <?php echo $javascript->blockEnd(); ?>   
 <div class="view school">
-	<h2 class="title"><?php echo $school['School']['name']; ?><span><?php echo $school['School']['location']; ?></span></h2> 
-	
 	<div id="left-col">
 		<div class="bubble corner">
 			<div class="rectangle"><h2><?php echo $school['School']['name']; ?><span><?php echo $school['School']['location']; ?></span></h2></div> 
@@ -72,12 +71,15 @@
 				<div class="clear"></div> 
 				<hr />
 				<p style="padding: 5px 10px;"> 
-				<?php echo $html->link(__('Twittear', true), 'http://twitter.com/share', array('class' => 'twitter-share-button', 'data-count' => 'horizontal', 'data-lang' => 'es')); ?>&nbsp;<iframe src="http://www.facebook.com/plugins/like.php?layout=button_count&amp;show_faces=false&amp;width=150&amp;action=recommend&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe></p>
+					<?php echo $html->link(__('Twittear', true), "http://twitter.com/share?text=".$school['School']['name']." - ".$school['School']['location']."&url=".$html->url(null, true)."&amp;via=".$appConfigurations['name'], array('class' => 'twitter-share-button', 'data-lang' => 'es', 'style' => 'border:1px solid #666;')); ?>
+					<?php echo $html->link(__('Facebook', true), 'http://www.facebook.com/sharer.php?u='.$html->url(null, true).'&t='.$school['School']['name']." - ".$school['School']['location'], array('name' => 'fb_share', 'class' => 'facebook-share-button')); ?>
+					<?php echo $html->link($html->image('share-email.png', array('alt' => '')), 'mailto:?subject=&amp;body=', array('escape' => false)); ?>
+				</p>
 		</div> 
 	</div> 
 	<div id="right-col">
-		<?php echo $this->element('facebook_box'); ?>    
-		<?php echo $this->element('waw_300_250');?>       
+		<?php echo $this->element('waw_300_250');?> 
+		<?php echo $this->element('facebook_box'); ?>      
 	</div>
 	<div class="clear"></div>
 	
