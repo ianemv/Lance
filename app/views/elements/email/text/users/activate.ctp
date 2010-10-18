@@ -12,4 +12,4 @@
 
 <?php echo sprintf(__('Si no creaste una cuenta en "%s", por favor omitir este Email.', true), $appConfigurations['name'])?>  
   
-<?php echo sprintf(_('Contacto: %s', true), $appConfigurations['email']); ?>
+<?php echo sprintf(__('Contacto: %s', true), $appConfigurations['email']); ?>
