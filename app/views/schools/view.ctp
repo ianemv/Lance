@@ -74,7 +74,7 @@
 					<ul class="actions">
 						<li class="sharing-option"><?php echo $html->link(__('Twittear', true), "http://twitter.com/share?text=".$appConfigurations['name']."::".$school['School']['name']." - ".$school['School']['location']."&url=".$html->url(null, true)."&amp;via=".$appConfigurations['name'], array('class' => 'sharing-twitter twitter-share-button', 'data-count' => 'none', 'data-lang' => 'es')); ?></li>
 						<li class="sharing-option"><?php echo $html->link(__('Facebook', true), 'http://www.facebook.com/sharer.php?u='.$html->url(null, true).'&t='.$school['School']['name']." - ".$school['School']['location'], array('name' => 'fb_share', 'type' => 'button_count', 'class' => 'sharing-facebook facebook-share-button')); ?></li>
-					 	<li><?php echo $html->link($html->image('share-email.png', array('alt' => '')), 'mailto:?subject=&amp;body=', array('class' => 'sharing-email', 'escape' => false)); ?></li>
+					 	<li><?php echo $html->link($html->image('share-email.png', array('alt' => '')), "mailto:?subject=".$appConfigurations['name'].": ".$school['School']['name']."-".$school['School']['location']."&body=".sprintf(__('Mira esta plaza que encontre en %s.', true), $appConfigurations['name'])."\n\n ".sprintf(__('Ya tiene %d votos.', true), $school['Plaza'][0]['vote_count']) . "\n\n" . $text->truncate($school['Plaza'][0]['description']). " " . sprintf(__('Vea mas %s', true), $html->url(null, true)), array('class' => 'sharing-email', 'escape' => false)); ?></li>
 					</ul> 
 					<div class="clear"></div>
 
