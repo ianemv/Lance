@@ -4,7 +4,7 @@
 	$html->meta(null, null, array('property' => 'og:image', 'content' => $html->url($appConfigurations['url'] . IMAGES_URL . 'plazas'. DS . 'vote'. DS .$school['Plaza'][0]['PlazaImage'][0]['image']), 'inline' => false)); 
 ?>
 <?php echo $javascript->link('http://static.ak.fbcdn.net/connect.php/js/FB.Share', array('inline' => false)); ?>
-<?php echo $javascript->codeBlock(); ?>
+<?php echo $javascript->codeBlock(null, array('inline' => false)); ?>
  $(document).ready(function() { 
 	$(".plaza_image_inner a").click(function() { 
     	var b = "plaza_"+$(this).attr('class');   

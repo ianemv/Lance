@@ -1,4 +1,4 @@
-<?php echo $javascript->codeBlock(); ?>
+<?php echo $javascript->codeBlock(null, array('inline' => false)); ?>
     $(document).ready(function() {
         $('#donar').colorbox({width:525,opacity:0.55});
     }); 

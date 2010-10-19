@@ -1,4 +1,4 @@
-<?php echo $javascript->codeBlock(); ?>
+<?php echo $javascript->codeBlock(null, array('inline' => false)); ?>
     $(document).ready(function() { 
   		$(".modal").click(function() {
 			$(this).colorbox({open:true, minWidth:"600px", opacity:0.50, transition:"fade"});

@@ -1,4 +1,4 @@
-<?php echo $javascript->codeBlock(); ?>
+<?php echo $javascript->codeBlock(null, array('inline' => false)); ?>
     $(document).ready(function() { 
 		$(".plaza_image_inner a").click(function() { 
 	     	var b = "plaza_"+$(this).attr('class');   

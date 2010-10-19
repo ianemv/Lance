@@ -11,7 +11,7 @@
 
 <!--
 
-<?php echo $javascript->codeBlock(); ?>
+<?php echo $javascript->codeBlock(null, array('inline' => false)); ?>
 	function processForm(request) {
 		if (request == 'success') {
 			
