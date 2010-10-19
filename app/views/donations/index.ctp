@@ -1,29 +1,6 @@
 <?php echo $javascript->codeBlock(); ?>
     $(document).ready(function() { 
-	    $(".transfer img").css({ 'opacity' : 0.0 });
-        $('#votacion_container_right .marcddo').hoverIntent(
-           function() {  
-	 		   var plazaImg = $(this).find('.plaza_img');
-			   var thumbRel = $(this).find('.plaza_img img').attr('rel');
-			   $(plazaImg).fadeOut();
-               $(this).find(".vote_box").effect('slide', {direction:'up'}, 200).effect('transfer', {to: $(".plaza_thumb img[rel='"+thumbRel+"']")}, 500); 
-			   $(this).find('.vote_dialog').effect('bounce', {direction:'down'},200);   
-			   $(".plaza_thumb img[rel='"+thumbRel+"']").animate({opacity: 1.0}, 1000); 	
-           },
-           function() {    
-	   		   var plazaImg = $(this).find('.plaza_img');
-			   var thumbRel = $(this).find('.plaza_img img').attr('rel');  
-			   $(plazaImg).fadeIn();  
-               $(this).find(".vote_box").fadeOut();
-			   $(".plaza_thumb img[rel='"+thumbRel+"']").animate({opacity: 0.0}, 1000); 
-               $(this).find(".vote_form input").val();
-           }
-       ); 
-        $(".vote_box").corner();   
-		$(".plaza_img").corner();   
-		$(".plaza_img_inner").corner(); 
-		
-		$(".plaza_img_inner a").click(function() { 
+		$(".plaza_image_inner a").click(function() { 
 	     	var b = "plaza_"+$(this).attr('class');   
 			$('a[rel="'+b+'"]').colorbox({
 				current:"<?php echo __('imagen', true); ?> {current} <?php echo __('de', true); ?> {total}", 
@@ -54,37 +31,22 @@
 			if (!empty($plazas)) {
 				foreach ($plazas as $plaza) {
 		?>
-		<div class="marco" id="plaza_<?php echo $plaza['Plaza']['id']; ?>"> 
-			<div class="clipwrapper">
-				<div class="clip">                                                                  
-					<?php if (!empty($plaza['PlazaImage'])): ?>  
-						<div class="plaza_img"> 
-							<div class="plaza_img_inner">  
-					   			<?php echo $html->link($html->image('plazas'. DS . 'preview'. DS .$plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))), '#', array('class' => 'group_'.$plaza['Plaza']['id'], 'escape' => false)); ?>  
-							</div>   
-							<div class="plaza_group">  
-							<?php foreach ($plaza['PlazaImage'] as $image): ?> 
-								<?php echo $html->tag('p', $html->link($plaza['School']['name'], '/img/plazas' . DS . $image['image'], array('rel' => 'plaza_group_'.$plaza['Plaza']['id'], 'title' => $plaza['School']['name'])))?>
-							<?php endforeach; ?> 
-							</div>
-						</div>
-					<?php endif; ?>
-					<div class="vote_box" style="display:none">
-						<div class="vote_dialog">
-							<?php echo $html->tag('p', sprintf(__('Ingresa tu mail para votar por esta plaza o puedes %s', true), $html->link(__('ver todas las plazas', true), array('controller' => 'plazas', 'action' => 'index')))); ?>
-					  	</div>
-						<div class="vote_form">    
-							<?php echo $form->create('Votes', array('action' => 'vote', 'id' => "form_".$plaza['Plaza']['id'])); ?> 
-							<?php echo $form->hidden('Vote.plaza_id', array('value' => $plaza['Plaza']['id'] )); ?>    
-							<?php echo $form->input('User.full_name', array('label' => array('text' => __('Nombrey Apellido', true), 'class' => 'label-over'), 'id' => uniqid('nombre_')))?>                              
-	                        <?php echo $form->input('User.email', array('label' => array('text' => __('Mail', true), 'class' => 'label-over'), 'class' => 'validate-email', 'id' => uniqid('mail_'))); ?>                                  
-						   	<?php echo $html->link($html->image('btn_votar_plaza.png', array('alt' => __('Votar', true))), '#', array('onclick' => 'return votePlaza({id:'.$plaza['Plaza']['id'].'});','class'=> 'btn_votar','style'=>'float:left', 'escape' => false)) ?>
-							<?php echo $form->end();?> 
-                        </div>
-				  	</div> 
-					
+		<div class="bubble bubble-small corner" id="plaza_<?php echo $plaza['Plaza']['id']; ?>"> 
+			<div class="rectangle"><h2><?php echo $html->link($text->truncate($plaza['School']['name'], 30), array('controller' => 'schools', 'action' => 'view', $plaza['School']['id'])); ?><span><?php echo sprintf(__('Votos: %d', true), $plaza['Plaza']['vote_count']); ?></span></h2></div> 
+			<div class="triangle-l"></div> <!-- Left triangle -->
+			<div class="triangle-r"></div> <!-- Right triangle -->                                         
+			<?php if (!empty($plaza['PlazaImage'])): ?>  
+				<div class="plaza_image corner"> 
+					<div class="plaza_image_inner">  
+			   			<?php echo $html->link($html->image('plazas'. DS . 'preview'. DS .$plaza['PlazaImage'][0]['image'], array('alt' => $plaza['School']['name'], 'rel' => Inflector::camelize( $plaza['School']['name'].$plaza['Plaza']['id']))), '#', array('class' => 'group_'.$plaza['Plaza']['id'], 'escape' => false)); ?>  
+					</div>   
+					<div class="plaza_group">  
+					<?php foreach ($plaza['PlazaImage'] as $image): ?> 
+						<?php echo $html->tag('p', $html->link($plaza['School']['name'], '/img/plazas' . DS . $image['image'], array('rel' => 'plaza_group_'.$plaza['Plaza']['id'], 'title' => $plaza['School']['name'])))?>
+					<?php endforeach; ?> 
+					</div>
 				</div>
-			</div>
+			<?php endif; ?>
 		</div> 	  
 		<?php		
 				}                     
