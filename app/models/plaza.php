@@ -30,7 +30,21 @@ class Plaza extends AppModel {
 		'Vote' => array(
 			'className' => 'Vote',
 			'foreignKey' => 'plaza_id',
-			'dependent' => false
+			'dependent' => false,
+			
+		),
+		'PlazaComment' => array(
+			'className' => 'PlazaImage',
+			'foreignKey' => 'plaza_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 
