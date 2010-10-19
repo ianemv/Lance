@@ -3,7 +3,9 @@
 
 class AppError extends ErrorHandler {
     function __construct($method, $messages) {
-        $this->controller = new AppController();
+        $this->controller = new AppController();    
+        $appConfigurations = Configure::read('App');  
+
         $params = Router::getParams();
 		$viewPath = $this->controller->viewPath;
 		
@@ -19,6 +21,7 @@ class AppError extends ErrorHandler {
         }
 
         $checkView = VIEWS.$viewPath.DS.Inflector::underscore($method).'.ctp';
+
         if (file_exists($checkView)) {
             $this->controller->_set(Router::getPaths());
             $this->controller->viewPath     = $viewPath;
@@ -30,7 +33,7 @@ class AppError extends ErrorHandler {
 
             $this->controller->render($method);
             e($this->controller->output);
-        } else {
+        } else {      
             parent::__construct($method, $messages);
         }
     }
