@@ -21,7 +21,7 @@
 <?php echo $javascript->blockEnd(); ?>   
 <div class="view school">
 	<div id="left-col">
-		<div class="bubble corner">
+		<div class="bubble bubble-long corner">
 			<div class="rectangle"><h2><?php echo $school['School']['name']; ?><span><?php echo $school['School']['location']; ?></span></h2></div> 
 			<div class="triangle-l"></div> <!-- Left triangle -->
 			<div class="triangle-r"></div> <!-- Right triangle -->

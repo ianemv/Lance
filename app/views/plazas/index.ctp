@@ -47,7 +47,7 @@ Solo haz “click” en tu(s) plaza(s) favorita(s) e ingresa tus datos ¡Tienes 
        
 	<div class="plaza marco" id="plaza_<?php echo $plaza['Plaza']['id']; ?>">
   		<div class="plaza_header">
-			<h3><?php echo TextHelper::truncate($plaza['School']['name'], 25); ?></h3>
+			<h3><?php echo $html->link($text->truncate($plaza['School']['name'], 25), array('controller' => 'schools', 'action' => 'view', $plaza['School']['id'])); ?></h3>
 			<p><?php echo $plaza['School']['location']; ?></p>
 		</div>
 		<div class="plaza_content"> 
