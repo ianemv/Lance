@@ -15,8 +15,8 @@ class DonationsController extends AppController {
         if ($this->RequestHandler->isAjax()) {
             $this->layout = 'ajax';
         } else {
-		    $this->Donation->recursive = 0;
-		    $this->set('donations', $this->paginate());
+		    #$this->Donation->recursive = 0;
+		    #$this->set('donations', $this->paginate());
         }
 	}
 

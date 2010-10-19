@@ -52,34 +52,46 @@ class AclFilterComponent extends Object {
             $thisControllerNode = $this->controller->Acl->Aco->node($this->controller->Auth->actionPath.$this->controller->name);
 
             if ($thisControllerNode) {
-                $thisControllerNode = $thisControllerNode['0'];
-                $thisControllerActions = $this->controller->Acl->Aco->find('list', array(
-                    'conditions' => array(
-                        'Aco.parent_id' => $thisControllerNode['Aco']['id'],
-                    ),
-                    'fields' => array(
-                        'Aco.id',
-                        'Aco.alias',
-                    ),
-                    'recursive' => '-1',
-                ));
-                $thisControllerActionsIds = array_keys($thisControllerActions);
-                $allowedActions = $this->controller->Acl->Aco->Permission->find('list', array(
-                    'conditions' => array(
-                        'Permission.aro_id' => $groupId,
-                        'Permission.aco_id' => $thisControllerActionsIds,
-                        'Permission._create' => 1,
-                        'Permission._read' => 1,
-                        'Permission._update' => 1,
-                        'Permission._delete' => 1,
-                    ),
-                    'fields' => array(
-                        'id',
-                        'aco_id',
-                    ),
-                    'recursive' => '-1',
-                ));
-                $allowedActionsIds = array_values($allowedActions);
+                $thisControllerNode = $thisControllerNode['0'];    
+				
+				if (($thisControllerActions = Cache::read('controller_actions_'.$thisControllerNode['Aco']['id'])) === false) {
+					$thisControllerActions = $this->controller->Acl->Aco->find('list', array(
+	                    'conditions' => array(
+	                        'Aco.parent_id' => $thisControllerNode['Aco']['id'],
+	                    ),
+	                    'fields' => array(
+	                        'Aco.id',
+	                        'Aco.alias',
+	                    ),
+	                    'recursive' => '-1',
+	                ));  
+					Cache::write('controller_actions_'.$thisControllerNode['Aco']['id'], $thisControllerActions);
+				}  
+
+                $thisControllerActionsIds = array_keys($thisControllerActions); 
+				if (($allowedActions = Cache::read('allowed_actions_'.$groupId."_".$thisControllerNode['Aco']['id'])) === false) {  
+				  	 $allowedActions = $this->controller->Acl->Aco->Permission->find('list', array(
+			              	'conditions' => array(
+	                        'Permission.aro_id' => $groupId,
+	                        'Permission.aco_id' => $thisControllerActionsIds,
+	                        'Permission._create' => 1,
+	                        'Permission._read' => 1,
+	                        'Permission._update' => 1,
+	                        'Permission._delete' => 1,
+	                    ),
+	                    'fields' => array(
+	                        'id',
+	                        'aco_id',
+	                    ),
+	                    'recursive' => '-1',
+	                ));             
+					 
+					Cache::write('allowed_actions_'.$groupId."_".$thisControllerNode['Aco']['id'], $allowedActions);
+				}    
+                $allowedActionsIds = array_values($allowedActions);   
+
+
+
             }
 
             $allow = array();
