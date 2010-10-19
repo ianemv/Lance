@@ -10,8 +10,12 @@ class SchoolsController extends AppController {
 			$this->redirect(array('controller' => 'plazas', 'action' => 'index'));
 		}                                                                         
 		                              
-		$this->School->recursive = 2; 
-		$school = $this->School->read(null, $id);
+		$this->School->recursive = 2;  
+		if (($school = Cache::read('school_'.$id)) === false) {
+		 	$school = $this->School->read(null, $id);   
+			Cache::write('school_'.$id, $school);
+		}
+		
 		$this->set('title_for_layout', $school['School']['name']);
 		$this->set('school',$school);;
 	}

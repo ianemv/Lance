@@ -59,8 +59,12 @@ class SponcersController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	} 
 	
-	function getsponcers() {
-		return $this->Sponcer->find('all', array('order' => array('Sponcer.show_order ASC')));
+	function getsponcers() { 
+		if (($sponcers = Cache::read('sponcers')) === false) {
+			$sponcers = $this->Sponcer->find('all', array('order' => array('Sponcer.show_order ASC')));
+			Cache::write('sponcers', $sponcers);
+		}     
+		return $sponcers;
 	}
 
 }
