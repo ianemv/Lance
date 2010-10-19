@@ -2,6 +2,7 @@
 
 /app/config/*.yml
 /app/tmp/cache/cake_*
+/app/tmp/cache/persistent/cake_*
 /app/tmp/cache/persistent/*.*
 /app/tmp/cache/models/cake_*
 /app/tmp/cache/views/cake_*
