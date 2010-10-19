@@ -8,7 +8,6 @@ class AppController extends Controller {
     var $view = 'Theme';      
 
 	var $apiRequest = false; 
-	var $persistModel = true;
 
     var $appConfigurations;
 
