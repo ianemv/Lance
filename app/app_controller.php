@@ -7,7 +7,8 @@ class AppController extends Controller {
    	var $uses = array('User');
     var $view = 'Theme';      
 
-	var $apiRequest = false;
+	var $apiRequest = false; 
+	var $persistModel = true;
 
     var $appConfigurations;
 
