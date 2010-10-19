@@ -23,7 +23,7 @@
 	</div> 
 	<div style="width:450px;float:left">
     	<h2><?php echo __('No tienes una cuenta?', true); ?></h2>
-		<p><?php echo sprintf(__('Es faciel! Solo %s ahora!', true), $html->link(__('Regístrate', true), array('action' => 'register'))); ?> </p>
+		<p><?php echo sprintf(__('Es facil! Solo %s ahora!', true), $html->link(__('Regístrate', true), array('action' => 'register'))); ?> </p>
 	</div>
 	<div style="clear:both;"></div>  
 </div>  
