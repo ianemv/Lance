@@ -239,10 +239,9 @@ class User extends AppModel {
     }      
 
     function resend($email) {
-        if (!is_null($email)) {
-            $user = $this->find('first', array('contitions' => array('User.email' => $email, 'User.active' => 0)));
-
-            if (!empty($user)) {
+        if (!is_null($email)) { 
+            $user = $this->findByEmail($email);   
+            if (!empty($user) && !$user['User']['active']) {
 
                 $data['User']['key']    = Security::hash(uniqid(rand(), true));
                 $this->read(null, $user['User']['id']);
