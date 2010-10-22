@@ -6,7 +6,7 @@ class SystemController extends AppController {
 	
 	var $name = 'System';
 	
-	var $uses = array('User');
+	var $uses = null;
 	
 	function admin_index() {
 		$this->set('title_for_layout', __('System', true));

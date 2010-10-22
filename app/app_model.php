@@ -43,6 +43,35 @@ class AppModel extends Model {
                 $rut = "0".$rut;
             }
         }
-    }
+    } 
+
+	function generateNiceName($title, $id = null) {
+		$title = strtolower($title);
+		$nice_name = Inflector::slug($title, '-');
+		
+		if (!empty($id)) {
+			$conditions = array('condition' => array($this->name.'.slug' => $nice_name, $this->name.'.id' => '<> '.$id));
+	  	} else {
+			$conditions = array('condition' => array($this->name.'.slug' => $nice_name));
+		} 
+		
+		$total = $this->find('count', $conditions);
+		if ($total > 0) {
+			for ($number = 2; $number > 0; $number++) {
+				if (!empty($id)) {
+					$conditions = array('conditions' => array($this->name.'.slug' => $nice_name.'-'.$number, $this->name.'.id' => '<> '.$id));
+				} else {
+					$conditions = array('conditions' => array($this->name.'.slug' => $nice_name.'-'.$number));
+				}                                                                                             
+				
+				$total = $this->find('count', $conditions);
+				if ($total == 0) {
+					$nice_name = $nice_name.'-'.$number;
+					$number = -1;
+				}
+			}
+		} 
+		return $nice_name;
+	}
                  
 }

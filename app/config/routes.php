@@ -13,7 +13,7 @@
 
 	// Pages
 	SuperRouter::connect('/', array('controller' => 'donations', 'action' => 'index', 'home'));
-	SuperRouter::connect('/pages/:slug', array('controller' => 'pages', 'action' => 'view')); 
+	SuperRouter::connect('/pages/:slug', array('controller' => 'pages', 'action' => 'view'), array('pass' => array('slug'))); 
 	SuperRouter::connect('/contacto', array('controller' => 'pages', 'action' => 'contact'));
     SuperRouter::connect('/proyecto', array('controller' => 'pages', 'action' => 'view', 'proyecto'));
     SuperRouter::connect('/prensa', array('controller' => 'pages', 'action' => 'view', 'prensa'));
