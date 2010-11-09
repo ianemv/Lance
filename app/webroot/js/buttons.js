@@ -25,7 +25,7 @@ if (!window.__BTN) var __BTN = function () {
         var c,
         d = parseInt(b.votes),
         e = a.firstChild.firstChild.firstChild.firstChild;
-        if (d > 9999) d = Math.floor(data.votes / 1E3) + "K";
+        if (d > 9999) d = Math.floor(b.votes / 1e3) + "K";
         else if (d > 999) {
             c = (d += "").charAt(0);
             d = d.replace(c, c+ ",")

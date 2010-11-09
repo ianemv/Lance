@@ -24,6 +24,13 @@ class DonationsController extends AppController {
         if ($this->RequestHandler->isAjax()) {
             $this->layout = 'ajax';
         }
+	   	if(in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
+			$this->set('test', true);
+		} else {       
+					echo $this->RequestHandler->getClientIp();
+			$this->set('test', false);
+		}                            
+		
     }
 
 	function admin_index() {
@@ -85,15 +92,23 @@ class DonationsController extends AppController {
 	
 	function donate() {
         $this->layout = 'ajax';
+		$this->autoRender = false;
         if (!$this->RequestHandler->isAjax()) {
        		$this->redirect('/');
         }
 
         if (!empty($this->data)) {
-            $donation = $this->Donation->donate($this->data);
-            $this->set('data', $donation);
+			if ($donation = $this->Donation->donate($this->data)) {  
+				if (empty($donation['valid'])) {
+					$this->_sendEmail($donation);
+				}
+ 				debug($donation);
+				die('here');
+			}
 		}
-        return false;
+    	
+		return json_encode(array('valid' => true));
+		exit();
     }
 }
 ?>
