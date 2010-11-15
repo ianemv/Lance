@@ -5,7 +5,7 @@ class PlazasController extends AppController {
 	
 	var $paginate = array(
 	    'limit' => 12,   
-		'order' => ''
+		'order' => 'Plaza.vote_count DESC'
     );      
 	
     function index() {
