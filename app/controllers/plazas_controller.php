@@ -10,7 +10,7 @@ class PlazasController extends AppController {
 	
     function index() {
 		$this->set('title_for_layout', 'Votar por una plaza');
-		$this->paginate = array('limit' => 9, 'order' => 'Plaza.vote_count');
+		$this->paginate = array('limit' => 9, 'order' => 'Plaza.vote_count DESC');
 		$this->set('plazas', $this->paginate());
     }
 
