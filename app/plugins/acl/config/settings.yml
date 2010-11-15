@@ -13,13 +13,15 @@ Menu:
                     plugin: acl
                 children:
                     users: 
-                        title: Users
+                        title: Users 
+                        class: icon_users
                         sort_order: 10
                         url:
                             admin: true
                             controller: users
                     groups: 
-                        title: Groups
+                        title: Groups 
+                        class: icon_groups
                         sort_order: 20
                         url:
                             admin: true

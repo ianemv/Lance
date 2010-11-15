@@ -6,8 +6,8 @@ class School extends AppModel {
 	
 	var $actsAs = array( 
 		'Searchable.Searchable' => array(
-			'summary' => 'location', 
-			'fields' => array('name', 'description', 'location', 'key') 
+			'summary' => 'location',
+			'fields' => array('name', 'description', 'location', 'key')
 		),
 		'FileUpload'  => array(
 			'image' => array(

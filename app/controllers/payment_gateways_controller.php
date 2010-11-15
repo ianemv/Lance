@@ -36,24 +36,19 @@ class PaymentGatewaysController extends AppController{
 
 
 	/**
-	 * Function for returning from payment gateway
+	 * Function for returning from payment gateways
 	 */
-	function returning($model){
-		if(!empty($model)){
-			switch($model){
-				case 'auction':
-					$this->Session->setFlash(__('Your payment was successful.  We will notify you when your item has been shipped.', true));
-					#$this->redirect(array('controller' => 'auctions', 'action' => 'won'));
-					break;
-
-				case 'package':
-					$this->Session->setFlash(__('You payment was successful and your bids are available for you use.  If your bids are not available yet, please allow a couple of minutes for them to become available.', true), 'default', array('class'=>'success'));
-					#$this->redirect(array('controller' => 'accounts', 'action' => 'index'));
+	function returning($model = null) {
+		if (!empty($model)) {
+			switch($model) {
+				case 'dontion':
+					$this->Session->setFlash(__('', true));
+					$this->redirect(array('controller' => 'donations', 'action' => 'dontated'));
 					break;
 			}
-		}else{
-			die('Dead');
-		}
+		} else {
+			die('Made it here');
+		}                 
 	}
 
 	/**
@@ -65,11 +60,6 @@ class PaymentGatewaysController extends AppController{
 				case 'donation':
 					$this->Session->setFlash(__('Your donation payment was canceled.', true));
 					$this->redirect(array('controller' => 'auctions', 'action' => 'won'));
-					break;
-
-				case 'package':
-					$this->Session->setFlash(__('Your payment was canceled.', true));
-					$this->redirect(array('controller' => 'accounts', 'action' => 'index'));
 					break;
 			}
 		}else{
@@ -106,54 +96,50 @@ class PaymentGatewaysController extends AppController{
     /* Returns true if a given variable represents an associative array */
     function is_associative_array( $var ) {
         return is_array( $var ) && !is_numeric( implode( '', array_keys( $var ) ) );
-    }
+    } 
+
+ 
+
 
     /**
      * DineroMail payment gateway
      * http://www.dineromail.com
      */
     function dineromail($model = null, $id = null){
-		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail');
+		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail'); 
 		$dineroMail  = array();
 
-		if(!empty($model)){
-			$dineroMail['DireccionFracaso'] = Configure::read('App.url') . '/users';
-			$dineroMail['DireccionExito']    = Configure::read('App.url') . '/payment_gateways/returning/donation';
-			$dineroMail['url'] 	  	     = $gateway['url'];
-			$dineroMail['E_Comercio']      = $gateway['id'];
+		if(!empty($model)){ 
+			
+			$dineroMail['error_url'] 	= Configure::read('App.url') . '/users';
+			$dineroMail['ok_url']    	= Configure::read('App.url') . '/payment_gateways/returning/donation'; 
+			$dineroMail['pending_url']  = Configure::read('App.url') . '/payment_gateways/pending/donation';
+			$dineroMail['country_id'] 	= $gateway['country_id'];
+			$dineroMail['url'] 	  	    = $gateway['url'];
+			$dineroMail['merchant'] 	= $gateway['merchant'];  
+			$dineroMail['payment_method_available'] = $gateway['payment_method_available'];
+			$dineroMail['header_image'] = Configure::read('App.url') . '/img/logo.png'; 
+			
+			#$dineroMail['E_Comercio']      = $gateway['id'];
 			#$dineroMail['lc'] 	 	     = $gateway['lc'];
-			$dineroMail['MediosPago'] 	= $gateway['medios'];
-			$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id');
+			#$dineroMail['MediosPago'] 	= $gateway['medios'];
+			#$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id');
+
 
 			switch($model){
                 case 'donation':
-                    #$donation   = $this->_getAuction($id, $this->Auth->user('id'));
-                    #$addresses = $this->_isAddressCompleted();
-                    #$user      = $auction['Winner'];
-
 					// Formating the data
-				    $dineroMail['return'] 	     = Configure::read('App.url') . '/payment_gateways/returning/donation';
-					$dineroMail['NombreItem']   = "Donar regalaunaplaza.cl";
-					$dineroMail['TipoMoneda'] 	= 1;
-					$dineroMail['PrecioItem']  	= 1000.00;
-				/*	$dineroMail['first_name']  	= $this->Auth->user('first_name');
-					$dineroMail['last_name']  	= $this->Auth->user('last_name');
-					$dineroMail['email']       	= $this->Auth->user('email');
-					$dineroMail['address1']    	= $addresses['Billing']['address_1'];
-					$dineroMail['address2']    	= $addresses['Billing']['address_2'];
-					$dineroMail['city']    	   	= $addresses['Billing']['city'];
-					$dineroMail['zip']    	   	= $addresses['Billing']['postcode']; 
-					*/
-
+					$dineroMail['item_name_1']   = Configure::read('App.name') . " - " .  __('Donación', true);
+					$dineroMail['item_quantity_1'] = 1;
+					$dineroMail['item_ammount_1'] = 25000.00;
+					$dineroMail['change_quantity'] = 0;
                     break;
                 default:
                     $this->Session->setFlash(sprintf(__('There is no handler for %s in this payment gateway.', true), $model));
                     $this->redirect('/');
-            }
+            }    
 
-			$this->Dineromail->configure($dineroMail);
-			$dineroMailData = $this->Dineromail->getFormData();
-			$this->set('dineroMailData', $dineroMailData);
+			$this->set('dineroMailData', $dineroMail);
 		}else{
 			$this->Session->setFlash(__('Invalid payment gateway', true));
 		}

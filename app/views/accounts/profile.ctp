@@ -1,10 +1,8 @@
 <h2 class="title"><?php echo __('Account Profile', true); ?></h2>  
 
-<div class="account profile">
+<div id="left-col" class="account profile">
 		<?php echo $form->create('Account', array('type' => 'file'));?>
-		<?php echo $form->input('image', array('type' => 'file', 'label' => array('text' =>  __('Profile Image', true), 'class' => 'label-over'))); ?> 
-		<?php echo $form->input('full_name', array('label' => array('text' => __('Full Name', true))))?>
-		<?php echo $form->input('full_name', array(__('Full Name', true))); ?>     
+		<?php echo $form->input('full_name', array('label' => array('text' => __('Full Name', true), 'class' => 'label-over')))?> 
 		<?php echo $form->input('location', array('label' => array('text' => __('Current Location', true), 'class' => 'label-over'))); ?> 
 		<?php echo $form->input('bio', array('label' => array('text' => __('About Yourself', true), 'class' => 'label-over')));?>
 		<?php echo $form->input('date_of_birth', array('label' => array('text' => __('Birthday', true))))?>
@@ -23,12 +21,3 @@
    <?php echo $this->element('account_menu'); ?>
 </div> 
 <div class="clear"></div>
-
-
-
-
-
-
-
-
-

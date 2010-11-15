@@ -37,6 +37,19 @@ class User extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+		'PlazaComment' => array(
+			'className' => 'PlazaComment',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 
@@ -145,8 +158,9 @@ class User extends AppModel {
 					$data['User']['ip'] = $_SERVER['REMOTE_ADDR'];
                     $this->create();
                 } 
-
- 				$data['User']['group_id'] = 2;  
+				if (empty($data['User']['group_id'])) {
+					$data['User']['group_id'] = 2;
+				}
 
                 if ($this->save($data)) {
                     $user = $this->read(null, $this->getLastInsertId());
@@ -178,7 +192,7 @@ class User extends AppModel {
                     if ($this->hasField($key)) {
                         $conditions[$key] = $datum;
                     }
-                }
+                }                    
 
                 $user = $this->find('first', array('conditions' => $conditions));
 
@@ -193,7 +207,7 @@ class User extends AppModel {
 
                     $user['User']['password']        = Security::hash(Configure::read('Security.salt').$user['User']['password_before']);
                     $user['User']['reset_link']      = $this->appConfigurations['url'].'/users/reset/'. $user['User']['key'];
-
+                                                                                                                                
                     $this->save($user, false);
                     return $user;
                 } else {
@@ -289,4 +303,24 @@ class User extends AppModel {
         }   
         return $newPassword;
     }
+
+	function getUserByIdOrUsername($id = null) {
+		if (!empty($id)) { 
+			$user = $this->find('first', 
+				array(
+					'conditions' => array(
+						'OR' => array(
+							array('User.id' => $id),
+							array('User.username' => $id)
+						),
+					),
+				)
+			);
+
+			if (!empty($user)) {
+				return $user;
+			}
+		}
+		return false;
+	}
 }

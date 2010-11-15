@@ -35,8 +35,11 @@ class MenuHelper extends Helper {
 		return $this->_title;
 	}
 	
-	private function _getHelperValue($child) {
-		return $child['title'];
+	private function _getHelperValue($child) {  
+	  	if (!empty($child['title'])) {
+			return $child['title'];       
+		}   
+		return "";
 	}
 	
 	private function _sortMenu($a, $b) {
@@ -65,7 +68,9 @@ class MenuHelper extends Helper {
 			}
 
 			$menuArr = array();
-			$menuArr['label'] = $this->_getHelperValue($child);
+			$menuArr['label'] = $this->_getHelperValue($child); 
+			$menuArr['title'] = $menuArr['label'];             
+			$menuArr['class'] = !empty($child['class']) ? $child['class']:"";
 			$menuArr['sort_order'] = !empty($child['sort_order']) ? (int)$child['sort_order']:$sortOrder;
 			if (!empty($child['url'])) {
 				if (is_array($child['url']) && empty($child['url']['plugin'])) {

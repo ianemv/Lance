@@ -1,7 +1,3 @@
-<?php
-debug($this->data);
-
-?>
 <div class="box users form">
 	<div class="box-top rounded_by_jQuery_corners" style="-moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;">
 	    <h4 class="white"><?php printf(__('Admin Edit %s', true), __('User', true)); ?></h4>

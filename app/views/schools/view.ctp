@@ -84,8 +84,50 @@
 					<div class="clear"></div>
 
 				</p>
-		</div> 
-	</div> 
+		</div>  
+		<!--
+		<?php #$comments = $this->requestAction('/plaza_comments/comments/limit:10/'.$school['Plaza'][0]['id']);  ?>   
+    	<div class="comments">
+			<?php if($session->check('Auth.User')):?>
+			<div class="comment-form">
+   				<?php echo $form->create('PlazaComment', array('action' => 'post')); ?> 
+				<?php echo $form->hidden('plaza_id', array('value' => $school['Plaza'][0]['id']))?>
+			  	<?php echo $form->input('comment', array('type' => 'textarea', 'label' => array('text' => __('Leave a comment', true)))); ?>
+				<?php echo $form->end('Post Comment'); ?>
+			 
+			</div>
+			<?php endif; ?>
+			<div class='comments-header'>
+				Comment Header
+			</div>
+			<div class="comments-content"> 
+				<?php if (!empty($comments)): ?> 
+		   		<div class="comments-list">
+			   		<?php foreach ($comments as $comment): ?>   
+				 	<div class="comment-thread" id="comment-thread-<?php echo $comment['PlazaComment']['id']; ?>" >
+					  	<div class="comment">
+							<div class="comment-author"> 
+							   
+								<p><?php echo $comment['User']['username']; ?></p>
+								 <?php echo $html->link($html->image('loading-sml.gif', array('alt' => '')), '',array('class' => 'thumb', 'escape' => false))?>
+							</div>
+					 		<div class="comment-content">
+								<p class="comment-body"><?php echo $comment['PlazaComment']['comment'] ?></p>
+						  	</div>
+						<div class="clear"></div> 
+						</div>
+				 	</div>
+					<?php endforeach; ?>
+				</div>
+ 			   	<?php echo $html->div('morebox', $html->link(__('Load More Comments', true), '#', array('id' => '', 'class' => 'more')), array('id' => '')); ?>
+				<?php endif ?>
+			</div>
+			<div class="comments-footer">
+			  	Comment Footer
+			</div>
+		</div>
+		-->
+ 	</div> 
 	<div id="right-col" style="postion:relative;">
 		 
 		<?php echo $this->element('waw_300_250');?> 

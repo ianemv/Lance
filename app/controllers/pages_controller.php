@@ -8,11 +8,16 @@ class PagesController extends AppController {
 	
 	var $components = array('Recaptcha');
 	
-	function beforeFilter() {
-		parent::beforeFilter();
-	}
+    function beforeFilter() {
+        parent::beforeFilter();
+
+        if (!empty($this->Auth)) {    
+			$this->Auth->allow('*');
+            #$this->Auth->allow('activate', 'register', 'reset', 'recover', 'resend', 'login', 'logout', 'admin_recover');
+        }
+    }
 	
-	function view($slug = null) {
+	function view($slug = null) {   
 		if (empty($slug)) {
 			$this->Session->setFlash(__('Invalid Page', true));
 			$this->redirect('/');
@@ -68,9 +73,54 @@ class PagesController extends AppController {
 		
 	}
 	
-	
 	function admin_index() {
 		$this->set('title_for_layout', __('Pages', true));
+		$this->Page->recursive = 0;
+		$this->set('pages', $this->paginate());
+	}  
+	
+	function admin_add() {
+		if (!empty($this->data)) {
+		   	if ($this->Page->save($this->data)) {
+				$this->Session->setFlash(sprintf(__('The %s has been saved', true), 'page'), 'message/success', array('class' => 'no-margin', 'close' => true));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(sprintf(__('The %s could not be saved. Please, try again.', true), 'page'), 'message/error', array('class' => 'no-margin','close' => true));
+			}
+		}   
+		$this->set('title_for_layout', sprintf(__('Add %s', true), 'Page'));        
+	} 
+	
+	function admin_edit($id = null) {
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'page'), 'message/warning', array('class' => 'no-margin', 'close' => true));
+			$this->redirect(array('action' => 'index'));
+		}
+		if (!empty($this->data)) {
+			if ($this->Page->save($this->data)) {
+				$this->Session->setFlash(sprintf(__('The %s has been saved', true), 'page'), 'message/success', array('class' => 'no-margin', 'close' => true));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(sprintf(__('The %s could not be saved. Please, try again.', true), 'page'), 'message/error', array('class' => 'no-margin', 'close' => true));
+			}
+		}
+		if (empty($this->data)) {
+			$this->data = $this->Page->read(null, $id);
+		}
+		$this->set('title_for_layout', sprintf(__('Edit "%s"', true), $this->data['Page']['slug']));
+	}
+	
+	function admin_delete($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'Page'), 'message/warning', array('class' => 'no-margin', 'close' => true));
+			$this->redirect(array('action' => 'index'));
+		}
+		if ($this->Page->delete($id)) {
+			$this->Session->setFlash(sprintf(__('%s deleted', true), 'Page'), 'message/success', array('class' => 'no-margin', 'close' => true));
+			$this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(sprintf(__('Unable to delete %s', true), 'Page'), 'message/error', array('class' => 'no-margin', 'close' => true));
+		}
 	}
 }
 

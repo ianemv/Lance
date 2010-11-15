@@ -12,8 +12,9 @@ class UsersController extends AppController {
     function beforeFilter() {
         parent::beforeFilter();
 
-        if (!empty($this->Auth)) {
-            $this->Auth->allow('activate', 'register', 'reset', 'recover', 'resend', 'login', 'logout');
+        if (!empty($this->Auth)) {    
+			$this->Auth->allow('*');
+            #$this->Auth->allow('activate', 'register', 'reset', 'recover', 'resend', 'login', 'logout', 'admin_recover');
         }
     }
 
@@ -158,7 +159,7 @@ class UsersController extends AppController {
     }
 
 	function changepassword() {
-		$this->layout = 'account';
+
 		$this->set('title_for_layout', __('Change Password', true));
 		if (!empty($this->data)) {
 			if ($user = $this->User->reset($this->data)) {
@@ -170,20 +171,77 @@ class UsersController extends AppController {
 			}                                                                    
 		}
 	}
+	
+	function admin_recover() {
+		$this->set('title_for_layout', __('Recover Password', true));   
+		$valid = false;  
+		$message = null;
+		if (!empty($this->data)) {
+		 	if ($user = $this->User->recover($this->data)) {
+		   		$this->_sendEmail($user);
+		  	  	$this->Session->setFlash(__('Your password has just been set to the e-mail address.', true), 'message/success', array('class' => 'no-margin')); 
+	   			$valid = true;
+			} else {
+				$message = __('The email you provided was not found.', true);  
+				$valid = false;
+			}
+		}
+		if ($this->RequestHandler->isAjax()) { 
+			$this->layout = 'ajax';
+			$this->autoRender = false; 
+   			
+			return json_encode(
+				array(
+					'valid' => $valid,
+					'error' => $message, 
+					'redirect' => 'login' 
+				)
+			); 
+		} else {  
+		   	$this->layout = "admin_login";
+			if (!empty($message)) {
+				$this->Session->setFlash($message);
+			}
+		} 
+	}
 
 
     function admin_login() {  
-		$this->set('title_for_layout', __('Administration Login', true));
-		$this->layout = "admin_login";
-		if (!empty($this->data)) {
-            if ($this->data['User']['remember_me'] == 1) {
-                $this->Cookie->write('User.id', $this->Auth->user('id'));
-            }
-        }
+		$this->set('title_for_layout', __('Administration Login', true)); 
+		$valid = false;
+		$message = false;
+		if (!$this->Session->check('Auth.User')) { 
+			if (!empty($this->data)) {    
+				if ($this->Auth->login($this->data)) {
+					$valid = true;  
+					if ($this->data['User']['remember_me'] == 1) {
+						$this->Cookie->write('User.id', $this->Auth->user('id'));
+					}
+				} else {
+					$valid = false; 
+ 					$message = $this->Auth->loginError;
+					$this->Auth->loginError = "";
+				}
+			}
+   		}      
+		
+		if ($this->RequestHandler->isAjax()) {
+			$this->layout = 'ajax';  
+			$this->autoRender = false;
+			return json_encode(
+				array(
+					'valid' => $valid,
+					'error' => $message,
+					)
+				);
+			
+		} else {
+			$this->layout = "admin_login"; 
+			if (!empty($message)) {
+		   		$this->Session->setFlash($message);  
+			}
+		}  
 
-        if ($this->Session->check('Auth.User')) {
-            $this->redirect('/');
-        }
     }
 
 	function admin_logout() {
@@ -211,13 +269,13 @@ class UsersController extends AppController {
 		if (!empty($this->data)) {
 			$this->User->create();
 			if ($this->User->register($this->data)) {
-				$this->Session->setFlash(sprintf(__('The %s has been saved', true), 'user'), 'success');
+				$this->Session->setFlash(sprintf(__('The %s has been saved', true), 'user'), 'message/success', array('class' => 'no-margin', 'close' => true));
 				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(sprintf(__('The %s could not be saved. Please, try again.', true), 'user'), 'error');
+			} else { 
+				$this->Session->setFlash(sprintf(__('The %s could not be saved. Please, try again.', true), 'user'), 'message/error', array('class' => 'no-margin','close' => true));
 			}
-		}
-		$this->set('title_for_layout', sprintf(__('Add %s', true), 'User'));
+		}   
+		$this->set('title_for_layout', sprintf(__('Add %s', true), 'User'));        
 		$groups = $this->User->Group->find('list');
 		$this->set(compact('groups'));
 	}
@@ -225,22 +283,20 @@ class UsersController extends AppController {
 	function admin_edit($id = null) {
 		
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'user'), 'attention');
+			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'user'), 'message/warning', array('class' => 'no-margin', 'close' => true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->User->register($this->data, $id)) {
-				$this->Session->setFlash(sprintf(__('The %s has been saved', true), 'user'), 'success');
+				$this->Session->setFlash(sprintf(__('The %s has been saved', true), 'user'), 'message/success', array('class' => 'no-margin', 'close' => true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(sprintf(__('The %s could not be saved. Please, try again.', true), 'user'), 'error');
+				$this->Session->setFlash(sprintf(__('The %s could not be saved. Please, try again.', true), 'user'), 'message/error', array('class' => 'no-margin', 'close' => true));
 			}
 		}
 		if (empty($this->data)) {
 			$this->data = $this->User->read(null, $id);
 		}
-	
-		
 		$this->set('title_for_layout', sprintf(__('Edit "%s"', true), $this->data['User']['username']));
 		$groups = $this->User->Group->find('list');
 		$this->set(compact('groups'));
@@ -248,12 +304,14 @@ class UsersController extends AppController {
 	
 	function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'User'));
+			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'User'), 'message/warning', array('class' => 'no-margin', 'close' => true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->User->delete($id)) {
-			$this->Session->setFlash(sprintf(__('%s deleted', true), 'User'));
+			$this->Session->setFlash(sprintf(__('%s deleted', true), 'User'), 'message/success', array('class' => 'no-margin', 'close' => true));
 			$this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(sprintf(__('Unable to delete %s', true), 'User'), 'message/error', array('class' => 'no-margin', 'close' => true));
 		}
 	}
 }
