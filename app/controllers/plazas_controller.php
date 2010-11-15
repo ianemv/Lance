@@ -5,12 +5,12 @@ class PlazasController extends AppController {
 	
 	var $paginate = array(
 	    'limit' => 12,   
-		'order' => 'Plaza.vote_count DESC'
+		'order' => ''
     );      
 	
     function index() {
 		$this->set('title_for_layout', 'Votar por una plaza');
-		#$this->paginate = array('order' => 'Plaza.vote_count DESC');
+		$this->paginate = array('limit' => 9, 'order' => 'Plaza.vote_count');
 		$this->set('plazas', $this->paginate());
     }
 
