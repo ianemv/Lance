@@ -78,41 +78,21 @@ class Account extends AppModel {
 	function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
 
-        $this->validate = array(
-        	'first_name' => array(
-					'notEmpty' => array(
-						'rule' => array('notEmpty'),
-						'message' => __('Tienes que ingresar tu nombre.', true),
-					),
-			 ),
-			'last_name' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
-					'message' => __('Tienes que ingresar tu appellido.', true),
-				),   
-            ), 
-        );
+        #$this->validate = array(
+        #	'first_name' => array(
+		#			'notEmpty' => array(
+		#				'rule' => array('notEmpty'),
+		#    			'message' => __('Tienes que ingresar tu nombre.', true),
+		#			),
+		#	 ),
+		#	'last_name' => array(
+		#		'notEmpty' => array(
+		#			'rule' => array('notEmpty'),
+		#			'message' => __('Tienes que ingresar tu appellido.', true),
+		#		),   
+        #    ), 
+        #);
     }
-	
-	
-	function getAccountByIdOrUsername($id = null) {
-		if (!empty($id)) {
-			$account = $this->find('first', 
-				array(
-					'conditions' => array(
-						'OR' => array(
-							array('User.id' => $id),
-							array('User.username' => $id)
-						),
-					),
-				)
-			);
-
-			if (!empty($account)) {
-				return $account;
-			}
-		}
-		return false;
-	}
+ 
 }
 ?>

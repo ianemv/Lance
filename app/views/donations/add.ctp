@@ -1,5 +1,5 @@
+<?php
 
-<?php 
 	if (!$test): ?>
                                                                                                 
 <div style="padding:20px;">
@@ -50,7 +50,7 @@ if (request.valid) {
 		<?php echo $form->submit('btn_donar.png'); ?>
     </div> 
 	<?php echo $form->end(); ?>
-</div> 
-        
+</div>
+
 <?php endif; ?>
 

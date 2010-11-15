@@ -13,12 +13,12 @@ class AccountsController extends AppController {
 		$this->set('accounts', $this->paginate());
 	}
 
-	function view($id = null) {
+	function view($id = null) {  
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid account', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('account', $this->Account->read(null, $id));
+		$this->set('user', $this->User->getUserByIdOrUsername($id));
 	}
 
 	function add() {
@@ -74,23 +74,33 @@ class AccountsController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	
-	function profile() {
+	function profile($username = null) { 
 		$this->set('title_for_layout', __('Account Profile', true));
 		if ($this->Auth->user()) {
-			$account = $this->Account->findByUserId($this->Auth->user('id')); 
-			$account['Account']['full_name'] = $account['Account']['first_name'] . " ". $account['Account']['last_name'];
+			$account = $this->Account->findByUserId($this->Auth->user('id'));
+			if (!empty($account)) {
+				$account['Account']['full_name'] = $account['Account']['first_name'] . " " . $account['Account']['last_name'];
+			} 
 			if (!empty($this->data)) {         
-				$fullName = explode(" ", trim($this->data['Account']['full_name']));
-				list($firstName, $lastName) = $fullName;   
+				$fullName = explode(" ", trim($this->data['Account']['full_name']));  
+				list($firstName, $lastName) = $fullName; 
 				
-			   	$this->data['Account']['id'] = $account['Account']['id'];
+				if (empty($account)) {
+					$this->Account->create();
+				} else {
+			   		$this->data['Account']['id'] = $account['Account']['id'];  
+				}
+				
 				$this->data['Account']['first_name'] = $firstName;
 				$this->data['Account']['last_name'] = $lastName; 
-				
+				$this->data['AccountType'] 
+
 				if ($this->Account->save($this->data)) {
 					$this->Session->setFlash(__('Your profile has been updated.', true), 'success');
 					$this->redirect(array('action' => 'profile'));
-				} else {      
+				} else { 
+					debug($this->Account);
+					die();
 					$this->Session->setFlash(__('Your profile could not be saved. Please, try again.', true), 'error');
 				}
 			}

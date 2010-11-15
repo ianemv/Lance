@@ -159,7 +159,7 @@ class UsersController extends AppController {
     }
 
 	function changepassword() {
-		$this->layout = 'account';
+
 		$this->set('title_for_layout', __('Change Password', true));
 		if (!empty($this->data)) {
 			if ($user = $this->User->reset($this->data)) {

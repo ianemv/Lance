@@ -303,4 +303,24 @@ class User extends AppModel {
         }   
         return $newPassword;
     }
+
+	function getUserByIdOrUsername($id = null) {
+		if (!empty($id)) { 
+			$user = $this->find('first', 
+				array(
+					'conditions' => array(
+						'OR' => array(
+							array('User.id' => $id),
+							array('User.username' => $id)
+						),
+					),
+				)
+			);
+
+			if (!empty($user)) {
+				return $user;
+			}
+		}
+		return false;
+	}
 }

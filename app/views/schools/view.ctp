@@ -84,9 +84,10 @@
 					<div class="clear"></div>
 
 				</p>
-		</div>
-		<?php $comments = $this->requestAction('/plaza_comments/comments/limit:10/'.$school['Plaza'][0]['id']);  ?>   
-		<div class="comments">
+		</div>  
+		<!--
+		<?php #$comments = $this->requestAction('/plaza_comments/comments/limit:10/'.$school['Plaza'][0]['id']);  ?>   
+    	<div class="comments">
 			<?php if($session->check('Auth.User')):?>
 			<div class="comment-form">
    				<?php echo $form->create('PlazaComment', array('action' => 'post')); ?> 
@@ -125,7 +126,8 @@
 			  	Comment Footer
 			</div>
 		</div>
-	</div> 
+		-->
+ 	</div> 
 	<div id="right-col" style="postion:relative;">
 		 
 		<?php echo $this->element('waw_300_250');?> 

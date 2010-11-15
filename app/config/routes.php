@@ -25,7 +25,9 @@
 	SuperRouter::connect('/register', array('controller' => 'users', 'action' => 'register'));
 	SuperRouter::connect('/login', array('controller' => 'users', 'action' => 'login'));  
 	SuperRouter::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
-	SuperRouter::connect('/recover', array('controller' => 'users', 'action' => 'recover'));
+	SuperRouter::connect('/recover', array('controller' => 'users', 'action' => 'recover')); 
+	
+	SuperRouter::connect('/people/:username', array('controller' => 'accounts', 'action' => 'view'), array('pass' => array('username')));
 
 
     SuperRouter::connect('/plazas/count', array('controller' => 'plazas', 'action' => 'count', 'ext' => 'json'), array('pass' => array('id'), 'id' => '[0-9]+'));

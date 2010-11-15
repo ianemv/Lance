@@ -19,12 +19,15 @@
 <?php $plazas = $this->requestAction('/plazas/getplazas/limit:9');  ?> 
 <?php echo $this->element('donation'); ?>
 <div id="votacion_container">
-	<h2 class="title"><?php echo __('Estas son nueve de las plazas más votadas', true); ?></h2>
+	<h2 class="title"><?php echo __('Resultados Votación', true); ?></h2>
     <?php echo $html->div('view_all', $html->link(__('ver todos', true), array('controller' => 'plazas', 'action' => 'index')), array('style' => 'float:right;margin-top:-30px;')); ?>
 	<div id="votacion_container_left" class="font">
-		<p><?php echo sprintf(__('Cientos de colegios participaron entre junio y agosto de 2010 en el Concurso LEGO CharityBox: %s. El certamen convocó a niños entre 6 y 10 años a construir con LEGO la plaza de sus sueños.', true), $html->tag('strong',__('Mi mejor plaza de juegos', true))); ?></p>    
-		<p><?php echo sprintf(__('Hemos llegado a la última y más importante etapa. Por una parte la elección de la mejor plaza y por otra la posibilidad de que ésta se construya en la realidad. Hoy, TODOS pueden participar: ¡entre TODOS podemos hacer realidad este sueño! Queremos construir a escala real en Concepción el proyecto ganador en 1.000 m² , una de las zonas más afectadas por el terremoto."', true), $html->tag('strong',__('Mi mejor plaza de juegos', true))); ?></p>
-		<div class="votar_button"><?php echo $html->link(__('Quiero elegir la mejor plaza de juegos', true), array('controller' => 'plazas'))?></div>
+		<p><?php echo __('Queremos felicitar a todos los colegios que han participado activamente en el proyecto Regala Una Plaza. Los resultados fueron increíbles. Miles de niños tuvieron la oportunidad de imaginar, crear y construir con LEGOS, el sueño de su mejor plaza de juegos.', true); ?></p>    
+		<p><?php echo __('Nuestro ganador del concurso es el "Complejo Educacional Apumanque de La Calera". Muchas felicidades a sus pequeños grandes arquitectos ¡Su plaza será construida a escala real en Concepción, una vez que se reúnan los fondos necesarios!', true); ?></p>
+		<p><?php echo __('Les comunicamos que hemos hecho una adaptación en la estructura de los premios. Además de premiar a los 9 ganadores por votación del público, tendremos ahora 9 premios para los establecimientos educacionales que sean escogidos por nuestro comité de jueces. Estos ganadores serán dados a conocer el 25 de Noviembre 2010. Pueden ver la nueva estructura de los premios en el link que está más abajo.', true); ?></p> 
+		<p><?php echo __('Todos los premios serán enviados a los respectivos colegios después de la ceremonia de premiación, que se realizará el día 06 de Diciembre en Santiago.', true); ?></p>
+		<p><?php echo sprintf(__('Para ver los premios y el listado de los colegios ganadores por votación del público sólo deben pulsar %s.', true), $html->link(__('aquí', true), '/files/CB_Ganadores_Votacion.pdf')); ?></p>
+		<p><?php echo sprintf(__('Para ver el ranking de votos para todos los instituciones sólo deben pulsar %s.', true), $html->link(__('aquí', true), '/files/CB_Ranking_Ganadores_Votacion.pdf')); ?></p> 
 	</div>
 	<div id="votacion_container_right">
 		<?php   
