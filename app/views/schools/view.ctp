@@ -129,8 +129,6 @@
 		-->
  	</div> 
 	<div id="right-col" style="postion:relative;">
-		 
-		<?php echo $this->element('waw_300_250');?> 
 		<?php echo $this->element('facebook_box'); ?>      
 	</div>
 	<div class="clear"></div>
