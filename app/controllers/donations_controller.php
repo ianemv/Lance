@@ -23,7 +23,11 @@ class DonationsController extends AppController {
     function add() {
         if ($this->RequestHandler->isAjax()) {
             $this->layout = 'ajax';
-        }  
+        }   
+
+ 		Configure::write('debug', 2);
+
+		debug($this->appConfigurations['allowedIps']);
 
 	   	if(in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
 			$this->set('test', true);
