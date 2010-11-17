@@ -1,0 +1,48 @@
+---
+Install:
+    date: Thu, 22 Jul 10 18:16:23 -0400
+App:
+    base:
+    baseUrl:
+    timezone: America/Santiago
+    theme: cleanity
+    name: Regala Una Plaza
+    url: http://regalaunaplaza.cl/
+    email: info@regalaunaplaza.cl
+    votes:
+        limits:
+            active: true
+            limit: 10 //
+            expiry: 365 //The number of days
+            all: true
+            force_login: true
+    donations:
+        cost: 25,000
+
+    allowedIps:
+        200.30.250.18
+        69.169.167.113
+Site:
+    name:
+    theme:
+    admin_theme: broom
+    status:1
+Hook:
+    bootstraps: acl,searchable
+    components:
+    routes: acl,searchable
+
+Email:
+    delivery: smtp
+    sendAs: both
+    return: info@regalaunaplaza.cl
+    from: Regala Una Plaza <info@regalaunaplaza.cl>
+    replyTo: info@regalaunaplaza.cl
+    smtpOptions:
+        port: 25
+        timeout: 30
+        host: localhost
+        auth: false
+        username:
+        password:
+        client: smtp_helo_hostname
