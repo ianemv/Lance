@@ -25,10 +25,6 @@ class DonationsController extends AppController {
             $this->layout = 'ajax';
         }   
 
- 		Configure::write('debug', 2);
-
-		debug($this->appConfigurations['allowedIps']);
-
 	   	if(in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
 			$this->set('test', true);
 		} else {       
