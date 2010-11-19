@@ -111,7 +111,7 @@ class DonationsController extends AppController {
 			}
 		}
     	
-		return json_encode(array('valid' => true, 'url' => '/payment_gateways/dineromail/donate/'.$donation['Donation']['id']));
+		return json_encode(array('valid' => true, 'url' => '/payment_gateways/dineromail/donation/'.$donation['Donation']['id']));
 		exit();
     }
 }

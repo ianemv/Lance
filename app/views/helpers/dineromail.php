@@ -7,9 +7,9 @@
 					$result .= '<input type="text" name="' . $name . '" value="' . $value . '" />';
 				}
 			} 
-			if (!empty($buttonName)) {                                                                                      
+			#if (!empty($buttonName)) {                                                                                      
 				$result .= '<div class="submit"><input type="submit" value="'.$buttonName.'" /></div>';  
-			}
+			#}
 			$result .= '</form>';
 			return $this->output($result);
 		}
