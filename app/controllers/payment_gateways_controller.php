@@ -108,7 +108,9 @@ class PaymentGatewaysController extends AppController{
     function dineromail($model = null, $id = null){
 		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail'); 
 		$dineroMail  = array();
-
+                
+		debug($gateway);
+		die();
 		if(!empty($model)){ 
 			
 			$dineroMail['error_url'] 	= Configure::read('App.url') . '/users';
