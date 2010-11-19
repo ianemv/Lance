@@ -8,7 +8,7 @@ class DonationsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		if (!empty($this->Auth)) {
-			$this->Auth->allow('index');
+			$this->Auth->allow('index', 'donate');
 		}
 	} 
 
