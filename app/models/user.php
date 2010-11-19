@@ -50,6 +50,10 @@ class User extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+		'Donation' => array(
+			'className' => 'Donation',
+			'foreignKey' => 'user_id',
 		)
 	);
 
@@ -143,7 +147,7 @@ class User extends AppModel {
 
     function register($data, $id = null) {
         if (is_array($data)) {   
-            if (!empty($data['User'])) {
+            #if (!empty($data['User'])) {
 				if (empty($id) || !empty($data['User']['reset_key'])) {
 					$data['User']['key']  = Security::hash(uniqid(rand(), true).Configure::read('Security.salt'));
 				}
@@ -154,32 +158,40 @@ class User extends AppModel {
 
                 if (!empty($id)) {
                     $data['User']['id'] = $id;
-                } else {
+                } else {  
+					$data['User']['active'] = 0;
 					$data['User']['ip'] = $_SERVER['REMOTE_ADDR'];
                     $this->create();
                 } 
 				if (empty($data['User']['group_id'])) {
 					$data['User']['group_id'] = 2;
-				}
+				}  
+				
+				debug($data);
+				die();   
 
-                if ($this->save($data)) {
-                    $user = $this->read(null, $this->getLastInsertId());
-
-                    $user['User']['username']       = $data['User']['username'];
-                    $user['User']['password']       = $data['User']['password_before'];
-                    $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $data['User']['key'];
-                    $user['to']                     = $data['User']['email'];
+                if ($user = $this->saveAll($data)) {   
+					debug($user);
+					die();
+                    #$user = $this->read(null, $this->getLastInsertId());   
+   
+                   # $user['User']['username']       = $data['User']['username'];
+                   # $user['User']['password']       = $data['User']['password_before'];
+                    $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $user['User']['key'];
+                    $user['to']                     = $user['User']['email'];
 					$user['subject']            	= sprintf(__('Verificación de tu registro - %s', true), $this->appConfigurations['name']);
                    	$user['template']               = 'users/activate';    
 
                     return $user;
-                } else {
+                } else { 
+					debug($this->validationErrors); 
+					die();
                     return false;
                 }
 
-            } else {
-                return false;
-            }
+            #} else {
+            #    return false;
+            #}
         }
     }
 

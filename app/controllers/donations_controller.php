@@ -92,13 +92,17 @@ class DonationsController extends AppController {
 	
 	function donate() {
         $this->layout = 'ajax';
-		$this->autoRender = false;
+		$this->autoRender = false; 
+		$id = null;
         if (!$this->RequestHandler->isAjax()) {
        		$this->redirect('/');
         }
 
-        if (!empty($this->data)) {
-			if ($donation = $this->Donation->donate($this->data)) {  
+        if (!empty($this->data)) {  
+			if ($this->Session->check('Auth.User')) {
+				$id = $this->Auth->User('id');
+			}         
+			if ($donation = $this->Donation->donate($this->data, $id)) {  
 				if (empty($donation['valid'])) {
 					$this->_sendEmail($donation);
 				}

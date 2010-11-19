@@ -7,7 +7,7 @@ class Account extends AppModel {
 	var $actsAs = array(
 		'FileUpload'  => array(
 			'image' => array(
-				'required'				=> array('add' => true, 'edit' => false),
+				'required'				=> array('add' => false, 'edit' => false),
 				'directory'				=> 'img/profile',
 				'allowed_mime' 	    => array('image/jpeg', 'image/jpg', 'image/gif', 'image/png'),
 				'allowed_extensions' => array('.jpg', '.jpeg', '.png', '.gif'),
@@ -78,20 +78,20 @@ class Account extends AppModel {
 	function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
 
-        #$this->validate = array(
-        #	'first_name' => array(
-		#			'notEmpty' => array(
-		#				'rule' => array('notEmpty'),
-		#    			'message' => __('Tienes que ingresar tu nombre.', true),
-		#			),
-		#	 ),
-		#	'last_name' => array(
-		#		'notEmpty' => array(
-		#			'rule' => array('notEmpty'),
-		#			'message' => __('Tienes que ingresar tu appellido.', true),
-		#		),   
-        #    ), 
-        #);
+        $this->validate = array(
+        	'first_name' => array(
+					'notEmpty' => array(
+						'rule' => array('notEmpty'),
+		    			'message' => __('Tienes que ingresar tu nombre.', true),
+	   			),
+			 ),
+			'last_name' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __('Tienes que ingresar tu appellido.', true),
+				),   
+            ), 
+        );
     }
  
 }

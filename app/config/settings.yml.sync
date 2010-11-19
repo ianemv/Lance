@@ -1,4 +1,5 @@
 ---
+debug: 0
 Install:
     date: Thu, 22 Jul 10 18:16:23 -0400
 App:
@@ -45,4 +46,4 @@ Email:
         auth: false
         username:
         password:
-        client: smtp_helo_hostname
+        client: smtp_helo_hostname 

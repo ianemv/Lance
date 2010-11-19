@@ -26,19 +26,24 @@
         <h2 class="title"><?php echo __('Ayudanos donando', true); ?></h2>
         <p style="padding: 5px 0;"><?php echo __('Ayudan a realizar este sueño', true); ?>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam hendrerit scelerisque nunc, et viverra ligula tempus sit amet. Nam arcu tellus, pulvinar in adipiscing non, sodales id ante. Pellentesque placerat metus non quam lobortis quis posuere dolor feugiat. Maecenas justo nibh, suscipit facilisis rhoncus sed, varius at velit.
-        </p>
-    </div>
-
+        </p>       
+    </div>     
 <?php
     echo $ajax->form(array('type' => 'post', 'options' => array('id' => 'formDonation', 'model' => 'Donation', 'url' => array('controller' => 'donations', 'action' => 'donate'), 'dataType' => 'json', 'success' => "
 if (request.valid) {
 	$.colorbox({width: '500px', height:'300px', href:'".$html->url(array('controller' => 'payment_gateways', 'action' => 'dineromail', 'donation'))."'});
 }
-")));
+")));     
+	echo $form->input('Account.first_name', array('label' => array('text' => __('Nombre', true),'class' => 'label-over'), 'style' => 'margin:0 0 10px 0; width:400px')); 
+    echo $form->input('Account.last_name', array('label' => array('text' => __('Apellido', true),'class' => 'label-over'), 'style' => 'margin:0 0 10px 0;width:400px'));
 
-    echo $form->input('first_name', array('label' => array('text' => __('Nombre', true),'class' => 'label-over'), 'style' => 'margin:0 0 10px 0; width:400px')); 
-    echo $form->input('last_name', array('label' => array('text' => __('Apellido', true),'class' => 'label-over'), 'style' => 'margin:0 0 10px 0;width:400px'));
-    echo $form->input('email', array('label' => array('text' => __('Tu mail', true), 'class' => 'label-over'), 'style' => 'margin:0 0 10px 0;width:400px', 'class' => 'validate-email', 'id' => uniqid('email_')));
+	if (!$session->check('Auth.User')): 
+		echo $form->input('User.username', array('label' => array('text' => __('Nombre usuario', true),'class' => 'label-over'), 'style' => 'margin:0 0 10px 0;width:400px'));
+	    echo $form->input('User.email', array('label' => array('text' => __('Tu mail', true), 'class' => 'label-over'), 'style' => 'margin:0 0 10px 0;width:400px', 'class' => 'validate-email', 'id' => uniqid('email_')));  
+		echo $form->input('User.password_before', array('type' => 'password', 'label' => array('text' => __('Contraseña', true), 'class' =>'label-over'), 'style' => 'margin: 0 0 10px 0;width:400px;'));      
+ 	endif;   
+
+                 
     echo $form->input('amount', array('type' => 'text', 'label' => array('text' => __('¿Cuántos metros quieres regalar?', true), 'style' => 'font-weight:bold;width:275px'), 'length' => 3, 'style' => 'position:static;display:inline;width:35px', 'between' => '&nbsp;', 'after' => $html->tag('span', $html->tag('strong', sprintf(__(' x $%s', true), $appConfigurations['donations']['cost'])))));
      
 ?>      
@@ -50,7 +55,8 @@ if (request.valid) {
 		<?php echo $form->submit('btn_donar.png'); ?>
     </div> 
 	<?php echo $form->end(); ?>
-</div>
+</div>   
+	
 
 <?php endif; ?>
 
