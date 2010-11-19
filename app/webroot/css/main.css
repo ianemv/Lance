@@ -126,7 +126,7 @@ span.current{color:#ff9900;font-size:25px;margin:0 10px;}
 	position:relative;
 } 
 
-#left-col { width: 700px;float:left;}                                                             
+#left-col { width: 625px;float:left;}                                                             
 
 #right-col { width:210px; float: left;padding: 0 5px;margin: 0 10px;position:relative;}  
 #right-col li { display: block; clear:both;}

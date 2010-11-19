@@ -2,7 +2,7 @@
 
 class AppController extends Controller {
     
-    var $helpers = array('Html', 'Form', 'Ajax', 'Time', 'Number', 'Javascript', 'Cache', 'Text', 'Session','Menu','Sidebar');
+    var $helpers = array('Html', 'Form', 'Ajax', 'Time', 'Number', 'Javascript', 'Cache', 'Text', 'Session','Menu','Sidebar','Dineromail');
     var $components = array('Security', 'Acl', 'Auth', 'Acl.AclFilter', 'Cookie', 'RequestHandler', 'Session', 'Email', 'Security');
    	var $uses = array('User');
     var $view = 'Theme';      

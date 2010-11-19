@@ -29,18 +29,20 @@ class Donation extends AppModel {
 	    if (!empty($data)) {  
 
             if (!empty($data['Donation'])) {   
-               	if ($user = $this->User->register($data, $id)) {   
+               	if ($user = $this->User->register($data, $id)) { 
 					$data['Donation']['user_id'] = $user['User']['id'];
 					$data['Donation']['status_id'] = 1;
-					$this->save($data);
+					if ($this->save($data)) {
+						$user['Donation']['id'] = $this->id;
+					}
                 } else {
                     $errors = array();
                     foreach ($this->User->validationErrors as $key=>$error) {
                         $errors[Inflector::camelize("Donation ".$key)] = $error;
                     }
-                    $data = array('valid' => false, 'errors' => $errors);  
-                }        
-                return $data;
+                    $user = array('valid' => false, 'errors' => $errors);  
+                }      
+                return $user;
             } else {
                 return false;
             }

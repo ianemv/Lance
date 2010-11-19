@@ -30,8 +30,9 @@
     </div>     
 <?php
     echo $ajax->form(array('type' => 'post', 'options' => array('id' => 'formDonation', 'model' => 'Donation', 'url' => array('controller' => 'donations', 'action' => 'donate'), 'dataType' => 'json', 'success' => "
-if (request.valid) {
-	$.colorbox({width: '500px', height:'300px', href:'".$html->url(array('controller' => 'payment_gateways', 'action' => 'dineromail', 'donation'))."'});
+if (request.valid) {    
+	alert(request.url);
+	$.colorbox({width: '500px', height:'300px', href:request.url});
 }
 ")));     
 	echo $form->input('Account.first_name', array('label' => array('text' => __('Nombre', true),'class' => 'label-over'), 'style' => 'margin:0 0 10px 0; width:400px')); 

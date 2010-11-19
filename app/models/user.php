@@ -166,17 +166,15 @@ class User extends AppModel {
 				if (empty($data['User']['group_id'])) {
 					$data['User']['group_id'] = 2;
 				}  
-				
-				debug($data);
-				die();   
 
-                if ($user = $this->saveAll($data)) {   
-					debug($user);
-					die();
-                    #$user = $this->read(null, $this->getLastInsertId());   
-   
-                   # $user['User']['username']       = $data['User']['username'];
-                   # $user['User']['password']       = $data['User']['password_before'];
+                if ($user = $this->save($data)) {
+	   				// Check for Account Data and save it too
+					if (!empty($data['Account'])) {
+						$data['Account']['user_id'] = $this->id;
+						$this->Account->save($data);
+					} 
+
+					$user['User']['id'] 			= $this->id;
                     $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $user['User']['key'];
                     $user['to']                     = $user['User']['email'];
 					$user['subject']            	= sprintf(__('Verificación de tu registro - %s', true), $this->appConfigurations['name']);

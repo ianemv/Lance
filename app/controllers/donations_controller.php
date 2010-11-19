@@ -1,7 +1,9 @@
 <?php
 class DonationsController extends AppController {
 
-	var $name = 'Donations';   
+	var $name = 'Donations'; 
+	
+    var $helpers = array('Dineromail'); 
 	
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -104,14 +106,12 @@ class DonationsController extends AppController {
 			}         
 			if ($donation = $this->Donation->donate($this->data, $id)) {  
 				if (empty($donation['valid'])) {
-					$this->_sendEmail($donation);
+					#$this->_sendEmail($donation);
 				}
- 				debug($donation);
-				die('here');
 			}
 		}
     	
-		return json_encode(array('valid' => true));
+		return json_encode(array('valid' => true, 'url' => '/payment_gateways/dineromail/donate/'.$donation['Donation']['id']));
 		exit();
     }
 }
