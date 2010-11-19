@@ -8,7 +8,7 @@ class PaymentGatewaysController extends AppController{
     function beforeFilter(){
         parent::beforeFilter();
         if(isset($this->Auth)){
-            $this->Auth->allow('returning','cancel','dineromail');
+            $this->Auth->allow('returning','pending','cancel','dineromail');
         }
     }
 
@@ -109,9 +109,6 @@ class PaymentGatewaysController extends AppController{
 		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail'); 
 		$dineroMail  = array();
 
-		debug($model);
-		debug($id);
-		die();
 		if(!empty($model)){ 
 			
 			$dineroMail['error_url'] 	= Configure::read('App.url') . '/users';
@@ -123,14 +120,6 @@ class PaymentGatewaysController extends AppController{
 			$dineroMail['payment_method_available'] = $gateway['payment_method_available'];
 			$dineroMail['header_image'] = Configure::read('App.url') . '/img/logo.png'; 
 			$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id');
-			
-			#$dineroMail['E_Comercio']      = $gateway['id'];
-			#$dineroMail['lc'] 	 	     = $gateway['lc'];
-			#$dineroMail['MediosPago'] 	= $gateway['medios'];
-			#$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id');
-           
-			debug($dineroMail);
-			die();
 
 			switch($model){
                 case 'donation':
