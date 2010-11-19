@@ -1,10 +1,10 @@
 <?php
 	class DineromailHelper extends Helper {
-		function submit($buttonName = null, $data = array()) {
+		function submit($buttonName = 'Submit', $data = array()) {
 			$result = '<form id="frmDineroMail" name="frmDineroMail" action="' .$data['url'] . '" method="post">';
 			foreach ($data as $name => $value) {
 				if (!$data != 'url') {
-					$result .= '<input type="hidden" name="' . $name . '" value="' . $value . '" />';
+					$result .= '<input type="text" name="' . $name . '" value="' . $value . '" />';
 				}
 			} 
 			if (!empty($buttonName)) {                                                                                      
