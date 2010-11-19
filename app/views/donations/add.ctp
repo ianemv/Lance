@@ -31,7 +31,6 @@
 <?php
     echo $ajax->form(array('type' => 'post', 'options' => array('id' => 'formDonation', 'model' => 'Donation', 'url' => array('controller' => 'donations', 'action' => 'donate'), 'dataType' => 'json', 'success' => "
 if (request.valid) {    
-	alert(request.url);
 	$.colorbox({width: '500px', height:'300px', href:request.url});
 }
 ")));     
