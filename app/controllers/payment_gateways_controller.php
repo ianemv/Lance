@@ -151,7 +151,8 @@ class PaymentGatewaysController extends AppController{
 			$dineroMail['merchant'] 	= $gateway['merchant'];  
 			$dineroMail['payment_method_available'] = $gateway['payment_method_available'];
 			$dineroMail['header_image'] = Configure::read('App.url') . '/img/logo.png'; 
-			$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id');
+			$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id'); 
+			$dineroMail['transaction_id'] = $id;
 
 			switch($model){
                 case 'donation':

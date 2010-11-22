@@ -34,8 +34,6 @@ class Donation extends AppModel {
 					$data['Donation']['status_id'] = 1; 
 					$data['Donation']['price'] = $this->appConfigurations['donations']['cost']; 
 					$data['Donation']['total'] = ($this->appConfigurations['donations']['cost'] * $data['Donation']['quantity']);    
-					debug($data);
-					die();
 					if ($this->save($data)) {
 						$user['Donation']['id'] = $this->id;
 					}
