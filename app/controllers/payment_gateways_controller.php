@@ -175,7 +175,8 @@ class PaymentGatewaysController extends AppController{
 
 	function dineromail_ipn(){
 		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail');  
-
+       	$this->log($this->data);
+		die();
  /*   	$this->Dineromail->configure($gateway);
     	if($this->Dineromail->validate_ipn()) {
 
