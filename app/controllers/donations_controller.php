@@ -8,7 +8,7 @@ class DonationsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		if (!empty($this->Auth)) {
-			$this->Auth->allow('index', 'donate');
+			$this->Auth->allow('index', 'donate', 'donated', 'canceled');
 		}
 	} 
 
@@ -113,6 +113,14 @@ class DonationsController extends AppController {
     	
 		return json_encode(array('valid' => true, 'url' => '/payment_gateways/dineromail/donation/'.$donation['Donation']['id']));
 		exit();
-    }
+    } 
+
+	function dontated() {
+		
+	}   
+	
+	function canceled() {
+		
+	}
 }
 ?>

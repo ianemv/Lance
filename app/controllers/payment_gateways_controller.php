@@ -1,14 +1,14 @@
 <?php
 class PaymentGatewaysController extends AppController{
     var $name = 'PaymentGateways';
-    var $uses = array();
+    var $uses = array('Donation');
 	var $components = array('Cookie');
    
 
     function beforeFilter(){
         parent::beforeFilter();
         if(isset($this->Auth)){
-            $this->Auth->allow('returning','pending','cancel','dineromail');
+            $this->Auth->allow('returning','pending','cancel','dineromail', 'dineromail_ipn');
         }
     }
 
@@ -38,10 +38,10 @@ class PaymentGatewaysController extends AppController{
 	/**
 	 * Function for returning from payment gateways
 	 */
-	function returning($model = null) {
+	function returning($model = null) {    
 		if (!empty($model)) {
 			switch($model) {
-				case 'dontion':
+				case 'donation':  
 					$this->Session->setFlash(__('', true));
 					$this->redirect(array('controller' => 'donations', 'action' => 'dontated'));
 					break;
@@ -59,11 +59,43 @@ class PaymentGatewaysController extends AppController{
 			switch($model){
 				case 'donation':
 					$this->Session->setFlash(__('Your donation payment was canceled.', true));
-					$this->redirect(array('controller' => 'auctions', 'action' => 'won'));
+					$this->redirect(array('controller' => 'donations', 'action' => 'canceled'));
 					break;
 			}
 		}else{
 			die('I hate you');
+		}
+	}  
+	  
+	function _getDonation($donation_id, $user_id, $redirect = true) {
+		$donation = $this->Donation->find('first', array('conditions' => array('Donation.id' => $donation_id)));
+		
+		if (!empty($donation)) {
+			if ($donation['Donation']['user_id'] != $user_id) {
+				$this->Session->setFlash(__('Invalid Action', true));
+				$this->redirect(array('controller' => 'donations', 'action' => 'donated'));
+			}                                                                              
+			
+			if ($donation['Donation']['status_id'] != 1) {
+				if ($redirect) {
+					$this->Session->setFlash(__('You have already paid for this donation.', true));
+					$this->redirect(array('controller' => 'donations', 'action' => 'donated'));
+				}                                                                              
+			}                                                                                  
+	 		$total = "total";
+			$donation['Donation']['total'] = $total;
+		}                                           
+		return $donation;
+	}
+	
+	function _setDonationStatus($donation_id, $status_id) {
+		if (!empty($donation_id) && !empty($status_id)) {
+			$donation['Donation']['id']			= $donation_id;
+			$donation['Donation']['status_id']	= $status_id;
+			
+			return $this->Donation->save($donation, false);
+		} else {
+			return false;
 		}
 	}
 
@@ -74,7 +106,7 @@ class PaymentGatewaysController extends AppController{
         // Get users
         $user = $this->User->findById($user_id);
 
-        $data['template'] = 'payment_gateways/auction_pay';
+        $data['template'] = 'payment_gateways/donation_pay';
         $data['layout']   = 'default';
 
         // Send to both user and admin
@@ -84,7 +116,7 @@ class PaymentGatewaysController extends AppController{
         $data['User']	  = $user['User'];
 
         $this->set('data', $data);
-        $this->set('auction', $auction);
+        $this->set('donation', $donation);
 
         if($this->_sendEmail($data)){
             return true;
@@ -126,8 +158,8 @@ class PaymentGatewaysController extends AppController{
 					// Formating the data
 					$dineroMail['item_name_1']   = Configure::read('App.name') . " - " .  __('Donación', true);
 					$dineroMail['item_quantity_1'] = 1;
-					$dineroMail['item_ammount_1'] = 25000.00;
-					$dineroMail['change_quantity'] = 0;
+					$dineroMail['item_ammount_1'] = 100000.00;
+					$dineroMail['change_quantity'] = 1;
                     break;
                 default:
                     $this->Session->setFlash(sprintf(__('There is no handler for %s in this payment gateway.', true), $model));
@@ -140,11 +172,12 @@ class PaymentGatewaysController extends AppController{
 		}
     }
 
-/*
-	function paypal_ipn(){
-		$gateway = Configure::read('PaymentGateways.Paypal') ? Configure::read('PaymentGateways.Paypal') : Configure::read('Paypal');
-		$this->Paypal->configure($gateway);
-		if($this->Paypal->validate_ipn()) {
+
+	function dineromail_ipn(){
+		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail');  
+
+ /*   	$this->Dineromail->configure($gateway);
+    	if($this->Dineromail->validate_ipn()) {
 
 			if(strtolower($this->Paypal->ipn_data['payment_status']) == 'completed'){
 				// Read the info
@@ -155,61 +188,22 @@ class PaymentGatewaysController extends AppController{
 				$user_id       = !empty($control[2]) ? $control[2] : null;
 
 				switch($model){
-					case 'auction':
-						$auction = $this->_getAuction($id, $user_id, false);
+					case 'donation':
+						$donation = $this->_getDonation($id, $user_id, false);
 
-						// Change auction status
-						$status = $this->_setAuctionStatus($id, 2);
-
-						// Check the first winners bonus
-						$this->_firstWin($user_id, $id);
-
-						// Lets deduct the spent credits
-						if(Configure::read('App.credit.active')){
-							$this->_credit($id, 0, $auction['Credit']['debit'], $user_id);
-						}
+						// Change donation status
+						$status = $this->_setDonationStatus($id, 2);
 
                         // Send notification email
-                        $this->_sendAuctionNotification($auction, $user_id);
-						break;
-
-					case 'package':
-						$package = $this->_getPackage($id, $user_id);
-
-						if($this->Paypal->ipn_data['mc_gross'] == $package['Package']['price']) {
-							// Adding bids
-							$description = __('Bids purchased - package name:', true).' '.$package['Package']['name'];
-							$credit      = $package['Package']['bids'];
-							$this->_bids($user_id, $description, $credit, 0);
-
-							// Updating account
-							$name  = __('Bids purchased - package name:', true).' '.$package['Package']['name'];
-							$bids  = $package['Package']['bids'];
-							$price = $package['Package']['price'];
-
-							// Add bonus if it's user first purchase
-							$this->_checkFirstPurchase($user_id, $bids);
-
-							$this->_account($user_id, $name, $bids, $price);
-
-							// Checking referral bonus
-							$this->_checkReferral($user_id);
-
-							// Check and increase user reward points
-							$this->_checkRewardPoints($id, $user_id);
-
-	                        // Send notification email
-	                        $this->_sendPackageNotification($package, $user_id);
-						}
+                        $this->_sendDonationNotification($donation, $user_id);
 						break;
 				}
 			}
 		}else{
 			$this->log('ipn validation failed.');
-		}
+		} 
+		*/
     }
-
-*/
 
  
 }

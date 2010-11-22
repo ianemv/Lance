@@ -44,7 +44,7 @@ if (request.valid) {
  	endif;   
 
                  
-    echo $form->input('amount', array('type' => 'text', 'label' => array('text' => __('¿Cuántos metros quieres regalar?', true), 'style' => 'font-weight:bold;width:275px'), 'length' => 3, 'style' => 'position:static;display:inline;width:35px', 'between' => '&nbsp;', 'after' => $html->tag('span', $html->tag('strong', sprintf(__(' x $%s', true), $appConfigurations['donations']['cost'])))));
+    echo $form->input('quantity', array('type' => 'text', 'label' => array('text' => __('¿Cuántos metros quieres regalar?', true), 'style' => 'font-weight:bold;width:275px'), 'length' => 3, 'style' => 'position:static;display:inline;width:35px', 'between' => '&nbsp;', 'after' => $html->tag('span', $html->tag('strong', sprintf(__(' x $%s', true), $appConfigurations['donations']['cost'])))));
      
 ?>      
     <div class="input" style="padding-left:185px;margin:20px;">
