@@ -2,7 +2,7 @@
 class PaymentGatewaysController extends AppController{
     var $name = 'PaymentGateways';
     var $uses = array('Donation');
-	var $components = array('Cookie');
+	var $components = array('Cookie', 'Dineromail');
    
 
     function beforeFilter(){
@@ -67,14 +67,14 @@ class PaymentGatewaysController extends AppController{
 		}
 	}  
 	  
-	function _getDonation($donation_id, $user_id, $redirect = true) {
+	function _getDonation($donation_id, $redirect = true) {
 		$donation = $this->Donation->find('first', array('conditions' => array('Donation.id' => $donation_id)));
 		
 		if (!empty($donation)) {
-			if ($donation['Donation']['user_id'] != $user_id) {
-				$this->Session->setFlash(__('Invalid Action', true));
-				$this->redirect(array('controller' => 'donations', 'action' => 'donated'));
-			}                                                                              
+		   # if ($donation['Donation']['user_id'] != $user_id) {
+		   # 	$this->Session->setFlash(__('Invalid Action', true));
+		   # 	$this->redirect(array('controller' => 'donations', 'action' => 'donated'));
+		   # }                                                                              
 			
 			if ($donation['Donation']['status_id'] != 1) {
 				if ($redirect) {
@@ -82,8 +82,6 @@ class PaymentGatewaysController extends AppController{
 					$this->redirect(array('controller' => 'donations', 'action' => 'donated'));
 				}                                                                              
 			}                                                                                  
-	 		$total = "total";
-			$donation['Donation']['total'] = $total;
 		}                                           
 		return $donation;
 	}
@@ -91,8 +89,8 @@ class PaymentGatewaysController extends AppController{
 	function _setDonationStatus($donation_id, $status_id) {
 		if (!empty($donation_id) && !empty($status_id)) {
 			$donation['Donation']['id']			= $donation_id;
-			$donation['Donation']['status_id']	= $status_id;
-			
+			$donation['Donation']['status_id']	= $status_id; 
+
 			return $this->Donation->save($donation, false);
 		} else {
 			return false;
@@ -116,7 +114,7 @@ class PaymentGatewaysController extends AppController{
         $data['User']	  = $user['User'];
 
         $this->set('data', $data);
-        $this->set('donation', $donation);
+        $this->set('donation', $donation); 
 
         if($this->_sendEmail($data)){
             return true;
@@ -151,7 +149,7 @@ class PaymentGatewaysController extends AppController{
 			$dineroMail['merchant'] 	= $gateway['merchant'];  
 			$dineroMail['payment_method_available'] = $gateway['payment_method_available'];
 			$dineroMail['header_image'] = Configure::read('App.url') . '/img/logo.png'; 
-			$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id'); 
+			#$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id'); 
 			$dineroMail['transaction_id'] = $id;
 
 			switch($model){
@@ -176,35 +174,31 @@ class PaymentGatewaysController extends AppController{
 
 	function dineromail_ipn(){
 		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail');  
-       	$this->log($this->data);
-		die();
- /*   	$this->Dineromail->configure($gateway);
-    	if($this->Dineromail->validate_ipn()) {
+		 
+		$_POST['Notificacion'] = "<?xml version='1.0' encoding='ISO-8859-1'?><notificacion><tiponotificacion>1</tiponotificacion><operaciones><operacion><tipo>1</tipo><id>44</id></operacion><operacion><tipo>1</tipo><id>43</id></operacion></operaciones></notificacion>";     
+		$this->Dineromail->configure($gateway);
+    	if($this->Dineromail->validate_ipn()) { 
+	 	  	foreach ($this->Dineromail->ipn_data['OPERACIONES']['OPERACION'] as $operacion) {
+				$model = 'donation';
+				$id = $operacion['ID'];
+				switch($model) {
+					case 'donation':      
+						// Get Donation
+						$donation = $this->_getDonation($id); 
 
-			if(strtolower($this->Paypal->ipn_data['payment_status']) == 'completed'){
-				// Read the info
-				$control = explode('#', $this->Paypal->ipn_data['custom']);
-
-				$model         = !empty($control[0]) ? $control[0] : null;
-				$id            = !empty($control[1]) ? $control[1] : null;
-				$user_id       = !empty($control[2]) ? $control[2] : null;
-
-				switch($model){
-					case 'donation':
-						$donation = $this->_getDonation($id, $user_id, false);
-
-						// Change donation status
-						$status = $this->_setDonationStatus($id, 2);
-
-                        // Send notification email
-                        $this->_sendDonationNotification($donation, $user_id);
-						break;
+						// Change donation status       
+						$status = $this->_setDonationStatus($id, $operacion['ESTADO']);
+						
+						if ($operacion['ESTADO'] == 2) {
+							// Send notification email
+                        	$this->_sendDonationNotification($donation, $donation['Donation']['id']);  
+					   	}
+					break;
 				}
 			}
 		}else{
 			$this->log('ipn validation failed.');
 		} 
-		*/
     }
 
  
