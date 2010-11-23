@@ -67,7 +67,7 @@ class PaymentGatewaysController extends AppController{
 		}
 	}  
 	  
-	function _getDonation($donation_id, $redirect = true) {
+	function _getDonation($donation_id, $redirect = false) {
 		$donation = $this->Donation->find('first', array('conditions' => array('Donation.id' => $donation_id)));
 		
 		if (!empty($donation)) {
@@ -80,7 +80,8 @@ class PaymentGatewaysController extends AppController{
 				if ($redirect) {
 					$this->Session->setFlash(__('You have already paid for this donation.', true));
 					$this->redirect(array('controller' => 'donations', 'action' => 'donated'));
-				}                                                                              
+				} 
+				return false;                                                                             
 			}                                                                                  
 		}                                           
 		return $donation;
@@ -186,14 +187,16 @@ class PaymentGatewaysController extends AppController{
 					case 'donation':      
 						// Get Donation
 						$donation = $this->_getDonation($id); 
-
-						// Change donation status       
-						$status = $this->_setDonationStatus($id, $operacion['ESTADO'], $operacion);
+                        
+						if ($donation !== false) {
+							// Change donation status       
+							$status = $this->_setDonationStatus($id, $operacion['ESTADO'], $operacion);
 						
-						if ($operacion['ESTADO'] == 2) {
-							// Send notification email
-                        	$this->_sendDonationNotification($donation, $donation['Donation']['id']);  
-					   	}
+							if ($operacion['ESTADO'] == 2) {
+								// Send notification email
+	                        	$this->_sendDonationNotification($donation, $donation['Donation']['id']);  
+						   	}  
+						}
 					break;
 				}
 			}
