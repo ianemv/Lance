@@ -50,6 +50,7 @@ Email:
 
 PaymentGateways:
     Dineromail:
+		password: !!urdead
         url:https://checkout.dineromail.com/CheckOut
         merchant: 0237797 #0237797 - Real   237845 - Test
         country_id: 3 # 1 = Argentina, 2 = Brasil, 3 = Chile, 4 = Mexico
