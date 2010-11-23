@@ -112,7 +112,7 @@ class PaymentGatewaysController extends AppController{
         // Send to both user and admin
         $data['to'] 	  = $user['User']['email'];
 
-        $data['subject']  = __('Donation Payment', true);
+        $data['subject']  = __('Donación', true) . ' - '. Configure::read('App.name');
         $data['User']	  = $user['User'];
 
         $this->set('data', $data);
@@ -177,7 +177,8 @@ class PaymentGatewaysController extends AppController{
 
 	function dineromail_ipn(){
 		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail');  
-   		
+   		   
+		$_POST['Notificacion'] = "<?xml version='1.0' encoding='ISO-8859-1'?><notificacion><tiponotificacion>1</tiponotificacion><operaciones><operacion><tipo>1</tipo><id>63</id></operacion></operaciones></notificacion>";
 		$this->Dineromail->configure($gateway);
     	if($this->Dineromail->validate_ipn()) { 
 	 	  	foreach ($this->Dineromail->ipn_data['OPERACIONES']['OPERACION'] as $operacion) {

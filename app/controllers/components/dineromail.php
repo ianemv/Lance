@@ -23,18 +23,18 @@ class DineromailComponent extends Object {
 	
 	function validate_ipn() {
 		if (!empty($this->xml)) {  
-			$notificacion = $this->xml->toArray();   
+			$notificacion = $this->xml->toArray();  
 			if (!empty($notificacion['Notificacion'])) {  
 				$data = array();   
-		    	foreach ($notificacion['Notificacion']['Operaciones'] as $key => $value) { 
-					if (is_array($value)) {
+		    	foreach ($notificacion['Notificacion']['Operaciones'] as $key => $value) {  
+					if (!empty($value['id'])) { 
+						$data[]['ID'] = $value['id'];
+					} else {	
 				   		foreach ($value as $val) {
 					    	$data[]['ID'] = $val['id'];
 						}
-					} else {
-	            		$data[]['ID'] = $value['id']; 
 					}
-				}   
+				}  
 				$this->_makeRequest($data);
 				if (!empty($this->result)) { 
 					if (!empty($this->result['REPORTE']) && $this->result['REPORTE']['ESTADOREPORTE'] == 1) {
