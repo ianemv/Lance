@@ -38,7 +38,14 @@ class DineromailComponent extends Object {
 				$this->_makeRequest($data);
 				if (!empty($this->result)) { 
 					if (!empty($this->result['REPORTE']) && $this->result['REPORTE']['ESTADOREPORTE'] == 1) {
-						$this->ipn_data = $this->result['REPORTE']['DETALLE'];
+						$result = $this->result['REPORTE']['DETALLE'];  
+					   	foreach ($result['OPERACIONES'] as $key => $operacions) {
+							if (!empty($operacions['ID'])) {
+								$this->ipn_data['OPERACIONES'][$key][] = $operacions;
+							} else {
+								$this->ipn_data['OPERACIONES']['OPERACION'] = $operacions;
+							}
+						}   
 						return true;
 					}
 				}     

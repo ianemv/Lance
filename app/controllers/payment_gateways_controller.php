@@ -177,11 +177,10 @@ class PaymentGatewaysController extends AppController{
 
 	function dineromail_ipn(){
 		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail');  
-   		   
-		$_POST['Notificacion'] = "<?xml version='1.0' encoding='ISO-8859-1'?><notificacion><tiponotificacion>1</tiponotificacion><operaciones><operacion><tipo>1</tipo><id>63</id></operacion></operaciones></notificacion>";
+   		  
 		$this->Dineromail->configure($gateway);
-    	if($this->Dineromail->validate_ipn()) { 
-	 	  	foreach ($this->Dineromail->ipn_data['OPERACIONES']['OPERACION'] as $operacion) {
+    	if($this->Dineromail->validate_ipn()) {    
+	 	  	foreach ($this->Dineromail->ipn_data['OPERACIONES']['OPERACION'] as $key => $operacion) {  
 				$model = 'donation';
 				$id = $operacion['ID'];
 				switch($model) {
