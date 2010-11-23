@@ -18,7 +18,7 @@ App:
             all: true
             force_login: true
     donations:
-        cost: 25000.00
+        cost: 1000.00
 
     allowedIps:
         69.169.167.113
@@ -50,11 +50,11 @@ Email:
 
 PaymentGateways:
     Dineromail:
-		password: !!urdead
-        url:https://checkout.dineromail.com/CheckOut
-        merchant: 0237797 #0237797 - Real   237845 - Test
-        country_id: 3 # 1 = Argentina, 2 = Brasil, 3 = Chile, 4 = Mexico
-        payment_method_available:"cl_dm;cl_visa,1,3,6;cl_master,1,3,6;cl_ripley"      
+		url:https://checkout.dineromail.com/CheckOut
+		merchant: 0237797 #0237797 - Real   237845 - Test
+		country_id: 3 # 1 = Argentina, 2 = Brasil, 3 = Chile, 4 = Mexico
+		payment_method_available:"cl_dm;cl_visa,1,3,6;cl_master,1,3,6;cl_ripley"
+		password: !!urdead      
 
 
 
