@@ -117,7 +117,7 @@ class PaymentGatewaysController extends AppController{
 
         $this->set('data', $data);
         $this->set('donation', $donation); 
-
+       	
         if($this->_sendEmail($data)){
             return true;
         }else{
@@ -194,7 +194,7 @@ class PaymentGatewaysController extends AppController{
 						
 							if ($operacion['ESTADO'] == 2) {
 								// Send notification email
-	                        	$this->_sendDonationNotification($donation, $donation['Donation']['id']);  
+	                        	$this->_sendDonationNotification($donation, $donation['Donation']['user_id']);  
 						   	}  
 						}
 					break;
