@@ -24,9 +24,9 @@ class DineromailComponent extends Object {
 	function validate_ipn() {
 		if (!empty($this->xml)) {  
 			$notificacion = $this->xml->toArray();   
-			if (!empty($notificacion['Notificacion'])) {  
+			if (!empty($notificacion['notificacion'])) {  
 				$data = array();   
-		    	foreach ($notificacion['Notificacion']['Operaciones'] as $key => $value) { 
+		    	foreach ($notificacion['notificacion']['operaciones'] as $key => $value) { 
 					if (is_array($value)) {
 				   		foreach ($value as $val) {
 					    	$data[]['ID'] = $val['id'];
