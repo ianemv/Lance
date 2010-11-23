@@ -105,8 +105,9 @@ class DonationsController extends AppController {
 				$id = $this->Auth->User('id');
 			}         
 			if ($donation = $this->Donation->donate($this->data, $id)) {  
-				if (empty($donation['valid'])) {
-					#$this->_sendEmail($donation);
+				if (empty($donation['valid'])) { 
+					// Send Welcome Email to New Register via Donation
+					$this->_sendEmail($donation);
 				}
 			}
 		}

@@ -94,4 +94,8 @@ function messageHint(m) {
         $("#message_hint").slideUp(1000);
         return false;
     });
+} 
+
+function updateDonation(val) { 
+	$("#tcost").html(parseFloat($("#bcost").html())*val);
 }

@@ -182,8 +182,6 @@ class User extends AppModel {
 
                     return $user;
                 } else { 
-					debug($this->validationErrors); 
-					die();
                     return false;
                 }
 
