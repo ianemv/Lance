@@ -154,10 +154,11 @@ class PaymentGatewaysController extends AppController{
 
 			switch($model){
                 case 'donation':
+					$donations = $this->_getDonation($id, false);
 					// Formating the data
 					$dineroMail['item_name_1']   = Configure::read('App.name') . " - " .  __('Donación', true);
-					$dineroMail['item_quantity_1'] = 1;
-					$dineroMail['item_ammount_1'] = 100000.00;
+					$dineroMail['item_quantity_1'] = $donations['Donation']['quantity'];
+					$dineroMail['item_ammount_1'] = $donations['Donation']['price'];
 					$dineroMail['change_quantity'] = 1;
                     break;
                 default:
