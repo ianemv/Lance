@@ -110,7 +110,7 @@ class PaymentGatewaysController extends AppController{
         $data['layout']   = 'default';
 
         // Send to both user and admin
-        $data['to'] 	  = array($user['User']['email'], $this->appConfigurations['email']);
+        $data['to'] 	  = $user['User']['email'];
 
         $data['subject']  = __('Donation Payment', true);
         $data['User']	  = $user['User'];
