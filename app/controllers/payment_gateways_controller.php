@@ -86,10 +86,11 @@ class PaymentGatewaysController extends AppController{
 		return $donation;
 	}
 	
-	function _setDonationStatus($donation_id, $status_id) {
+	function _setDonationStatus($donation_id, $status_id, $data = array()) {
 		if (!empty($donation_id) && !empty($status_id)) {
 			$donation['Donation']['id']			= $donation_id;
 			$donation['Donation']['status_id']	= $status_id; 
+			$donation['Donation']['data'] 		= json_encode($data);
 
 			return $this->Donation->save($donation, false);
 		} else {
@@ -175,8 +176,7 @@ class PaymentGatewaysController extends AppController{
 
 	function dineromail_ipn(){
 		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail');  
-		 
-		$_POST['Notificacion'] = "<?xml version='1.0' encoding='ISO-8859-1'?><notificacion><tiponotificacion>1</tiponotificacion><operaciones><operacion><tipo>1</tipo><id>44</id></operacion><operacion><tipo>1</tipo><id>43</id></operacion></operaciones></notificacion>";     
+   		
 		$this->Dineromail->configure($gateway);
     	if($this->Dineromail->validate_ipn()) { 
 	 	  	foreach ($this->Dineromail->ipn_data['OPERACIONES']['OPERACION'] as $operacion) {
@@ -188,7 +188,7 @@ class PaymentGatewaysController extends AppController{
 						$donation = $this->_getDonation($id); 
 
 						// Change donation status       
-						$status = $this->_setDonationStatus($id, $operacion['ESTADO']);
+						$status = $this->_setDonationStatus($id, $operacion['ESTADO'], $operacion);
 						
 						if ($operacion['ESTADO'] == 2) {
 							// Send notification email
