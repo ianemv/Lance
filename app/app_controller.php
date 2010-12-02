@@ -33,9 +33,9 @@ class AppController extends Controller {
 			$this->layout = 'admin';
 		} 
 		
-		if (in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
-			Configure::write('dev', 1);
-			Configure::write('debug', 2); 
+		#if (in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
+		#	Configure::write('dev', 1);
+		#	Configure::write('debug', 2); 
 			$cache = new Folder(CACHE.'Models');
 			$files = $cache->read();
 			foreach ($files[1] as $file) {
@@ -45,7 +45,7 @@ class AppController extends Controller {
 				echo "Removing Cache file $file<br />";
 	  			@unlink(CACHE.'Models'.DS.$file);
 			}
-		}
+		#}
 		
 	   # $this->Auth->allow('*');  
 
