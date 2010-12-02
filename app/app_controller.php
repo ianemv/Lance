@@ -41,7 +41,8 @@ class AppController extends Controller {
 			foreach ($files[1] as $file) {
 				if (!preg_match('/^cake_/', $file)) {
 					continue;
-				}
+				} 
+				echo "Removing Cache file $file<br />";
 	  			@unlink(CACHE.'Models'.DS.$file);
 			}
 		}
