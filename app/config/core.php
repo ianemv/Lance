@@ -299,7 +299,7 @@
  *	));
  *
  */
- /*   Cache::config('default', array('engine' => 'File'));     
+	Cache::config('default', array('engine' => 'File'));     
 	
 	Cache::config('paginate_cache', array(
 	'engine' => 'File',
@@ -307,4 +307,3 @@
 	'serialize' => true,
 	'duration' => '+1 hour',
 	));
-	*/
