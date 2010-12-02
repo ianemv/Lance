@@ -31,6 +31,10 @@ class AppController extends Controller {
 		
 		if (isset($this->params['admin'])) {
 			$this->layout = 'admin';
+		} 
+		
+		if (in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
+			Configure::write('dev', 1);
 		}
 		
 	   # $this->Auth->allow('*');  

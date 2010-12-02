@@ -1,7 +1,7 @@
 <?php
 	$number->addFormat('CLP', $appConfigurations['currency']['CLP']);
-	if (!$test): ?>                                                                                     
-<div style="padding:20px;">
+	if (!Configure::read('dev')): ?>                                                                                     
+<div style="width: 400px; padding:20px;">
     <div class="info" style="margin: 10px 0;">
         <h2 class="title"><?php echo __('Formulario donación', true); ?></h2>
         <p style="padding: 5px 0;">
@@ -11,7 +11,7 @@
 </div> 
 <?php else: ?>   
 
-<div style="padding:20px;">
+<div style="width:425px; padding:20px;">
     <div class="info" style="margin: 10px 0;">
         <h2 class="title"><?php echo __('Formulario de Donación', true); ?></h2>
         <p style="padding: 5px 0; width:400px;">Metro cuadrado por metro cuadrado - apoyenos con una donación de 1m2 o más para la nueva plaza de juegos, y hacer realidad los sueños de los niños. Basado en las ideas de los niños ganadoras de la escuela "Complejo Educacional Apumanque - La Calera" construiremos la mejor plaza de juegos en 1.000 m2. Ayúdenos en alcanzar nuestro objetivo, de construir la plaza y donarlo a Concepción, y de esta manera devolver alegría a una de las ciudades más afectadas por el terremoto 2010. Por favor completa el siguiente formulario con tus datos y elije la cantidad de m2 que quieres donar. (mínimo 1 m2 = 25.000 pesos). Todos las transacciones serán realizados a través del pago seguro en línea de DineroMail. Muchas gracias!
