@@ -20,10 +20,19 @@ App:
     donations:
         cost: 1000.00
 
+    currency:
+        CLP: 
+            zero: 0
+            places: 3 
+            thousands: .
+            escape: true      
+
     allowedIps:
         69.169.167.113
         200.30.250.18
+        205.118.81.24
 
+     
 Site:
     name:
     theme:
