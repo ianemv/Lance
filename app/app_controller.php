@@ -420,6 +420,11 @@ class AppController extends Controller {
 			$this->Security->blackHole($this, 'login');
 			return false;
 		}
+	} 
+	
+	function clear_cache() {
+		Cache::clear();   
+		die('here');
 	}
 
     function build_acl() {

@@ -30,8 +30,39 @@ class UsersController extends AppController {
         
         if ($this->Session->check('Auth.User')) {
             $this->redirect($this->Auth->redirect());
-        }
-    }
+        } 
+
+		if ($this->RequestHandler->isAjax()) { 
+			$this->layout = 'ajax';
+			$this->autoRender = false;
+	  		$this->render('login_ajax');
+		}
+    } 
+	
+	function login_ajax() {   
+		if ($this->RequestHandler->isAjax()) { 
+			Configure::write('debug', 0);
+			$this->layout = 'ajax'; 
+			$result = array('valid' => false, 'url' => '/users/login_ajax');
+			if (!empty($_GET['redirect'])) {
+				$this->set('redirect', $_GET['redirect']);
+			}
+
+			if (!empty($this->data)) { 
+				if ($this->Auth->login($this->data)) {
+					$result = array('valid' => true);
+				}  
+				if (!empty($this->data['User']['redirect'])) {
+					$result = array('url' => $this->data['User']['redirect']);
+				}
+				$this->autoRender = false;
+				return json_encode($result);
+			}
+		} else {
+			$this->redirect('login');
+		} 
+	   
+	}
     
     function logout() { 
 	  	$this->Auth->logout();

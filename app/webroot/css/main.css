@@ -14,7 +14,8 @@ h3{color:#fff;font-size:15px;}
 .header2_1{height:58px;font-size:14px;color:#fff;font-size:20px;width:800px;margin-left:100px;padding-top:15px;line-height:25px;}
 #logo1{position:absolute;left:0px;top:0px;width:97px;height:108px;}
 #logo2{position:absolute;right:0px;top:0px;margin-top:10px;}
-#plaza_container{height:244px;width:952px;margin-top:12px;text-align:center;}
+#plaza_container{height:244px;width:952px;margin-top:12px;text-align:center;}  
+
 #plaza_suenos_menu{width:870px;height:80px;margin:0 auto 30px;background-color:#FF9933;position:relative;}
 #plaza_suenos_menu .title{left:20px;position:absolute;top:28px;width:200px;color:#FFF;font-weight:bold;}
 .jcarousel-skin-tango{height:100px;width:500px;position:absolute;right:150px;}
@@ -406,7 +407,58 @@ background-position: -159px -56px;
 	-webkit-border-radius: 6px;
 }                     
 .comments .morebox a{ color:#333333; text-decoration:none; display:block;}
-.comments .morebox a:hover{ color:#333333; text-decoration:none}
+.comments .morebox a:hover{ color:#333333; text-decoration:none}      
+
+#plaza_container_grid {
+	background: url(/img/grid_bg.png) no-repeat;
+	width: 921px; 
+	height: 466px;
+	margin: 15px 0 0 15px; 
+	position: relative;
+}
+#plaza_grid { padding: 10px;padding-top: 20px; } 
+
+.grid_head { padding: 10px; } 
+.grid_head div.title { color: #fff; font-size:1.1em;;}  
+
+.grid_loading {
+	position: absolute;
+	margin-top: 200px;
+	left: 300px;
+}  
+
+.grid_loading img { float: left;}  
+.grid_loading p { margin-left:10px; padding: 10px; color: #fff;font-weight: bold;}  
+
+
+           
+.imjqmosaic_tile {
+	background-image: url(/img/plaza_bg.png); 
+	background-repeat: no-repeat; 
+	width: 34px; 
+	height: 8px;
+	float: left;
+	border: 1px solid rgb(96, 151, 49); 
+	margin: 0px;
+	-moz-border-radius: 0px 0px 0px 0px; 
+	-webkit-border-radius: 0px;
+}   
+
+.imjqmosaic_tile_active {
+	background-image: url(/img/plaza.png); 
+}
+
+.imjqmosaic_tile .e {
+	cursor:pointer;
+	background-color: rgb(198, 227, 70);;
+	text-align:center;
+	vertical-align:middle;
+	width: 34px; 
+	height: 8px;
+	opacity:0.0;
+	filter:alpha(opacity=0);
+}
+        
 
 
 

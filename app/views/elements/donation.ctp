@@ -1,6 +1,6 @@
 <?php echo $javascript->codeBlock(null, array('inline' => false)); ?>
     $(document).ready(function() {
-        $('#donar').colorbox({width:525,opacity:0.55, onComplete:function(){$('.required label').labelOver('label-over');}});
+        $('#donar').colorbox({opacity:0.55, onComplete:function(){$(".corner").corner(); $('.required label').labelOver('label-over');}});
     }); 
 <?php echo $javascript->blockEnd(); ?>
 

@@ -11,18 +11,17 @@ class Donation extends AppModel {
 			'order' => ''
 		)
 	);
+	
+	var $hasMany = array( 
+		'DonationMeter' => array(
+		 	'className' => 'DonationMeter',
+			'foreignKey' => 'donation_id',
+			'dependent' => true,
+		)
+  	);
 
     function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
-
-        $this->validate = array( 
-            /*'rut' => array(
-                'checkRut' => array(
-                    'rule' => 'checkRut',
-                    'message' => __('Please enter your RUT', true),
-                )
-            ) */
-        ); 
     } 
 
     function donate($data, $id =null) {
@@ -33,9 +32,18 @@ class Donation extends AppModel {
 					$data['Donation']['user_id'] = $user['User']['id'];
 					$data['Donation']['status_id'] = 1; 
 					$data['Donation']['price'] = $this->appConfigurations['donations']['cost']; 
-					$data['Donation']['total'] = ($this->appConfigurations['donations']['cost'] * $data['Donation']['quantity']);    
-					if ($this->save($data)) {
-						$user['Donation']['id'] = $this->id;
+					$data['Donation']['total'] = ($this->appConfigurations['donations']['cost'] * $data['Donation']['quantity']);  
+				   
+			    	
+					if (!empty($data['DonationMeter'])) {
+						
+					} else {
+						#$meters = $this->DonationMeter->getMeters($data['Donation']['quantity']);
+					}
+					if ($this->save($data)) { 
+						$user['Donation']['id'] = $this->id;            
+						$data['DonationMeter']['donation_id'] = $this->id;
+						$this->DonationMeter->save($data);
 					}
                 } else {
                     $errors = array();

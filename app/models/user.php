@@ -172,13 +172,15 @@ class User extends AppModel {
 					if (!empty($data['Account'])) {
 						$data['Account']['user_id'] = $this->id;
 						$this->Account->save($data);
-					} 
-
-					$user['User']['id'] 			= $this->id;
-                    $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $user['User']['key'];
-                    $user['to']                     = $user['User']['email'];
-					$user['subject']            	= sprintf(__('Verificación de tu registro - %s', true), $this->appConfigurations['name']);
-                   	$user['template']               = 'users/activate';    
+					}
+					
+					if (empty($id)) { 
+						$user['User']['id'] 			= $this->id;
+	                    $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $user['User']['key'];
+	                    $user['to']                     = $user['User']['email'];
+						$user['subject']            	= sprintf(__('Verificación de tu registro - %s', true), $this->appConfigurations['name']);
+	                   	$user['template']               = 'users/activate';  
+	  				}
 
                     return $user;
                 } else { 

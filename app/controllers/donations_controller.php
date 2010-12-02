@@ -8,7 +8,7 @@ class DonationsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		if (!empty($this->Auth)) {
-			$this->Auth->allow('index', 'donate', 'donated', 'canceled');
+			$this->Auth->allow('index', 'donate', 'donated', 'canceled', 'grid');
 		}
 	} 
 
@@ -22,18 +22,34 @@ class DonationsController extends AppController {
         }
 	}
 
-    function add() {
+    function add($meter = null) {
         if ($this->RequestHandler->isAjax()) {
             $this->layout = 'ajax';
-        }   
+        } 
+
+  		if (empty($meter)) {
+		   // Find available meter and set it.  No free meters up to 1000 get the next in the list.
+		}  
+		
+		$this->set('meter', $meter);  
 
 	   	if(in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
 			$this->set('test', true);
 		} else {       
 			#echo $this->RequestHandler->getClientIp();
 			$this->set('test', false);
-		}                           
-    }
+		}                         
+    } 
+
+	function grid() {
+		if ($this->RequestHandler->isAjax()) {
+			$this->layout = 'ajax';
+		} else {
+		   # $this->redirect('/');
+		}
+		
+		
+	}
 
 	function admin_index() {
 		$this->Donation->recursive = 0;
@@ -103,15 +119,16 @@ class DonationsController extends AppController {
         if (!empty($this->data)) {  
 			if ($this->Session->check('Auth.User')) {
 				$id = $this->Auth->User('id');
-			}         
+			}  
+      
 			if ($donation = $this->Donation->donate($this->data, $id)) {  
 				if (empty($donation['valid'])) { 
 					// Send Welcome Email to New Register via Donation
 					$this->_sendEmail($donation);
 				}
 			}
-		}
-    	
+		}  
+		
 		return json_encode(array('valid' => true, 'url' => '/payment_gateways/dineromail/donation/'.$donation['Donation']['id']));
 		exit();
     } 

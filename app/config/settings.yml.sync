@@ -23,6 +23,7 @@ App:
     allowedIps:
         69.169.167.113
         200.30.250.18
+
 Site:
     name:
     theme:
