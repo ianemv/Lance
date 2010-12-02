@@ -35,6 +35,15 @@ class AppController extends Controller {
 		
 		if (in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
 			Configure::write('dev', 1);
+			Configure::write('debug', 2); 
+			$cache = new Folder(CACHE.'Models');
+			$files = $cache->read();
+			foreach ($files[1] as $file) {
+				if (!preg_match('/^cake_/', $file)) {
+					continue;
+				}
+	  			@unlink(CACHE.'Models'.DS.$file);
+			}
 		}
 		
 	   # $this->Auth->allow('*');  
