@@ -20,7 +20,7 @@ class DonationMeter extends AppModel {
 	    	'conditions' => array('Donations.status_id' => 1),
 			'joins' => array(
 				array(
-					'table' => 'Donations',
+					'table' => 'donations',
 					'alias' => 'Donations',
 					'type' => 'LEFT',
 					'conditions' => array('Donations.id = DonationMeter.donation_id')
