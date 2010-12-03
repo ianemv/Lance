@@ -19,7 +19,7 @@ App:
             force_login: true
     donations:
         cost: 1000.00
-		meters: 1000
+        meters: 1000
         min: 1
 
     currency:
@@ -32,11 +32,10 @@ App:
     allowedIps:
         67.214.229.250
         200.72.42.235
-		69.169.167.113
-		200.30.250.18
+        69.169.167.113
+        200.30.250.18
         205.118.81.24
 
-     
 Site:
     name:
     theme:
