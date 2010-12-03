@@ -6,13 +6,18 @@
 			url:'<?php echo $html->url(array('controller' => 'donations', 'action' => 'grid'))?>',
 			success: function(data) {
 				$(".grid_loading").hide();
-				$('#plaza_grid').html(data);	
-				$(".imjqmosaic_tile a").colorbox({opacity:0.55, onComplete:function(){$(".corner").corner();$('.required label').labelOver('label-over');}});
+				$('#plaza_grid').html(data);
+				$.getJSON('<?php echo $html->url(array('controller' => 'donation_meters', 'action' => 'meters')); ?>', function(data) { 
+					$.each(data, function(i, meter) {
+			  			$("#imjqmosaic_tile_"+meter).addClass('imjqmosaic_tile_active');
+						$("#imjqmosaic_tile_"+meter+" a").removeClass('donate').attr('rel', 'tooltip');
+					}); 
+				})
+				$(".imjqmosaic_tile a.donate").colorbox({opacity:0.55, onComplete:function(){$(".corner").corner();$('.required label').labelOver('label-over');}});
 			} 
 		});
     }); 
-<?php echo $javascript->blockEnd(); ?>   
-
+<?php echo $javascript->blockEnd(); ?>           
 <div id="plaza_container_grid"> 
 	<div class="grid_head">
 		<div class="title"><?php echo sprintf(__('Nos faltan %s m para construir la mejor plaza', true), $html->tag('span', '100.000', array('id' => 'gdcount')))?></div>
@@ -23,9 +28,11 @@
 		<?php echo $html->image('plaza_load.png', array('alt' => ''))?>
 		
 	</div>
-</div>
+</div> 
+
  
-<?php echo $this->element('home_carousel'); ?>
+<?php echo $this->element('home_carousel'); ?>  
+
 
 
 

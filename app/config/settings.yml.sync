@@ -19,6 +19,8 @@ App:
             force_login: true
     donations:
         cost: 1000.00
+		meters: 1000
+        min: 1
 
     currency:
         CLP: 

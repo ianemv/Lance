@@ -14,9 +14,22 @@ $(document).ready(function() {
 	$(".settings-menu-toggle").click(function() {       
 		$(".settings-menu").toggleClass('open');
 		return false;
-	})
-   
+	});
 	
+	$('a[rel=tooltip]').mouseover(function(e) { 
+		alert('here');
+			//var tip = $(this).attr('title');	
+			//$(this).attr('title','');
+			$(this).append('<div class="tooltip"></div>');		
+	   		$('.tooltip').fadeIn('500');
+	 		$('.tooltip').fadeTo('10',0.9);  
+		}).mousemove(function(e) {
+			$('.tooltip').css('top', e.pageY + 10 );
+			$('.tooltip').css('left', e.pageX + 20 );
+		}).mouseout(function() {
+			//$(this).attr('title',$('.tipBody').html());
+			$(this).children('div.tooltip').remove();
+		});
 });
 
 jQuery.fn.labelOver = function(overClass) {
@@ -99,3 +112,5 @@ function messageHint(m) {
 function updateDonation(val) { 
 	$("#tcost").html(parseFloat($("#bcost").html())*val);
 }
+
+

@@ -435,7 +435,8 @@ background-position: -159px -56px;
            
 .imjqmosaic_tile {
 	background-image: url(/img/plaza_bg.png); 
-	background-repeat: no-repeat; 
+	background-repeat: no-repeat;
+	position: relative; 
 	width: 34px; 
 	height: 8px;
 	float: left;
@@ -446,7 +447,8 @@ background-position: -159px -56px;
 }   
 
 .imjqmosaic_tile_active {
-	background-image: url(/img/plaza.png); 
+	background-image: url(/img/plaza.png);  
+	border-color: transparent !important;
 }
 
 .imjqmosaic_tile .e {
@@ -458,6 +460,27 @@ background-position: -159px -56px;
 	height: 8px;
 	opacity:0.0;
 	filter:alpha(opacity=0);
+}
+
+
+.tooltip {
+	background: #fff;
+	position: absolute;
+	height: 100px;
+	width: 250px;
+	border: 1px solid #33A8E9; 
+	z-index:100;
+}                
+
+.tooltip:after {
+	content: '';
+	height: 0;
+	position: absolute;
+	width: 0;
+	border: 10px solid transparent;
+	border-top-color: #33A8E9; 
+	top:100%;
+	left:10px;
 }
         
 

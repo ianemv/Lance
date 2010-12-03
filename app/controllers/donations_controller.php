@@ -139,6 +139,7 @@ class DonationsController extends AppController {
 	
 	function canceled() {
 		
-	}
+	}  
+	
 }
 ?>

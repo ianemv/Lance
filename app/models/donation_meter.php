@@ -11,11 +11,41 @@ class DonationMeter extends AppModel {
 			'fields' => '',
 			'order' => ''
 		)
-	);
+	); 
 	
 	
-	function generateMeter($num) {
-		return rand(1,1000);
+	function getCurrentMeters() {
+		$query = array(
+	   		'fields' => array('DonationMeter.meter'),
+	    	'conditions' => array('Donations.status_id' => 1),
+			'joins' => array(
+				array(
+					'table' => 'Donations',
+					'alias' => 'Donations',
+					'type' => 'LEFT',
+					'conditions' => array('Donations.id = DonationMeter.donation_id')
+		    	)
+		   	)
+	   	);
+		return $this->find('list', $query);
 	}
+	
+	
+	function generateMeter($num = 1) {      
+		$totalMeters = range(1, $this->appConfigurations['donations']['meters']);
+   		$currentMeters = $this->getCurrentMeters();
+		$availableMeters = array_diff($totalMeters, $currentMeters); 
+		$availableMeters = (count($availableMeters)>0)?$availableMeters:$totalMeters;  
+		$keys =  array_rand($availableMeters, ($num>count($availableMeters))?count($availableMeters):$num); 
+		if (is_array($keys)) {
+			foreach ($keys as $key) {
+				$meters[] = $availableMeters[$key];
+			}
+		} else {
+			$meters[] = $availableMeters[$keys];
+		}       
+		shuffle($meters);  
+		return $meters;
+	}  
 }
 ?>
