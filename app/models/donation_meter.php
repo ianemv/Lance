@@ -1,6 +1,7 @@
 <?php
 class DonationMeter extends AppModel {
 	var $name = 'DonationMeter';
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
 		'Donation' => array(
@@ -10,12 +11,11 @@ class DonationMeter extends AppModel {
 			'fields' => '',
 			'order' => ''
 		)
-	); 
+	);
 	
 	
-	function getMeters($num) {
-		
+	function generateMeter($num) {
+		return rand(1,1000);
 	}
-
 }
 ?>

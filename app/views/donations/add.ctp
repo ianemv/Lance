@@ -14,8 +14,12 @@
 <div style="width:425px; padding:20px;">
     <div class="info" style="margin: 10px 0;">
         <h2 class="title"><?php echo __('Formulario de Donación', true); ?></h2>
-        <p style="padding: 5px 0; width:400px;">Metro cuadrado por metro cuadrado - apoyenos con una donación de 1m2 o más para la nueva plaza de juegos, y hacer realidad los sueños de los niños. Basado en las ideas de los niños ganadoras de la escuela "Complejo Educacional Apumanque - La Calera" construiremos la mejor plaza de juegos en 1.000 m2. Ayúdenos en alcanzar nuestro objetivo, de construir la plaza y donarlo a Concepción, y de esta manera devolver alegría a una de las ciudades más afectadas por el terremoto 2010. Por favor completa el siguiente formulario con tus datos y elije la cantidad de m2 que quieres donar. (mínimo 1 m2 = 25.000 pesos). Todos las transacciones serán realizados a través del pago seguro en línea de DineroMail. Muchas gracias!
-        </p>
+        <p style="padding: 5px 0;"><strong>M<sup>2</sup> X M<sup>2</sup></strong></p>
+		<p>¡Ayúdanos a contruir una nueva plaza de juegos y así hacer realidad el sueño de miles de niños!</p>
+        <p>Basándonos en las ideas de los alumnos de la escuela “Complejo Educacional Apumanque” de la Calera, ganadores del concurso Charitybox, construiremos, en 1000 m2, la MEJOR plaza de juegos y la donaremos a Concepción. Nuestro objetivo es devolverle la alegría a una de las zonas más afectadas por el terremoto.</p>  
+		<p><strong>¡Dona un metro cuadro o más, completando el siguiente formulario!</strong></p>
+		<p class="note">*Todas las transacciones serán realizadas a través del método de Pago Seguro en Línea de DineroMail (donación mínima un metro cuadrado = $25.000)</p>
+	   	<p><strong>Un metro cuadro: Un sueño!</strong></p>
  		<?php if (!$session->check('Auth.User')): ?>
 		<?php $meter = ($meter)?$meter:null?>
       	<p><?php echo $html->link(__('¿Ya tienes una cuenta?', true), array('controller' => 'users', 'action' => 'login_ajax', '?' => array('redirect' => $html->url(array('controller' => 'donations', 'action' => 'add', $meter)))), array('onclick' => '$(this).colorbox({width:525,opacity:0.55, onComplete:function(){$(\'.required label\').labelOver(\'label-over\');}});')); ?></p>  

@@ -27,23 +27,25 @@ class Donation extends AppModel {
     function donate($data, $id =null) {
 	    if (!empty($data)) {  
 
-            if (!empty($data['Donation'])) {   
+            if (!empty($data['Donation'])) {
+	   			$data['Donation']['quantity'] = ($data['Donation']['quantity'])?$data['Donation']['quantity']:1;
                	if ($user = $this->User->register($data, $id)) { 
 					$data['Donation']['user_id'] = $user['User']['id'];
 					$data['Donation']['status_id'] = 1; 
 					$data['Donation']['price'] = $this->appConfigurations['donations']['cost']; 
-					$data['Donation']['total'] = ($this->appConfigurations['donations']['cost'] * $data['Donation']['quantity']);  
-				   
-			    	
-					if (!empty($data['DonationMeter'])) {
-						
-					} else {
-						#$meters = $this->DonationMeter->getMeters($data['Donation']['quantity']);
-					}
+					$data['Donation']['total'] = ($this->appConfigurations['donations']['cost'] * $data['Donation']['quantity']);      
+ 
 					if ($this->save($data)) { 
-						$user['Donation']['id'] = $this->id;            
-						$data['DonationMeter']['donation_id'] = $this->id;
-						$this->DonationMeter->save($data);
+						$user['Donation']['id'] = $this->id;
+						
+						for($i=0;$i<$data['Donation']['quantity'];$i++) { 
+							$data['DonationMeter'][$i]['donation_id'] = $this->id;
+							if (empty($data['DonationMeter'][$i]['meter'])) {
+								$data['DonationMeter'][$i]['meter'] = $this->DonationMeter->generateMeter(1);
+							}
+						} 
+   
+						$this->DonationMeter->saveAll($data['DonationMeter']);
 					}
                 } else {
                     $errors = array();

@@ -33,19 +33,10 @@ class AppController extends Controller {
 			$this->layout = 'admin';
 		} 
 		
-		#if (in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
-		#	Configure::write('dev', 1);
-		#	Configure::write('debug', 2); 
-			$cache = new Folder(CACHE.'Models');
-			$files = $cache->read();
-			foreach ($files[1] as $file) {
-				if (!preg_match('/^cake_/', $file)) {
-					continue;
-				} 
-				echo "Removing Cache file $file<br />";
-	  			@unlink(CACHE.'Models'.DS.$file);
-			}
-		#}
+		if (in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
+			Configure::write('dev', 1);
+			Configure::write('debug', 2); 	
+		}
 		
 	   # $this->Auth->allow('*');  
 
