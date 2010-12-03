@@ -93,7 +93,7 @@ class AccountsController extends AppController {
 				
 				$this->data['Account']['first_name'] = $firstName;
 				$this->data['Account']['last_name'] = $lastName; 
-				$this->data['AccountType'] 
+				#$this->data['AccountType'] 
 
 				if ($this->Account->save($this->data)) {
 					$this->Session->setFlash(__('Your profile has been updated.', true), 'success');
