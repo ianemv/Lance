@@ -34,8 +34,7 @@ class AppController extends Controller {
 		} 
 		
 		if (in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
-			Configure::write('dev', 1);
-			Configure::write('debug', 2); 	
+			Configure::write('dev', 1); 
 		}
 		
 	   # $this->Auth->allow('*');  
