@@ -29,7 +29,9 @@ class DonationMetersController extends AppController {
         }
 		$this->layout = 'ajax';
 		$this->autoRender = false;
-		return json_encode($this->DonationMeter->getCurrentMeters());
+		$meters = $this->DonationMeter->getCurrentMeters();
+		$count = count($meters);
+		return json_encode(array('count' => $count, 'meters' => $meters));
 	}
 
 }

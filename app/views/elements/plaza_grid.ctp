@@ -8,10 +8,11 @@
 				$(".grid_loading").hide();
 				$('#plaza_grid').html(data);
 				$.getJSON('<?php echo $html->url(array('controller' => 'donation_meters', 'action' => 'meters')); ?>', function(data) { 
-					$.each(data, function(i, meter) {
+					$.each(data.meters, function(i, meter) {
 			  			$("#imjqmosaic_tile_"+meter).addClass('imjqmosaic_tile_active');
 						$("#imjqmosaic_tile_"+meter+" a").removeClass('donate').attr('rel', 'tooltip');
-					}); 
+					});
+					$("#gdcount").html((<?php echo $appConfigurations['donations']['meters']; ?> - data.count)); 
 				})
 				$(".imjqmosaic_tile a.donate").colorbox({opacity:0.55, onComplete:function(){$(".corner").corner();$('.required label').labelOver('label-over');}});
 			} 
