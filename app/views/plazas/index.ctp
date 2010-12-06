@@ -21,7 +21,7 @@
 <p><?php echo __('Nuestro ganador del concurso es el "Complejo Educacional Apumanque de La Calera". Muchas felicidades a sus pequeños grandes arquitectos ¡Su plaza será construida a escala real en Concepción, una vez que se reúnan los fondos necesarios!', true); ?></p>     <br />
 <p><?php echo __('Les comunicamos que hemos hecho una adaptación en la estructura de los premios. Además de premiar a los 9 ganadores por votación del público, tendremos ahora 9 premios para los establecimientos educacionales que sean escogidos por nuestro comité de jueces. Estos ganadores serán dados a conocer el 25 de Noviembre 2010. Pueden ver la nueva estructura de los premios en el link que está más abajo.', true); ?></p>  <br />
 <p><?php echo __('Todos los premios serán enviados a los respectivos colegios después de la ceremonia de premiación, que se realizará el día 06 de Diciembre en Santiago.', true); ?></p>    <br />
-<p><?php echo sprintf(__('Para ver los premios y el listado de los colegios ganadores por votación del público sólo deben pulsar %s.', true), $html->link(__('aquí', true), '/files/CB_Ganadores_Votacion.pdf')); ?></p>
+<p><?php echo sprintf(__('Para ver los premios y el listado de los colegios ganadores por votación del público sólo deben pulsar %s.', true), $html->link(__('aquí', true), '/files/18_Premios_LEGO_Charitybox.pdf')); ?></p>
 <p><?php echo sprintf(__('Para ver el ranking de votos para todos los instituciones sólo deben pulsar %s.', true), $html->link(__('aquí', true), '/files/CB_Ranking_Ganadores_Votacion.pdf')); ?></p>    
 
 <div id="votacion_container_full"> 
