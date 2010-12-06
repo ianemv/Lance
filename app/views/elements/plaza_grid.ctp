@@ -20,7 +20,7 @@
 <?php echo $javascript->blockEnd(); ?>           
 <div id="plaza_container_grid"> 
 	<div class="grid_head">
-		<div class="title"><?php echo sprintf(__('Nos faltan %s m para construir la mejor plaza', true), $html->tag('span', '100.000', array('id' => 'gdcount')))?></div>
+		<div class="title"><?php echo sprintf(__('Nos faltan %s m<sup>2</sup> para construir la mejor plaza', true), $html->tag('span', '1.000', array('id' => 'gdcount')))?></div>
 		<?php echo $html->link($html->image('btn_donation_long.png', array('alt' => __('¡Quiero donar ahora!', true))), array('controller' => 'donations', 'action' => 'add'), array('id' => 'donar', 'style' => 'top: 0px;right:0px', 'escape' => false)); ?>
 	</div>    
 	<div class="grid_loading"><?php echo $html->image('loading_lg.gif', array()); ?><p><?php echo __('Cargando Plaza... eserpa un momento', true); ?></p></div>
