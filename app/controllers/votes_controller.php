@@ -32,44 +32,7 @@ class VotesController extends AppController {
 					} else {    
 						$message = $this->Auth->loginError;
 		   				$canVote = false;
-					}
-
-					/* 
-					if (array_key_exists('full_name', $this->data['User'])) {
-						if (!empty($this->data['User']['full_name']) && strpos($this->data['User']['full_name'], ' ')) { 
-							list($first_name, $last_name) = explode(" ", $this->data['User']['full_name']); 
-							$this->data['User']['first_name'] = ($first_name)?$first_name:"";
-							$this->data['User']['last_name'] = ($last_name)?$last_name:"";
-						} elseif(array_key_exists('full_name', $this->data['User'])) {
-							$this->data['User']['first_name'] = "";
-							$this->data['User']['last_name'] = "";
-						}
-				  	}                                         
-
-				  	$canVote = true;   
-					$user = $this->User->findByEmail($this->data['User']['email']);     
-					if (empty($user)) {     
-						$user['User']['group_id']       = 2;  // Adding User
-		                $user['User']['username']       = $this->data['User']['email'];
-		                $user['User']['first_name']     = $this->data['User']['first_name'];
-		                $user['User']['last_name']      = $this->data['User']['last_name'];
-		                $user['User']['email']          = $this->data['User']['email'];
-		                $user['User']['password_before']= $this->User->generateRandomPassword();
-		                $user['User']['active']         = 1;   
-                            
-						$this->User->set($user);
-						#if ($this->User->validates(array('fieldList' => array('first_name', 'last_name', 'email')))) {
-							if (!$user = $this->User->register($user)) {  
-								//User coudn't be created        '
-			          			$message = implode(", ", $this->User->invalidFields());
-			                    $canVote = false;
-							  	$login = true;    
-			                } 
-				   		#} else {
-							
-						#}
-					}  
-					*/         
+					}        
 				} else {   
 					$login = true;
 					$canVote = false;

@@ -19,7 +19,7 @@ class SystemController extends AppController {
 		
 		if ($this->Auth->user()) {
 			if (!empty($this->data)) {
-				if ($user = $this->User->register($this->data, $this->Auth->user('id'))) {
+				if ($this->User->register($this->data, $this->Auth->user('id'))) {
 					$this->Session->setFlash(sprintf(__('Your account as been updated.', true), 'user'), 'success');
 					$this->redirect(array('action' => 'account'));
 				} else {

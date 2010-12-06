@@ -77,7 +77,7 @@ class AccountsController extends AppController {
 	function profile($username = null) { 
 		$this->set('title_for_layout', __('Account Profile', true));
 		if ($this->Auth->user()) {
-			$account = $this->Account->findByUserId($this->Auth->user('id'));
+			$account = $this->Account->findByUserId($this->Auth->user('id')); 
 			if (!empty($account)) {
 				$account['Account']['full_name'] = $account['Account']['first_name'] . " " . $account['Account']['last_name'];
 			} 

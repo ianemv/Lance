@@ -29,7 +29,9 @@ class Donation extends AppModel {
 
             if (!empty($data['Donation'])) {
 	   			$data['Donation']['quantity'] = ($data['Donation']['quantity'])?$data['Donation']['quantity']:$this->appConfigurations['donations']['min'];
-               	if ($user = $this->User->register($data, $id)) { 
+               	if ($user = $this->User->register($data, $id)) {
+	 				debug($user);
+	die();
 					$data['Donation']['user_id'] = $user['User']['id'];
 					$data['Donation']['status_id'] = 1; 
 					$data['Donation']['price'] = $this->appConfigurations['donations']['cost']; 
@@ -40,16 +42,15 @@ class Donation extends AppModel {
 						$meterCount = 0;
 						if (!empty($data['DonationMeter'])) {
 							$meterCount = count($data['DonationMeter']);
-						}
-						if ($data['Donation']['quantity']>1) {                                                                                           
+						} 
+                                                                                         
 						$meters = $this->DonationMeter->generateMeter($data['Donation']['quantity'] - $meterCount); 
-						}
 						for($i=0;$i<$data['Donation']['quantity'];$i++) { 
 							$data['DonationMeter'][$i]['donation_id'] = $this->id;
 							if (empty($data['DonationMeter'][$i]['meter'])) {
 								$data['DonationMeter'][$i]['meter'] = array_shift($meters);
 							}
-						}  
+						} 
 
 						$this->DonationMeter->saveAll($data['DonationMeter']);    
 					}

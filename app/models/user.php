@@ -19,12 +19,16 @@ class User extends AppModel {
 
     var $belongsTo = array('Group');
 
-	var $hasMany = array( 
+
+	var $hasOne = array(
 		'Account' => array(
 		 	'className' => 'Account',
 			'foreignKey' => 'user_id',
 			'dependent' => true,
-		),
+		)
+	);
+
+	var $hasMany = array( 
 		'UserMetaData' => array(
 			'className' => 'UserMetaData',
 			'foreignKey' => 'user_id',
@@ -157,6 +161,7 @@ class User extends AppModel {
                 }
 
                 if (!empty($id)) {
+					$this->id = $id;
                     $data['User']['id'] = $id;
                 } else {  
 					$data['User']['active'] = 0;
@@ -167,20 +172,21 @@ class User extends AppModel {
 					$data['User']['group_id'] = 2;
 				}  
 
-                if ($user = $this->save($data)) {
+                if ($user = $this->save($data)) { 
 	   				// Check for Account Data and save it too
 					if (!empty($data['Account'])) {
-						$data['Account']['user_id'] = $this->id;
-						$this->Account->save($data);
+						$data['Account']['user_id'] = $this->id; 
+						$account = $this->Account->save($data);
 					}
-					
+					    
+
 					if (empty($id)) { 
 						$user['User']['id'] 			= $this->id;
 	                    $user['User']['activate_link']  = $this->appConfigurations['url'].'/users/activate/'. $user['User']['key'];
 	                    $user['to']                     = $user['User']['email'];
 						$user['subject']            	= sprintf(__('Verificación de tu registro - %s', true), $this->appConfigurations['name']);
 	                   	$user['template']               = 'users/activate';  
-	  				}
+	  				} 
 
                     return $user;
                 } else { 
