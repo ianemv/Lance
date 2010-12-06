@@ -30,8 +30,6 @@ class Donation extends AppModel {
             if (!empty($data['Donation'])) {
 	   			$data['Donation']['quantity'] = ($data['Donation']['quantity'])?$data['Donation']['quantity']:$this->appConfigurations['donations']['min'];
                	if ($user = $this->User->register($data, $id)) {
-	 				debug($user);
-	die();
 					$data['Donation']['user_id'] = $user['User']['id'];
 					$data['Donation']['status_id'] = 1; 
 					$data['Donation']['price'] = $this->appConfigurations['donations']['cost']; 
