@@ -32,9 +32,17 @@ class AppController extends Controller {
 		if (isset($this->params['admin'])) {
 			$this->layout = 'admin';
 		} 
-		
-		if (in_array($this->RequestHandler->getClientIp(), $this->appConfigurations['allowedIps'])) { 
-			Configure::write('dev', 1); 
+
+		if (array_key_exists('test', $_GET)) {
+			if ($_GET['test']) {  
+				$this->Session->write('test', true); 
+			} else {         
+				$this->Session->delete('test');
+			}
+		}  
+
+		if ($this->Session->check('test')) { 
+			Configure::write('dev', 1);  
 		}
 		
 	   # $this->Auth->allow('*');  
@@ -292,7 +300,7 @@ class AppController extends Controller {
         }
     }    
 
-	function authenticate($args) {       
+	function authenticate($args) {
 		$data[$this->Auth->fields['username']] = $args['username'];
 		$data[$this->Auth->fields['password']] = $this->Auth->password($args['password']);  
 		if ($this->Auth->login($data)) { 
@@ -303,11 +311,6 @@ class AppController extends Controller {
 		}
 	} 
 	
-	function clear_cache() {
-		Cache::clear();   
-		die('here');
-	}
-
     function build_acl() {
         if (!Configure::read('debug')) {
             return $this->_stop();

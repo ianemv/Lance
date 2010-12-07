@@ -110,7 +110,7 @@ function messageHint(m) {
 } 
 
 function updateDonation(val) { 
-	$("#tcost").html(parseFloat($("#bcost").html())*val);
+	$("#tcost").html((parseFloat($("#bcost").html())*val)+'.000');
 }
 
 
