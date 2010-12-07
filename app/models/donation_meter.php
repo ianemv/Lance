@@ -17,7 +17,7 @@ class DonationMeter extends AppModel {
 	function getCurrentMeters() {
 		$query = array(
 	   		'fields' => array('DonationMeter.meter'),
-	    	'conditions' => array('Donations.status_id' => 1),
+	    	'conditions' => array('Donations.status_id' => 2),
 			'joins' => array(
 				array(
 					'table' => 'donations',
