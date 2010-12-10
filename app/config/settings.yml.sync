@@ -1,0 +1,81 @@
+---
+debug: 0
+Install:
+    date: Thu, 22 Jul 10 18:16:23 -0400
+App:
+    base:
+    baseUrl:
+    timezone: America/Santiago
+    theme: cleanity
+    name: Regala Una Plaza
+    url: http://regalaunaplaza.cl/
+    email: info@regalaunaplaza.cl
+    votes:
+        limits:
+            active: true
+            limit: 10 //
+            expiry: 365 //The number of days
+            all: true
+            force_login: true
+    donations:
+        cost: 1.000
+        meters: 1000
+        min: 1
+
+    currency:
+        CLP: 
+            zero: 0
+            places: 3 
+            thousands: .
+            escape: true      
+
+    allowedIps:
+        67.214.229.250
+        200.72.42.235
+        69.169.167.113
+        200.30.250.18
+        205.118.81.24
+
+Site:
+    name:
+    theme:
+    admin_theme: constellation
+    status:1
+Hook:
+    bootstraps: acl,searchable
+    components:
+    routes: acl,searchable
+
+Email:
+    delivery: smtp
+    sendAs: both
+    return: info@regalaunaplaza.cl
+    from: Regala Una Plaza <info@regalaunaplaza.cl>
+    replyTo: info@regalaunaplaza.cl
+    smtpOptions:
+        port: 25
+        timeout: 30
+        host: localhost
+        auth: false
+        username:
+        password:
+        client: smtp_helo_hostname
+
+PaymentGateways:
+	Dineromail:
+        password: !!urdead
+        url:https://checkout.dineromail.com/CheckOut
+        merchant: 0237797 #0237797 - Real   237845 - Test
+        country_id: 3 # 1 = Argentina, 2 = Brasil, 3 = Chile, 4 = Mexico
+        payment_method_available:"cl_dm;cl_visa,1,3,6;cl_master,1,3,6;cl_ripley"
+        header_image: https://static.e-junkie.com/sslpic/30174.c49d331ff787c87b1dafad4aceaeac83.jpg 
+        step_color: E7E7E7
+        hover_step_color: DFEFFF 
+        links_color: 0000D4
+        font_color: 6699CC
+        border_color: F99800
+        button_color: 6699CC
+	          
+
+
+
