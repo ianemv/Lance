@@ -18,7 +18,7 @@ App:
             all: true
             force_login: true
     donations:
-        cost: 1000.00
+        cost: 1000
         meters: 1000
         min: 1
 
