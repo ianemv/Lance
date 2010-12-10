@@ -63,8 +63,8 @@ Email:
 
 PaymentGateways:
 	Dineromail:
-        password: !!urdead
         url:https://checkout.dineromail.com/CheckOut
+        password: !!urdead
         merchant: 0237797 #0237797 - Real   237845 - Test
         country_id: 3 # 1 = Argentina, 2 = Brasil, 3 = Chile, 4 = Mexico
         payment_method_available:"cl_dm;cl_visa,1,3,6;cl_master,1,3,6;cl_ripley"
@@ -75,6 +75,7 @@ PaymentGateways:
         font_color: 6699CC
         border_color: F99800
         button_color: 6699CC
+        change_quantity: 0
 	          
 
 
