@@ -12,7 +12,8 @@
 <?php else: ?>   
 
 <div style="width:425px; padding:20px;">
-    <div class="info" style="margin: 10px 0;">
+    <div class="info" style="margin: 10px 0;"> 
+		<div id="messages"></div>
         <h2 class="title"><?php echo __('Formulario de Donación', true); ?></h2>
         <p style="padding: 5px 0;"><strong>M<sup>2</sup> X M<sup>2</sup></strong></p>
 		<p>¡Ayúdanos a contruir una nueva plaza de juegos y así hacer realidad el sueño de miles de niños!</p>
@@ -29,6 +30,13 @@
     echo $ajax->form(array('type' => 'post', 'options' => array('id' => 'formDonation', 'model' => 'Donation', 'url' => array('controller' => 'donations', 'action' => 'donate'), 'dataType' => 'json', 'success' => "
 if (request.valid) {    
 	$.colorbox({width: '500px', height:'300px', href:request.url});
+} else {
+	if (request.errors) { 
+		$('#messages').html('');
+		$.each(request.errors, function(key, error) {
+			$('#messages').append('<div class=\"msg-error\">'+error+'</div>');
+		});
+	}
 }
 "))); 
 	if (!empty($meter)):

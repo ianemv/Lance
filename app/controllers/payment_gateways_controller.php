@@ -141,18 +141,19 @@ class PaymentGatewaysController extends AppController{
 		$gateway = Configure::read('PaymentGateways.Dineromail') ? Configure::read('PaymentGateways.Dineromail') : Configure::read('Dineromail'); 
 		$dineroMail  = array();
 
-		if(!empty($model)){ 
+		if(!empty($model)){
 			
-			$dineroMail['error_url'] 	= Configure::read('App.url') . '/users';
-			$dineroMail['ok_url']    	= Configure::read('App.url') . '/payment_gateways/returning/donation'; 
-			$dineroMail['pending_url']  = Configure::read('App.url') . '/payment_gateways/pending/donation';
-			$dineroMail['country_id'] 	= $gateway['country_id'];
-			$dineroMail['url'] 	  	    = $gateway['url'];
-			$dineroMail['merchant'] 	= $gateway['merchant'];  
-			$dineroMail['payment_method_available'] = $gateway['payment_method_available'];
-			$dineroMail['header_image'] = Configure::read('App.url') . '/img/logo.png'; 
-			#$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id'); 
+			$dineroMail['error_url'] 	= Configure::read('App.url');
+			$dineroMail['ok_url']    	= Configure::read('App.url') . 'payment_gateways/returning/donation'; 
+			$dineroMail['pending_url']  = Configure::read('App.url') . 'payment_gateways/pending/donation';
 			$dineroMail['transaction_id'] = $id;
+			$dineroMail['custom']		 = $model . '#' . $id . '#' . $this->Auth->user('id');
+			 
+			if (is_array($gateway)) {
+				foreach ($gateway as $key => $value) {
+					$dineroMail[$key] = $value;
+				}
+			}
 
 			switch($model){
                 case 'donation':
@@ -161,13 +162,11 @@ class PaymentGatewaysController extends AppController{
 					$dineroMail['item_name_1']   = Configure::read('App.name') . " - " .  __('Donación', true);
 					$dineroMail['item_quantity_1'] = $donations['Donation']['quantity'];
 					$dineroMail['item_ammount_1'] = $donations['Donation']['price'];
-					$dineroMail['change_quantity'] = 1;
                     break;
                 default:
                     $this->Session->setFlash(sprintf(__('There is no handler for %s in this payment gateway.', true), $model));
                     $this->redirect('/');
             }    
-
 			$this->set('dineroMailData', $dineroMail);
 		}else{
 			$this->Session->setFlash(__('Invalid payment gateway', true));

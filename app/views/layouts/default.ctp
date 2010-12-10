@@ -47,7 +47,7 @@
     <?php echo $this->element('message_hint'); ?>
    <div class="full header2">
         <div class="wrap">  
-			<?php echo $html->image('logo_charitybox.png', array('alt' => __('Charity Box', true), 'id' => 'logo1')); ?>  
+			<?php echo $html->image('logo.png', array('alt' => __('Charity Box', true), 'id' => 'logo1')); ?>  
 			<?php echo $this->element('menu_top'); ?>
             <?php echo $html->image('fundacionmustaki.png', array('alt' => __('Mustaki Foundation', true), 'id' => 'logo2')); ?>
             <div class="header2_1">
