@@ -8,7 +8,7 @@ class DonationsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		if (!empty($this->Auth)) {
-			$this->Auth->allow('index', 'donate', 'donated', 'canceled', 'grid');
+			$this->Auth->allow('index', 'donate', 'donated', 'canceled', 'grid', 'winner');
 		}
 	} 
 
@@ -16,10 +16,16 @@ class DonationsController extends AppController {
 		$this->set('title_for_layout', __('Necesitamos tu donación, para hacer real su sueño', true));
         if ($this->RequestHandler->isAjax()) {
             $this->layout = 'ajax';
-        } else {
-		    #$this->Donation->recursive = 0;
-		    #$this->set('donations', $this->paginate());
+        } else { 
+	   		if (Configure::read('dev')) { 
+				$this->redirect('winner');
+			}
         }
+	} 
+	
+	function winner() {
+		$this->set('title_for_layout', __('', true));
+		
 	}
 
     function add($meter = null) {

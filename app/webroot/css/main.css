@@ -43,7 +43,7 @@ h2 span { font-size: 8pt;display:block;padding: 5px 0 0 5px;}
 #donar{position:absolute;top:128px;right:63px;}
 #metodo_pago{position:absolute;right:51px;top:245px;}
 .header2_2 ul li{float:left;}
-#votacion_container{height:450px;}  
+ 
 
 #votacion_container_left{width:260px;float:left;padding:20px;}
 #votacion_container_right{width:650px;float:right;margin-top:20px;}
@@ -337,8 +337,8 @@ background-position: -159px -56px;
 
 
 
- #votacion_container_right .plaza_image{background:#fff;padding:3px 3px 3px 3px;position:absolute;top:0;left:5px;margin-top:5px;}
-#votacion_container_right .plaza_image_inner img{width:175px;height:140px;padding:0;margin:0;}
+ #votacion_container_right .plaza_image, #votacion_container_full .plaza_image{background:#fff;padding:3px 3px 3px 3px;position:absolute;top:0;left:5px;margin-top:5px;}
+#votacion_container_right .plaza_image_inner img, #votacion_container_full .plaza_image_inner img{width:175px;height:140px;padding:0;margin:0;}
 
 .plaza {float:left;display:block;width:240px;} 
 .plaza_header {height:35px;padding:5px 10px;}
@@ -482,6 +482,14 @@ background-position: -159px -56px;
 	border-top-color: #33A8E9; 
 	top:100%;
 	left:10px;
+}   
+
+     
+.button_menu {
+	margin-left: 20px;
+}
+.button_menu li{
+	float: left;
 }
         
 

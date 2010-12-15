@@ -6,7 +6,14 @@ class PlazasController extends AppController {
 	var $paginate = array(
 	    'limit' => 12,   
 		'order' => ''
-    );      
+    ); 
+
+function beforeFilter(){
+    parent::beforeFilter();
+    if(isset($this->Auth)){
+        $this->Auth->allow('getwinners');
+    }
+}     
 	
     function index() {
 		$this->set('title_for_layout', 'Votar por una plaza');
@@ -87,6 +94,11 @@ class PlazasController extends AppController {
 	function getplazas() {  
         $this->paginate = array('order' => 'Plaza.vote_count DESC');
 		return $this->paginate();       
+	} 
+	
+	function getwinners() {
+		$plazas = $this->Plaza->find('all', array('conditions' => array('Plaza.id' => array(18, 76))));
+		return $plazas;
 	}
 
     function count() {

@@ -42,19 +42,6 @@ class User extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'PlazaComment' => array(
-			'className' => 'PlazaComment',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'Donation' => array(
 			'className' => 'Donation',
 			'foreignKey' => 'user_id',

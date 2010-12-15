@@ -17,12 +17,9 @@
 
 <?php echo $javascript->blockEnd(); ?>
 <?php $plazas = $this->requestAction('/plazas/getplazas/limit:9');  ?>
-<?php if (!Configure::read('dev')): ?> 
 <?php echo $this->element('donation'); ?>  
-<?php else: ?>
-<?php echo $this->element('plaza_grid'); ?>  
-<?php endif; ?>
-<div id="votacion_container">
+
+<div id="votacion_container">   
 	<h2 class="title"><?php echo __('Resultados Votación', true); ?></h2>
     <?php echo $html->div('view_all', $html->link(__('ver todos', true), array('controller' => 'plazas', 'action' => 'index')), array('style' => 'float:right;margin-top:-30px;')); ?>
 	<div id="votacion_container_left" class="font">

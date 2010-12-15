@@ -33,19 +33,6 @@ class Plaza extends AppModel {
 			'dependent' => false,
 			
 		),
-		'PlazaComment' => array(
-			'className' => 'PlazaImage',
-			'foreignKey' => 'plaza_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
 	);
 
 }
